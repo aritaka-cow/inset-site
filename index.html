@@ -42,11 +42,13 @@
 
   <h2>よくある質問</h2>
   <p class="q">写真はアップロードされますか？</p>
-  <p>いいえ。本アプリは通信を一切行わず、すべて端末内で処理します。</p>
+  <p>いいえ。写真や編集後画像はアップロードされません。編集処理は端末内で行われます。アプリ改善のため、匿名の利用状況イベントのみ PostHog へ送信します。</p>
   <p class="q">なぜ写真の権限が必要ですか？</p>
   <p>書き出した写真をライブラリへ<strong>保存（追加）する</strong>ためだけです。既存の写真は読み取りません。</p>
   <p class="q">プリセットはどこに保存されますか？</p>
-  <p>端末内のみ（数値設定のみ）。外部送信はありません。</p>
+  <p>端末内のみ（数値設定のみ）。プリセット名やプリセット内容は分析イベントとして送信しません。</p>
+  <p class="q">どのような分析データを送りますか？</p>
+  <p>フレーム追加、プリセット保存、書き出し成功/失敗などの匿名イベントです。写真内容、ファイル名、位置情報、プリセット名、色の実値は送信しません。</p>
   <p class="q">料金はかかりますか？</p>
   <p>Inset は無料です。</p>
 
@@ -72,11 +74,13 @@
 
   <h2>FAQ</h2>
   <p class="q">Are my photos uploaded?</p>
-  <p>No. The App makes no network connections; everything is processed on your device.</p>
+  <p>No. Photos and edited images are not uploaded. Editing happens on your device. The App only sends anonymous usage events to PostHog to improve the product.</p>
   <p class="q">Why does it need photo permission?</p>
   <p>Only to <strong>save (add)</strong> your exported image to your library. It never reads your existing photos.</p>
   <p class="q">Where are presets stored?</p>
-  <p>On your device only (numeric settings only). Nothing is transmitted.</p>
+  <p>On your device only (numeric settings only). Preset names and preset contents are not sent as analytics events.</p>
+  <p class="q">What analytics data is sent?</p>
+  <p>Anonymous events such as frame added, preset saved, and export succeeded/failed. Photo content, filenames, location data, preset names, and exact color values are not sent.</p>
   <p class="q">Is it free?</p>
   <p>Yes, Inset is free.</p>
 

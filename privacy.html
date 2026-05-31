@@ -31,33 +31,35 @@
 
   <!-- ====================== 日本語 ====================== -->
   <p class="mut">日本語（English follows below）</p>
-  <p>Inset（以下「本アプリ」）は、ユーザーのプライバシー保護を最優先に設計されています。本アプリは<strong>いかなる個人情報・利用データも収集・保存・送信しません</strong>。</p>
+  <p>Inset（以下「本アプリ」）は、ユーザーのプライバシーに配慮して設計されています。本アプリは、アプリ改善のために<strong>匿名の利用状況データ</strong>を収集します。写真、編集後画像、ファイル名、写真の位置情報、プリセット名は収集・送信しません。</p>
 
   <h2>データの収集</h2>
   <ul>
     <li>アカウント登録・ログインはありません。</li>
-    <li>本アプリは<strong>ネットワーク通信を行いません</strong>。すべての処理は端末内で完結します。</li>
-    <li>解析（アナリティクス）・広告・トラッキング・第三者 SDK を一切使用しません。</li>
+    <li>本アプリは、匿名の利用分析のために PostHog を使用します。</li>
+    <li>収集する可能性がある情報: 匿名のアプリ/端末インスタンス識別子、アプリの起動・画面表示・フレーム追加・プリセット保存・書き出し成功/失敗などの利用イベント、アプリバージョン、OS/端末種別などの技術情報。</li>
+    <li>広告目的のトラッキングは行いません。</li>
   </ul>
 
   <h2>写真へのアクセス</h2>
   <ul>
     <li>本アプリは、編集した写真をフォトライブラリへ<strong>保存（追加）するためだけ</strong>に写真へのアクセスを要求します（「追加のみ」の権限）。</li>
     <li><strong>既存の写真を読み取ることはありません。</strong>編集対象は、あなたが選択した写真だけが本アプリに渡されます。</li>
-    <li>写真の処理はすべて端末内で行われ、外部に送信・アップロードされることはありません。</li>
+    <li>写真の処理は端末内で行われ、写真や編集後画像が外部に送信・アップロードされることはありません。</li>
+    <li>写真ファイル名、写真メタデータ、位置情報、プリセット名、任意カラーの実際の色値も分析イベントには含めません。</li>
   </ul>
 
   <h2>端末内に保存される情報</h2>
   <ul>
     <li>保存したプリセット（余白の色・幅・比率などの<strong>数値設定のみ</strong>）は端末内にのみ保存されます。画像・位置情報は含まれません。</li>
-    <li>これらが外部へ送信されることはありません。アプリを削除すると消去されます。</li>
+    <li>プリセット名やプリセット内容そのものは分析サービスへ送信しません。アプリを削除すると端末内のプリセットは消去されます。</li>
   </ul>
 
   <h2>第三者への提供</h2>
-  <p>本アプリはデータを収集しないため、第三者への提供・共有は一切ありません。</p>
+  <p>本アプリは、利用分析のために PostHog（PostHog, Inc.）へ匿名の利用イベントを送信します。広告会社への販売や広告目的の共有は行いません。</p>
 
   <h2>お子様のプライバシー</h2>
-  <p>本アプリはデータを収集しないため、年齢を問わず安全にご利用いただけます。</p>
+  <p>本アプリは子どもを対象にしたサービスではありません。年齢、氏名、メールアドレスなど、個人を直接識別する情報の入力は求めません。</p>
 
   <h2>本ポリシーの変更</h2>
   <p>本ポリシーは更新される場合があります。重要な変更はアプリの更新情報または本ページでお知らせします。</p>
@@ -70,33 +72,35 @@
 
   <!-- ====================== English ====================== -->
   <p class="mut">English</p>
-  <p>Inset (“the App”) is designed with privacy first. The App <strong>does not collect, store, or transmit any personal or usage data</strong>.</p>
+  <p>Inset (“the App”) is designed with privacy in mind. The App collects <strong>anonymous usage analytics</strong> to improve the product. It does not collect or transmit your photos, edited images, filenames, photo location data, or preset names.</p>
 
   <h2>Data Collection</h2>
   <ul>
     <li>No account and no sign-in.</li>
-    <li>The App <strong>makes no network connections</strong>. All processing happens on your device.</li>
-    <li>No analytics, no advertising, no tracking, and no third-party SDKs.</li>
+    <li>The App uses PostHog for anonymous product analytics.</li>
+    <li>Data that may be collected: anonymous app/device instance identifier, usage events such as app opens, screen views, frame additions, preset saves, export success/failure, app version, OS/device type, and similar technical information.</li>
+    <li>The App does not use advertising tracking.</li>
   </ul>
 
   <h2>Photo Access</h2>
   <ul>
     <li>The App requests photo access <strong>only to save (add)</strong> your edited images to your photo library (“add-only” permission).</li>
     <li><strong>It never reads your existing photo library.</strong> Only the photo you choose is passed to the App.</li>
-    <li>All photo processing happens on-device; nothing is uploaded or transmitted.</li>
+    <li>Photo processing happens on-device. Photos and edited images are not uploaded or transmitted.</li>
+    <li>Photo filenames, photo metadata, location data, preset names, and exact custom color values are not included in analytics events.</li>
   </ul>
 
   <h2>Information Stored on Your Device</h2>
   <ul>
     <li>Saved presets (numeric settings only — frame color, width, ratio) are stored locally on your device. They contain no images or location data.</li>
-    <li>They are never transmitted. Deleting the App removes them.</li>
+    <li>Preset names and preset contents are not sent to analytics services. Deleting the App removes local presets.</li>
   </ul>
 
   <h2>Third Parties</h2>
-  <p>Because the App collects no data, nothing is shared with third parties.</p>
+  <p>The App sends anonymous usage events to PostHog (PostHog, Inc.) for product analytics. We do not sell data or share it with advertising companies for advertising purposes.</p>
 
   <h2>Children’s Privacy</h2>
-  <p>The App collects no data and is safe for users of any age.</p>
+  <p>The App is not directed to children. It does not ask for directly identifying information such as name, email address, or age.</p>
 
   <h2>Changes to This Policy</h2>
   <p>This policy may be updated. Material changes will be noted in the app’s release notes or on this page.</p>
