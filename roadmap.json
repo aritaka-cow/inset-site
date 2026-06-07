@@ -113,13 +113,13 @@
     },
     {
       "id": "RM-007",
-      "title": { "ja": "Pro 課金（買い切り＋年額）", "en": "Pro plan (one-time + annual)" },
+      "title": { "ja": "Pro 課金（年額サブ主役＋買い切り）", "en": "Pro plan (annual sub + lifetime)" },
       "category": "growth",
       "stage": "next",
-      "ref": "",
+      "ref": "T-0166",
       "note": {
-        "ja": "Pro バンドル（フィルム＋バッチ）を買い切り中心に提供。MVP は無料のまま。",
-        "en": "Pro bundle (film + batch) offered primarily as a one-time purchase. The MVP stays free."
+        "ja": "Pro（バッチ＋フィルム＋動画）を年額サブスク主役で提供。月額をアンカーに、買い切り(lifetime)併設。$9.99/年から始め、機能拡充に合わせ $19.99/年まで段階値上げ（早期ユーザーは旧価格でロック）。MVP は無料のまま。",
+        "en": "Pro (batch + film + video) as an annual subscription, with a monthly anchor and a lifetime option. Start at $9.99/yr and ramp to $19.99/yr as features grow (early adopters keep their price). The MVP stays free."
       }
     },
     {
