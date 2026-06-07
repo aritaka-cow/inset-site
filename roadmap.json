@@ -1,0 +1,182 @@
+{
+  "updated": "2026-06-07",
+  "items": [
+    {
+      "id": "RM-001",
+      "title": { "ja": "v1.0 App Store 審査提出", "en": "v1.0 App Store submission" },
+      "category": "feature",
+      "stage": "now",
+      "ref": "T-0137",
+      "note": {
+        "ja": "MVP（完全無料・iOS 17+）の審査提出。スクショ・掲載文・素材は確定済み。",
+        "en": "Submitting the free MVP (iOS 17+) for review. Screenshots, listing copy, and assets are finalized."
+      }
+    },
+    {
+      "id": "RM-002",
+      "title": { "ja": "TestFlight 配布", "en": "TestFlight distribution" },
+      "category": "feature",
+      "stage": "now",
+      "ref": "T-0133",
+      "note": {
+        "ja": "実機での最終確認のため TestFlight でベータ配布する。",
+        "en": "Beta distribution via TestFlight for final on-device verification."
+      }
+    },
+    {
+      "id": "RM-003",
+      "title": { "ja": "匿名利用分析の本番計測", "en": "Production usage analytics" },
+      "category": "growth",
+      "stage": "now",
+      "ref": "",
+      "note": {
+        "ja": "PostHog で匿名イベントを計測（写真・ファイル名・色の実値は送らない）。Live events で疎通確認。",
+        "en": "Anonymous event analytics via PostHog (no photos, filenames, or exact color values). Verifying via live events."
+      }
+    },
+    {
+      "id": "RM-004",
+      "title": { "ja": "書き出し品質の継続検証", "en": "Export quality verification" },
+      "category": "bug",
+      "stage": "now",
+      "ref": "T-0130",
+      "note": {
+        "ja": "元解像度維持・色プロファイルなど、書き出し画像の品質をデバイス横断で検証する。",
+        "en": "Verifying export fidelity (original resolution, color profile) across devices."
+      }
+    },
+    {
+      "id": "RM-005",
+      "title": { "ja": "バッチ一括書き出し", "en": "Batch export" },
+      "category": "feature",
+      "stage": "next",
+      "ref": "T-0129",
+      "note": {
+        "ja": "複数の写真に同じフレーム設定をまとめて適用・書き出し（v1.1 Pro）。",
+        "en": "Apply one frame setup to many photos and export in bulk (v1.1 Pro)."
+      }
+    },
+    {
+      "id": "RM-006",
+      "title": { "ja": "フィルムフレーム", "en": "Film frames" },
+      "category": "feature",
+      "stage": "next",
+      "ref": "T-0127",
+      "note": {
+        "ja": "フィルム風の余白プリセットを追加（v1.1 Pro）。",
+        "en": "Film-style margin presets (v1.1 Pro)."
+      }
+    },
+    {
+      "id": "RM-007",
+      "title": { "ja": "Pro 課金（買い切り＋年額）", "en": "Pro plan (one-time + annual)" },
+      "category": "growth",
+      "stage": "next",
+      "ref": "",
+      "note": {
+        "ja": "Pro バンドル（フィルム＋バッチ）を買い切り中心に提供。MVP は無料のまま。",
+        "en": "Pro bundle (film + batch) offered primarily as a one-time purchase. The MVP stays free."
+      }
+    },
+    {
+      "id": "RM-008",
+      "title": { "ja": "日本語ローカライズ", "en": "Japanese localization" },
+      "category": "i18n",
+      "stage": "next",
+      "ref": "T-0136",
+      "note": {
+        "ja": "UI と App Store 掲載の日本語対応を整える（英語と併用）。",
+        "en": "Japanese UI and App Store listing alongside English."
+      }
+    },
+    {
+      "id": "RM-009",
+      "title": { "ja": "多言語ローカライズの拡充", "en": "More language localizations" },
+      "category": "i18n",
+      "stage": "later",
+      "ref": "",
+      "note": {
+        "ja": "英・日以外の言語へローカライズを広げ、グローバル展開を進める。",
+        "en": "Expand localization beyond English and Japanese for global reach."
+      }
+    },
+    {
+      "id": "RM-010",
+      "title": { "ja": "システムテーマ追従（ライト/ダーク）", "en": "System theme support (light/dark)" },
+      "category": "feature",
+      "stage": "later",
+      "ref": "",
+      "note": {
+        "ja": "現状ダーク固定の UI を、端末のライト/ダーク設定に追従させる。",
+        "en": "Follow the device light/dark setting instead of the current dark-only UI."
+      }
+    },
+    {
+      "id": "RM-011",
+      "title": { "ja": "ライトモード用アプリアイコン", "en": "Light-mode app icon" },
+      "category": "feature",
+      "stage": "later",
+      "ref": "",
+      "note": {
+        "ja": "iOS 18+ のライト/ダーク別アイコンに対応する。",
+        "en": "Add a light-appearance icon variant for iOS 18+."
+      }
+    },
+    {
+      "id": "RM-012",
+      "title": { "ja": "ASO・ストア素材の最適化", "en": "ASO & store asset optimization" },
+      "category": "growth",
+      "stage": "later",
+      "ref": "",
+      "note": {
+        "ja": "スクリーンショット・キーワード・掲載文を継続的に改善し、発見性を高める。",
+        "en": "Continuously improve screenshots, keywords, and copy for discoverability."
+      }
+    },
+    {
+      "id": "RM-013",
+      "title": { "ja": "ローンチ告知・SNS 展開", "en": "Launch announcement & social" },
+      "category": "growth",
+      "stage": "later",
+      "ref": "",
+      "note": {
+        "ja": "無彩のギャラリー調ビジュアルで、ローンチ告知と作例の発信を行う。",
+        "en": "Announce the launch and share examples with a muted, gallery-toned visual style."
+      }
+    }
+  ],
+  "changelog": [
+    {
+      "date": "2026-06-04",
+      "version": "Pre-launch",
+      "title": {
+        "ja": "App Store 素材を確定（スクショ6枚・掲載文・アイコン）",
+        "en": "Finalized App Store assets (6 screenshots, copy, icon)"
+      }
+    },
+    {
+      "date": "2026-06-03",
+      "version": "Pre-launch",
+      "title": {
+        "ja": "プリセット管理を刷新（ドラッグ並び替え・誤削除防止）",
+        "en": "Reworked preset management (drag reorder, safer delete)"
+      }
+    },
+    {
+      "date": "2026-06-03",
+      "version": "Pre-launch",
+      "title": {
+        "ja": "全画面プレビューを追加",
+        "en": "Added fullscreen preview"
+      }
+    },
+    {
+      "date": "2026-05-31",
+      "version": "Pre-launch",
+      "title": {
+        "ja": "サポート/プライバシーサイトを公開",
+        "en": "Published support & privacy site"
+      }
+    }
+  ]
+}
