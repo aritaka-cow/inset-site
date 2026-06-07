@@ -101,6 +101,17 @@
       }
     },
     {
+      "id": "RM-021",
+      "title": { "ja": "レビュー依頼プロンプト", "en": "Review request prompt" },
+      "category": "feature",
+      "stage": "next",
+      "ref": "T-0167",
+      "note": {
+        "ja": "画像を数枚保存した直後など、良い体験のタイミングで App Store のレビュー依頼（Apple 公式のレビューAPI）を表示する。設定には手動の評価リンクも用意する。",
+        "en": "Prompt for an App Store review at a good moment (e.g., after saving a few images) using Apple's official review API, plus a manual rate link in settings."
+      }
+    },
+    {
       "id": "RM-019",
       "title": { "ja": "動画対応", "en": "Video support" },
       "category": "feature",
