@@ -6,7 +6,7 @@
       "title": { "ja": "編集画面のパフォーマンス改善", "en": "Editor performance improvement" },
       "category": "bug",
       "stage": "now",
-      "ref": "",
+      "ref": "T-0163",
       "note": {
         "ja": "編集画面が「もっさり」するとのフィードバック。データ量の大きい写真で重くなる想定。編集中は縮小画像で操作し、プレビュー・書き出し時にオリジナル解像度を使う方針で改善する。",
         "en": "Feedback that the editor feels sluggish, likely with large photos. Plan: edit on a downscaled image, then use full resolution for preview and export."
@@ -17,10 +17,21 @@
       "title": { "ja": "App Store 検索プレビュー表示の改善", "en": "App Store search preview" },
       "category": "growth",
       "stage": "now",
-      "ref": "",
+      "ref": "T-0164",
       "note": {
         "ja": "App Store の検索結果でアプリ画面のプレビュー（スクリーンショット）が表示されず、リッチさが薄い。原因を調査して表示されるようにする。",
         "en": "In App Store search results, the screenshot preview doesn't appear, making the listing look plain. Investigate and fix so previews show."
+      }
+    },
+    {
+      "id": "RM-020",
+      "title": { "ja": "カラーピッカーで写真の色を拾えないバグ", "en": "Color picker can't sample photo colors" },
+      "category": "bug",
+      "stage": "now",
+      "ref": "T-0165",
+      "note": {
+        "ja": "フレームの色選択でカラーピッカー（スポイト）を使うとき、写真の中の色を選びたいのに、若干マスク（オーバーレイ）がかかった色しか拾えない。元画像の色をそのまま拾えるよう修正する。",
+        "en": "When using the color picker (eyedropper) to set a frame color, you can only sample a slightly masked color instead of the actual photo color. Fix so the original pixel color is sampled."
       }
     },
     {
@@ -180,7 +191,7 @@
   ],
   "changelog": [
     {
-      "date": "2026-06-07",
+      "date": "2026-06-05",
       "version": "1.0",
       "title": {
         "ja": "v1.0 を App Store にリリース（テスト完了・TestFlight 配布・匿名分析 稼働）",
