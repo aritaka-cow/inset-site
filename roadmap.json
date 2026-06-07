@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-07",
+  "updated": "2026-06-08",
   "items": [
     {
       "id": "RM-014",
@@ -10,17 +10,6 @@
       "note": {
         "ja": "編集画面が「もっさり」するとのフィードバック。データ量の大きい写真で重くなる想定。編集中は縮小画像で操作し、プレビュー・書き出し時にオリジナル解像度を使う方針で改善する。",
         "en": "Feedback that the editor feels sluggish, likely with large photos. Plan: edit on a downscaled image, then use full resolution for preview and export."
-      }
-    },
-    {
-      "id": "RM-015",
-      "title": { "ja": "App Store 検索プレビュー表示の改善", "en": "App Store search preview" },
-      "category": "growth",
-      "stage": "now",
-      "ref": "T-0164",
-      "note": {
-        "ja": "App Store の検索結果でアプリ画面のプレビュー（スクリーンショット）が表示されず、リッチさが薄い。原因を調査して表示されるようにする。",
-        "en": "In App Store search results, the screenshot preview doesn't appear, making the listing look plain. Investigate and fix so previews show."
       }
     },
     {
@@ -70,12 +59,12 @@
     {
       "id": "RM-018",
       "title": { "ja": "Inset ロゴ入りフィルム風フレーム（無料）", "en": "Free Inset film-style frames" },
-      "category": "growth",
+      "category": "feature",
       "stage": "next",
       "ref": "",
       "note": {
-        "ja": "Kodak などメーカー名入りフィルム風の枠を模し、「inset」ロゴ入りのフィルム風フレームを2種ほど無料で提供。投稿時の露出がそのままマーケティングになる。",
-        "en": "Two free film-style frames carrying the \"inset\" wordmark (like maker-branded film borders). Free use turns shared posts into organic marketing."
+        "ja": "「inset」ロゴ入りのフィルム風フレームを2種ほど、無料で使えるようにする。",
+        "en": "Add a couple of free film-style frames featuring the \"inset\" wordmark."
       }
     },
     {
@@ -109,17 +98,6 @@
       "note": {
         "ja": "フィルム風の余白プリセットを追加（v1.1 Pro）。無料の Inset ロゴ入りフレーム（RM-018）とは別の有料セット。",
         "en": "Film-style margin presets (v1.1 Pro). A paid set, separate from the free Inset-branded frames (RM-018)."
-      }
-    },
-    {
-      "id": "RM-007",
-      "title": { "ja": "Pro 課金（年額サブ主役＋買い切り）", "en": "Pro plan (annual sub + lifetime)" },
-      "category": "growth",
-      "stage": "next",
-      "ref": "T-0166",
-      "note": {
-        "ja": "Pro（バッチ＋フィルム＋動画）を年額サブスク主役で提供。月額をアンカーに、買い切り(lifetime)併設。$9.99/年から始め、機能拡充に合わせ $19.99/年まで段階値上げ（早期ユーザーは旧価格でロック）。MVP は無料のまま。",
-        "en": "Pro (batch + film + video) as an annual subscription, with a monthly anchor and a lifetime option. Start at $9.99/yr and ramp to $19.99/yr as features grow (early adopters keep their price). The MVP stays free."
       }
     },
     {
@@ -164,28 +142,6 @@
       "note": {
         "ja": "iOS 18+ のライト/ダーク別アイコンに対応する。",
         "en": "Add a light-appearance icon variant for iOS 18+."
-      }
-    },
-    {
-      "id": "RM-012",
-      "title": { "ja": "ASO・ストア素材の最適化", "en": "ASO & store asset optimization" },
-      "category": "growth",
-      "stage": "later",
-      "ref": "",
-      "note": {
-        "ja": "スクリーンショット・キーワード・掲載文を継続的に改善し、発見性を高める。",
-        "en": "Continuously improve screenshots, keywords, and copy for discoverability."
-      }
-    },
-    {
-      "id": "RM-013",
-      "title": { "ja": "ローンチ告知・SNS 展開", "en": "Launch announcement & social" },
-      "category": "growth",
-      "stage": "later",
-      "ref": "",
-      "note": {
-        "ja": "無彩のギャラリー調ビジュアルで、ローンチ告知と作例の発信を行う。",
-        "en": "Announce the launch and share examples with a muted, gallery-toned visual style."
       }
     }
   ],

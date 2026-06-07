@@ -101,7 +101,7 @@ const T = {
        stage:{ now:["Now","In progress"], next:["Next","Up next"], later:["Later","Future"] } }
 };
 const STAGES = ["now","next","later"];
-const CATS = ["feature","bug","i18n","growth"];
+const CATS = ["feature","bug","i18n"];
 let DATA = null, lang = "ja", filter = "all";
 
 function pick(o){ return (o && (o[lang] || o.ja || o.en)) || ""; }
