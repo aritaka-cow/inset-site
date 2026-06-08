@@ -24,17 +24,6 @@
       }
     },
     {
-      "id": "RM-004",
-      "title": { "ja": "書き出し品質の継続検証", "en": "Export quality verification" },
-      "category": "bug",
-      "stage": "now",
-      "ref": "T-0130",
-      "note": {
-        "ja": "元解像度維持・色プロファイルなど、書き出し画像の品質をデバイス横断で検証する。",
-        "en": "Verifying export fidelity (original resolution, color profile) across devices."
-      }
-    },
-    {
       "id": "RM-016",
       "title": { "ja": "比率を選べるクロップ", "en": "Aspect-ratio crop" },
       "category": "feature",
