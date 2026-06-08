@@ -6,6 +6,7 @@
       "title": { "ja": "編集画面のパフォーマンス改善", "en": "Editor performance improvement" },
       "category": "bug",
       "stage": "now",
+      "implemented": true,
       "ref": "T-0163",
       "note": {
         "ja": "編集画面が「もっさり」するとのフィードバック。データ量の大きい写真で重くなる想定。編集中は縮小画像で操作し、プレビュー・書き出し時にオリジナル解像度を使う方針で改善する。",
@@ -17,6 +18,7 @@
       "title": { "ja": "カラーピッカーで写真の色を拾えないバグ", "en": "Color picker can't sample photo colors" },
       "category": "bug",
       "stage": "now",
+      "implemented": true,
       "ref": "T-0165",
       "note": {
         "ja": "フレームの色選択でカラーピッカー（スポイト）を使うとき、写真の中の色を選びたいのに、若干マスク（オーバーレイ）がかかった色しか拾えない。元画像の色をそのまま拾えるよう修正する。",
@@ -28,6 +30,7 @@
       "title": { "ja": "比率を選べるクロップ", "en": "Aspect-ratio crop" },
       "category": "feature",
       "stage": "next",
+      "implemented": true,
       "ref": "",
       "note": {
         "ja": "写真編集で、元写真の比率だけでなく任意の比率を選んでクロップできるようにする。",
@@ -39,6 +42,7 @@
       "title": { "ja": "一つ前に戻る（Undo）", "en": "Undo" },
       "category": "feature",
       "stage": "next",
+      "implemented": false,
       "ref": "",
       "note": {
         "ja": "フレームを誤って削除したときに1つ前の状態に戻せる Undo を追加する（フィードバックより）。",
@@ -50,6 +54,7 @@
       "title": { "ja": "Inset ロゴ入りフィルム風フレーム（無料）", "en": "Free Inset film-style frames" },
       "category": "feature",
       "stage": "next",
+      "implemented": false,
       "ref": "",
       "note": {
         "ja": "「inset」ロゴ入りのフィルム風フレームを2種ほど、無料で使えるようにする。",
@@ -61,6 +66,7 @@
       "title": { "ja": "プライマリ言語を英語化（日本語はローカライズ）", "en": "English as primary language" },
       "category": "i18n",
       "stage": "next",
+      "implemented": false,
       "ref": "T-0136",
       "note": {
         "ja": "アプリと App Store のプライマリ言語を英語にし、日本語はローカライズとして提供する。",
@@ -72,10 +78,11 @@
       "title": { "ja": "バッチ一括書き出し", "en": "Batch export" },
       "category": "feature",
       "stage": "next",
+      "implemented": true,
       "ref": "T-0129",
       "note": {
-        "ja": "複数の写真に同じフレーム設定をまとめて適用・書き出し（v1.1 Pro）。",
-        "en": "Apply one frame setup to many photos and export in bulk (v1.1 Pro)."
+        "ja": "複数の写真に同じフレーム設定をまとめて適用・書き出し（v1.1 Pro）。実装済み・課金（Pro）と合わせて v1.1 で公開予定。",
+        "en": "Apply one frame setup to many photos and export in bulk (v1.1 Pro). Built; ships with the v1.1 Pro update."
       }
     },
     {
@@ -83,6 +90,7 @@
       "title": { "ja": "フィルムフレーム（Pro）", "en": "Film frames (Pro)" },
       "category": "feature",
       "stage": "next",
+      "implemented": false,
       "ref": "T-0127",
       "note": {
         "ja": "フィルム風の余白プリセットを追加（v1.1 Pro）。無料の Inset ロゴ入りフレーム（RM-018）とは別の有料セット。",
@@ -94,6 +102,7 @@
       "title": { "ja": "レビュー依頼プロンプト", "en": "Review request prompt" },
       "category": "feature",
       "stage": "next",
+      "implemented": false,
       "ref": "T-0167",
       "note": {
         "ja": "画像を数枚保存した直後など、良い体験のタイミングで App Store のレビュー依頼（Apple 公式のレビューAPI）を表示する。設定には手動の評価リンクも用意する。",
@@ -105,6 +114,7 @@
       "title": { "ja": "編集状態の復元（前回の続きから）", "en": "Restore last editing session" },
       "category": "feature",
       "stage": "next",
+      "implemented": true,
       "ref": "T-0168",
       "note": {
         "ja": "アプリを閉じても前回の編集内容（選択写真・フレーム・クロップ）をキャッシュし、次に開いたときに続きから再開できるようにする。",
@@ -116,6 +126,7 @@
       "title": { "ja": "動画対応", "en": "Video support" },
       "category": "feature",
       "stage": "later",
+      "implemented": false,
       "ref": "",
       "note": {
         "ja": "写真だけでなく動画にも簡単に枠（フレーム）を付けられるようにする。将来的な構想。",
@@ -127,6 +138,7 @@
       "title": { "ja": "多言語ローカライズの拡充", "en": "More language localizations" },
       "category": "i18n",
       "stage": "later",
+      "implemented": false,
       "ref": "",
       "note": {
         "ja": "英・日以外の言語へローカライズを広げ、グローバル展開を進める。",
@@ -138,6 +150,7 @@
       "title": { "ja": "システムテーマ追従（ライト/ダーク）", "en": "System theme support (light/dark)" },
       "category": "feature",
       "stage": "later",
+      "implemented": false,
       "ref": "",
       "note": {
         "ja": "現状ダーク固定の UI を、端末のライト/ダーク設定に追従させる。",
@@ -149,6 +162,7 @@
       "title": { "ja": "ライトモード用アプリアイコン", "en": "Light-mode app icon" },
       "category": "feature",
       "stage": "later",
+      "implemented": false,
       "ref": "",
       "note": {
         "ja": "iOS 18+ のライト/ダーク別アイコンに対応する。",

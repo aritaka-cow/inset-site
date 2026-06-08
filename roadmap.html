@@ -41,6 +41,9 @@
   .card h3{margin:0 0 6px;font-size:15px;font-weight:600;line-height:1.45;}
   .card p{margin:0;font-size:13px;color:var(--mut);line-height:1.6;}
   .card .ref{display:inline-block;margin-top:8px;font-size:11px;color:#9a9aa0;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;}
+  .card .status{display:inline-block;font-size:11px;letter-spacing:.03em;padding:2px 8px;border-radius:6px;margin:0 0 8px 6px;border:1px solid;vertical-align:top;}
+  .card .status.done{background:#e7f6ec;color:#1a7f3c;border-color:#bfe6cb;}
+  .card .status.planned{background:#f5f5f7;color:#8a8a90;border-color:#e4e4e8;}
 
   .changelog{margin:56px 0 0;}
   .changelog h2{font-size:18px;margin:0 0 4px;}
@@ -90,13 +93,13 @@ const T = {
   ja:{ title:"Inset — ロードマップ", tagline:"写真に余白（フレーム）を重ねるアプリの開発計画",
        loading:"読み込み中…", cl_title:"これまでの歩み", cl_sub:"主な開発マイルストーン",
        back:"← サポート / Support", updated:u=>`最終更新: ${u}`, empty:"（まだありません）",
-       all:"すべて",
+       all:"すべて", done:"実装済み", planned:"未実装",
        cat:{feature:"機能",bug:"バグ改善",i18n:"グローバル対応",growth:"グロース"},
        stage:{ now:["Now","いま進めている"], next:["Next","次に取り組む"], later:["Later","その先の構想"] } },
   en:{ title:"Inset — Roadmap", tagline:"Development plan for the photo-margin (frame) app",
        loading:"Loading…", cl_title:"Milestones", cl_sub:"Key development milestones so far",
        back:"← Support", updated:u=>`Last updated: ${u}`, empty:"(nothing yet)",
-       all:"All",
+       all:"All", done:"Implemented", planned:"Planned",
        cat:{feature:"Feature",bug:"Fixes",i18n:"Global",growth:"Growth"},
        stage:{ now:["Now","In progress"], next:["Next","Up next"], later:["Later","Future"] } }
 };
@@ -136,8 +139,11 @@ function render(){
     list.forEach(i=>{
       const card = document.createElement("div"); card.className = "card";
       const ref = i.ref ? `<span class="ref">${i.ref}</span>` : "";
+      const status = i.implemented
+        ? `<span class="status done">✓ ${t.done}</span>`
+        : `<span class="status planned">${t.planned}</span>`;
       card.innerHTML =
-        `<span class="tag cat-${i.category}">${t.cat[i.category]||i.category}</span>`+
+        `<span class="tag cat-${i.category}">${t.cat[i.category]||i.category}</span>${status}`+
         `<h3></h3><p></p>${ref}`;
       card.querySelector("h3").textContent = pick(i.title);
       card.querySelector("p").textContent = pick(i.note);
