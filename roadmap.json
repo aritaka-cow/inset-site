@@ -101,6 +101,17 @@
       }
     },
     {
+      "id": "RM-022",
+      "title": { "ja": "編集状態の復元（前回の続きから）", "en": "Restore last editing session" },
+      "category": "feature",
+      "stage": "next",
+      "ref": "T-0168",
+      "note": {
+        "ja": "アプリを閉じても前回の編集内容（選択写真・フレーム・クロップ）をキャッシュし、次に開いたときに続きから再開できるようにする。",
+        "en": "Cache the last edit (selected photo, frames, crop) so reopening the app resumes where you left off instead of resetting."
+      }
+    },
+    {
       "id": "RM-019",
       "title": { "ja": "動画対応", "en": "Video support" },
       "category": "feature",
