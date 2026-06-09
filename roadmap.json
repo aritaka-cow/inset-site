@@ -1,5 +1,27 @@
 {
   "updated": "2026-06-10",
+  "releases": [
+    {
+      "version": "1.1",
+      "type": "minor",
+      "status": "next",
+      "title": { "ja": "安定化＆たまった改善", "en": "Stability & pent-up improvements" },
+      "theme": {
+        "ja": "フィードバックを反映して、安定＆もっと便利に。",
+        "en": "Fixes and quality-of-life improvements from your feedback."
+      }
+    },
+    {
+      "version": "1.2",
+      "type": "minor",
+      "status": "planned",
+      "title": { "ja": "Inset Pro 登場", "en": "Introducing Inset Pro" },
+      "theme": {
+        "ja": "もっと自由な余白表現を。",
+        "en": "More creative freedom for your margins."
+      }
+    }
+  ],
   "items": [
     {
       "id": "RM-014",
@@ -7,6 +29,7 @@
       "category": "bug",
       "stage": "now",
       "implemented": true,
+      "release": "1.1",
       "ref": "T-0163",
       "note": {
         "ja": "編集画面が「もっさり」するとのフィードバック。データ量の大きい写真で重くなる想定。編集中は縮小画像で操作し、プレビュー・書き出し時にオリジナル解像度を使う方針で改善する。",
@@ -19,6 +42,7 @@
       "category": "bug",
       "stage": "now",
       "implemented": true,
+      "release": "1.1",
       "ref": "T-0165",
       "note": {
         "ja": "フレームの色選択でカラーピッカー（スポイト）を使うとき、写真の中の色を選びたいのに、若干マスク（オーバーレイ）がかかった色しか拾えない。元画像の色をそのまま拾えるよう修正する。",
@@ -31,6 +55,7 @@
       "category": "bug",
       "stage": "now",
       "implemented": false,
+      "release": "1.1",
       "ref": "T-0182",
       "note": {
         "ja": "全画面プレビューとスポイト表示で、大きな写真を扱うと内部で何度も再描画されメモリ消費・遅延が発生しうる問題を修正する（コードレビューで検出）。",
@@ -43,6 +68,7 @@
       "category": "bug",
       "stage": "now",
       "implemented": false,
+      "release": "1.1",
       "ref": "T-0183",
       "note": {
         "ja": "まれな条件で保存済みプリセットが読み込めなくなった場合に、データが失われないようバックアップ退避と互換性チェックを追加する（コードレビューで検出・予防修正）。",
@@ -55,6 +81,7 @@
       "category": "bug",
       "stage": "now",
       "implemented": false,
+      "release": "1.1",
       "ref": "T-0184",
       "note": {
         "ja": "新しい写真を読み込んだ時に、前の写真のクロップ枠・回転・傾きが引き継がれてしまう問題を修正する。",
@@ -67,6 +94,7 @@
       "category": "feature",
       "stage": "next",
       "implemented": true,
+      "release": "1.1",
       "ref": "",
       "note": {
         "ja": "写真編集で、元写真の比率だけでなく任意の比率を選んでクロップできるようにする。",
@@ -79,6 +107,7 @@
       "category": "feature",
       "stage": "next",
       "implemented": true,
+      "release": "1.1",
       "ref": "T-0181",
       "note": {
         "ja": "フレームの削除や、色・幅・比率・クロップなどの編集を1つ前に戻せる Undo と、やり直す Redo を追加（フィードバックより）。実装済み・次回アップデートで公開予定。",
@@ -91,6 +120,7 @@
       "category": "feature",
       "stage": "now",
       "implemented": false,
+      "release": "1.1",
       "ref": "T-0175",
       "note": {
         "ja": "「inset」ロゴ入りのフィルム風フレームを2種ほど、無料で使えるようにする。フィルムストリップ（縦連結）形式を第一候補として優先度を引き上げ。",
@@ -103,70 +133,11 @@
       "category": "i18n",
       "stage": "next",
       "implemented": false,
+      "release": "1.1",
       "ref": "T-0136",
       "note": {
         "ja": "アプリと App Store のプライマリ言語を英語にし、日本語はローカライズとして提供する。",
         "en": "Switch the app and App Store primary language to English, with Japanese offered as a localization."
-      }
-    },
-    {
-      "id": "RM-005",
-      "title": { "ja": "バッチ一括書き出し", "en": "Batch export" },
-      "category": "feature",
-      "stage": "next",
-      "implemented": true,
-      "ref": "T-0129",
-      "note": {
-        "ja": "複数の写真に同じフレーム設定をまとめて適用・書き出し（v1.1 Pro）。実装済み・課金（Pro）と合わせて v1.1 で公開予定。",
-        "en": "Apply one frame setup to many photos and export in bulk (v1.1 Pro). Built; ships with the v1.1 Pro update."
-      }
-    },
-    {
-      "id": "RM-006",
-      "title": { "ja": "フィルムフレーム（Pro）", "en": "Film frames (Pro)" },
-      "category": "feature",
-      "stage": "next",
-      "implemented": false,
-      "ref": "T-0127",
-      "note": {
-        "ja": "フィルム風の余白プリセットを追加（v1.1 Pro）。無料の Inset ロゴ入りフレーム（RM-018）とは別の有料セット。",
-        "en": "Film-style margin presets (v1.1 Pro). A paid set, separate from the free Inset-branded frames (RM-018)."
-      }
-    },
-    {
-      "id": "RM-021",
-      "title": { "ja": "レビュー依頼プロンプト", "en": "Review request prompt" },
-      "category": "feature",
-      "stage": "next",
-      "implemented": true,
-      "ref": "T-0167",
-      "note": {
-        "ja": "画像を数枚保存した直後など、良い体験のタイミングで App Store のレビュー依頼（Apple 公式のレビューAPI）を表示する。設定には手動の評価リンクも用意する。",
-        "en": "Prompt for an App Store review at a good moment (e.g., after saving a few images) using Apple's official review API, plus a manual rate link in settings."
-      }
-    },
-    {
-      "id": "RM-022",
-      "title": { "ja": "編集状態の復元（前回の続きから）", "en": "Restore last editing session" },
-      "category": "feature",
-      "stage": "next",
-      "implemented": true,
-      "ref": "T-0168",
-      "note": {
-        "ja": "アプリを閉じても前回の編集内容（選択写真・フレーム・クロップ）をキャッシュし、次に開いたときに続きから再開できるようにする。",
-        "en": "Cache the last edit (selected photo, frames, crop) so reopening the app resumes where you left off instead of resetting."
-      }
-    },
-    {
-      "id": "RM-023",
-      "title": { "ja": "Android版", "en": "Android version" },
-      "category": "feature",
-      "stage": "next",
-      "implemented": false,
-      "ref": "T-0171",
-      "note": {
-        "ja": "iPhone だけでなく Android でも Inset を使えるようにする。7月中のリリースを目標に実装を進める。",
-        "en": "Bring Inset to Android, not just iPhone. In development, targeting a release within July."
       }
     },
     {
@@ -175,6 +146,7 @@
       "category": "bug",
       "stage": "next",
       "implemented": false,
+      "release": "1.1",
       "ref": "T-0173",
       "note": {
         "ja": "現在は書き出すと写真のEXIF（カメラ・レンズ・撮影設定）が失われる。元のメタデータを保持できるよう修正する（フィードバックより）。",
@@ -187,6 +159,7 @@
       "category": "bug",
       "stage": "next",
       "implemented": false,
+      "release": "1.1",
       "ref": "T-0185",
       "note": {
         "ja": "サイズの大きい写真の読み込み・書き出し時に画面が一瞬固まることがある問題と、写真を素早く選び直した時にまれに前の選択が表示される問題を修正する（コードレビューで検出）。",
@@ -199,10 +172,76 @@
       "category": "bug",
       "stage": "next",
       "implemented": false,
+      "release": "1.1",
       "ref": "T-0186",
       "note": {
         "ja": "クロップ境界の1ピクセル単位の端数処理と、固定比率クロップのごく僅かな比率ずれを修正し、プレビューと書き出しの一致精度をさらに高める（コードレビューで検出）。",
         "en": "Refine sub-pixel rounding at crop boundaries and a tiny aspect deviation in fixed-ratio crops, further tightening preview/export consistency (found in code review)."
+      }
+    },
+    {
+      "id": "RM-021",
+      "title": { "ja": "レビュー依頼プロンプト", "en": "Review request prompt" },
+      "category": "feature",
+      "stage": "next",
+      "implemented": true,
+      "release": "1.1",
+      "ref": "T-0167",
+      "note": {
+        "ja": "画像を数枚保存した直後など、良い体験のタイミングで App Store のレビュー依頼（Apple 公式のレビューAPI）を表示する。設定には手動の評価リンクも用意する。",
+        "en": "Prompt for an App Store review at a good moment (e.g., after saving a few images) using Apple's official review API, plus a manual rate link in settings."
+      }
+    },
+    {
+      "id": "RM-022",
+      "title": { "ja": "編集状態の復元（前回の続きから）", "en": "Restore last editing session" },
+      "category": "feature",
+      "stage": "next",
+      "implemented": true,
+      "release": "1.1",
+      "ref": "T-0168",
+      "note": {
+        "ja": "アプリを閉じても前回の編集内容（選択写真・フレーム・クロップ）をキャッシュし、次に開いたときに続きから再開できるようにする。",
+        "en": "Cache the last edit (selected photo, frames, crop) so reopening the app resumes where you left off instead of resetting."
+      }
+    },
+    {
+      "id": "RM-005",
+      "title": { "ja": "バッチ一括書き出し", "en": "Batch export" },
+      "category": "feature",
+      "stage": "next",
+      "implemented": true,
+      "release": "1.2",
+      "ref": "T-0129",
+      "note": {
+        "ja": "複数の写真に同じフレーム設定をまとめて適用・書き出し（v1.2 Pro）。実装済み、v1.2 で公開予定。",
+        "en": "Apply one frame setup to many photos and export in bulk (v1.2 Pro). Built; ships with the v1.2 Pro update."
+      }
+    },
+    {
+      "id": "RM-006",
+      "title": { "ja": "フィルムフレーム（Pro）", "en": "Film frames (Pro)" },
+      "category": "feature",
+      "stage": "next",
+      "implemented": false,
+      "release": "1.2",
+      "ref": "T-0127",
+      "note": {
+        "ja": "フィルム風の余白プリセットを追加（v1.2 Pro）。無料の Inset ロゴ入りフレーム（RM-018）とは別の有料セット。",
+        "en": "Film-style margin presets (v1.2 Pro). A paid set, separate from the free Inset-branded frames (RM-018)."
+      }
+    },
+    {
+      "id": "RM-023",
+      "title": { "ja": "Android版", "en": "Android version" },
+      "category": "feature",
+      "stage": "next",
+      "implemented": false,
+      "release": null,
+      "ref": "T-0171",
+      "note": {
+        "ja": "iPhone だけでなく Android でも Inset を使えるようにする。7月中のリリースを目標に実装を進める。",
+        "en": "Bring Inset to Android, not just iPhone. In development, targeting a release within July."
       }
     },
     {
@@ -211,6 +250,7 @@
       "category": "feature",
       "stage": "later",
       "implemented": false,
+      "release": null,
       "ref": "",
       "note": {
         "ja": "写真だけでなく動画にも簡単に枠（フレーム）を付けられるようにする。将来的な構想。",
@@ -223,6 +263,7 @@
       "category": "i18n",
       "stage": "later",
       "implemented": false,
+      "release": null,
       "ref": "",
       "note": {
         "ja": "英・日以外の言語へローカライズを広げ、グローバル展開を進める。",
@@ -235,6 +276,7 @@
       "category": "feature",
       "stage": "later",
       "implemented": false,
+      "release": null,
       "ref": "",
       "note": {
         "ja": "現状ダーク固定の UI を、端末のライト/ダーク設定に追従させる。",
@@ -247,6 +289,7 @@
       "category": "feature",
       "stage": "later",
       "implemented": false,
+      "release": null,
       "ref": "",
       "note": {
         "ja": "iOS 18+ のライト/ダーク別アイコンに対応する。",
@@ -259,6 +302,7 @@
       "category": "feature",
       "stage": "later",
       "implemented": false,
+      "release": null,
       "ref": "T-0188",
       "note": {
         "ja": "Inset の統計は匿名・最小限（写真や個人情報は送信しない）だが、設定画面から完全にオフにできるトグルを追加する。",

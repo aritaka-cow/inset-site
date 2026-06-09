@@ -54,6 +54,22 @@
   .changelog .date{font-size:12px;color:var(--mut);font-family:ui-monospace,SFMono-Regular,Menlo,monospace;}
   .changelog .ctitle{font-size:14px;}
 
+  .releases{margin:8px 0 36px;}
+  .releases > h2{font-size:18px;margin:0 0 4px;}
+  .releases > .sub{color:var(--mut);font-size:13px;margin:0 0 18px;}
+  .release{border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:0 0 14px;background:var(--card);}
+  .release .rhead{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;margin:0 0 2px;}
+  .release .ver{font-size:16px;font-weight:700;color:var(--accent);}
+  .release .vbadge{font-size:11px;letter-spacing:.03em;padding:2px 8px;border-radius:6px;border:1px solid #e0e0e4;background:#ececef;color:#3a3a40;}
+  .release .vbadge.next{background:#1c1c1e;color:#fff;border-color:#1c1c1e;}
+  .release .rtitle{font-size:14px;font-weight:600;}
+  .release .rtheme{margin:6px 0 12px;font-size:13px;color:var(--mut);}
+  .release ul{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(2,1fr);gap:6px 18px;}
+  .release li{font-size:13px;line-height:1.5;display:flex;gap:8px;align-items:baseline;}
+  .release li .dot{flex:none;width:6px;height:6px;border-radius:50%;margin-top:6px;background:#bdbdc4;}
+  .release li .dot.done{background:#1a7f3c;}
+  @media(max-width:820px){ .release ul{grid-template-columns:1fr;} }
+
   footer{max-width:1040px;margin:0 auto;padding:0 24px 56px;color:var(--mut);font-size:13px;}
   footer a{color:#0a63c9;}
   .loading,.error{color:var(--mut);padding:40px 0;}
@@ -74,6 +90,13 @@
 
 <main>
   <p class="updated" id="updated"></p>
+
+  <section class="releases" id="releases" hidden>
+    <h2 data-i18n="rel_title">次のアップデート計画</h2>
+    <p class="sub" data-i18n="rel_sub">確定した次のリリースのまとまり（予定）</p>
+    <div id="releases-list"></div>
+  </section>
+
   <div class="filters" id="filters" role="group" aria-label="Filter"></div>
   <div class="board" id="board"><p class="loading" data-i18n="loading">読み込み中…</p></div>
 
@@ -95,12 +118,18 @@ const T = {
        back:"← サポート / Support", updated:u=>`最終更新: ${u}`, empty:"（まだありません）",
        all:"すべて", done:"実装済み", planned:"未実装",
        cat:{feature:"機能",bug:"バグ改善",i18n:"グローバル対応",growth:"グロース"},
+       rel_title:"次のアップデート計画", rel_sub:"確定した次のリリースのまとまり（予定）",
+       reltype:{patch:"修正",minor:"新機能",major:"大型"},
+       relstatus:{released:"リリース済み",next:"次のリリース",planned:"計画中"},
        stage:{ now:["Now","いま進めている"], next:["Next","次に取り組む"], later:["Later","その先の構想"] } },
   en:{ title:"Inset — Roadmap", tagline:"Development plan for the photo-margin (frame) app",
        loading:"Loading…", cl_title:"Milestones", cl_sub:"Key development milestones so far",
        back:"← Support", updated:u=>`Last updated: ${u}`, empty:"(nothing yet)",
        all:"All", done:"Implemented", planned:"Planned",
        cat:{feature:"Feature",bug:"Fixes",i18n:"Global",growth:"Growth"},
+       rel_title:"Upcoming releases", rel_sub:"What's bundled into the next versions (planned)",
+       reltype:{patch:"Patch",minor:"Feature",major:"Major"},
+       relstatus:{released:"Released",next:"Next up",planned:"Planned"},
        stage:{ now:["Now","In progress"], next:["Next","Up next"], later:["Later","Future"] } }
 };
 const STAGES = ["now","next","later"];
@@ -151,6 +180,39 @@ function render(){
     });
     board.appendChild(col);
   });
+
+  // releases (upcoming, grouped by version)
+  const rels = DATA.releases || [];
+  const rsec = document.getElementById("releases");
+  const rlist = document.getElementById("releases-list"); rlist.innerHTML = "";
+  if(rels.length){
+    rsec.hidden = false;
+    rels.forEach(r=>{
+      const wrap = document.createElement("div"); wrap.className = "release";
+      const statusLabel = (t.relstatus && t.relstatus[r.status]) || r.status || "";
+      const typeLabel = (t.reltype && t.reltype[r.type]) || "";
+      const badgeCls = r.status === "next" ? "vbadge next" : "vbadge";
+      const head = document.createElement("div"); head.className = "rhead";
+      head.innerHTML =
+        `<span class="ver">v${r.version}</span>`+
+        `<span class="${badgeCls}">${statusLabel}</span>`+
+        (typeLabel ? `<span class="vbadge">${typeLabel}</span>` : "")+
+        `<span class="rtitle"></span>`;
+      head.querySelector(".rtitle").textContent = pick(r.title);
+      wrap.appendChild(head);
+      const theme = document.createElement("p"); theme.className = "rtheme";
+      theme.textContent = pick(r.theme); wrap.appendChild(theme);
+      const ul = document.createElement("ul");
+      DATA.items.filter(i=>i.release === r.version).forEach(i=>{
+        const li = document.createElement("li");
+        li.innerHTML = `<span class="dot${i.implemented?" done":""}"></span><span class="lbl"></span>`;
+        li.querySelector(".lbl").textContent = pick(i.title);
+        ul.appendChild(li);
+      });
+      wrap.appendChild(ul);
+      rlist.appendChild(wrap);
+    });
+  } else { rsec.hidden = true; }
 
   // changelog
   const cl = DATA.changelog || [];
