@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-09",
+  "updated": "2026-06-10",
   "items": [
     {
       "id": "RM-014",
@@ -39,14 +39,14 @@
     },
     {
       "id": "RM-017",
-      "title": { "ja": "一つ前に戻る（Undo）", "en": "Undo" },
+      "title": { "ja": "一つ前に戻る（Undo / Redo）", "en": "Undo / Redo" },
       "category": "feature",
       "stage": "next",
-      "implemented": false,
-      "ref": "",
+      "implemented": true,
+      "ref": "T-0181",
       "note": {
-        "ja": "フレームを誤って削除したときに1つ前の状態に戻せる Undo を追加する（フィードバックより）。",
-        "en": "Add undo so an accidentally deleted frame can be restored (from user feedback)."
+        "ja": "フレームの削除や、色・幅・比率・クロップなどの編集を1つ前に戻せる Undo と、やり直す Redo を追加（フィードバックより）。実装済み・次回アップデートで公開予定。",
+        "en": "Add Undo to step back through edits (frame delete, color, width, ratio, crop, …) plus Redo to reapply (from user feedback). Built; ships in the next update."
       }
     },
     {
