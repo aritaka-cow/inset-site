@@ -26,6 +26,42 @@
       }
     },
     {
+      "id": "RM-025",
+      "title": { "ja": "全画面プレビューとスポイトの高速化・メモリ改善", "en": "Faster fullscreen preview & eyedropper, lower memory use" },
+      "category": "bug",
+      "stage": "now",
+      "implemented": false,
+      "ref": "T-0182",
+      "note": {
+        "ja": "全画面プレビューとスポイト表示で、大きな写真を扱うと内部で何度も再描画されメモリ消費・遅延が発生しうる問題を修正する（コードレビューで検出）。",
+        "en": "Fix redundant full-resolution re-rendering in the fullscreen preview and eyedropper that can cause high memory use and lag with large photos (found in code review)."
+      }
+    },
+    {
+      "id": "RM-026",
+      "title": { "ja": "プリセット保存の堅牢化（消失防止）", "en": "More robust preset storage (loss prevention)" },
+      "category": "bug",
+      "stage": "now",
+      "implemented": false,
+      "ref": "T-0183",
+      "note": {
+        "ja": "まれな条件で保存済みプリセットが読み込めなくなった場合に、データが失われないようバックアップ退避と互換性チェックを追加する（コードレビューで検出・予防修正）。",
+        "en": "Add backup fallback and compatibility checks so saved presets are never lost even if the preset file fails to load (preventive fix from code review)."
+      }
+    },
+    {
+      "id": "RM-027",
+      "title": { "ja": "写真を切り替えた時に前のクロップ・回転が残る問題", "en": "Previous crop/rotation persists when switching photos" },
+      "category": "bug",
+      "stage": "now",
+      "implemented": false,
+      "ref": "T-0184",
+      "note": {
+        "ja": "新しい写真を読み込んだ時に、前の写真のクロップ枠・回転・傾きが引き継がれてしまう問題を修正する。",
+        "en": "Fix an issue where the previous photo's crop, rotation, and straighten settings carry over when loading a new photo."
+      }
+    },
+    {
       "id": "RM-016",
       "title": { "ja": "比率を選べるクロップ", "en": "Aspect-ratio crop" },
       "category": "feature",
@@ -53,12 +89,12 @@
       "id": "RM-018",
       "title": { "ja": "Inset ロゴ入りフィルム風フレーム（無料）", "en": "Free Inset film-style frames" },
       "category": "feature",
-      "stage": "next",
+      "stage": "now",
       "implemented": false,
-      "ref": "",
+      "ref": "T-0175",
       "note": {
-        "ja": "「inset」ロゴ入りのフィルム風フレームを2種ほど、無料で使えるようにする。",
-        "en": "Add a couple of free film-style frames featuring the \"inset\" wordmark."
+        "ja": "「inset」ロゴ入りのフィルム風フレームを2種ほど、無料で使えるようにする。フィルムストリップ（縦連結）形式を第一候補として優先度を引き上げ。",
+        "en": "Add a couple of free film-style frames featuring the \"inset\" wordmark. Prioritized, with a film-strip (stacked) format as the leading candidate."
       }
     },
     {
@@ -146,6 +182,30 @@
       }
     },
     {
+      "id": "RM-028",
+      "title": { "ja": "大きな写真での読み込み・書き出しの安定化", "en": "Smoother loading & export with large photos" },
+      "category": "bug",
+      "stage": "next",
+      "implemented": false,
+      "ref": "T-0185",
+      "note": {
+        "ja": "サイズの大きい写真の読み込み・書き出し時に画面が一瞬固まることがある問題と、写真を素早く選び直した時にまれに前の選択が表示される問題を修正する（コードレビューで検出）。",
+        "en": "Fix brief UI freezes when loading or exporting large photos, and a rare case where quickly re-picking photos shows the earlier selection (found in code review)."
+      }
+    },
+    {
+      "id": "RM-029",
+      "title": { "ja": "クロップ精度の微調整", "en": "Crop precision refinements" },
+      "category": "bug",
+      "stage": "next",
+      "implemented": false,
+      "ref": "T-0186",
+      "note": {
+        "ja": "クロップ境界の1ピクセル単位の端数処理と、固定比率クロップのごく僅かな比率ずれを修正し、プレビューと書き出しの一致精度をさらに高める（コードレビューで検出）。",
+        "en": "Refine sub-pixel rounding at crop boundaries and a tiny aspect deviation in fixed-ratio crops, further tightening preview/export consistency (found in code review)."
+      }
+    },
+    {
       "id": "RM-019",
       "title": { "ja": "動画対応", "en": "Video support" },
       "category": "feature",
@@ -191,6 +251,18 @@
       "note": {
         "ja": "iOS 18+ のライト/ダーク別アイコンに対応する。",
         "en": "Add a light-appearance icon variant for iOS 18+."
+      }
+    },
+    {
+      "id": "RM-030",
+      "title": { "ja": "匿名統計のオプトアウト設定", "en": "Opt-out toggle for anonymous analytics" },
+      "category": "feature",
+      "stage": "later",
+      "implemented": false,
+      "ref": "T-0188",
+      "note": {
+        "ja": "Inset の統計は匿名・最小限（写真や個人情報は送信しない）だが、設定画面から完全にオフにできるトグルを追加する。",
+        "en": "Inset's analytics are anonymous and minimal (no photos or personal data), but add a settings toggle to turn them off entirely."
       }
     }
   ],
