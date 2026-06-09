@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-08",
+  "updated": "2026-06-09",
   "items": [
     {
       "id": "RM-014",
@@ -102,7 +102,7 @@
       "title": { "ja": "レビュー依頼プロンプト", "en": "Review request prompt" },
       "category": "feature",
       "stage": "next",
-      "implemented": false,
+      "implemented": true,
       "ref": "T-0167",
       "note": {
         "ja": "画像を数枚保存した直後など、良い体験のタイミングで App Store のレビュー依頼（Apple 公式のレビューAPI）を表示する。設定には手動の評価リンクも用意する。",
@@ -119,6 +119,30 @@
       "note": {
         "ja": "アプリを閉じても前回の編集内容（選択写真・フレーム・クロップ）をキャッシュし、次に開いたときに続きから再開できるようにする。",
         "en": "Cache the last edit (selected photo, frames, crop) so reopening the app resumes where you left off instead of resetting."
+      }
+    },
+    {
+      "id": "RM-023",
+      "title": { "ja": "Android版", "en": "Android version" },
+      "category": "feature",
+      "stage": "next",
+      "implemented": false,
+      "ref": "T-0171",
+      "note": {
+        "ja": "iPhone だけでなく Android でも Inset を使えるようにする。7月中のリリースを目標に実装を進める。",
+        "en": "Bring Inset to Android, not just iPhone. In development, targeting a release within July."
+      }
+    },
+    {
+      "id": "RM-024",
+      "title": { "ja": "書き出し時にEXIF情報を保持", "en": "Preserve EXIF metadata on export" },
+      "category": "bug",
+      "stage": "next",
+      "implemented": false,
+      "ref": "T-0173",
+      "note": {
+        "ja": "現在は書き出すと写真のEXIF（カメラ・レンズ・撮影設定）が失われる。元のメタデータを保持できるよう修正する（フィードバックより）。",
+        "en": "Currently the photo's EXIF data (camera, lens, settings) is lost on export. Fix so the original metadata is preserved (from user feedback)."
       }
     },
     {
