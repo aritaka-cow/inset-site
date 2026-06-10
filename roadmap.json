@@ -54,7 +54,7 @@
       "title": { "ja": "全画面プレビューとスポイトの高速化・メモリ改善", "en": "Faster fullscreen preview & eyedropper, lower memory use" },
       "category": "bug",
       "stage": "now",
-      "implemented": false,
+      "implemented": true,
       "release": "1.1",
       "ref": "T-0182",
       "note": {
