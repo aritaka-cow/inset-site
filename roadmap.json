@@ -145,7 +145,7 @@
       "title": { "ja": "書き出し時にEXIF情報を保持", "en": "Preserve EXIF metadata on export" },
       "category": "bug",
       "stage": "next",
-      "implemented": false,
+      "implemented": true,
       "release": "1.1",
       "ref": "T-0173",
       "note": {
