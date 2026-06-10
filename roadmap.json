@@ -80,7 +80,7 @@
       "title": { "ja": "写真を切り替えた時に前のクロップ・回転が残る問題", "en": "Previous crop/rotation persists when switching photos" },
       "category": "bug",
       "stage": "now",
-      "implemented": false,
+      "implemented": true,
       "release": "1.1",
       "ref": "T-0184",
       "note": {
