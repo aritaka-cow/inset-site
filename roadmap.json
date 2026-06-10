@@ -171,7 +171,7 @@
       "title": { "ja": "クロップ精度の微調整", "en": "Crop precision refinements" },
       "category": "bug",
       "stage": "next",
-      "implemented": false,
+      "implemented": true,
       "release": "1.1",
       "ref": "T-0186",
       "note": {
