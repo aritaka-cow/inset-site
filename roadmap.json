@@ -158,7 +158,7 @@
       "title": { "ja": "大きな写真での読み込み・書き出しの安定化", "en": "Smoother loading & export with large photos" },
       "category": "bug",
       "stage": "next",
-      "implemented": false,
+      "implemented": true,
       "release": "1.1",
       "ref": "T-0185",
       "note": {
