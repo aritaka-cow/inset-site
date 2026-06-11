@@ -199,7 +199,8 @@ function render(){
   STAGES.forEach(stage=>{
     const col = document.createElement("div"); col.className = "col";
     const [head, sub] = t.stage[stage];
-    const list = items.filter(i=>i.stage===stage);
+    const list = items.filter(i=>i.stage===stage)
+      .sort((a,b)=>(a.implemented?1:0)-(b.implemented?1:0));
     col.innerHTML = `<div class="chead"><h2>${head}</h2><span class="sub">${sub}</span><span class="count">${list.length}</span></div>`;
     if(!list.length){ const e=document.createElement("p"); e.className="empty"; e.textContent=t.empty; col.appendChild(e); }
     list.forEach(i=>{
