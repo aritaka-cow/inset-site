@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-11",
+  "updated": "2026-06-12",
   "releases": [
     {
       "version": "1.1",
@@ -320,6 +320,32 @@
       "note": {
         "ja": "Inset の統計は匿名・最小限（写真や個人情報は送信しない）だが、設定画面から完全にオフにできるトグルを追加する。",
         "en": "Inset's analytics are anonymous and minimal (no photos or personal data), but add a settings toggle to turn them off entirely."
+      }
+    },
+    {
+      "id": "RM-032",
+      "title": { "ja": "設定画面（言語切替・お知らせ・各種リンク）", "en": "Settings screen (language, news, links)" },
+      "category": "feature",
+      "stage": "next",
+      "implemented": false,
+      "release": "1.1",
+      "ref": "T-0200",
+      "note": {
+        "ja": "アプリ内に設定画面を追加。アプリの言語切替（iOS のアプリごとの言語設定）、お知らせ、プライバシーポリシー／サポートへのリンク、バージョン情報をまとめる。",
+        "en": "Add an in-app settings screen: app language (iOS per-app language setting), news, links to privacy policy and support, and version info."
+      }
+    },
+    {
+      "id": "RM-033",
+      "title": { "ja": "アプリ内お知らせ（アップデート情報の配信）", "en": "In-app announcements (update news)" },
+      "category": "feature",
+      "stage": "next",
+      "implemented": false,
+      "release": "1.1",
+      "ref": "T-0201",
+      "note": {
+        "ja": "アップデート内容や告知をアプリ内で確認できるように。更新後の初回起動には What's New を表示する。",
+        "en": "See update notes and announcements inside the app, with a What's New sheet after each update."
       }
     }
   ],
