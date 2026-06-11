@@ -131,13 +131,13 @@
       "id": "RM-018",
       "title": { "ja": "Inset ロゴ入りフィルム風フレーム（無料）", "en": "Free Inset film-style frames" },
       "category": "feature",
-      "stage": "now",
+      "stage": "next",
       "implemented": false,
-      "release": "1.1",
+      "release": "1.2",
       "ref": "T-0175",
       "note": {
-        "ja": "「inset」ロゴ入りのフィルム風フレームを2種ほど、無料で使えるようにする。フィルムストリップ（縦連結）形式を第一候補として優先度を引き上げ。",
-        "en": "Add a couple of free film-style frames featuring the \"inset\" wordmark. Prioritized, with a film-strip (stacked) format as the leading candidate."
+        "ja": "「inset」ロゴ入りのフィルム風フレームを2種ほど、無料で使えるようにする。フィルムストリップ（縦連結）形式を第一候補。Pro のフィルムフレーム（RM-006）と同時に v1.2 で公開し、無料で試して Pro のフルセットへ進める導線にする。",
+        "en": "Add a couple of free film-style frames featuring the \"inset\" wordmark, with a film-strip (stacked) format as the leading candidate. Ships in v1.2 alongside the Pro film frames (RM-006), so the free frames act as the entry point to the full Pro set."
       }
     },
     {
