@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-10",
+  "updated": "2026-06-11",
   "releases": [
     {
       "version": "1.1",
@@ -86,6 +86,19 @@
       "note": {
         "ja": "新しい写真を読み込んだ時に、前の写真のクロップ枠・回転・傾きが引き継がれてしまう問題を修正する。",
         "en": "Fix an issue where the previous photo's crop, rotation, and straighten settings carry over when loading a new photo."
+      }
+    },
+    {
+      "id": "RM-031",
+      "title": { "ja": "写真を選んでも編集画面に反映されないバグ", "en": "Selected photo not applied to editor" },
+      "category": "bug",
+      "stage": "now",
+      "implemented": false,
+      "release": "1.1",
+      "ref": "T-0198",
+      "note": {
+        "ja": "写真を選んでも反映されず、初期のサンプル画像のまま保存されるとのフィードバック。iCloud 写真などの読み込み失敗時に無反応になるのが原因。失敗時のエラー表示と、再試行・代替経路による読み込みの堅牢化を行う。",
+        "en": "Feedback that a selected photo isn't applied and the default sample image gets saved instead. Caused by silent failures when loading some photos (e.g., iCloud photos). Adds visible error feedback plus retry/fallback loading."
       }
     },
     {
