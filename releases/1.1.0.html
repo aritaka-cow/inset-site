@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Inset 1.1.0 — リリースノート / Release Notes</title>
+<style>
+  :root{ --bg:#fff; --fg:#1a1a18; --mut:#6b6b70; --mut2:#9a9aa0; --line:#e6e6ea; --ink:#1a1a18; }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--fg);
+       font:15px/1.75 -apple-system,"Hiragino Sans","Hiragino Kaku Gothic ProN",system-ui,sans-serif;
+       -webkit-font-smoothing:antialiased;}
+
+  header{border-bottom:1px solid var(--line);}
+  header .wrap{max-width:760px;margin:0 auto;padding:24px 24px 18px;
+    display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap;}
+  header .crumb{font-size:12.5px;color:var(--mut);margin:0 0 6px;}
+  header .crumb a{color:var(--mut);text-decoration:none;}
+  header .crumb a:hover{text-decoration:underline;}
+  header h1{margin:0;font-size:22px;font-weight:700;letter-spacing:.01em;}
+  header .meta{margin:6px 0 0;color:var(--mut);font-size:13px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;}
+  .vbadge{font-size:11px;letter-spacing:.03em;padding:3px 10px;border-radius:999px;
+    background:var(--ink);color:#fff;font-weight:600;white-space:nowrap;}
+  .lang{display:flex;border:1px solid var(--line);border-radius:8px;overflow:hidden;margin-top:2px;}
+  .lang button{background:#fff;color:var(--mut);border:0;padding:6px 14px;font:inherit;font-size:12.5px;cursor:pointer;}
+  .lang button[aria-pressed="true"]{background:var(--ink);color:#fff;font-weight:600;}
+
+  main{max-width:760px;margin:0 auto;padding:30px 24px 0;}
+  .lead{font-size:16px;line-height:1.9;margin:0 0 36px;}
+
+  section{margin:0 0 44px;}
+  section h2{font-size:17px;font-weight:700;margin:0 0 10px;letter-spacing:.01em;}
+  section h3{font-size:14px;font-weight:700;margin:18px 0 6px;}
+  section p{margin:0 0 10px;color:var(--fg);}
+  section p.note{color:var(--mut);font-size:13px;}
+  section ul{margin:0 0 10px;padding-left:1.3em;}
+  section li{margin:4px 0;}
+  section li b{font-weight:600;}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start;}
+  @media(max-width:640px){ .grid2{grid-template-columns:1fr;} }
+
+  footer{border-top:1px solid var(--line);margin-top:48px;}
+  footer .wrap{max-width:760px;margin:0 auto;padding:16px 24px 40px;
+    display:flex;gap:18px;flex-wrap:wrap;color:var(--mut);font-size:12.5px;}
+  footer a{color:var(--fg);font-weight:600;text-decoration:none;}
+  footer a:hover{text-decoration:underline;}
+
+  body[data-lang="ja"] .i-en{display:none;}
+  body[data-lang="en"] .i-ja{display:none;}
+</style>
+</head>
+<body data-lang="ja">
+<header><div class="wrap">
+  <div>
+    <p class="crumb"><a href="../index.html">Inset</a> / <a href="../roadmap.html"><span class="i-ja">ロードマップ</span><span class="i-en">Roadmap</span></a> / <span class="i-ja">リリースノート</span><span class="i-en">Release Notes</span></p>
+    <h1>Inset 1.1.0</h1>
+    <p class="meta"><span class="vbadge"><span class="i-ja">アップデート</span><span class="i-en">Update</span></span> <span>2026-06-13</span></p>
+  </div>
+  <div class="lang" role="group" aria-label="Language">
+    <button data-lang="ja" aria-pressed="true">日本語</button>
+    <button data-lang="en" aria-pressed="false">English</button>
+  </div>
+</div></header>
+
+<main>
+  <p class="lead">
+    <span class="i-ja">Inset 1.1.0 は、初回リリース後にいただいたフィードバックをまとめて反映した大型アップデートです。日本語対応・クロップ・Undo/Redo・編集の続きから再開など、毎日の編集が確実に快適になる 16 の改善を詰め込みました。</span>
+    <span class="i-en">Inset 1.1.0 is a major update built on your feedback since launch. Japanese localization, cropping, Undo/Redo, session restore — 16 improvements that make everyday editing noticeably better.</span>
+  </p>
+
+  <section>
+    <h2><span class="i-ja">日本語に対応しました</span><span class="i-en">Now in Japanese</span></h2>
+    <p>
+      <span class="i-ja">アプリ全体が日本語で使えるようになりました。設定画面の言語ピッカーから、再起動なしでいつでも日本語 / English を切り替えられます（システム設定に従うこともできます）。</span>
+      <span class="i-en">The entire app is now available in Japanese. Switch between English and Japanese anytime from the in-app language picker — no restart needed (or simply follow your system setting).</span>
+    </p>
+  </section>
+
+  <section>
+    <h2><span class="i-ja">設定画面とアプリ内お知らせ</span><span class="i-en">Settings screen &amp; in-app announcements</span></h2>
+    <p>
+      <span class="i-ja">新しい設定画面に、言語切替・お知らせ・サポートやプライバシーポリシーへのリンク・バージョン情報をまとめました。アップデート情報はアプリ内の「お知らせ」に届き、更新後の初回起動では What's New が表示されます（いま読んでいるこのページも、そこから来られたかもしれません）。</span>
+      <span class="i-en">The new settings screen brings together language, announcements, support and privacy links, and version info. Update news now arrives in-app, with a What's New sheet after each update — you may have arrived at this very page from it.</span>
+    </p>
+  </section>
+
+  <section>
+    <h2><span class="i-ja">編集がもっと自由に</span><span class="i-en">More freedom while editing</span></h2>
+    <ul>
+      <li><b><span class="i-ja">比率を選べるクロップ</span><span class="i-en">Ratio crop</span></b> — <span class="i-ja">写真タブで 1:1 / 4:5 / 3:2 / 9:16 / 自由形式のクロップ、90° 回転、傾きの微調整ができます。</span><span class="i-en">Crop to 1:1, 4:5, 3:2, 9:16 or freeform in the Photo tab, rotate 90°, and fine-tune straightening.</span></li>
+      <li><b>Undo / Redo</b> — <span class="i-ja">編集操作をいつでも一手ずつ戻せます。思い切った調整も安心です。</span><span class="i-en">Step back through any edit. Experiment without worry.</span></li>
+      <li><b><span class="i-ja">編集の続きから再開</span><span class="i-en">Pick up where you left off</span></b> — <span class="i-ja">アプリを閉じても、前回の写真とフレーム設定が復元されます。</span><span class="i-en">Close the app and your photo and frame setup are restored next time.</span></li>
+      <li><b><span class="i-ja">EXIF 情報を保持</span><span class="i-en">EXIF preserved</span></b> — <span class="i-ja">書き出した写真に撮影情報（位置情報を含む）が引き継がれるようになりました。</span><span class="i-en">Exports now carry over capture metadata, including location.</span></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2><span class="i-ja">速く、堅牢に</span><span class="i-en">Faster and more reliable</span></h2>
+    <ul>
+      <li><span class="i-ja">編集画面・全画面プレビュー・スポイトのパフォーマンスとメモリ使用を大きく改善</span><span class="i-en">Major performance and memory improvements across the editor, fullscreen preview, and eyedropper</span></li>
+      <li><span class="i-ja">大きな写真（高解像度・HEIC/DNG）の読み込みと書き出しを安定化</span><span class="i-en">More stable loading and exporting of large photos (high-res, HEIC/DNG)</span></li>
+      <li><span class="i-ja">写真を選んでも編集画面に反映されないことがある問題を修正</span><span class="i-en">Fixed photos sometimes not appearing after picking</span></li>
+      <li><span class="i-ja">カラーピッカーで写真の色を拾えないことがあるバグを修正</span><span class="i-en">Fixed the eyedropper occasionally failing to sample colors</span></li>
+      <li><span class="i-ja">写真を切り替えた時に前のクロップ・回転が残る問題を修正</span><span class="i-en">Fixed previous crop/rotation persisting across photo switches</span></li>
+      <li><span class="i-ja">プリセット保存の堅牢化（破損時の自動バックアップ）とクロップ精度の改善</span><span class="i-en">Hardened preset storage (automatic backup on corruption) and improved crop precision</span></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2><span class="i-ja">次のアップデート</span><span class="i-en">What's next</span></h2>
+    <p>
+      <span class="i-ja">次の v1.2 では Inset Pro（複数写真への一括フレームなど）を計画しています。進捗は<a href="../roadmap.html">公開ロードマップ</a>でいつでも確認できます。</span>
+      <span class="i-en">v1.2 will introduce Inset Pro, including batch framing for multiple photos. Follow along on the <a href="../roadmap.html">public roadmap</a>.</span>
+    </p>
+    <p class="note">
+      <span class="i-ja">フィードバックは <a href="../index.html">サポートページ</a> からお気軽にどうぞ。</span>
+      <span class="i-en">Feedback is always welcome via the <a href="../index.html">support page</a>.</span>
+    </p>
+  </section>
+</main>
+
+<footer><div class="wrap">
+  <a href="../index.html"><span class="i-ja">サポート</span><span class="i-en">Support</span></a>
+  <a href="../roadmap.html"><span class="i-ja">ロードマップ</span><span class="i-en">Roadmap</span></a>
+  <a href="../privacy.html"><span class="i-ja">プライバシー</span><span class="i-en">Privacy</span></a>
+  <a href="1.0.0.html">1.0.0</a>
+</div></footer>
+
+<script>
+  const params = new URLSearchParams(location.search);
+  let lang = params.get("lang") || (navigator.language?.startsWith("ja") ? "ja" : "en");
+  if (lang !== "ja" && lang !== "en") lang = "ja";
+  setLang(lang);
+  document.querySelectorAll(".lang button").forEach(b => {
+    b.onclick = () => setLang(b.getAttribute("data-lang"));
+  });
+  function setLang(l) {
+    document.body.setAttribute("data-lang", l);
+    document.documentElement.lang = l;
+    document.querySelectorAll(".lang button").forEach(x =>
+      x.setAttribute("aria-pressed", String(x.getAttribute("data-lang") === l)));
+  }
+</script>
+</body>
+</html>
