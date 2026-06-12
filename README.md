@@ -22,6 +22,7 @@
    - `type`: `release`（アプリ更新のお知らせ）または `news`（一般告知）。アプリ側は未知の type も一般告知として表示する
    - `appVersion`: `release` のみ必須。この値が端末のアプリバージョンと一致すると、更新後の初回起動で What's New シートに使われる
    - `title` / `body`: `{ "en": ..., "ja": ... }`。en 必須、ja 推奨（欠落時は en にフォールバック）
+   - `url`（任意）: 詳細ページへのリンク。**https のみ有効**（http は無視される）。画像付きのリッチな解説はサイト側のページに置き、ここからリンクする。アプリでは「詳しく見る ↗」として表示される
 3. push 前に構文チェック: `python3 -m json.tool announcements.json > /dev/null`
 4. push 後の反映は**最大 11 分程度**（GitHub Pages の CDN cache-control: max-age=600 + デプロイ時間）。即時反映は保証されない。
 
