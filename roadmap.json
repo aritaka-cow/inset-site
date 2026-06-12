@@ -347,6 +347,19 @@
         "ja": "アップデート内容や告知をアプリ内で確認できるように。更新後の初回起動には What's New を表示する。",
         "en": "See update notes and announcements inside the app, with a What's New sheet after each update."
       }
+    },
+    {
+      "id": "RM-034",
+      "title": { "ja": "v1.1 アップデートの公開（リリースノート付き）", "en": "Ship the v1.1 update (with release notes)" },
+      "category": "release",
+      "stage": "next",
+      "implemented": false,
+      "release": "1.1",
+      "ref": "T-0202",
+      "note": {
+        "ja": "v1.1 のリリース業務一式。詳しいリリースノートページの公開、アプリ内お知らせ（What's New）の配信、App Store への提出までを含む。",
+        "en": "Everything needed to ship v1.1: a detailed release notes page, the in-app What's New announcement, and App Store submission."
+      }
     }
   ],
   "changelog": [
