@@ -1,10 +1,10 @@
 {
-  "updated": "2026-06-12",
+  "updated": "2026-06-13",
   "releases": [
     {
       "version": "1.1",
       "type": "minor",
-      "status": "next",
+      "status": "released",
       "title": { "ja": "安定化＆たまった改善", "en": "Stability & pent-up improvements" },
       "theme": {
         "ja": "フィードバックを反映して、安定＆もっと便利に。",
@@ -353,7 +353,7 @@
       "title": { "ja": "v1.1 アップデートの公開（リリースノート付き）", "en": "Ship the v1.1 update (with release notes)" },
       "category": "release",
       "stage": "next",
-      "implemented": false,
+      "implemented": true,
       "release": "1.1",
       "ref": "T-0202",
       "note": {
@@ -363,6 +363,14 @@
     }
   ],
   "changelog": [
+    {
+      "date": "2026-06-13",
+      "version": "1.1",
+      "title": {
+        "ja": "v1.1.0 を App Store に公開（日本語対応・クロップ・Undo/Redo・アプリ内お知らせ）",
+        "en": "Released v1.1.0 on the App Store (Japanese, crop, Undo/Redo, in-app news)"
+      }
+    },
     {
       "date": "2026-06-05",
       "version": "1.0",
