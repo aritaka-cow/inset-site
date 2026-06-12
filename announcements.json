@@ -2,6 +2,21 @@
   "version": 1,
   "announcements": [
     {
+      "id": "rel-1.1.0",
+      "date": "2026-06-13",
+      "type": "release",
+      "appVersion": "1.1.0",
+      "title": {
+        "en": "Inset 1.1.0",
+        "ja": "Inset 1.1.0"
+      },
+      "body": {
+        "en": "Now in Japanese! Plus ratio crop, Undo/Redo, session restore, a settings screen with in-app news, EXIF preservation, and many performance and stability fixes.",
+        "ja": "日本語に対応しました！ さらに比率クロップ、Undo/Redo、編集の続きから再開、設定画面とアプリ内お知らせ、EXIF 保持、多数のパフォーマンス・安定性改善を含むアップデートです。"
+      },
+      "url": "https://aritaka-cow.github.io/inset-site/releases/1.1.0.html"
+    },
+    {
       "id": "rel-1.0.0",
       "date": "2026-06-12",
       "type": "release",
