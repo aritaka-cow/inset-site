@@ -6,11 +6,15 @@
       "date": "2026-06-12",
       "type": "release",
       "appVersion": "1.0.0",
-      "title": { "en": "Inset 1.0.0", "ja": "Inset 1.0.0" },
+      "title": {
+        "en": "Inset 1.0.0",
+        "ja": "Inset 1.0.0"
+      },
       "body": {
         "en": "Initial release. Frame your photos with layered margins, save presets, and export in full resolution.",
         "ja": "初回リリース。重ねた余白で写真をフレームし、プリセットを保存して、フル解像度で書き出せます。"
-      }
+      },
+      "url": "https://aritaka-cow.github.io/inset-site/releases/1.0.0.html"
     }
   ]
 }

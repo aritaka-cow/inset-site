@@ -340,7 +340,7 @@
       "title": { "ja": "アプリ内お知らせ（アップデート情報の配信）", "en": "In-app announcements (update news)" },
       "category": "feature",
       "stage": "next",
-      "implemented": false,
+      "implemented": true,
       "release": "1.1",
       "ref": "T-0201",
       "note": {

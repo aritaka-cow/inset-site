@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Inset 1.0.0 — リリースノート / Release Notes</title>
+<style>
+  :root{ --bg:#fff; --fg:#1a1a18; --mut:#6b6b70; --mut2:#9a9aa0; --line:#e6e6ea; --ink:#1a1a18; }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--fg);
+       font:15px/1.75 -apple-system,"Hiragino Sans","Hiragino Kaku Gothic ProN",system-ui,sans-serif;
+       -webkit-font-smoothing:antialiased;}
+
+  header{border-bottom:1px solid var(--line);}
+  header .wrap{max-width:760px;margin:0 auto;padding:24px 24px 18px;
+    display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap;}
+  header .crumb{font-size:12.5px;color:var(--mut);margin:0 0 6px;}
+  header .crumb a{color:var(--mut);text-decoration:none;}
+  header .crumb a:hover{text-decoration:underline;}
+  header h1{margin:0;font-size:22px;font-weight:700;letter-spacing:.01em;}
+  header .meta{margin:6px 0 0;color:var(--mut);font-size:13px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;}
+  .vbadge{font-size:11px;letter-spacing:.03em;padding:3px 10px;border-radius:999px;
+    background:var(--ink);color:#fff;font-weight:600;white-space:nowrap;}
+  .lang{display:flex;border:1px solid var(--line);border-radius:8px;overflow:hidden;margin-top:2px;}
+  .lang button{background:#fff;color:var(--mut);border:0;padding:6px 14px;font:inherit;font-size:12.5px;cursor:pointer;}
+  .lang button[aria-pressed="true"]{background:var(--ink);color:#fff;font-weight:600;}
+
+  main{max-width:760px;margin:0 auto;padding:30px 24px 0;}
+  .lead{font-size:16px;line-height:1.9;margin:0 0 36px;}
+
+  section{margin:0 0 44px;}
+  section h2{font-size:17px;font-weight:700;margin:0 0 10px;letter-spacing:.01em;}
+  section p{margin:0 0 10px;color:var(--fg);}
+  section p.note{color:var(--mut);font-size:13px;}
+  section ul{margin:0 0 10px;padding-left:1.3em;}
+  section li{margin:3px 0;}
+
+  figure{margin:18px 0 6px;text-align:center;}
+  figure img{width:min(320px,80%);border:1px solid var(--line);border-radius:14px;
+    box-shadow:0 8px 28px rgba(0,0,0,.07);}
+  figure figcaption{font-size:12px;color:var(--mut2);margin-top:10px;}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start;}
+  @media(max-width:640px){ .grid2{grid-template-columns:1fr;} }
+
+  footer{border-top:1px solid var(--line);margin-top:48px;}
+  footer .wrap{max-width:760px;margin:0 auto;padding:16px 24px 40px;
+    display:flex;gap:18px;flex-wrap:wrap;color:var(--mut);font-size:12.5px;}
+  footer a{color:var(--fg);font-weight:600;text-decoration:none;}
+  footer a:hover{text-decoration:underline;}
+
+  /* ja/en 切替: body[data-lang] で表示を出し分ける */
+  body[data-lang="ja"] .i-en{display:none;}
+  body[data-lang="en"] .i-ja{display:none;}
+</style>
+</head>
+<body data-lang="ja">
+<header><div class="wrap">
+  <div>
+    <p class="crumb"><a href="../index.html">Inset</a> / <a href="../roadmap.html"><span class="i-ja">ロードマップ</span><span class="i-en">Roadmap</span></a> / <span class="i-ja">リリースノート</span><span class="i-en">Release Notes</span></p>
+    <h1>Inset 1.0.0</h1>
+    <p class="meta"><span class="vbadge"><span class="i-ja">初回リリース</span><span class="i-en">Initial release</span></span> <span>2026-06-12</span></p>
+  </div>
+  <div class="lang" role="group" aria-label="Language">
+    <button data-lang="ja" aria-pressed="true">日本語</button>
+    <button data-lang="en" aria-pressed="false">English</button>
+  </div>
+</div></header>
+
+<main>
+  <p class="lead">
+    <span class="i-ja">Inset 1.0.0 をリリースしました。写真に「余白のフレーム」を重ねて、作品のように仕上げるアプリです。色・幅・比率を自由に決めて、フル解像度のまま書き出せます。</span>
+    <span class="i-en">Inset 1.0.0 is here — an app that layers margin frames onto your photos to make them feel like finished works. Choose any color, width, and ratio, then export in full resolution.</span>
+  </p>
+
+  <section>
+    <h2><span class="i-ja">フレームは、何枚でも重ねられる</span><span class="i-en">Stack as many frames as you like</span></h2>
+    <p>
+      <span class="i-ja">余白のレイヤーを好きな枚数だけ重ねられます。1 枚ごとに色と幅を個別に設定できるので、細い縁取り＋大きな余白のような組み合わせも自由です。</span>
+      <span class="i-en">Layer any number of margins. Each frame has its own color and width, so combinations like a thin keyline inside a generous mat come naturally.</span>
+    </p>
+    <figure>
+      <img class="i-ja" src="img/1.0.0/ja-3.jpg" alt="複数フレームを重ねた編集画面" loading="lazy">
+      <img class="i-en" src="img/1.0.0/en-3.jpg" alt="Editor with multiple stacked frames" loading="lazy">
+      <figcaption><span class="i-ja">レイヤーごとに色・幅・比率を調整</span><span class="i-en">Adjust color, width, and ratio per layer</span></figcaption>
+    </figure>
+  </section>
+
+  <section>
+    <h2><span class="i-ja">トリミングせず、どの比率にも</span><span class="i-en">Any ratio, without cropping</span></h2>
+    <p>
+      <span class="i-ja">1:1・4:5・3:2・9:16 など、書き出したい比率に余白でフィットさせます。写真そのものは切り抜かないので、構図はそのまま。SNS ごとの最適比率に同じ写真を使い回せます。</span>
+      <span class="i-en">Fit your photo to 1:1, 4:5, 3:2, 9:16 and more using margins instead of cropping. The composition stays intact, so one photo works across every platform's ideal ratio.</span>
+    </p>
+    <figure>
+      <img class="i-ja" src="img/1.0.0/ja-2.jpg" alt="比率フィットの編集画面" loading="lazy">
+      <img class="i-en" src="img/1.0.0/en-2.jpg" alt="Editor fitting a photo to a ratio" loading="lazy">
+      <figcaption><span class="i-ja">縦横の切替もワンタップ</span><span class="i-en">Switch portrait/landscape with one tap</span></figcaption>
+    </figure>
+  </section>
+
+  <section>
+    <h2><span class="i-ja">色は、写真から吸える</span><span class="i-en">Pick colors straight from your photo</span></h2>
+    <p>
+      <span class="i-ja">フレームの色は白・黒・カスタムカラーに加えて、スポイトで写真の中から直接拾えます。ルーペで狙った 1 ピクセルの色を確認しながら選べるので、写真に馴染むフレームが簡単に作れます。</span>
+      <span class="i-en">Frames can be white, black, any custom color — or sampled directly from the photo with the eyedropper. A loupe shows the exact pixel you're picking, making it easy to build frames that belong to the image.</span>
+    </p>
+  </section>
+
+  <div class="grid2">
+    <section>
+      <h2><span class="i-ja">プリセットで再利用</span><span class="i-en">Reuse with presets</span></h2>
+      <p>
+        <span class="i-ja">気に入ったフレーム構成は名前を付けて保存。次の写真にワンタップで適用できます。並べ替え・削除も自由です。</span>
+        <span class="i-en">Save frame setups you like and apply them to the next photo in one tap. Reorder and delete freely.</span>
+      </p>
+    </section>
+    <section>
+      <h2><span class="i-ja">フル解像度で書き出し</span><span class="i-en">Full-resolution export</span></h2>
+      <p>
+        <span class="i-ja">書き出しは常に元写真のフル解像度。プレビューで見たままの構図・余白・色で写真ライブラリに保存されます。</span>
+        <span class="i-en">Exports always use the photo's full resolution. What you see in the preview is exactly what lands in your library.</span>
+      </p>
+    </section>
+  </div>
+
+  <section>
+    <h2><span class="i-ja">プライバシーは設計から</span><span class="i-en">Private by design</span></h2>
+    <p>
+      <span class="i-ja">Inset が要求するのは「写真の保存（追加のみ）」の権限だけ。既存のライブラリは読み取りません。編集はすべて端末内で完結し、写真が外部に送信されることはありません。</span>
+      <span class="i-en">Inset only asks for add-only photo access — it never reads your existing library. All editing happens on device, and your photos never leave it.</span>
+    </p>
+    <p class="note">
+      <span class="i-ja">詳しくは<a href="../privacy.html">プライバシーポリシー</a>をご覧ください。</span>
+      <span class="i-en">See the <a href="../privacy.html">privacy policy</a> for details.</span>
+    </p>
+  </section>
+
+  <section>
+    <h2><span class="i-ja">次のアップデート</span><span class="i-en">What's next</span></h2>
+    <p>
+      <span class="i-ja">v1.1 では日本語対応・設定画面・アプリ内お知らせなどの改善を予定しています。開発状況は<a href="../roadmap.html">公開ロードマップ</a>でいつでも確認できます。</span>
+      <span class="i-en">v1.1 brings Japanese localization, a settings screen, in-app announcements, and more. Follow progress anytime on the <a href="../roadmap.html">public roadmap</a>.</span>
+    </p>
+  </section>
+</main>
+
+<footer><div class="wrap">
+  <a href="../index.html"><span class="i-ja">サポート</span><span class="i-en">Support</span></a>
+  <a href="../roadmap.html"><span class="i-ja">ロードマップ</span><span class="i-en">Roadmap</span></a>
+  <a href="../privacy.html"><span class="i-ja">プライバシー</span><span class="i-en">Privacy</span></a>
+</div></footer>
+
+<script>
+  // ?lang=en での直リンクとブラウザ言語を初期値に反映（トグルで上書き可）。
+  const params = new URLSearchParams(location.search);
+  let lang = params.get("lang") || (navigator.language?.startsWith("ja") ? "ja" : "en");
+  if (lang !== "ja" && lang !== "en") lang = "ja";
+  setLang(lang);
+  document.querySelectorAll(".lang button").forEach(b => {
+    b.onclick = () => setLang(b.getAttribute("data-lang"));
+  });
+  function setLang(l) {
+    document.body.setAttribute("data-lang", l);
+    document.documentElement.lang = l;
+    document.querySelectorAll(".lang button").forEach(x =>
+      x.setAttribute("aria-pressed", String(x.getAttribute("data-lang") === l)));
+  }
+</script>
+</body>
+</html>
