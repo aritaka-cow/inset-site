@@ -2,6 +2,21 @@
   "version": 1,
   "announcements": [
     {
+      "id": "rel-1.2.0",
+      "date": "2026-06-21",
+      "type": "release",
+      "appVersion": "1.2.0",
+      "title": {
+        "en": "Inset 1.2.0",
+        "ja": "Inset 1.2.0"
+      },
+      "body": {
+        "en": "Introducing Inset Lab — creative frames (film, polaroid & 35mm) you can lay right onto your photo, plus framing multiple photos at once. Core features stay free; Lab is a subscription or one-time purchase.",
+        "ja": "Inset Lab が登場。フィルム・ポラロイド・35mm のクリエイティブフレームを写真に重ねられます。複数の写真への一括フレームも。基本機能は無料のまま、Lab はサブスクリプションまたは買い切りで提供します。"
+      },
+      "url": "https://aritaka-cow.github.io/inset-site/releases/1.2.0.html"
+    },
+    {
       "id": "rel-1.1.0",
       "date": "2026-06-13",
       "type": "release",

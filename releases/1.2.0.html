@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Inset 1.2.0 — リリースノート / Release Notes</title>
+<style>
+  :root{ --bg:#fff; --fg:#1a1a18; --mut:#6b6b70; --mut2:#9a9aa0; --line:#e6e6ea; --ink:#1a1a18; }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--fg);
+       font:15px/1.75 -apple-system,"Hiragino Sans","Hiragino Kaku Gothic ProN",system-ui,sans-serif;
+       -webkit-font-smoothing:antialiased;}
+
+  header{border-bottom:1px solid var(--line);}
+  header .wrap{max-width:760px;margin:0 auto;padding:24px 24px 18px;
+    display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap;}
+  header .crumb{font-size:12.5px;color:var(--mut);margin:0 0 6px;}
+  header .crumb a{color:var(--mut);text-decoration:none;}
+  header .crumb a:hover{text-decoration:underline;}
+  header h1{margin:0;font-size:22px;font-weight:700;letter-spacing:.01em;}
+  header .meta{margin:6px 0 0;color:var(--mut);font-size:13px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;}
+  .vbadge{font-size:11px;letter-spacing:.03em;padding:3px 10px;border-radius:999px;
+    background:var(--ink);color:#fff;font-weight:600;white-space:nowrap;}
+  .lang{display:flex;border:1px solid var(--line);border-radius:8px;overflow:hidden;margin-top:2px;}
+  .lang button{background:#fff;color:var(--mut);border:0;padding:6px 14px;font:inherit;font-size:12.5px;cursor:pointer;}
+  .lang button[aria-pressed="true"]{background:var(--ink);color:#fff;font-weight:600;}
+
+  main{max-width:760px;margin:0 auto;padding:30px 24px 0;}
+  .lead{font-size:16px;line-height:1.9;margin:0 0 36px;}
+
+  section{margin:0 0 44px;}
+  section h2{font-size:17px;font-weight:700;margin:0 0 10px;letter-spacing:.01em;}
+  section h3{font-size:14px;font-weight:700;margin:18px 0 6px;}
+  section p{margin:0 0 10px;color:var(--fg);}
+  section p.note{color:var(--mut);font-size:13px;}
+  section ul{margin:0 0 10px;padding-left:1.3em;}
+  section li{margin:4px 0;}
+  section li b{font-weight:600;}
+
+  footer{border-top:1px solid var(--line);margin-top:48px;}
+  footer .wrap{max-width:760px;margin:0 auto;padding:16px 24px 40px;
+    display:flex;gap:18px;flex-wrap:wrap;color:var(--mut);font-size:12.5px;}
+  footer a{color:var(--fg);font-weight:600;text-decoration:none;}
+  footer a:hover{text-decoration:underline;}
+
+  body[data-lang="ja"] .i-en{display:none;}
+  body[data-lang="en"] .i-ja{display:none;}
+</style>
+</head>
+<body data-lang="ja">
+<header><div class="wrap">
+  <div>
+    <p class="crumb"><a href="../index.html">Inset</a> / <a href="../roadmap.html"><span class="i-ja">ロードマップ</span><span class="i-en">Roadmap</span></a> / <span class="i-ja">リリースノート</span><span class="i-en">Release Notes</span></p>
+    <h1>Inset 1.2.0</h1>
+    <p class="meta"><span class="vbadge"><span class="i-ja">アップデート</span><span class="i-en">Update</span></span> <span>2026-06-21</span></p>
+  </div>
+  <div class="lang" role="group" aria-label="Language">
+    <button data-lang="ja" aria-pressed="true">日本語</button>
+    <button data-lang="en" aria-pressed="false">English</button>
+  </div>
+</div></header>
+
+<main>
+  <p class="lead">
+    <span class="i-ja">Inset 1.2.0 で <b>Inset Lab</b> が登場しました。写真にそのまま重ねられるクリエイティブフレーム（フィルム・ポラロイド・35mm）と、複数の写真への一括フレームを解放する有料機能です。基本機能はこれまでどおり無料のままです。</span>
+    <span class="i-en">Inset 1.2.0 introduces <b>Inset Lab</b> — paid features that unlock creative frames (film, polaroid &amp; 35mm) you can lay right onto your photo, plus framing multiple photos at once. The core features stay free.</span>
+  </p>
+
+  <section>
+    <h2><span class="i-ja">クリエイティブフレーム</span><span class="i-en">Creative frames</span></h2>
+    <p>
+      <span class="i-ja">フィルム・ポラロイド・35mm の質感フレームを、写真の最内側に重ねられます。写真の比率や向きにフレームが自動でフィットし、90° 回転にも対応。プレビューと書き出しは常に一致します。</span>
+      <span class="i-en">Lay film, polaroid, and 35mm frames directly onto your photo. Each frame fits your photo’s ratio and orientation automatically, with 90° rotation — and the preview always matches the export.</span>
+    </p>
+  </section>
+
+  <section>
+    <h2><span class="i-ja">複数の写真に一度でフレーム</span><span class="i-en">Frame multiple photos at once</span></h2>
+    <p>
+      <span class="i-ja">同じフレーム設定を複数の写真へまとめて適用し、一括で書き出せます。各写真の向きに合わせてフレームが自動調整されます。</span>
+      <span class="i-en">Apply the same look to many photos and export them in one batch — each frame adjusts to the photo’s orientation automatically.</span>
+    </p>
+  </section>
+
+  <section>
+    <h2><span class="i-ja">プランについて</span><span class="i-en">Plans</span></h2>
+    <ul>
+      <li><b><span class="i-ja">年額 / 月額（自動更新サブスクリプション）</span><span class="i-en">Yearly / Monthly (auto-renewable)</span></b> — <span class="i-ja">各 7 日間の無料トライアル付き。</span><span class="i-en">each with a 7-day free trial.</span></li>
+      <li><b><span class="i-ja">買い切り（Lifetime）</span><span class="i-en">Lifetime (one-time)</span></b> — <span class="i-ja">一度きりの購入で、継続課金はありません。</span><span class="i-en">a single purchase with no recurring charges.</span></li>
+    </ul>
+    <p class="note">
+      <span class="i-ja">価格は App Store 上で各国・地域の通貨で表示されます。解約・管理は端末の「設定 &gt; Apple アカウント &gt; サブスクリプション」から。詳しくは<a href="../terms.html">利用規約</a>をご覧ください。</span>
+      <span class="i-en">Prices are shown in your local currency on the App Store. Manage or cancel in Settings &gt; your Apple Account &gt; Subscriptions. See the <a href="../terms.html">Terms of Use</a> for details.</span>
+    </p>
+  </section>
+
+  <section>
+    <h2><span class="i-ja">その他の改善</span><span class="i-en">Other improvements</span></h2>
+    <ul>
+      <li><span class="i-ja">フィルムフレーム適用時のプレビューと書き出しの一致・安定性を改善。</span><span class="i-en">Improved preview/export consistency and stability with creative frames.</span></li>
+      <li><span class="i-ja">細かな安定性の改善。</span><span class="i-en">Various stability fixes.</span></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2><span class="i-ja">フィードバック</span><span class="i-en">Feedback</span></h2>
+    <p class="note">
+      <span class="i-ja">ご感想・ご要望は <a href="../index.html">サポートページ</a> からお気軽にどうぞ。進捗は<a href="../roadmap.html">公開ロードマップ</a>で確認できます。</span>
+      <span class="i-en">Thoughts and requests are always welcome via the <a href="../index.html">support page</a>. Follow along on the <a href="../roadmap.html">public roadmap</a>.</span>
+    </p>
+  </section>
+</main>
+
+<footer><div class="wrap">
+  <a href="../index.html"><span class="i-ja">サポート</span><span class="i-en">Support</span></a>
+  <a href="../roadmap.html"><span class="i-ja">ロードマップ</span><span class="i-en">Roadmap</span></a>
+  <a href="../privacy.html"><span class="i-ja">プライバシー</span><span class="i-en">Privacy</span></a>
+  <a href="../terms.html"><span class="i-ja">利用規約</span><span class="i-en">Terms</span></a>
+  <a href="1.1.0.html">1.1.0</a>
+</div></footer>
+
+<script>
+  const params = new URLSearchParams(location.search);
+  let lang = params.get("lang") || (navigator.language?.startsWith("ja") ? "ja" : "en");
+  if (lang !== "ja" && lang !== "en") lang = "ja";
+  setLang(lang);
+  document.querySelectorAll(".lang button").forEach(b => {
+    b.onclick = () => setLang(b.getAttribute("data-lang"));
+  });
+  function setLang(l) {
+    document.body.setAttribute("data-lang", l);
+    document.documentElement.lang = l;
+    document.querySelectorAll(".lang button").forEach(x =>
+      x.setAttribute("aria-pressed", String(x.getAttribute("data-lang") === l)));
+  }
+</script>
+</body>
+</html>
