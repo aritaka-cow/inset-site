@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-13",
+  "updated": "2026-06-22",
   "releases": [
     {
       "version": "1.1",
@@ -14,11 +14,11 @@
     {
       "version": "1.2",
       "type": "minor",
-      "status": "planned",
-      "title": { "ja": "Inset Pro 登場", "en": "Introducing Inset Pro" },
+      "status": "submitted",
+      "title": { "ja": "Inset Lab 登場", "en": "Introducing Inset Lab" },
       "theme": {
-        "ja": "もっと自由な余白表現を。",
-        "en": "More creative freedom for your margins."
+        "ja": "クリエイティブフレームと一括フレームで、表現の幅を広げる。",
+        "en": "Creative frames and batch framing — expand what you can express."
       }
     }
   ],
@@ -132,12 +132,12 @@
       "title": { "ja": "Inset ロゴ入りフィルム風フレーム（無料）", "en": "Free Inset film-style frames" },
       "category": "feature",
       "stage": "next",
-      "implemented": false,
+      "implemented": true,
       "release": "1.2",
       "ref": "T-0175",
       "note": {
-        "ja": "「inset」ロゴ入りのフィルム風フレームを2種ほど、無料で使えるようにする。フィルムストリップ（縦連結）形式を第一候補。Pro のフィルムフレーム（RM-006）と同時に v1.2 で公開し、無料で試して Pro のフルセットへ進める導線にする。",
-        "en": "Add a couple of free film-style frames featuring the \"inset\" wordmark, with a film-strip (stacked) format as the leading candidate. Ships in v1.2 alongside the Pro film frames (RM-006), so the free frames act as the entry point to the full Pro set."
+        "ja": "「inset」ロゴ入りのフレームを無料ティアとして提供（35mm Black 2:3 (3) / Film White 3:2 / Film Black 3:4 / Other Sepia 1:1）。Lab のクリエイティブフレーム（RM-006）と同時に v1.2 で公開し、無料で試して Lab のフルセットへ進める導線とする。",
+        "en": "Inset-branded frames are available in the free tier (35mm Black 2:3 (3) / Film White 3:2 / Film Black 3:4 / Other Sepia 1:1). Ships in v1.2 alongside Lab's creative frames (RM-006), as the entry point to the full Lab set."
       }
     },
     {
@@ -146,7 +146,7 @@
       "category": "i18n",
       "stage": "next",
       "implemented": true,
-      "release": "1.1",
+      "release": "1.2",
       "ref": "T-0136",
       "note": {
         "ja": "アプリと App Store のプライマリ言語を英語にし、日本語はローカライズとして提供する。",
@@ -220,28 +220,54 @@
     },
     {
       "id": "RM-005",
-      "title": { "ja": "バッチ一括書き出し", "en": "Batch export" },
+      "title": { "ja": "バッチ一括書き出し（Lab）", "en": "Batch export (Lab)" },
       "category": "feature",
       "stage": "next",
       "implemented": true,
       "release": "1.2",
       "ref": "T-0129",
       "note": {
-        "ja": "複数の写真に同じフレーム設定をまとめて適用・書き出し（v1.2 Pro）。実装済み、v1.2 で公開予定。",
-        "en": "Apply one frame setup to many photos and export in bulk (v1.2 Pro). Built; ships with the v1.2 Pro update."
+        "ja": "複数の写真に同じフレーム設定をまとめて適用・書き出し。v1.2 で公開（Inset Lab）。",
+        "en": "Apply one frame setup to many photos and export in bulk. Ships in v1.2 as part of Inset Lab."
       }
     },
     {
       "id": "RM-006",
-      "title": { "ja": "フィルムフレーム（Pro）", "en": "Film frames (Pro)" },
+      "title": { "ja": "クリエイティブフレーム（Lab）", "en": "Creative frames (Lab)" },
       "category": "feature",
       "stage": "next",
-      "implemented": false,
+      "implemented": true,
       "release": "1.2",
       "ref": "T-0127",
       "note": {
-        "ja": "フィルム風の余白プリセットを追加（v1.2 Pro）。無料の Inset ロゴ入りフレーム（RM-018）とは別の有料セット。",
-        "en": "Film-style margin presets (v1.2 Pro). A paid set, separate from the free Inset-branded frames (RM-018)."
+        "ja": "フィルム・ポラロイド・35mm のクリエイティブフレームを写真に重ねられる。向きを自動調整・90°回転対応。v1.2 で公開（Inset Lab）。無料の Inset ロゴ入りフレーム（RM-018）が入口になる有料セット。",
+        "en": "Lay film, polaroid, and 35mm creative frames right onto your photo, with auto orientation and 90° rotation. Ships in v1.2 as part of Inset Lab — a paid set entered via the free Inset-branded frames (RM-018)."
+      }
+    },
+    {
+      "id": "RM-035",
+      "title": { "ja": "Inset Lab 課金（年額/月額/買い切り）", "en": "Inset Lab purchases (yearly / monthly / lifetime)" },
+      "category": "feature",
+      "stage": "next",
+      "implemented": true,
+      "release": "1.2",
+      "ref": "T-0131",
+      "note": {
+        "ja": "StoreKit 2 で課金を実装。Lab（クリエイティブフレーム＋一括フレーム）を 年額／月額（各7日間無料トライアル）または買い切りで提供。地域別の現地通貨表示、地域変更時の追従、復元、課金経路の匿名計測も実装。v1.2 で公開（Inset Lab）。",
+        "en": "Implemented StoreKit 2 purchases. Lab (creative frames + batch framing) is offered as a yearly or monthly subscription (each with a 7-day free trial) or a one-time Lifetime purchase. Includes local-currency display, storefront-change follow-up, restore, and anonymous funnel analytics. Ships in v1.2 as part of Inset Lab."
+      }
+    },
+    {
+      "id": "RM-036",
+      "title": { "ja": "クリエイティブフレームのお気に入り", "en": "Favorites for creative frames" },
+      "category": "feature",
+      "stage": "next",
+      "implemented": true,
+      "release": "1.2",
+      "ref": "T-0204",
+      "note": {
+        "ja": "書き出しに使ったクリエイティブフレームの回数を端末ローカルに記録（送信しない）し、選択画面の上部に「お気に入り」として上位を素早く再利用できるようにする。Inset Lab 利用者に提供。",
+        "en": "Track how often each creative frame is used at export, on-device only (never sent), and surface the top frames as a Favorites row at the top of the picker for one-tap reuse. Available to Inset Lab users."
       }
     },
     {
@@ -363,6 +389,14 @@
     }
   ],
   "changelog": [
+    {
+      "date": "2026-06-22",
+      "version": "1.2",
+      "title": {
+        "ja": "v1.2.0 を App Store に提出（審査待ち）。Inset Lab 登場（クリエイティブフレーム・一括フレーム・年額/月額/買い切り）、プライマリ言語を英語へ切替。",
+        "en": "Submitted v1.2.0 to the App Store (waiting for review). Introducing Inset Lab (creative frames, batch framing, yearly / monthly / lifetime). Primary language switched to English."
+      }
+    },
     {
       "date": "2026-06-13",
       "version": "1.1",
