@@ -17,9 +17,13 @@
     display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap;}
   header h1{margin:0;font-size:20px;font-weight:700;letter-spacing:.01em;}
   header p{margin:4px 0 0;color:var(--mut);font-size:13px;}
-  .lang{display:flex;border:1px solid var(--line);border-radius:8px;overflow:hidden;margin-top:2px;}
+  .lang{display:flex;border:1px solid var(--line);border-radius:8px;overflow:hidden;}
   .lang button{background:#fff;color:var(--mut);border:0;padding:6px 14px;font:inherit;font-size:12.5px;cursor:pointer;}
   .lang button[aria-pressed="true"]{background:var(--ink);color:#fff;font-weight:600;}
+  .header-tools{display:flex;align-items:center;gap:8px;margin-top:2px;flex-wrap:wrap;}
+  .archive-btn{background:#fff;color:var(--mut);border:1px solid var(--line);border-radius:8px;
+    padding:6px 12px;font:inherit;font-size:12.5px;cursor:pointer;white-space:nowrap;}
+  .archive-btn[aria-pressed="true"]{background:var(--ink);color:#fff;border-color:var(--ink);font-weight:600;}
 
   main{max-width:1280px;margin:0 auto;padding:22px 24px 0;}
   .updated{color:var(--mut2);font-size:12px;margin:0 0 22px;}
@@ -114,9 +118,13 @@
 <header><div class="wrap">
   <div><h1 data-i18n="title">Inset — ロードマップ</h1>
   <p data-i18n="tagline">写真に余白（フレーム）を重ねるアプリの開発計画</p></div>
-  <div class="lang" role="group" aria-label="Language">
-    <button data-lang="ja" aria-pressed="true">日本語</button>
-    <button data-lang="en" aria-pressed="false">English</button>
+  <div class="header-tools">
+    <button id="archive-toggle" class="archive-btn" type="button" aria-pressed="false"
+            data-i18n="show_archive" data-i18n-pressed="hide_archive">アーカイブを表示</button>
+    <div class="lang" role="group" aria-label="Language">
+      <button data-lang="ja" aria-pressed="true">日本語</button>
+      <button data-lang="en" aria-pressed="false">English</button>
+    </div>
   </div>
 </div></header>
 
@@ -151,6 +159,7 @@ const T = {
        copyright:"© 2026 Inset", support_q:"サポートが必要ですか？", support_link:"サポートページへ →",
        updated:u=>`最終更新: ${u}`, empty:"（まだありません）",
        all:"すべて", done:"実装済み", planned:"未実装",
+       show_archive:"アーカイブを表示", hide_archive:"アーカイブを非表示",
        progress:(d,t)=>`進捗: <b>${d} / ${t}</b> 実装済み`, target:"対象: iOS",
        cat:{feature:"機能",bug:"バグ改善",i18n:"グローバル対応",growth:"グロース",release:"リリース"},
        rel_title:"次のアップデート計画",
@@ -162,6 +171,7 @@ const T = {
        copyright:"© 2026 Inset", support_q:"Need help?", support_link:"Go to Support →",
        updated:u=>`Last updated: ${u}`, empty:"(nothing yet)",
        all:"All", done:"Implemented", planned:"Planned",
+       show_archive:"Show archive", hide_archive:"Hide archive",
        progress:(d,t)=>`Progress: <b>${d} / ${t}</b> implemented`, target:"Platform: iOS",
        cat:{feature:"Feature",bug:"Fixes",i18n:"Global",growth:"Growth",release:"Release"},
        rel_title:"Upcoming releases",
@@ -171,18 +181,29 @@ const T = {
 };
 const STAGES = ["now","next","later"];
 const CATS = ["feature","bug","i18n","release"];
-let DATA = null, lang = "ja", filter = "all";
+let DATA = null, lang = "ja", filter = "all", showArchive = false;
 
 function pick(o){ return (o && (o[lang] || o.ja || o.en)) || ""; }
+
+/// リリース済みバージョン（status==="released"）の集合。`showArchive===false` の時、これに属する
+/// 個別項目（item.release）と release カード自体は board / releases から非表示にする。
+function releasedVersions(){
+  return new Set(((DATA && DATA.releases) || []).filter(r=>r.status==="released").map(r=>r.version));
+}
 
 function render(){
   const t = T[lang];
   document.documentElement.lang = lang;
   document.querySelectorAll("[data-i18n]").forEach(el=>{
-    const k = el.getAttribute("data-i18n"); if(typeof t[k]==="string") el.textContent = t[k];
+    const k = el.getAttribute("data-i18n");
+    const kp = el.getAttribute("data-i18n-pressed");
+    const useKey = (el.getAttribute("aria-pressed")==="true" && kp) ? kp : k;
+    if(typeof t[useKey]==="string") el.textContent = t[useKey];
   });
   if(!DATA) return;
   document.getElementById("updated").textContent = t.updated(DATA.updated);
+  const archived = releasedVersions();
+  const isArchived = i => i && i.release && archived.has(i.release);
 
   // filters
   const fc = document.getElementById("filters"); fc.innerHTML = "";
@@ -193,9 +214,10 @@ function render(){
     fc.appendChild(b);
   });
 
-  // board
+  // board（リリース済みバージョンに紐づく項目は showArchive のときだけ表示）
   const board = document.getElementById("board"); board.innerHTML = "";
-  const items = DATA.items.filter(i=> filter==="all" || i.category===filter);
+  const items = DATA.items.filter(i =>
+    (filter==="all" || i.category===filter) && (showArchive || !isArchived(i)));
   STAGES.forEach(stage=>{
     const col = document.createElement("div"); col.className = "col";
     const [head, sub] = t.stage[stage];
@@ -219,8 +241,8 @@ function render(){
     board.appendChild(col);
   });
 
-  // releases (upcoming, grouped by version)
-  const rels = DATA.releases || [];
+  // releases (upcoming, grouped by version)。released は showArchive のときだけ出す。
+  const rels = (DATA.releases || []).filter(r => showArchive || r.status !== "released");
   const rsec = document.getElementById("releases");
   const rlist = document.getElementById("releases-list"); rlist.innerHTML = "";
   if(rels.length){
@@ -278,6 +300,12 @@ document.querySelectorAll(".lang button").forEach(b=>{
     render();
   };
 });
+
+document.getElementById("archive-toggle").onclick = (e)=>{
+  showArchive = !showArchive;
+  e.currentTarget.setAttribute("aria-pressed", String(showArchive));
+  render();
+};
 
 fetch("roadmap.json?v=" + Date.now())
   .then(r=>{ if(!r.ok) throw new Error(r.status); return r.json(); })
