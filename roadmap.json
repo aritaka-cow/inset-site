@@ -303,7 +303,7 @@
       "stage": "later",
       "implemented": false,
       "release": null,
-      "ref": "",
+      "ref": "T-0161",
       "note": {
         "ja": "英・日以外の言語へローカライズを広げ、グローバル展開を進める。",
         "en": "Expand localization beyond English and Japanese for global reach."
