@@ -25,10 +25,10 @@
       "version": "1.2.1",
       "type": "minor",
       "status": "planned",
-      "title": { "ja": "テーマ切替 & Letterbox フレーム", "en": "Theme Switch & Letterbox Frames" },
+      "title": { "ja": "テーマ切替・Letterbox フレーム・多言語ストア", "en": "Theme Switch, Letterbox Frames & Localized Store" },
       "theme": {
-        "ja": "ライト/ダークテーマの選択と、新しい Letterbox by Pixflow フレームを追加。",
-        "en": "Choose your light or dark theme, plus new Letterbox by Pixflow frames."
+        "ja": "ライト/ダークテーマの選択、Letterbox by Pixflow フレーム、App Store メタデータの多言語化。",
+        "en": "Light/dark theme, Letterbox by Pixflow frames, and App Store metadata in 17 languages."
       }
     }
   ],
@@ -310,9 +310,9 @@
       "id": "RM-009",
       "title": { "ja": "多言語ローカライズの拡充", "en": "More language localizations" },
       "category": "i18n",
-      "stage": "later",
+      "stage": "next",
       "implemented": false,
-      "release": null,
+      "release": "1.2.1",
       "ref": "T-0161",
       "note": {
         "ja": "英・日以外の言語へローカライズを広げ、グローバル展開を進める。",
