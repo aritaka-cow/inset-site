@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-22",
+  "updated": "2026-06-24",
   "releases": [
     {
       "version": "1.1",
@@ -19,6 +19,16 @@
       "theme": {
         "ja": "クリエイティブフレームと一括フレームで、表現の幅を広げる。",
         "en": "Creative frames and batch framing — expand what you can express."
+      }
+    },
+    {
+      "version": "1.2.1",
+      "type": "minor",
+      "status": "planned",
+      "title": { "ja": "テーマ切替 & Letterbox フレーム", "en": "Theme Switch & Letterbox Frames" },
+      "theme": {
+        "ja": "ライト/ダークテーマの選択と、新しい Letterbox by Pixflow フレームを追加。",
+        "en": "Choose your light or dark theme, plus new Letterbox by Pixflow frames."
       }
     }
   ],
@@ -313,9 +323,9 @@
       "id": "RM-010",
       "title": { "ja": "システムテーマ追従（ライト/ダーク）", "en": "System theme support (light/dark)" },
       "category": "feature",
-      "stage": "later",
+      "stage": "next",
       "implemented": false,
-      "release": null,
+      "release": "1.2.1",
       "ref": "",
       "note": {
         "ja": "現状ダーク固定の UI を、端末のライト/ダーク設定に追従させる。",
@@ -326,13 +336,26 @@
       "id": "RM-011",
       "title": { "ja": "ライトモード用アプリアイコン", "en": "Light-mode app icon" },
       "category": "feature",
-      "stage": "later",
+      "stage": "next",
       "implemented": false,
-      "release": null,
+      "release": "1.2.1",
       "ref": "",
       "note": {
         "ja": "iOS 18+ のライト/ダーク別アイコンに対応する。",
         "en": "Add a light-appearance icon variant for iOS 18+."
+      }
+    },
+    {
+      "id": "RM-037",
+      "title": { "ja": "Letterbox フレーム（Lab）", "en": "Letterbox frames (Lab)" },
+      "category": "feature",
+      "stage": "next",
+      "implemented": false,
+      "release": "1.2.1",
+      "ref": "",
+      "note": {
+        "ja": "Letterbox by Pixflow のクリエイティブフレームを Lab に追加。映画的なラウンドエッジ・ヴィンテージ風のフレームで写真の表現を広げる。",
+        "en": "Add Letterbox by Pixflow creative frames to Lab. Cinematic round-edge and vintage-style frames to expand your creative expression."
       }
     },
     {
