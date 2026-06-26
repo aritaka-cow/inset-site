@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-24",
+  "updated": "2026-06-26",
   "releases": [
     {
       "version": "1.1",
@@ -14,7 +14,7 @@
     {
       "version": "1.2",
       "type": "minor",
-      "status": "submitted",
+      "status": "released",
       "title": { "ja": "Inset Lab 登場", "en": "Introducing Inset Lab" },
       "theme": {
         "ja": "クリエイティブフレームと一括フレームで、表現の幅を広げる。",
@@ -23,8 +23,8 @@
     },
     {
       "version": "1.2.1",
-      "type": "minor",
-      "status": "planned",
+      "type": "patch",
+      "status": "next",
       "title": { "ja": "テーマ切替・Letterbox フレーム・多言語ストア", "en": "Theme Switch, Letterbox Frames & Localized Store" },
       "theme": {
         "ja": "ライト/ダークテーマの選択、Letterbox by Pixflow フレーム、App Store メタデータの多言語化。",
@@ -413,11 +413,11 @@
   ],
   "changelog": [
     {
-      "date": "2026-06-22",
+      "date": "2026-06-26",
       "version": "1.2",
       "title": {
-        "ja": "v1.2.0 を App Store に提出（審査待ち）。Inset Lab 登場（クリエイティブフレーム・一括フレーム・年額/月額/買い切り）、プライマリ言語を英語へ切替。",
-        "en": "Submitted v1.2.0 to the App Store (waiting for review). Introducing Inset Lab (creative frames, batch framing, yearly / monthly / lifetime). Primary language switched to English."
+        "ja": "v1.2.0 を App Store に公開。Inset Lab 登場（クリエイティブフレーム・一括フレーム・年額/月額/買い切り）、プライマリ言語を英語へ切替。",
+        "en": "Released v1.2.0 on the App Store. Introducing Inset Lab (creative frames, batch framing, yearly / monthly / lifetime). Primary language switched to English."
       }
     },
     {
