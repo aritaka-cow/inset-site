@@ -372,6 +372,32 @@
       }
     },
     {
+      "id": "RM-038",
+      "title": { "ja": "写真アプリから Inset へ共有", "en": "Share from Photos to Inset" },
+      "category": "feature",
+      "stage": "later",
+      "implemented": false,
+      "release": null,
+      "ref": "T-0232",
+      "note": {
+        "ja": "iOS の写真アプリや共有シートから Inset を選び、選択した写真をそのまま Inset の編集画面へ渡せるようにする。写真投稿前のワークフローに入りやすくするための Share Extension。",
+        "en": "Add a Share Extension so Inset appears in the iOS Photos app and share sheet, letting selected photos open directly in the editor. This makes Inset easier to use in the pre-posting photo workflow."
+      }
+    },
+    {
+      "id": "RM-039",
+      "title": { "ja": "カラーフレームの並び替え", "en": "Reorder color frames" },
+      "category": "feature",
+      "stage": "later",
+      "implemented": false,
+      "release": null,
+      "ref": "T-0233",
+      "note": {
+        "ja": "複数のカラーフレームを重ねたあと、ドラッグなどで順番を入れ替えられる UI を追加する。フレームを作り直さずに内側・外側の順序を調整できるようにする。",
+        "en": "Add UI for reordering stacked color frames, for example with drag and drop. Users should be able to adjust inner/outer frame order without rebuilding the stack."
+      }
+    },
+    {
       "id": "RM-032",
       "title": { "ja": "設定画面（言語切替・お知らせ・各種リンク）", "en": "Settings screen (language, news, links)" },
       "category": "feature",
