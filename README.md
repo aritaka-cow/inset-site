@@ -6,8 +6,17 @@
 |---|---|
 | `index.html` | サポート / FAQ |
 | `privacy.html` | プライバシーポリシー |
-| `roadmap.html` / `roadmap.json` | 公開ロードマップ（json が正本） |
+| `roadmap.html` / `roadmap.json` | 公開ロードマップ終了の案内（ロードマップ正本は Yohaku GitHub Issues） |
 | `announcements.json` | アプリ内お知らせの配信元（T-0201 / RM-033） |
+
+## ロードマップの運用
+
+公開ロードマップは 2026-06-28 に終了。今後のロードマップ正本は private の [Yohaku GitHub Issues](https://github.com/aritaka-cow/Yohaku/issues) に置く。
+
+- 未実装の旧 `roadmap.json` 項目は Yohaku Issues #85〜#95 に移行済み。
+- 外部向けの更新情報は App Store、アプリ内お知らせ、リリースノートで案内する。
+- `roadmap.html` は古いURL向けの終了案内ページとして残す。
+- `roadmap.json` は詳細データを公開せず、終了ステータスのみ返す。
 
 ## announcements.json の運用
 

@@ -3,317 +3,41 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Inset — ロードマップ / Roadmap</title>
+<title>Inset — Roadmap</title>
 <style>
-  :root{ --bg:#fff; --fg:#1a1a18; --mut:#6b6b70; --mut2:#9a9aa0; --line:#e6e6ea; --line2:#f0f0f3;
-         --ink:#1a1a18; --chip:#fff; }
+  :root{ --bg:#fff; --fg:#1c1c1e; --mut:#6b6b70; --line:#e6e6ea; --accent:#111114; }
   *{box-sizing:border-box}
   body{margin:0;background:var(--bg);color:var(--fg);
-       font:15px/1.65 -apple-system,"Hiragino Sans","Hiragino Kaku Gothic ProN",system-ui,sans-serif;
-       -webkit-font-smoothing:antialiased;}
-
-  header{border-bottom:1px solid var(--line);}
-  header .wrap{max-width:1280px;margin:0 auto;padding:24px 24px 18px;
-    display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap;}
-  header h1{margin:0;font-size:20px;font-weight:700;letter-spacing:.01em;}
-  header p{margin:4px 0 0;color:var(--mut);font-size:13px;}
-  .lang{display:flex;border:1px solid var(--line);border-radius:8px;overflow:hidden;}
-  .lang button{background:#fff;color:var(--mut);border:0;padding:6px 14px;font:inherit;font-size:12.5px;cursor:pointer;}
-  .lang button[aria-pressed="true"]{background:var(--ink);color:#fff;font-weight:600;}
-  .header-tools{display:flex;align-items:center;gap:8px;margin-top:2px;flex-wrap:wrap;}
-  .archive-btn{background:#fff;color:var(--mut);border:1px solid var(--line);border-radius:8px;
-    padding:6px 12px;font:inherit;font-size:12.5px;cursor:pointer;white-space:nowrap;}
-  .archive-btn[aria-pressed="true"]{background:var(--ink);color:#fff;border-color:var(--ink);font-weight:600;}
-
-  main{max-width:1280px;margin:0 auto;padding:22px 24px 0;}
-  .updated{color:var(--mut2);font-size:12px;margin:0 0 22px;}
-
-  .sect-title{font-size:15px;font-weight:700;margin:0 0 12px;}
-
-  /* ---- releases ---- */
-  .releases{margin:0 0 30px;}
-  .rel-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;}
-  .release{border:1px solid var(--line);border-radius:10px;background:#fff;display:flex;flex-direction:column;}
-  .release .rhead{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:14px 18px 0;}
-  .release .ver{font-size:16px;font-weight:700;}
-  .release .rtitle{font-size:14.5px;font-weight:700;}
-  .release .vbadge{margin-left:auto;font-size:11px;letter-spacing:.03em;padding:3px 10px;border-radius:999px;
-    border:1px solid var(--line);background:#fff;color:var(--mut);white-space:nowrap;}
-  .release .vbadge.next{background:var(--ink);color:#fff;border-color:var(--ink);font-weight:600;}
-  .release .rtheme{margin:4px 0 0;padding:0 18px;font-size:12.5px;color:var(--mut);}
-  .release ul{list-style:none;padding:12px 18px 14px;margin:0;flex:1;
-    display:grid;grid-template-columns:repeat(2,1fr);gap:7px 18px;}
-  .release li{font-size:12.5px;line-height:1.5;display:flex;gap:8px;align-items:baseline;color:var(--fg);}
-  .release li .dot{flex:none;width:7px;height:7px;border-radius:50%;margin-top:5px;
-    border:1.5px solid var(--mut2);background:#fff;}
-  .release li .dot.done{background:var(--ink);border-color:var(--ink);}
-  .release li.planned-item{color:var(--mut);}
-  .release .rfoot{border-top:1px solid var(--line);padding:9px 18px;font-size:11.5px;color:var(--mut);
-    display:flex;gap:18px;flex-wrap:wrap;}
-  .release .rfoot b{color:var(--fg);font-weight:600;}
-
-  /* ---- filters ---- */
-  .filters{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 16px;}
-  .filters button{background:#fff;color:var(--fg);border:1px solid var(--line);
-    border-radius:999px;padding:5px 14px;font:inherit;font-size:12.5px;cursor:pointer;transition:.15s;}
-  .filters button:hover{border-color:var(--mut2);}
-  .filters button[aria-pressed="true"]{background:var(--ink);color:#fff;border-color:var(--ink);font-weight:600;}
-
-  /* ---- board ---- */
-  .board{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:0 0 36px;align-items:start;}
-  .col{border:1px solid var(--line);border-radius:10px;background:#fff;padding:0 16px;min-width:0;}
-  .col .chead{display:flex;align-items:baseline;gap:8px;padding:13px 0 11px;border-bottom:1px solid var(--line);}
-  .col .chead h2{font-size:14.5px;font-weight:700;margin:0;}
-  .col .chead .sub{color:var(--mut);font-size:12px;}
-  .col .chead .count{margin-left:auto;font-size:11px;color:var(--mut);border:1px solid var(--line);
-    border-radius:999px;min-width:22px;height:18px;line-height:16px;text-align:center;padding:0 6px;}
-  .col .empty{color:var(--mut2);font-size:12.5px;padding:12px 0;}
-
-  .item{padding:12px 0 11px;border-bottom:1px solid var(--line2);}
-  .item:last-child{border-bottom:0;}
-  .item .top{display:flex;align-items:center;gap:8px;margin:0 0 7px;}
-  .item .tag{font-size:10.5px;letter-spacing:.02em;padding:1px 8px;border-radius:5px;
-    border:1px solid var(--line);background:#fff;color:#3a3a40;white-space:nowrap;}
-  .item .status{margin-left:auto;font-size:11px;white-space:nowrap;display:inline-flex;align-items:center;gap:5px;}
-  .item .status .sdot{width:7px;height:7px;border-radius:50%;display:inline-block;}
-  .item .status.done{color:var(--fg);font-weight:600;}
-  .item .status.done .sdot{background:var(--ink);}
-  .item .status.planned{color:var(--mut2);}
-  .item .status.planned .sdot{border:1.5px solid var(--mut2);background:#fff;width:6px;height:6px;}
-  .item h3{margin:0 0 4px;font-size:13.5px;font-weight:600;line-height:1.5;}
-  .item p{margin:0;font-size:12px;color:var(--mut);line-height:1.65;}
-  .item .ref{display:block;text-align:right;margin-top:6px;font-size:10.5px;color:var(--mut2);
-    font-family:ui-monospace,SFMono-Regular,Menlo,monospace;}
-
-  /* ---- changelog (horizontal timeline) ---- */
-  .changelog{margin:0 0 8px;}
-  .changelog .sub{color:var(--mut);font-size:12.5px;margin:-8px 0 18px;}
-  .changelog ol{list-style:none;display:flex;gap:28px;margin:0;padding:16px 0 6px;
-    border-top:1px solid var(--line);overflow-x:auto;}
-  .changelog li{position:relative;flex:1;min-width:170px;}
-  .changelog li::before{content:"";position:absolute;left:0;top:-21px;width:9px;height:9px;
-    border-radius:50%;background:var(--ink);}
-  .changelog .date{font-size:11px;color:var(--mut2);font-family:ui-monospace,SFMono-Regular,Menlo,monospace;}
-  .changelog .ctitle{font-size:12.5px;font-weight:600;line-height:1.55;margin-top:3px;}
-
-  footer{border-top:1px solid var(--line);margin-top:30px;}
-  footer .wrap{max-width:1280px;margin:0 auto;padding:16px 24px 40px;
-    display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;
-    color:var(--mut);font-size:12.5px;}
-  footer a{color:var(--fg);font-weight:600;text-decoration:none;}
-  footer a:hover{text-decoration:underline;}
-  .loading,.error{color:var(--mut);padding:40px 0;}
-
-  @media(max-width:880px){
-    .rel-grid{grid-template-columns:1fr;}
-    .release .rhead{row-gap:6px;}
-    .release .vbadge{margin-left:0;}
-    .release ul{grid-template-columns:1fr;}
-    .board{grid-template-columns:1fr;}
-    .changelog li{min-width:200px;flex:none;}
-  }
+       font:16px/1.7 -apple-system,"Hiragino Sans","Hiragino Kaku Gothic ProN",system-ui,sans-serif;}
+  header{background:var(--accent);color:#fff;padding:28px 24px;}
+  header .wrap{max-width:760px;margin:0 auto;}
+  header h1{margin:0;font-size:22px;font-weight:700;}
+  header p{margin:4px 0 0;color:#b9b9c0;font-size:14px;}
+  main{max-width:760px;margin:0 auto;padding:40px 24px 64px;}
+  h2{font-size:20px;margin:0 0 12px;border-bottom:1px solid var(--line);padding-bottom:6px;}
+  p{margin:0 0 16px;}
+  .mut{color:var(--mut);font-size:14px;}
+  .lang-sep{margin:40px 0;border:0;border-top:1px solid var(--line);}
+  a{color:#0a63c9;}
 </style>
 </head>
 <body>
-<header><div class="wrap">
-  <div><h1 data-i18n="title">Inset — ロードマップ</h1>
-  <p data-i18n="tagline">写真に余白（フレーム）を重ねるアプリの開発計画</p></div>
-  <div class="header-tools">
-    <button id="archive-toggle" class="archive-btn" type="button" aria-pressed="false"
-            data-i18n="show_archive" data-i18n-pressed="hide_archive">アーカイブを表示</button>
-    <div class="lang" role="group" aria-label="Language">
-      <button data-lang="ja" aria-pressed="true">日本語</button>
-      <button data-lang="en" aria-pressed="false">English</button>
-    </div>
-  </div>
-</div></header>
-
+<header><div class="wrap"><h1>Inset — Roadmap</h1>
+<p>Development updates are now shared through the app and release notes.</p></div></header>
 <main>
-  <p class="updated" id="updated"></p>
+  <p class="mut">日本語（English follows below）</p>
+  <h2>公開ロードマップについて</h2>
+  <p>Inset の公開ロードマップは終了しました。</p>
+  <p>今後のアップデート情報は、アプリ内の「お知らせ」とリリースノートで案内します。ご要望や不具合報告はサポートページからお送りください。</p>
+  <p><a href="index.html">サポートページへ</a> ・ <a href="releases/1.2.0.html">リリースノートへ</a></p>
 
-  <section class="releases" id="releases" hidden>
-    <h2 class="sect-title" data-i18n="rel_title">次のアップデート計画</h2>
-    <div class="rel-grid" id="releases-list"></div>
-  </section>
+  <hr class="lang-sep">
 
-  <div class="filters" id="filters" role="group" aria-label="Filter"></div>
-  <div class="board" id="board"><p class="loading" data-i18n="loading">読み込み中…</p></div>
-
-  <section class="changelog" id="changelog" hidden>
-    <h2 class="sect-title" data-i18n="cl_title">これまでの歩み</h2>
-    <p class="sub" data-i18n="cl_sub">主な開発マイルストーン</p>
-    <ol id="changelog-list"></ol>
-  </section>
+  <p class="mut">English</p>
+  <h2>About the public roadmap</h2>
+  <p>The public Inset roadmap has been retired.</p>
+  <p>Future update news will be shared through in-app announcements and release notes. For requests or bug reports, please use the support page.</p>
+  <p><a href="index.html">Go to Support</a> · <a href="releases/1.2.0.html">View Release Notes</a></p>
 </main>
-
-<footer><div class="wrap">
-  <span data-i18n="copyright">© 2026 Inset</span>
-  <span><span data-i18n="support_q">サポートが必要ですか？</span>
-    <a href="index.html" data-i18n="support_link">サポートページへ →</a></span>
-</div></footer>
-
-<script>
-const T = {
-  ja:{ title:"Inset — ロードマップ", tagline:"写真に余白（フレーム）を重ねるアプリの開発計画",
-       loading:"読み込み中…", cl_title:"これまでの歩み", cl_sub:"主な開発マイルストーン",
-       copyright:"© 2026 Inset", support_q:"サポートが必要ですか？", support_link:"サポートページへ →",
-       updated:u=>`最終更新: ${u}`, empty:"（まだありません）",
-       all:"すべて", done:"実装済み", planned:"未実装",
-       show_archive:"アーカイブを表示", hide_archive:"アーカイブを非表示",
-       progress:(d,t)=>`進捗: <b>${d} / ${t}</b> 実装済み`, target:"対象: iOS",
-       cat:{feature:"機能",bug:"バグ改善",i18n:"グローバル対応",growth:"グロース",release:"リリース"},
-       rel_title:"次のアップデート計画",
-       reltype:{patch:"修正",minor:"新機能",major:"大型"},
-       relstatus:{released:"リリース済み",submitted:"審査待ち",next:"次のリリース",planned:"計画中"},
-       stage:{ now:["Now","いま進めている"], next:["Next","次に取り組む"], later:["Later","その先の構想"] } },
-  en:{ title:"Inset — Roadmap", tagline:"Development plan for the photo-margin (frame) app",
-       loading:"Loading…", cl_title:"Milestones", cl_sub:"Key development milestones so far",
-       copyright:"© 2026 Inset", support_q:"Need help?", support_link:"Go to Support →",
-       updated:u=>`Last updated: ${u}`, empty:"(nothing yet)",
-       all:"All", done:"Implemented", planned:"Planned",
-       show_archive:"Show archive", hide_archive:"Hide archive",
-       progress:(d,t)=>`Progress: <b>${d} / ${t}</b> implemented`, target:"Platform: iOS",
-       cat:{feature:"Feature",bug:"Fixes",i18n:"Global",growth:"Growth",release:"Release"},
-       rel_title:"Upcoming releases",
-       reltype:{patch:"Patch",minor:"Feature",major:"Major"},
-       relstatus:{released:"Released",submitted:"In review",next:"Next up",planned:"Planned"},
-       stage:{ now:["Now","In progress"], next:["Next","Up next"], later:["Later","Future"] } }
-};
-const STAGES = ["now","next","later"];
-const CATS = ["feature","bug","i18n","release"];
-let DATA = null, lang = "ja", filter = "all", showArchive = false;
-
-function pick(o){ return (o && (o[lang] || o.ja || o.en)) || ""; }
-
-/// リリース済みバージョン（status==="released"）の集合。`showArchive===false` の時、これに属する
-/// 個別項目（item.release）と release カード自体は board / releases から非表示にする。
-function releasedVersions(){
-  return new Set(((DATA && DATA.releases) || []).filter(r=>r.status==="released").map(r=>r.version));
-}
-
-function render(){
-  const t = T[lang];
-  document.documentElement.lang = lang;
-  document.querySelectorAll("[data-i18n]").forEach(el=>{
-    const k = el.getAttribute("data-i18n");
-    const kp = el.getAttribute("data-i18n-pressed");
-    const useKey = (el.getAttribute("aria-pressed")==="true" && kp) ? kp : k;
-    if(typeof t[useKey]==="string") el.textContent = t[useKey];
-  });
-  if(!DATA) return;
-  document.getElementById("updated").textContent = t.updated(DATA.updated);
-  const archived = releasedVersions();
-  const isArchived = i => i && i.release && archived.has(i.release);
-
-  // filters
-  const fc = document.getElementById("filters"); fc.innerHTML = "";
-  [["all",t.all],...CATS.map(c=>[c,t.cat[c]])].forEach(([key,label])=>{
-    const b = document.createElement("button");
-    b.textContent = label; b.setAttribute("aria-pressed", String(filter===key));
-    b.onclick = ()=>{ filter = key; render(); };
-    fc.appendChild(b);
-  });
-
-  // board（リリース済みバージョンに紐づく項目は showArchive のときだけ表示）
-  const board = document.getElementById("board"); board.innerHTML = "";
-  const items = DATA.items.filter(i =>
-    (filter==="all" || i.category===filter) && (showArchive || !isArchived(i)));
-  STAGES.forEach(stage=>{
-    const col = document.createElement("div"); col.className = "col";
-    const [head, sub] = t.stage[stage];
-    const list = items.filter(i=>i.stage===stage)
-      .sort((a,b)=>(a.implemented?1:0)-(b.implemented?1:0));
-    col.innerHTML = `<div class="chead"><h2>${head}</h2><span class="sub">${sub}</span><span class="count">${list.length}</span></div>`;
-    if(!list.length){ const e=document.createElement("p"); e.className="empty"; e.textContent=t.empty; col.appendChild(e); }
-    list.forEach(i=>{
-      const card = document.createElement("div"); card.className = "item";
-      const ref = i.ref ? `<span class="ref">${i.ref}</span>` : "";
-      const status = i.implemented
-        ? `<span class="status done"><span class="sdot"></span>${t.done}</span>`
-        : `<span class="status planned"><span class="sdot"></span>${t.planned}</span>`;
-      card.innerHTML =
-        `<div class="top"><span class="tag">${t.cat[i.category]||i.category}</span>${status}</div>`+
-        `<h3></h3><p></p>${ref}`;
-      card.querySelector("h3").textContent = pick(i.title);
-      card.querySelector("p").textContent = pick(i.note);
-      col.appendChild(card);
-    });
-    board.appendChild(col);
-  });
-
-  // releases (upcoming, grouped by version)。released は showArchive のときだけ出す。
-  const rels = (DATA.releases || []).filter(r => showArchive || r.status !== "released");
-  const rsec = document.getElementById("releases");
-  const rlist = document.getElementById("releases-list"); rlist.innerHTML = "";
-  if(rels.length){
-    rsec.hidden = false;
-    rels.forEach(r=>{
-      const wrap = document.createElement("div"); wrap.className = "release";
-      const statusLabel = (t.relstatus && t.relstatus[r.status]) || r.status || "";
-      const badgeCls = r.status === "next" ? "vbadge next" : "vbadge";
-      const head = document.createElement("div"); head.className = "rhead";
-      head.innerHTML =
-        `<span class="ver">v${r.version}</span>`+
-        `<span class="rtitle"></span>`+
-        `<span class="${badgeCls}">${statusLabel}</span>`;
-      head.querySelector(".rtitle").textContent = pick(r.title);
-      wrap.appendChild(head);
-      const theme = document.createElement("p"); theme.className = "rtheme";
-      theme.textContent = pick(r.theme); wrap.appendChild(theme);
-      const relItems = DATA.items.filter(i=>i.release === r.version);
-      const ul = document.createElement("ul");
-      relItems.forEach(i=>{
-        const li = document.createElement("li");
-        if(!i.implemented) li.className = "planned-item";
-        li.innerHTML = `<span class="dot${i.implemented?" done":""}"></span><span class="lbl"></span>`;
-        li.querySelector(".lbl").textContent = pick(i.title);
-        ul.appendChild(li);
-      });
-      wrap.appendChild(ul);
-      const done = relItems.filter(i=>i.implemented).length;
-      const foot = document.createElement("div"); foot.className = "rfoot";
-      foot.innerHTML = `<span>${t.progress(done, relItems.length)}</span><span>${t.target}</span>`;
-      wrap.appendChild(foot);
-      rlist.appendChild(wrap);
-    });
-  } else { rsec.hidden = true; }
-
-  // changelog
-  const cl = DATA.changelog || [];
-  const sec = document.getElementById("changelog");
-  const ol = document.getElementById("changelog-list"); ol.innerHTML = "";
-  if(cl.length){
-    sec.hidden = false;
-    cl.forEach(c=>{
-      const li = document.createElement("li");
-      li.innerHTML = `<div class="date">${c.date}</div><div class="ctitle"></div>`;
-      li.querySelector(".ctitle").textContent = pick(c.title);
-      ol.appendChild(li);
-    });
-  } else { sec.hidden = true; }
-}
-
-document.querySelectorAll(".lang button").forEach(b=>{
-  b.onclick = ()=>{
-    lang = b.getAttribute("data-lang");
-    document.querySelectorAll(".lang button").forEach(x=>x.setAttribute("aria-pressed", String(x===b)));
-    render();
-  };
-});
-
-document.getElementById("archive-toggle").onclick = (e)=>{
-  showArchive = !showArchive;
-  e.currentTarget.setAttribute("aria-pressed", String(showArchive));
-  render();
-};
-
-fetch("roadmap.json?v=" + Date.now())
-  .then(r=>{ if(!r.ok) throw new Error(r.status); return r.json(); })
-  .then(d=>{ DATA = d; render(); })
-  .catch(e=>{
-    document.getElementById("board").innerHTML =
-      `<p class="error">ロードマップを読み込めませんでした / Could not load roadmap. (${e.message})</p>`;
-  });
-</script>
 </body>
 </html>
