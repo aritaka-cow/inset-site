@@ -2,6 +2,21 @@
   "version": 1,
   "announcements": [
     {
+      "id": "rel-1.2.1",
+      "date": "2026-07-02",
+      "type": "release",
+      "appVersion": "1.2.1",
+      "title": {
+        "en": "Inset 1.2.1",
+        "ja": "Inset 1.2.1"
+      },
+      "body": {
+        "en": "New Letterbox frames, a cleaner Creative Frames picker, Photos sharing, and 17 app languages make finishing your photos smoother.",
+        "ja": "新しい Letterbox フレーム、整理されたフレーム選択、写真アプリ共有、17言語対応で、写真の仕上げがさらにスムーズになりました。"
+      },
+      "url": "https://aritaka-cow.github.io/inset-site/releases/1.2.1.html"
+    },
+    {
       "id": "rel-1.2.0",
       "date": "2026-06-26",
       "type": "release",
