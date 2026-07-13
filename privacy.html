@@ -31,12 +31,13 @@
 
   <!-- ====================== 日本語 ====================== -->
   <p class="mut">日本語（English follows below）</p>
-  <p>Inset（以下「本アプリ」）は、ユーザーのプライバシーに配慮して設計されています。本アプリは、アプリ改善のために<strong>匿名の利用状況データ</strong>を収集します。写真、編集後画像、ファイル名、写真の位置情報、プリセット名は収集・送信しません。</p>
+  <p>Inset（以下「本アプリ」）は、ユーザーのプライバシーに配慮して設計されています。本アプリは、アプリ改善のための<strong>匿名の利用状況データ</strong>と、課金機能に必要な購入履歴を収集します。写真、編集後画像、ファイル名、写真の位置情報、プリセット名は収集・送信しません。</p>
 
   <h2>データの収集</h2>
   <ul>
     <li>アカウント登録・ログインはありません。</li>
     <li>本アプリは、匿名の利用分析のために PostHog を使用します。</li>
+    <li>Inset Lab の購入確認、解錠、復元、購入分析のために RevenueCat を使用します。</li>
     <li>収集する可能性がある情報: 匿名のアプリ/端末インスタンス識別子、アプリの起動・画面表示・フレーム追加・プリセット保存・書き出し成功/失敗などの利用イベント、アプリバージョン、OS/端末種別などの技術情報。</li>
     <li>Apple Ads 経由でインストールされた場合、広告効果を測定するため、Apple が返す attribution 結果と campaign / ad group / keyword / ad ID、claim / conversion type、国・地域、掲載面を、匿名の利用イベントとともに PostHog へ送信する場合があります。</li>
     <li>Apple Ads attribution token、Apple API の未加工レスポンス、広告のクリック・表示日時は保存せず、PostHog にも送信しません。</li>
@@ -58,13 +59,14 @@
   </ul>
 
   <h2>第三者への提供</h2>
-  <p>本アプリは、利用分析のために PostHog（PostHog, Inc.）へ匿名の利用イベントを送信します。広告会社への販売や広告目的の共有は行いません。</p>
+  <p>本アプリは、利用分析と広告効果測定のために PostHog（PostHog, Inc.）へ匿名の利用イベントを送信し、課金機能と購入分析のために RevenueCat（RevenueCat, Inc.）へ購入履歴と匿名識別子を送信します。データの販売、データブローカーへの提供、他社のアプリやWebサイトを横断する広告目的のトラッキングは行いません。</p>
 
   <h2>購入・課金について</h2>
   <ul>
     <li>Inset Lab の購入（自動更新サブスクリプション・買い切り）は <strong>Apple（App Store / StoreKit）</strong>を通じて処理されます。本アプリがクレジットカード番号などの決済情報を収集・保存することはありません。</li>
-    <li>本アプリは解錠状態（Lab が有効かどうか）を StoreKit から受け取って機能を出し分けるだけで、氏名・メールアドレスなどの個人情報を購入に紐づけることはありません。</li>
-    <li>課金導線の把握のため、どのプランを選んだか・購入に着手したか等の<strong>匿名イベント</strong>（製品ID・導線などの非個人情報のみ）を PostHog へ送ることがあります。実際の課金者数・売上は Apple（App Store Connect）側で集計され、本アプリには個人を識別する購入情報は渡りません。</li>
+    <li>RevenueCat は、レシート・トランザクション情報、製品ID、購入・更新・有効期限・復元状態などの購入履歴を受け取り、正当性確認と Lab の解錠、購入分析に使用します。</li>
+    <li>RevenueCat には自動生成された匿名 App User ID と、PostHog の仮名ユーザーIDを送信します。本アプリにはアカウントがなく、氏名・メールアドレス・Apple Accountなどの直接識別情報とは紐づけません。</li>
+    <li>RevenueCat は購入ライフサイクルイベントを PostHog へ送信します。これらはアプリ機能、製品分析、Apple Ads のキャンペーン効果測定に使用しますが、他社サービスを横断するユーザー追跡には使用しません。</li>
   </ul>
 
   <h2>お子様のプライバシー</h2>
@@ -81,12 +83,13 @@
 
   <!-- ====================== English ====================== -->
   <p class="mut">English</p>
-  <p>Inset (“the App”) is designed with privacy in mind. The App collects <strong>anonymous usage analytics</strong> to improve the product. It does not collect or transmit your photos, edited images, filenames, photo location data, or preset names.</p>
+  <p>Inset (“the App”) is designed with privacy in mind. The App collects <strong>anonymous usage analytics</strong> to improve the product and purchase history required to provide paid features. It does not collect or transmit your photos, edited images, filenames, photo location data, or preset names.</p>
 
   <h2>Data Collection</h2>
   <ul>
     <li>No account and no sign-in.</li>
     <li>The App uses PostHog for anonymous product analytics.</li>
+    <li>The App uses RevenueCat to validate, unlock, restore, and analyze Inset Lab purchases.</li>
     <li>Data that may be collected: anonymous app/device instance identifier, usage events such as app opens, screen views, frame additions, preset saves, export success/failure, app version, OS/device type, and similar technical information.</li>
     <li>When the App is installed through Apple Ads, it may send Apple's attribution result and campaign, ad group, keyword, and ad IDs, claim/conversion type, country or region, and placement to PostHog with anonymous usage events to measure campaign performance.</li>
     <li>The Apple Ads attribution token, raw Apple API response, and ad click or impression timestamps are not stored or sent to PostHog.</li>
@@ -108,13 +111,14 @@
   </ul>
 
   <h2>Third Parties</h2>
-  <p>The App sends anonymous usage events to PostHog (PostHog, Inc.) for product analytics. We do not sell data or share it with advertising companies for advertising purposes.</p>
+  <p>The App sends anonymous usage events to PostHog (PostHog, Inc.) for product analytics and advertising measurement, and sends purchase history and anonymous identifiers to RevenueCat (RevenueCat, Inc.) for purchase functionality and analytics. We do not sell data, provide it to data brokers, or track users across other companies’ apps or websites for advertising.</p>
 
   <h2>Purchases</h2>
   <ul>
     <li>Inset Lab purchases (auto-renewable subscriptions and the one-time Lifetime) are processed by <strong>Apple (App Store / StoreKit)</strong>. The App never collects or stores payment information such as credit card numbers.</li>
-    <li>The App only receives your entitlement status (whether Lab is active) from StoreKit to gate features; it does not link your name or email to a purchase.</li>
-    <li>To understand the purchase funnel, the App may send <strong>anonymous events</strong> (non-personal data such as product ID and entry point) to PostHog. Actual buyer counts and revenue are measured in Apple’s App Store Connect, and no personally identifying purchase information is passed to the App.</li>
+    <li>RevenueCat receives purchase history such as receipt and transaction information, product ID, purchase, renewal, expiration, and restore status. It uses this data to validate purchases, unlock Lab, and provide purchase analytics.</li>
+    <li>The App sends RevenueCat an automatically generated anonymous App User ID and a pseudonymous PostHog user ID. The App has no account system and does not associate these identifiers with a name, email address, Apple Account, or other direct identifier.</li>
+    <li>RevenueCat sends purchase lifecycle events to PostHog. These events are used for app functionality, product analytics, and Apple Ads campaign measurement, but not to track users across other companies’ services.</li>
   </ul>
 
   <h2>Children’s Privacy</h2>
