@@ -71,7 +71,7 @@ export const homeCopy: Localized<{
       device: "Inset on iPhone showing two margin layers around a photograph",
       water: "A glass of water presented inside a white inner mat and black outer mat",
       batch: ["A pale branch reflected in water", "A glowing lamp", "A geometric chair and table"],
-      frames: ["A coffee sign in a black 35mm frame", "Two people beneath a chandelier in a black polaroid frame", "Sunset light on water in a white polaroid frame", "A field and plume of steam in a white film frame"]
+      frames: ["A coffee sign in a black 35mm frame", "Two people beneath a chandelier in a black polaroid frame", "Sunset light on water in a white polaroid frame", "A field and plume of steam in a white film frame", "A paraglider in a rounded Letterbox border", "A sunlit tree in an original Letterbox frame"]
     }
   },
   ja: {
@@ -91,7 +91,7 @@ export const homeCopy: Localized<{
       device: "写真のまわりに2層の余白を重ねたInsetのiPhone編集画面",
       water: "白い内側の余白と黒い外側の余白で仕上げた水のグラスの写真",
       batch: ["水面に映る淡い枝", "灯りのついたランプ", "幾何学的な椅子とテーブル"],
-      frames: ["coffeeの看板を入れた黒い35mmフレーム", "シャンデリアの下の二人を入れた黒いポラロイドフレーム", "夕景の水面を入れた白いポラロイドフレーム", "草原と噴煙を入れた白いフィルムフレーム"]
+      frames: ["coffeeの看板を入れた黒い35mmフレーム", "シャンデリアの下の二人を入れた黒いポラロイドフレーム", "夕景の水面を入れた白いポラロイドフレーム", "草原と噴煙を入れた白いフィルムフレーム", "丸いLetterbox枠で仕上げたパラグライダー", "Original Letterboxで仕上げた木の写真"]
     }
   }
 };

@@ -17,7 +17,9 @@ const expectedFiles = [
   ...versions.flatMap((version) => [`releases/${version}/index.html`, `ja/releases/${version}/index.html`, `releases/${version}.html`]),
   "images/app-icon.png", "images/hero-finished.webp", "images/device-composite.webp", "images/water-glass.webp",
   "images/batch-branch.webp", "images/batch-lamp.webp", "images/batch-chair.webp",
-  "images/frame-35mm-black.webp", "images/frame-polaroid-black.webp", "images/frame-polaroid-white.webp", "images/frame-film-white.webp"
+  "images/frame-35mm-black.webp", "images/frame-polaroid-black.webp", "images/frame-polaroid-white.webp", "images/frame-film-white.webp",
+  "images/frame-letterbox-round-border.webp", "images/frame-letterbox-original.webp",
+  "store-badges/app-store-en.svg", "store-badges/app-store-ja.svg"
 ];
 
 async function exists(path) { try { await stat(path); return true; } catch { return false; } }
