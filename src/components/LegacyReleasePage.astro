@@ -13,7 +13,7 @@ const locales = ["ja", "en"] as const;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="robots" content="noindex, follow" />
     <title>Inset {release.version} — Release Notes</title>
-    <link rel="canonical" href={`https://inset.app${releasePath(release.version, "en")}`} />
+    <link rel="canonical" href={`https://inset.page${releasePath(release.version, "en")}`} />
     <script is:inline>
       document.documentElement.classList.add("legacy-js");
       const requested = new URLSearchParams(location.search).get("lang");

@@ -1,6 +1,6 @@
-# Cloudflare tooling for inset.app
+# Cloudflare tooling for inset.page
 
-Updated: 2026-07-15
+Updated: 2026-07-16
 
 ## Installed and recommended now
 
@@ -24,7 +24,7 @@ npm run preview
 npm run deploy:dry-run
 ```
 
-`npm run preview` builds a noindex preview and serves the same Workers Static Assets configuration used in production. `npm run deploy` changes Cloudflare state and should be run only for an intentional release.
+`npm run preview` builds a noindex preview and serves the same Workers Static Assets configuration used in production. `npm run deploy` deploys both the static site and the small `www` redirect Worker, changes Cloudflare state, and should be run only for an intentional release.
 
 ## Useful later, but not needed for the initial static site
 
@@ -34,8 +34,8 @@ npm run deploy:dry-run
 | Cloudflare Observatory | The production hostname is live | Measures Lighthouse and field-oriented performance without adding a package to the repository |
 | Cloudflare Web Analytics | Immediately after the production domain is connected | Gives privacy-oriented traffic and Core Web Vitals measurement; no PostHog web SDK is needed initially |
 | Lighthouse CI | Performance regressions need a hard CI budget | Browser availability and network variation make it better as a second-stage CI gate |
-| `@cloudflare/vitest-pool-workers` | Worker code, bindings, or APIs are added | The current site has no Worker runtime logic to test |
-| `cloudflare:test` / Miniflare APIs | Low-level Worker behavior needs direct tests | Wrangler already includes the local runtime required by this static site |
+| `@cloudflare/vitest-pool-workers` | Stateful Worker code, bindings, or APIs are added | The only runtime code is a pure redirect handler covered by a deterministic Node test |
+| `cloudflare:test` / Miniflare APIs | Low-level Worker behavior needs direct runtime tests | Wrangler dry-run plus the redirect contract test is sufficient for the current 0.45 KiB handler |
 
 Do not add `@astrojs/cloudflare`, the Cloudflare Vite plugin, direct Miniflare, or C3 for the current architecture. Those are useful for SSR or Worker-backed applications, while this site deliberately outputs static HTML.
 
@@ -52,10 +52,12 @@ Create or connect a Worker named `inset-site`; its name must match `wrangler.jso
 
 The `_headers` file applies `X-Robots-Tag: noindex, nofollow` to `workers.dev` version URLs. Preview builds also use a noindex meta tag when run through `npm run build:preview`.
 
-Before production launch:
+The production build command above updates `inset-site`. The independently deployed `inset-site-www-redirect` Worker is defined by `wrangler.www.jsonc` and only needs `npm run deploy:www` when its redirect code or route changes. It keeps `www.inset.page` from serving duplicate content while leaving apex static assets on the direct asset path.
 
-1. Deploy with the `inset.app` Custom Domain declared in `wrangler.jsonc`; Cloudflare creates the required DNS record and certificate.
-2. Add a permanent redirect from `www.inset.app` to the apex domain.
+Production launch and follow-up:
+
+1. `inset.page` is deployed through the Custom Domain declared in `wrangler.jsonc`; Cloudflare created its DNS record and certificate on 2026-07-16.
+2. `inset-site-www-redirect` is deployed from `wrangler.www.jsonc`; `www.inset.page` returns a one-hop 301 to the same path and query on the apex domain.
 3. Keep the ordinary `workers.dev` alias disabled; retain version preview URLs for review.
 4. Configure AI Crawl Control to allow search and user-invoked agents, and block training-only crawlers according to the launch policy.
 5. Enable Web Analytics, then add the domain property and sitemap in Google Search Console.

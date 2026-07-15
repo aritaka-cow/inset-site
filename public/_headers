@@ -14,6 +14,6 @@
   Cache-Control: public, max-age=600, must-revalidate
 
 # Prevent versioned preview URLs and the disabled workers.dev alias from being
-# indexed. The canonical inset.app host is unaffected.
+# indexed. The canonical inset.page host is unaffected.
 https://:version.:subdomain.workers.dev/*
   X-Robots-Tag: noindex, nofollow

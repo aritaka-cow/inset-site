@@ -3,7 +3,7 @@ schema_version: 1
 product: Inset Web
 revision: PD-0001
 status: approved
-updated: 2026-07-15
+updated: 2026-07-16
 approved_by: user
 approved_at: 2026-07-15
 supersedes:
@@ -70,12 +70,13 @@ Insetはこの工程を短く正確にする製品だが、現在のWebサイト
 - `../Yohaku/DESIGN.md`: 写真優先、抑制、実物による証明、情報の少なさ、正確さがブランドの不変条件。
 - `../Yohaku/docs/features.json`: 余白レイヤー、WYSIWYG、フル解像度書き出し、クロップ、プリセットなどの検証記録。
 - `../Yohaku/docs/design-reference/`: 公開版実UIと承認済みApp Store、SNS素材。
-- Apple Lookup API: 2026-07-15確認時点の公開版は1.2.1。iOS 17.0以降、Inset Lab、バッチ、Letterbox、17言語が公開説明に含まれる。
+- Apple Lookup APIとApp Store公開ページ: 2026-07-16確認時点の公開版は1.2.1。iOS 17.0以降、Inset Lab、バッチ、Letterboxが公開説明に含まれる。
+- Cloudflare: `inset.page`は`inset-site`、`www.inset.page`は一段301専用の`inset-site-www-redirect`へ接続済み。両方にCloudflare管理DNSとTLS証明書が発行されている。
 - 現在の`index.html`、`privacy.html`、`terms.html`、`announcements.json`、`roadmap.json`、`releases/`: 既存の公開URLとアプリ参照契約。
 
 ### User decisions
 
-- 正規ドメインは`inset.app`。
+- 正規ドメインは`inset.page`。
 - 英語を`/`、日本語を`/ja/`へ置く。
 - サイトデザインは以前のWeb案を継承せず、製品とブランドの前提から作り直す。
 - Android版は`Coming Soon`として予告する。
@@ -144,7 +145,7 @@ Insetはこの工程を短く正確にする製品だが、現在のWebサイト
 - Accessibility: WCAG 2.2 AAとreduced motionをデザイン段階から扱う。
 - SEO: 既存URLとwire contractを失わず、英語rootと日本語`/ja/`の相互参照を保つ。
 - Privacy and legal: 法務本文は現在の複数変更系列を意図的に統合し、別途確認なしに書き換えない。
-- Repository safety: 現在のmainは未コミット変更があり、origin/mainより1コミット遅れている。視覚方向の承認までは`design/`以外を変更しない。
+- Repository safety: 既存のローカルmainには未コミット変更があるため保持し、ドメイン移行と本番反映は最新`origin/main`から作成した独立worktreeで行う。
 - Delivery: Pencilを視覚正本とし、実装は承認済みexperience specとvisual directionから行う。
 - Theme: 消費者向け公開サイトとしてライトとダークの両方を設計し、ページ途中で無意味にテーマを反転しない。
 
@@ -160,7 +161,6 @@ Insetはこの工程を短く正確にする製品だが、現在のWebサイト
 - 初回リリースでのブログ、コミュニティ、ユーザーギャラリー投稿機能
 - `llms.txt`
 - WebへのPostHog導入
-- このデザインフェーズでのCloudflare設定変更、公開、Git操作、production code実装
 
 ## リスクと未解決事項 / Risks and open questions
 
@@ -173,7 +173,7 @@ Insetはこの工程を短く正確にする製品だが、現在のWebサイト
 - Medium: Android版の公開時期、Google Play URL、課金と機能の最終状態は未確定。`Coming Soon`表示を一箇所の構造化コンテンツから更新できるようにする必要がある。
 - Open: 専用App Storeキャンペーンリンクの最終URL。
 - Open: Android公開時に`Coming Soon`を置き換えるGoogle Play URLと公開確認手順。
-- Open: `www.inset.app`、旧GitHub Pages、Workers previewの最終redirectとnoindex設定。
+- Resolved 2026-07-16: `www.inset.page`は専用Workerでapexへ一段301し、旧GitHub Pages互換配信とWorkers previewのnoindexを維持する。
 
 ## 承認 / Approval
 

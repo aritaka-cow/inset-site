@@ -122,6 +122,18 @@
       "status": "verified"
     },
     {
+      "path": "wrangler.www.jsonc",
+      "revision": "1",
+      "role": "cloudflare-www-redirect-config",
+      "status": "deployed"
+    },
+    {
+      "path": "workers/www-redirect.js",
+      "revision": "1",
+      "role": "canonical-host-redirect-worker",
+      "status": "deployed"
+    },
+    {
       "path": "design/initiatives/inset-web/concepts/quiet-gallery-desktop.png",
       "revision": "VD-0001-A-desktop",
       "role": "visual-direction-preview",
@@ -159,10 +171,10 @@
     }
   ],
   "blockers": [],
-  "last_completed_checkpoint": "implementation-verified",
-  "last_event_id": "EVT-000017",
+  "last_completed_checkpoint": "production-domain-launched",
+  "last_event_id": "EVT-000018",
   "mode": "redesign",
-  "next_action": "Reconcile the existing dirty and behind Git state, then connect inset.app and complete the live Cloudflare launch checklist when explicitly authorized.",
+  "next_action": "Enable Web Analytics, align AI Crawl Control with robots.txt, create the Search Console Domain property, and submit the sitemap.",
   "pencil": {
     "file_path": "/Users/aritakakanazawa/projects/App/Inset/inset-site/design/inset-web.pen",
     "frame_ids": [
@@ -183,7 +195,7 @@
     ]
   },
   "pending_user_decisions": [],
-  "phase": "implementation",
+  "phase": "launch",
   "product": "Inset Web",
   "project_root": "/Users/aritakakanazawa/projects/App/Inset/inset-site",
   "schema_version": 1,
@@ -214,9 +226,9 @@
     }
   },
   "status": "completed",
-  "step": "implementation-verified",
+  "step": "production-domain-live",
   "surfaces": [
     "website/LP"
   ],
-  "updated_at": "2026-07-15T12:45:39+00:00"
+  "updated_at": "2026-07-15T20:02:47+00:00"
 }
