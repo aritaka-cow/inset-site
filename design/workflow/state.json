@@ -171,8 +171,8 @@
     }
   ],
   "blockers": [],
-  "last_completed_checkpoint": "production-domain-launched",
-  "last_event_id": "EVT-000018",
+  "last_completed_checkpoint": "store-badges-and-six-frame-gallery-verified",
+  "last_event_id": "EVT-000019",
   "mode": "redesign",
   "next_action": "Enable Web Analytics, align AI Crawl Control with robots.txt, create the Search Console Domain property, and submit the sitemap.",
   "pencil": {
@@ -226,9 +226,9 @@
     }
   },
   "status": "completed",
-  "step": "production-domain-live",
+  "step": "store-badges-and-six-frame-gallery-verified",
   "surfaces": [
     "website/LP"
   ],
-  "updated_at": "2026-07-15T20:02:47+00:00"
+  "updated_at": "2026-07-15T22:24:17+00:00"
 }

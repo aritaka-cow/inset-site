@@ -22,11 +22,24 @@ private struct Output {
     let photo: String
     let style: Style
     let filename: String
+    let orientToPhoto: Bool
+
+    init(photo: String, style: Style, filename: String, orientToPhoto: Bool = true) {
+        self.photo = photo
+        self.style = style
+        self.filename = filename
+        self.orientToPhoto = orientToPhoto
+    }
 }
 
 private let scriptURL = URL(fileURLWithPath: CommandLine.arguments[0]).standardizedFileURL
 private let repositoryRoot = scriptURL.deletingLastPathComponent().deletingLastPathComponent()
-private let assetsRoot = repositoryRoot.deletingLastPathComponent().appendingPathComponent("Yohaku/Yohaku/Resources/Assets.xcassets")
+private let assetsRoot: URL = {
+    if let override = ProcessInfo.processInfo.environment["INSET_ASSETS_ROOT"], !override.isEmpty {
+        return URL(fileURLWithPath: override).standardizedFileURL
+    }
+    return repositoryRoot.deletingLastPathComponent().appendingPathComponent("Yohaku/Yohaku/Resources/Assets.xcassets")
+}()
 private let outputRoot = repositoryRoot.appendingPathComponent("public/images")
 private let black = CGColor(red: 0, green: 0, blue: 0, alpha: 1)
 private let white = CGColor(red: 1, green: 1, blue: 1, alpha: 1)
@@ -51,6 +64,17 @@ private let outputs = [
         photo: "shot_collage_7",
         style: Style(asset: "film_film_white_3x2", window: UnitRect(x: 0.0374, y: 0.0314, width: 0.929, height: 0.9328), assetAspect: 1.4511, paper: white),
         filename: "frame-film-white.webp"
+    ),
+    Output(
+        photo: "paywall_sample_14",
+        style: Style(asset: "film_letterbox_dirty_round_fitted_4x5", window: UnitRect(x: 0.032675, y: 0.026432, width: 0.934649, height: 0.947137), assetAspect: 0.808921, paper: black),
+        filename: "frame-letterbox-round-border.webp"
+    ),
+    Output(
+        photo: "shot_collage_2",
+        style: Style(asset: "film_letterbox_dirty_original_3x2", window: UnitRect(x: 0.10026, y: 0.027315, width: 0.799219, height: 0.945833), assetAspect: 1.777778, paper: black),
+        filename: "frame-letterbox-original.webp",
+        orientToPhoto: false
     )
 ]
 
@@ -114,12 +138,12 @@ private func orientation(_ aspect: CGFloat) -> Int {
     return value > 0 ? 1 : -1
 }
 
-private func makeFrame(photo: CGImage, style: Style) -> CGImage {
+private func makeFrame(photo: CGImage, style: Style, orientToPhoto: Bool) -> CGImage {
     let photoAspect = CGFloat(photo.width) / CGFloat(max(1, photo.height))
     let windowAspect = style.assetAspect * (style.window.width / style.window.height)
     let photoOrientation = orientation(photoAspect)
     let windowOrientation = orientation(windowAspect)
-    let turns = photoOrientation == 0 || windowOrientation == 0 || photoOrientation == windowOrientation ? 0 : 1
+    let turns = orientToPhoto && photoOrientation != 0 && windowOrientation != 0 && photoOrientation != windowOrientation ? 1 : 0
     let overlay = rotate(loadImage(named: style.asset), turns: turns)
     let window = rotate(style.window, turns: turns)
     let overlayAspect = CGFloat(overlay.width) / CGFloat(overlay.height)
@@ -182,7 +206,7 @@ private func saveWebP(_ image: CGImage, to url: URL) {
 }
 
 for output in outputs {
-    let image = downscale(makeFrame(photo: loadImage(named: output.photo), style: output.style))
+    let image = downscale(makeFrame(photo: loadImage(named: output.photo), style: output.style, orientToPhoto: output.orientToPhoto))
     let url = outputRoot.appendingPathComponent(output.filename)
     saveWebP(image, to: url)
     print("\(url.path) \(image.width)x\(image.height)")

@@ -78,12 +78,14 @@ const homeFaqs: Faq[] = [
       <h2 id="frames-heading" class="display-heading">{copy.framesHeading}</h2>
       <p>{copy.framesBody}</p>
     </div>
-    <div class="creative-gallery" role="group" aria-label={locale === "ja" ? "4種類のクリエイティブフレーム" : "Four Creative Frame examples"}>
+    <div class="creative-gallery" role="group" aria-label={locale === "ja" ? "6種類のクリエイティブフレーム" : "Six Creative Frame examples"}>
       {[
         { src: "frame-35mm-black.webp", alt: copy.imageAlt.frames[0], className: "creative-frame--one", width: 1200, height: 1191 },
         { src: "frame-polaroid-black.webp", alt: copy.imageAlt.frames[1], className: "creative-frame--two", width: 1200, height: 772 },
         { src: "frame-polaroid-white.webp", alt: copy.imageAlt.frames[2], className: "creative-frame--three", width: 948, height: 1200 },
-        { src: "frame-film-white.webp", alt: copy.imageAlt.frames[3], className: "creative-frame--four", width: 827, height: 1200 }
+        { src: "frame-film-white.webp", alt: copy.imageAlt.frames[3], className: "creative-frame--four", width: 827, height: 1200 },
+        { src: "frame-letterbox-round-border.webp", alt: copy.imageAlt.frames[4], className: "creative-frame--five", width: 971, height: 1200 },
+        { src: "frame-letterbox-original.webp", alt: copy.imageAlt.frames[5], className: "creative-frame--six", width: 1200, height: 675 }
       ].map(({ src, alt, className, width, height }) => (
         <img class:list={["creative-frame", className]} src={assetPath(`/images/${src}`)} width={width} height={height} alt={alt} loading="lazy" decoding="async" />
       ))}
@@ -150,10 +152,12 @@ const homeFaqs: Faq[] = [
   .feature-creative h2 { font-size: clamp(46px, 3.7vw, 52px); }
   .creative-gallery { position: relative; width: 100%; max-width: 690px; height: 668px; }
   .creative-frame { position: absolute; object-fit: contain; }
-  .creative-frame--one { left: 6%; top: 6%; width: 26%; transform: rotate(-3deg); }
-  .creative-frame--two { left: 35%; top: 4%; width: 52%; transform: rotate(2deg); }
-  .creative-frame--three { left: 14%; top: 46%; width: 22%; transform: rotate(2deg); }
-  .creative-frame--four { left: 57%; top: 49%; width: 27%; transform: rotate(-2deg); }
+  .creative-frame--one { left: 1%; top: 12%; width: 24%; transform: rotate(-3deg); }
+  .creative-frame--two { left: 28%; top: 4%; width: 43%; transform: rotate(2deg); }
+  .creative-frame--three { left: 5%; top: 54%; width: 20%; transform: rotate(2deg); }
+  .creative-frame--four { left: 80%; top: 53%; width: 18%; transform: rotate(-2deg); }
+  .creative-frame--five { left: 77%; top: 8%; width: 21%; transform: rotate(2.5deg); }
+  .creative-frame--six { left: 29%; top: 51%; width: 45%; transform: rotate(-1.5deg); }
 
   .home-faq { min-height: 520px; padding: 46px max(8vw, 112px) 42px; }
   .home-faq h2 { margin: 18px 0 16px; font-family: var(--serif); font-size: 28px; font-weight: 500; }
@@ -196,11 +200,13 @@ const homeFaqs: Faq[] = [
     .feature-creative__copy { gap: 16px; }
     .feature-creative h2 { font-size: 42px; line-height: 1.35; }
     .feature-creative__copy > p:last-child { font-size: 16px; line-height: 1.75; }
-    .creative-gallery { height: 506px; }
-    .creative-frame--one { left: 2%; top: 5%; width: 36%; }
-    .creative-frame--two { left: 38%; top: 2%; width: 60%; }
-    .creative-frame--three { left: 8%; top: 48%; width: 30%; }
-    .creative-frame--four { left: 58%; top: 49%; width: 32%; }
+    .creative-gallery { height: 650px; }
+    .creative-frame--one { left: 1%; top: 3%; width: 38%; }
+    .creative-frame--two { left: 40%; top: 1%; width: 58%; }
+    .creative-frame--three { left: 5%; top: 69%; width: 33%; }
+    .creative-frame--four { left: 64%; top: 67%; width: 31%; }
+    .creative-frame--five { left: 3%; top: 35%; width: 31%; }
+    .creative-frame--six { left: 34%; top: 39%; width: 64%; }
 
     .home-faq { min-height: 640px; padding: 40px 20px; }
     .home-faq h2 { font-size: 27px; }

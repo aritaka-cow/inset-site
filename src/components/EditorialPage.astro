@@ -42,8 +42,10 @@ const counterpartPath = pathFor(pageKey, locale === "ja" ? "en" : "ja");
       {[
         { src: "frame-35mm-black.webp", alt: "35mm", width: 1200, height: 1191 },
         { src: "frame-polaroid-black.webp", alt: locale === "ja" ? "黒いポラロイド" : "Black polaroid", width: 1200, height: 772 },
+        { src: "frame-letterbox-round-border.webp", alt: locale === "ja" ? "丸いLetterbox枠" : "Rounded Letterbox border", width: 971, height: 1200 },
         { src: "frame-polaroid-white.webp", alt: locale === "ja" ? "白いポラロイド" : "White polaroid", width: 948, height: 1200 },
-        { src: "frame-film-white.webp", alt: locale === "ja" ? "白いフィルム" : "White film", width: 827, height: 1200 }
+        { src: "frame-film-white.webp", alt: locale === "ja" ? "白いフィルム" : "White film", width: 827, height: 1200 },
+        { src: "frame-letterbox-original.webp", alt: locale === "ja" ? "Original Letterbox" : "Original Letterbox", width: 1200, height: 675 }
       ].map(({ src, alt, width, height }) => <img src={assetPath(`/images/${src}`)} width={width} height={height} alt={alt} loading="eager" decoding="async" />)}
     </div>
   )}
@@ -79,12 +81,14 @@ const counterpartPath = pathFor(pageKey, locale === "ja" ? "en" : "ja");
   .editorial-proof--features > img { width: 100%; }
   .editorial-proof__result { display: grid; place-items: center; padding: 22px; background: var(--dark-mat); }
   .editorial-proof__result > div { padding: 26px; background: #fff; }
-  .frame-proof { display: grid; grid-template-columns: 0.8fr 1.35fr 0.65fr 1fr; align-items: center; gap: clamp(18px, 3vw, 44px); width: min(1180px, calc(100% - 2 * var(--page-gutter))); margin: 80px auto 10px; padding: 58px 0; }
+  .frame-proof { display: grid; grid-template-columns: 0.8fr 1.35fr 0.7fr; align-items: center; gap: clamp(24px, 3vw, 44px); width: min(1180px, calc(100% - 2 * var(--page-gutter))); margin: 80px auto 10px; padding: 58px 0; }
   .frame-proof img { width: 100%; max-height: 420px; object-fit: contain; }
   .frame-proof img:nth-child(1) { transform: rotate(-2deg); }
   .frame-proof img:nth-child(2) { transform: rotate(1.4deg); }
   .frame-proof img:nth-child(3) { transform: rotate(2deg); }
   .frame-proof img:nth-child(4) { transform: rotate(-1.5deg); }
+  .frame-proof img:nth-child(5) { transform: rotate(1.5deg); }
+  .frame-proof img:nth-child(6) { transform: rotate(-1deg); }
   .support-links { display: flex; flex-wrap: wrap; gap: 12px 28px; padding: 44px 0; border-top: 1px solid var(--line); }
   .support-links a { display: inline-flex; align-items: center; min-height: 44px; font-weight: 600; }
   @media (max-width: 760px) {
