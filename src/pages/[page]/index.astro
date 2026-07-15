@@ -1,0 +1,11 @@
+---
+import EditorialPage from "@/components/EditorialPage.astro";
+import { contentPageKeys, type ContentPageKey } from "@/data/site";
+
+export function getStaticPaths() {
+  return contentPageKeys.map((page) => ({ params: { page }, props: { pageKey: page } }));
+}
+interface Props { pageKey: ContentPageKey }
+const { pageKey } = Astro.props;
+---
+<EditorialPage locale="en" pageKey={pageKey} />

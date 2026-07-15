@@ -1,13 +1,48 @@
 # inset-site
 
-[Inset](https://aritaka-cow.github.io/inset-site/) の公開サイト（GitHub Pages）。
+[Inset](https://inset.app/) の日英公式サイトです。Astroで静的HTMLを生成し、Cloudflare Workers Static Assetsから配信します。旧GitHub Pages URLと公開済みアプリの取得先は、同じビルド成果物で互換配信します。
+
+## ローカル開発
+
+Node.js 24.14.0を使用します。
+
+```sh
+nvm use
+npm ci
+npm run dev
+```
+
+Cloudflareと同じ配信設定で確認する場合:
+
+```sh
+npm run preview
+```
+
+型、コンテンツ契約、HTML、内部リンク、canonical、hreflang、sitemapをまとめて検証する場合:
+
+```sh
+npm run build
+```
+
+Cloudflareのツール選定とWorkers Builds設定は [`docs/cloudflare-tooling.md`](docs/cloudflare-tooling.md) を参照してください。
+
+## 公開URL
+
+- English: `/`
+- 日本語: `/ja/`
+- Features, How it works, Frames, Pricing, FAQ, Support, Privacy, Terms, Releasesを両言語で生成
+- `inset.app` をcanonical、英語ルートを `x-default` とする
+
+## 既存の公開契約
 
 | ファイル | 用途 |
 |---|---|
-| `index.html` | サポート / FAQ |
-| `privacy.html` | プライバシーポリシー |
+| `index.html` | 旧GitHub Pagesのサポート / FAQ |
+| `privacy.html` | 旧プライバシーポリシーURLの互換ページ |
+| `terms.html` | 旧利用規約URLの互換ページ |
 | `roadmap.html` / `roadmap.json` | 公開ロードマップ終了の案内（ロードマップ正本は Yohaku GitHub Issues） |
 | `announcements.json` | アプリ内お知らせの配信元（T-0201 / RM-033） |
+| `releases/*.html` | 旧リリースノートURLの互換ページ |
 
 ## ロードマップの運用
 

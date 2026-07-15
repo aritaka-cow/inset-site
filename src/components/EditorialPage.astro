@@ -1,0 +1,98 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import FaqList from "@/components/FaqList.astro";
+import StoreButtons from "@/components/StoreButtons.astro";
+import { faqs, pageContent, pathFor, type ContentPageKey, type Locale } from "@/data/site";
+
+interface Props { locale: Locale; pageKey: ContentPageKey }
+const { locale, pageKey } = Astro.props;
+const copy = pageContent[locale][pageKey];
+const base = import.meta.env.BASE_URL;
+const assetPath = (path: string) => `${base}${path.replace(/^\//, "")}`;
+const currentPath = pathFor(pageKey, locale);
+const counterpartPath = pathFor(pageKey, locale === "ja" ? "en" : "ja");
+---
+
+<BaseLayout
+  locale={locale}
+  title={copy.title}
+  description={copy.description}
+  currentPath={currentPath}
+  counterpartPath={counterpartPath}
+  faqItems={pageKey === "faq" ? faqs[locale] : []}
+>
+  <header class="editorial-hero">
+    <div class="editorial-hero__inner">
+      {copy.eyebrow && <p class="eyebrow">{copy.eyebrow}</p>}
+      <h1>{copy.heading}</h1>
+      <p class="lede">{copy.intro}</p>
+      {(pageKey === "pricing" || pageKey === "support") && <div class="editorial-actions"><StoreButtons locale={locale} compact /></div>}
+    </div>
+  </header>
+
+  {pageKey === "features" && (
+    <figure class="editorial-proof editorial-proof--features">
+      <img src={assetPath("/images/device-composite.webp")} width="900" height="1840" alt={locale === "ja" ? "Insetの編集画面" : "Inset editing screen"} loading="eager" decoding="async" />
+      <div class="editorial-proof__result"><div><img src={assetPath("/images/water-glass.webp")} width="1100" height="733" alt={locale === "ja" ? "余白で仕上げた写真" : "A photograph finished with layered margins"} loading="eager" decoding="async" /></div></div>
+    </figure>
+  )}
+
+  {pageKey === "frames" && (
+    <div class="frame-proof" role="group" aria-label={locale === "ja" ? "クリエイティブフレームの例" : "Creative Frame examples"}>
+      {[
+        { src: "frame-35mm-black.webp", alt: "35mm", width: 1200, height: 1191 },
+        { src: "frame-polaroid-black.webp", alt: locale === "ja" ? "黒いポラロイド" : "Black polaroid", width: 1200, height: 772 },
+        { src: "frame-polaroid-white.webp", alt: locale === "ja" ? "白いポラロイド" : "White polaroid", width: 948, height: 1200 },
+        { src: "frame-film-white.webp", alt: locale === "ja" ? "白いフィルム" : "White film", width: 827, height: 1200 }
+      ].map(({ src, alt, width, height }) => <img src={assetPath(`/images/${src}`)} width={width} height={height} alt={alt} loading="eager" decoding="async" />)}
+    </div>
+  )}
+
+  <div class="editorial-body">
+    {pageKey === "faq" ? (
+      <FaqList items={faqs[locale]} openFirst />
+    ) : (
+      copy.sections.map((section) => (
+        <section class="editorial-section">
+          <h2>{section.title}</h2>
+          <div>
+            <p>{section.body}</p>
+            {section.bullets && <ul>{section.bullets.map((item) => <li>{item}</li>)}</ul>}
+          </div>
+        </section>
+      ))
+    )}
+
+    {pageKey === "support" && (
+      <div class="support-links">
+        <a href={`mailto:inset.support@gmail.com`}>inset.support@gmail.com</a>
+        <a href={assetPath(pathFor("faq", locale))}>{locale === "ja" ? "FAQを見る" : "Read the FAQ"}</a>
+        <a href={assetPath(pathFor("releases", locale))}>{locale === "ja" ? "更新情報を見る" : "Read release notes"}</a>
+      </div>
+    )}
+  </div>
+</BaseLayout>
+
+<style>
+  .editorial-proof { width: min(1060px, calc(100% - 2 * var(--page-gutter))); margin: 80px auto 0; }
+  .editorial-proof--features { display: grid; grid-template-columns: minmax(220px, 340px) minmax(420px, 1fr); align-items: center; gap: clamp(54px, 9vw, 130px); }
+  .editorial-proof--features > img { width: 100%; }
+  .editorial-proof__result { display: grid; place-items: center; padding: 22px; background: var(--dark-mat); }
+  .editorial-proof__result > div { padding: 26px; background: #fff; }
+  .frame-proof { display: grid; grid-template-columns: 0.8fr 1.35fr 0.65fr 1fr; align-items: center; gap: clamp(18px, 3vw, 44px); width: min(1180px, calc(100% - 2 * var(--page-gutter))); margin: 80px auto 10px; padding: 58px 0; }
+  .frame-proof img { width: 100%; max-height: 420px; object-fit: contain; }
+  .frame-proof img:nth-child(1) { transform: rotate(-2deg); }
+  .frame-proof img:nth-child(2) { transform: rotate(1.4deg); }
+  .frame-proof img:nth-child(3) { transform: rotate(2deg); }
+  .frame-proof img:nth-child(4) { transform: rotate(-1.5deg); }
+  .support-links { display: flex; flex-wrap: wrap; gap: 12px 28px; padding: 44px 0; border-top: 1px solid var(--line); }
+  .support-links a { display: inline-flex; align-items: center; min-height: 44px; font-weight: 600; }
+  @media (max-width: 760px) {
+    .editorial-proof { width: calc(100% - 40px); margin-top: 52px; }
+    .editorial-proof--features { grid-template-columns: 1fr; gap: 38px; }
+    .editorial-proof--features > img { width: 220px; margin-inline: auto; }
+    .editorial-proof__result { padding: 13px; }
+    .editorial-proof__result > div { padding: 14px; }
+    .frame-proof { grid-template-columns: 0.8fr 1.2fr; gap: 20px; width: calc(100% - 40px); margin-top: 48px; padding: 20px 0; }
+  }
+</style>

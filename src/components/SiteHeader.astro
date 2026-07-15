@@ -1,0 +1,38 @@
+---
+import { localeLabels, navLabels, pathFor, type Locale } from "@/data/site";
+import Icon from "@/components/Icon.astro";
+
+interface Props {
+  locale: Locale;
+  counterpartPath: string;
+}
+
+const { locale, counterpartPath } = Astro.props;
+const base = import.meta.env.BASE_URL;
+const localPath = (path: string) => `${base}${path.replace(/^\//, "")}`;
+const navKeys = ["features", "frames", "pricing", "faq"] as const;
+---
+
+<header class="site-header">
+  <a class="brand" href={localPath(pathFor("home", locale))} aria-label="Inset home">
+    <img src={localPath("/images/app-icon.png")} width="34" height="34" alt="" />
+    <span>Inset</span>
+  </a>
+
+  <nav class="desktop-nav" aria-label={locale === "ja" ? "主要ナビゲーション" : "Primary navigation"}>
+    {navKeys.map((key) => <a href={localPath(pathFor(key, locale))}>{navLabels[key][locale]}</a>)}
+    <a class="locale-link" href={localPath(counterpartPath)} hreflang={locale === "ja" ? "en" : "ja"}>{localeLabels[locale].language}</a>
+  </nav>
+
+  <div class="mobile-nav">
+    <a class="locale-link locale-link--mobile" href={localPath(counterpartPath)} hreflang={locale === "ja" ? "en" : "ja"}>{localeLabels[locale].language}</a>
+    <details class="mobile-menu">
+      <summary aria-label={localeLabels[locale].menu}><Icon name="menu" /><span class="visually-hidden">{localeLabels[locale].menu}</span></summary>
+      <nav aria-label={locale === "ja" ? "モバイルナビゲーション" : "Mobile navigation"}>
+        {navKeys.map((key) => <a href={localPath(pathFor(key, locale))}>{navLabels[key][locale]}</a>)}
+        <a href={localPath(pathFor("how-it-works", locale))}>{locale === "ja" ? "使い方" : "How it works"}</a>
+        <a href={localPath(pathFor("support", locale))}>{locale === "ja" ? "サポート" : "Support"}</a>
+      </nav>
+    </details>
+  </div>
+</header>

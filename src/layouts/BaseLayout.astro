@@ -1,0 +1,119 @@
+---
+import "@/styles/global.css";
+import SiteHeader from "@/components/SiteHeader.astro";
+import SiteFooter from "@/components/SiteFooter.astro";
+import { appFacts, appStoreId, appStoreUrls, siteOrigin, supportEmail, type Faq, type Locale } from "@/data/site";
+
+interface Props {
+  locale: Locale;
+  title: string;
+  description: string;
+  currentPath: string;
+  counterpartPath: string;
+  imagePath?: string;
+  includeAppSchema?: boolean;
+  faqItems?: Faq[];
+  article?: boolean;
+  noindex?: boolean;
+}
+
+const {
+  locale,
+  title,
+  description,
+  currentPath,
+  counterpartPath,
+  imagePath = "/images/hero-finished.webp",
+  includeAppSchema = false,
+  faqItems = [],
+  article = false,
+  noindex = false
+} = Astro.props;
+const base = import.meta.env.BASE_URL;
+const assetPath = (path: string) => `${base}${path.replace(/^\//, "")}`;
+const canonical = new URL(currentPath, siteOrigin).href;
+const counterpart = new URL(counterpartPath, siteOrigin).href;
+const isPreview = import.meta.env.PUBLIC_SITE_ENV === "preview";
+const language = locale === "ja" ? "ja-JP" : "en-US";
+const schemas: Record<string, unknown>[] = [
+  {
+    "@context": "https://schema.org",
+    "@type": article ? "Article" : "WebPage",
+    name: title,
+    description,
+    url: canonical,
+    inLanguage: language,
+    isPartOf: { "@type": "WebSite", name: "Inset", url: siteOrigin }
+  }
+];
+
+if (includeAppSchema) {
+  schemas.push(
+    { "@context": "https://schema.org", "@type": "WebSite", name: "Inset", url: siteOrigin, inLanguage: ["en-US", "ja-JP"] },
+    { "@context": "https://schema.org", "@type": "Person", name: appFacts.developer, url: appFacts.developerUrl, email: supportEmail },
+    {
+      "@context": "https://schema.org",
+      "@type": "MobileApplication",
+      name: "Inset",
+      applicationCategory: "MultimediaApplication",
+      operatingSystem: `${appFacts.minimumOs} or later`,
+      softwareVersion: appFacts.publicVersion,
+      downloadUrl: appStoreUrls[locale],
+      installUrl: appStoreUrls[locale],
+      isAccessibleForFree: true,
+      offers: { "@type": "Offer", price: 0, url: appStoreUrls[locale] },
+      author: { "@type": "Person", name: appFacts.developer, url: appFacts.developerUrl }
+    }
+  );
+}
+
+if (faqItems.length > 0) {
+  schemas.push({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqItems.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: { "@type": "Answer", text: item.answer }
+    }))
+  });
+}
+---
+
+<!doctype html>
+<html lang={locale}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#FBFAF6" />
+    <meta name="apple-itunes-app" content={`app-id=${appStoreId}`} />
+    <meta name="robots" content={isPreview || noindex ? "noindex, follow" : "index, follow, max-image-preview:large"} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang={locale === "ja" ? "en" : "ja"} href={counterpart} />
+    <link rel="alternate" hreflang={locale} href={canonical} />
+    <link rel="alternate" hreflang="x-default" href={locale === "en" ? canonical : counterpart} />
+    <link rel="icon" type="image/png" sizes="32x32" href={assetPath("/favicon-32.png")} />
+    <link rel="apple-touch-icon" sizes="180x180" href={assetPath("/apple-touch-icon.png")} />
+    <meta property="og:type" content={article ? "article" : "website"} />
+    <meta property="og:site_name" content="Inset" />
+    <meta property="og:locale" content={locale === "ja" ? "ja_JP" : "en_US"} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={new URL(imagePath, siteOrigin).href} />
+    <meta property="og:image:alt" content={locale === "ja" ? "Insetで仕上げた写真" : "A photograph finished with Inset"} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL(imagePath, siteOrigin).href} />
+    {schemas.map((schema) => <script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />)}
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">{locale === "ja" ? "本文へ移動" : "Skip to content"}</a>
+    <SiteHeader locale={locale} counterpartPath={counterpartPath} />
+    <main id="main-content"><slot /></main>
+    <SiteFooter locale={locale} />
+  </body>
+</html>

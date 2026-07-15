@@ -1,0 +1,23 @@
+---
+import { appStoreUrls, storeCopy, type Locale } from "@/data/site";
+import Icon from "@/components/Icon.astro";
+
+interface Props {
+  locale: Locale;
+  compact?: boolean;
+}
+
+const { locale, compact = false } = Astro.props;
+const copy = storeCopy[locale];
+---
+
+<div class:list={["store-buttons", { "store-buttons--compact": compact }]}>
+  <a class="store-button store-button--active" href={appStoreUrls[locale]} rel="external" aria-label={copy.available}>
+    <Icon name="apple" />
+    <span>{copy.appStore}</span>
+  </a>
+  <button class="store-button store-button--disabled" type="button" aria-label={`${copy.googlePlay}, ${copy.comingSoon}`} disabled>
+    <Icon name="google-play" />
+    <span class="store-button__stack"><span>{copy.googlePlay}</span><small>{copy.comingSoon}</small></span>
+  </button>
+</div>
