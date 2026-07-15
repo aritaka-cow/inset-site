@@ -1,0 +1,11 @@
+node_modules/
+dist/
+dist-github/
+.astro/
+.wrangler/
+playwright-report/
+test-results/
+.DS_Store
+*.log
+public/releases/img/
+design/workflow/.workflow.lock

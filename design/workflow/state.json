@@ -1,0 +1,222 @@
+{
+  "active_initiative": "inset-web",
+  "active_skills": [
+    "orchestrate-product-design",
+    "define-product",
+    "design-taste-frontend",
+    "ui-ux-pro-max",
+    "inset-design-system",
+    "deliver-pencil-design",
+    "design-system-auditor",
+    "frontend-app-builder",
+    "workers-best-practices",
+    "wrangler",
+    "frontend-testing-debugging"
+  ],
+  "approved_revisions": {
+    "experience_spec": "EX-0004",
+    "product_definition": "PD-0001",
+    "visual_direction": "VD-0004"
+  },
+  "artifacts": [
+    {
+      "path": "design/workflow/state.json",
+      "revision": "1",
+      "role": "workflow-state",
+      "status": "active"
+    },
+    {
+      "path": "design/workflow/events.jsonl",
+      "revision": "1",
+      "role": "workflow-events",
+      "status": "active"
+    },
+    {
+      "path": "design/decisions.jsonl",
+      "revision": "1",
+      "role": "decision-log",
+      "status": "active"
+    },
+    {
+      "path": "design/product-definition.md",
+      "revision": "PD-0001",
+      "role": "product-definition",
+      "status": "approved"
+    },
+    {
+      "path": "design/initiatives/inset-web/brief.md",
+      "revision": "4",
+      "role": "initiative-brief",
+      "status": "active"
+    },
+    {
+      "path": "design/initiatives/inset-web/experience-spec.md",
+      "revision": "EX-0004",
+      "role": "experience-spec",
+      "status": "approved"
+    },
+    {
+      "path": "design/inset-web.pen",
+      "revision": "VD-0004",
+      "role": "visual-source",
+      "status": "approved"
+    },
+    {
+      "path": "design/assets/inset-iphone17-stack-composite.png",
+      "revision": "1",
+      "role": "visual-asset",
+      "status": "superseded"
+    },
+    {
+      "path": "design/assets/inset-web-vd0004-device-composite.png",
+      "revision": "1",
+      "role": "visual-asset",
+      "status": "approved"
+    },
+    {
+      "path": "design/assets/inset-web-vd0004-water-glass-raw.png",
+      "revision": "1",
+      "role": "visual-asset",
+      "status": "approved"
+    },
+    {
+      "path": "design/assets/creative-frame-35mm-black-2x3.png",
+      "revision": "1",
+      "role": "visual-asset",
+      "status": "approved"
+    },
+    {
+      "path": "design/assets/creative-frame-polaroid-white-3x2.png",
+      "revision": "1",
+      "role": "visual-asset",
+      "status": "approved"
+    },
+    {
+      "path": "design/assets/creative-frame-film-white-9x16.png",
+      "revision": "1",
+      "role": "visual-asset",
+      "status": "approved"
+    },
+    {
+      "path": "design/assets/creative-frame-film-black-1x1.png",
+      "revision": "1",
+      "role": "visual-asset",
+      "status": "approved"
+    },
+    {
+      "path": "design/initiatives/inset-web/handoff.md",
+      "revision": "HD-0004",
+      "role": "handoff",
+      "status": "implemented"
+    },
+    {
+      "path": "docs/cloudflare-tooling.md",
+      "revision": "1",
+      "role": "implementation-tooling-guide",
+      "status": "verified"
+    },
+    {
+      "path": "wrangler.jsonc",
+      "revision": "1",
+      "role": "cloudflare-static-assets-config",
+      "status": "verified"
+    },
+    {
+      "path": "design/initiatives/inset-web/concepts/quiet-gallery-desktop.png",
+      "revision": "VD-0001-A-desktop",
+      "role": "visual-direction-preview",
+      "status": "superseded"
+    },
+    {
+      "path": "design/initiatives/inset-web/concepts/quiet-gallery-mobile.png",
+      "revision": "VD-0001-A-mobile",
+      "role": "visual-direction-preview",
+      "status": "superseded"
+    },
+    {
+      "path": "design/initiatives/inset-web/concepts/precision-studio-desktop.png",
+      "revision": "VD-0001-B-desktop",
+      "role": "visual-direction-preview",
+      "status": "candidate"
+    },
+    {
+      "path": "design/initiatives/inset-web/concepts/precision-studio-mobile.png",
+      "revision": "VD-0001-B-mobile",
+      "role": "visual-direction-preview",
+      "status": "candidate"
+    },
+    {
+      "path": "design/initiatives/inset-web/concepts/framed-exhibition-desktop-v2.png",
+      "revision": "VD-0001-C-desktop",
+      "role": "visual-direction-preview",
+      "status": "candidate"
+    },
+    {
+      "path": "design/initiatives/inset-web/concepts/framed-exhibition-mobile-v2.png",
+      "revision": "VD-0001-C-mobile",
+      "role": "visual-direction-preview",
+      "status": "candidate"
+    }
+  ],
+  "blockers": [],
+  "last_completed_checkpoint": "implementation-verified",
+  "last_event_id": "EVT-000017",
+  "mode": "redesign",
+  "next_action": "Reconcile the existing dirty and behind Git state, then connect inset.app and complete the live Cloudflare launch checklist when explicitly authorized.",
+  "pencil": {
+    "file_path": "/Users/aritakakanazawa/projects/App/Inset/inset-site/design/inset-web.pen",
+    "frame_ids": [
+      "bi8Au",
+      "LJAxf",
+      "H8dOs",
+      "xZe86",
+      "X5AYf",
+      "ASoFO",
+      "L6sy4u",
+      "zyzpR"
+    ],
+    "in_scope": true,
+    "last_save_confirmed": true,
+    "last_save_confirmed_at": "2026-07-15T11:19:13+00:00",
+    "screen_ids": [
+      "SCR-001"
+    ]
+  },
+  "pending_user_decisions": [],
+  "phase": "implementation",
+  "product": "Inset Web",
+  "project_root": "/Users/aritakakanazawa/projects/App/Inset/inset-site",
+  "schema_version": 1,
+  "skill_dependencies": {
+    "design-system-auditor": {
+      "checked_at": "2026-07-15T09:05:36+00:00",
+      "local_hash": "sha256:c2e440bdaa1cb1c4ed8732f6a5466fe0c3f06fc68a306f53ace1b31bc8a9193f",
+      "remote_commit": "0872b4a7763145fc0e5847d8357fb446a857c683",
+      "remote_hash": "sha256:c2e440bdaa1cb1c4ed8732f6a5466fe0c3f06fc68a306f53ace1b31bc8a9193f",
+      "source": "Community-Access/accessibility-agents:codex-skills/design-system-auditor@main",
+      "status": "current"
+    },
+    "design-taste-frontend": {
+      "checked_at": "2026-07-15T09:21:00+00:00",
+      "local_hash": "sha256:e728e06baa9dd75586a1b3f0e2bf337f081aea4c977ae3aa717e3ce201144b01",
+      "remote_commit": "b17742737e796305d829b3ad39eda3add0d79060",
+      "remote_hash": "sha256:e728e06baa9dd75586a1b3f0e2bf337f081aea4c977ae3aa717e3ce201144b01",
+      "source": "Leonxlnx/taste-skill:skills/taste-skill@main",
+      "status": "current"
+    },
+    "ui-ux-pro-max": {
+      "checked_at": "2026-07-15T00:01:33+00:00",
+      "local_hash": "sha256:d9326322f613e2156cf30ec3b24a726416e671178d52c9a3d6eb376625740cdc",
+      "remote_commit": "0468898265b1552e19f96e9da448e971b6d325fd",
+      "remote_hash": "sha256:d9326322f613e2156cf30ec3b24a726416e671178d52c9a3d6eb376625740cdc",
+      "source": "nextlevelbuilder/ui-ux-pro-max-skill:.claude/skills/ui-ux-pro-max@main",
+      "status": "current"
+    }
+  },
+  "status": "completed",
+  "step": "implementation-verified",
+  "surfaces": [
+    "website/LP"
+  ],
+  "updated_at": "2026-07-15T12:45:39+00:00"
+}

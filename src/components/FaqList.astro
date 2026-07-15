@@ -1,0 +1,22 @@
+---
+import type { Faq } from "@/data/site";
+import Icon from "@/components/Icon.astro";
+
+interface Props {
+  items: Faq[];
+  openFirst?: boolean;
+}
+const { items, openFirst = false } = Astro.props;
+---
+
+<div class="faq-list">
+  {items.map((item, index) => (
+    <details class="faq-item" open={openFirst && index === 0}>
+      <summary>
+        <span>{item.question}</span>
+        <Icon name="caret-down" />
+      </summary>
+      <p>{item.answer}</p>
+    </details>
+  ))}
+</div>

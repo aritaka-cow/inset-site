@@ -1,0 +1,210 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import StoreButtons from "@/components/StoreButtons.astro";
+import FaqList from "@/components/FaqList.astro";
+import { faqs, homeCopy, pathFor, type Faq, type Locale } from "@/data/site";
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const copy = homeCopy[locale];
+const base = import.meta.env.BASE_URL;
+const assetPath = (path: string) => `${base}${path.replace(/^\//, "")}`;
+const homeFaqs: Faq[] = [
+  faqs[locale][0],
+  locale === "ja"
+    ? { question: "Inset Labとは何ですか？", answer: "クリエイティブフレーム、お気に入り、複数写真への一括処理を追加する有料機能です。" }
+    : { question: "What is Inset Lab?", answer: "Inset Lab is the paid upgrade for Creative Frames, favorites, and batch processing of multiple photographs." },
+  faqs[locale][2],
+  faqs[locale][3],
+  faqs[locale][8]
+];
+---
+
+<BaseLayout
+  locale={locale}
+  title={copy.title}
+  description={copy.description}
+  currentPath={pathFor("home", locale)}
+  counterpartPath={pathFor("home", locale === "ja" ? "en" : "ja")}
+  includeAppSchema
+  faqItems={homeFaqs}
+>
+  <section class="home-hero">
+    <div class="home-hero__copy">
+      <h1 class="display-heading">{copy.heading}</h1>
+      <p class="home-hero__lead">{copy.lead}</p>
+      <StoreButtons locale={locale} />
+    </div>
+    <div class="home-hero__stage" aria-hidden="true">
+      <div class="home-hero__mat">
+        <img src={assetPath("/images/hero-finished.webp")} width="1138" height="1420" alt="" fetchpriority="high" decoding="async" />
+      </div>
+    </div>
+    <p class="visually-hidden">{copy.imageAlt.hero}</p>
+  </section>
+
+  <section class="feature-layers" aria-labelledby="layers-heading">
+    <img class="device-proof" src={assetPath("/images/device-composite.webp")} width="900" height="1840" alt={copy.imageAlt.device} loading="lazy" decoding="async" />
+    <div class="feature-layers__copy">
+      <h2 id="layers-heading" class="display-heading">{copy.layersHeading}</h2>
+      <p>{copy.layersBody}</p>
+      <figure class="water-result">
+        <div class="water-result__inner">
+          <img src={assetPath("/images/water-glass.webp")} width="1100" height="733" alt={copy.imageAlt.water} loading="lazy" decoding="async" />
+        </div>
+      </figure>
+    </div>
+  </section>
+
+  <section class="feature-repeat" aria-labelledby="repeat-heading">
+    <h2 id="repeat-heading" class="display-heading">{copy.repeatHeading}</h2>
+    <p>{copy.repeatBody}</p>
+    <div class="batch-gallery">
+      {[
+        ["batch-branch.webp", copy.imageAlt.batch[0], "batch-frame--small"],
+        ["batch-lamp.webp", copy.imageAlt.batch[1], "batch-frame--large"],
+        ["batch-chair.webp", copy.imageAlt.batch[2], "batch-frame--small"]
+      ].map(([src, alt, className]) => (
+        <figure class:list={["batch-frame", className]}>
+          <img src={assetPath(`/images/${src}`)} width="900" height="1200" alt={alt} loading="lazy" decoding="async" />
+        </figure>
+      ))}
+    </div>
+  </section>
+
+  <section class="feature-creative" aria-labelledby="frames-heading">
+    <div class="feature-creative__copy">
+      <p class="eyebrow">{copy.framesEyebrow}</p>
+      <h2 id="frames-heading" class="display-heading">{copy.framesHeading}</h2>
+      <p>{copy.framesBody}</p>
+    </div>
+    <div class="creative-gallery" role="group" aria-label={locale === "ja" ? "4種類のクリエイティブフレーム" : "Four Creative Frame examples"}>
+      {[
+        { src: "frame-35mm-black.webp", alt: copy.imageAlt.frames[0], className: "creative-frame--one", width: 1200, height: 1191 },
+        { src: "frame-polaroid-black.webp", alt: copy.imageAlt.frames[1], className: "creative-frame--two", width: 1200, height: 772 },
+        { src: "frame-polaroid-white.webp", alt: copy.imageAlt.frames[2], className: "creative-frame--three", width: 948, height: 1200 },
+        { src: "frame-film-white.webp", alt: copy.imageAlt.frames[3], className: "creative-frame--four", width: 827, height: 1200 }
+      ].map(({ src, alt, className, width, height }) => (
+        <img class:list={["creative-frame", className]} src={assetPath(`/images/${src}`)} width={width} height={height} alt={alt} loading="lazy" decoding="async" />
+      ))}
+    </div>
+  </section>
+
+  <section class="home-faq" aria-labelledby="faq-heading">
+    <h2 id="faq-heading">FAQ</h2>
+    <FaqList items={homeFaqs} openFirst />
+  </section>
+
+  <section class="closing-actions" aria-label={locale === "ja" ? "Insetを入手" : "Get Inset"}>
+    <img src={assetPath("/images/app-icon.png")} width="64" height="64" alt="Inset" loading="lazy" decoding="async" />
+    <StoreButtons locale={locale} />
+  </section>
+</BaseLayout>
+
+<style>
+  .home-hero {
+    display: grid;
+    grid-template-columns: minmax(0, 514px) minmax(0, 626px);
+    align-items: center;
+    justify-content: center;
+    gap: 68px;
+    min-height: 760px;
+    padding: 54px 84px 66px 104px;
+    background: var(--paper);
+  }
+  .home-hero__copy { display: grid; gap: 28px; }
+  .home-hero h1 { font-size: clamp(60px, 4.86vw, 70px); }
+  .home-hero__lead { margin: 0; color: var(--muted); font-size: 18px; line-height: 1.8; white-space: pre-line; }
+  .home-hero__stage { display: grid; place-items: center; min-height: 624px; padding: 42px; border: 1px solid var(--ink); }
+  .home-hero__mat { display: grid; place-items: center; width: min(100%, 534px); aspect-ratio: 534 / 540; padding: 30px; background: var(--paper-raised); border: 1px solid var(--ink); }
+  .home-hero__mat img { width: 100%; height: 100%; object-fit: cover; }
+
+  .feature-layers {
+    display: grid;
+    grid-template-columns: minmax(300px, 430px) minmax(440px, 570px);
+    align-items: center;
+    justify-content: center;
+    gap: 112px;
+    min-height: 1080px;
+    padding: 90px 104px;
+  }
+  .device-proof { width: 100%; max-width: 430px; margin-inline: auto; }
+  .feature-layers__copy { display: grid; gap: 28px; }
+  .feature-layers h2 { font-size: clamp(48px, 4vw, 54px); }
+  .feature-layers__copy > p, .feature-creative__copy > p:last-child { margin: 0; color: var(--muted); font-size: 18px; line-height: 1.8; }
+  .water-result { display: grid; place-items: center; width: 100%; min-height: 364px; margin: 0; padding: 13px 30px; background: var(--dark-mat); }
+  .water-result__inner { display: grid; place-items: center; width: 100%; padding: 17px 27px; background: #fff; }
+  .water-result img { width: 100%; aspect-ratio: 3 / 2; object-fit: contain; }
+
+  .feature-repeat { display: grid; justify-items: center; gap: 20px; min-height: 720px; padding: 74px 84px 72px; }
+  .feature-repeat h2 { font-size: 49px; text-align: center; }
+  .feature-repeat > p { max-width: 720px; margin: 0; color: var(--muted); font-size: 17px; line-height: 1.7; text-align: center; }
+  .batch-gallery { display: flex; align-items: center; justify-content: center; gap: clamp(28px, 4.86vw, 70px); width: 100%; min-height: 410px; }
+  .batch-frame { display: grid; place-items: center; flex: 0 1 auto; margin: 0; padding: 17px; background: var(--paper-raised); border: 1px solid var(--ink); }
+  .batch-frame--small { width: min(24vw, 300px); }
+  .batch-frame--large { width: min(26vw, 330px); }
+  .batch-frame img { width: 100%; aspect-ratio: 1; object-fit: cover; }
+
+  .feature-creative { display: grid; grid-template-columns: minmax(300px, 430px) minmax(520px, 690px); align-items: center; justify-content: center; gap: 88px; min-height: 820px; padding: 76px 104px; background: var(--paper-raised); }
+  .feature-creative__copy { display: grid; gap: 28px; }
+  .feature-creative h2 { font-size: clamp(46px, 3.7vw, 52px); }
+  .creative-gallery { position: relative; width: 100%; max-width: 690px; height: 668px; }
+  .creative-frame { position: absolute; object-fit: contain; }
+  .creative-frame--one { left: 6%; top: 6%; width: 26%; transform: rotate(-3deg); }
+  .creative-frame--two { left: 35%; top: 4%; width: 52%; transform: rotate(2deg); }
+  .creative-frame--three { left: 14%; top: 46%; width: 22%; transform: rotate(2deg); }
+  .creative-frame--four { left: 57%; top: 49%; width: 27%; transform: rotate(-2deg); }
+
+  .home-faq { min-height: 520px; padding: 46px max(8vw, 112px) 42px; }
+  .home-faq h2 { margin: 18px 0 16px; font-family: var(--serif); font-size: 28px; font-weight: 500; }
+  .closing-actions { display: flex; align-items: center; justify-content: center; gap: 38px; min-height: 260px; padding: 48px var(--page-gutter); }
+  .closing-actions > img { flex: 0 0 auto; border-radius: 23%; }
+
+  @media (max-width: 1100px) and (min-width: 761px) {
+    .home-hero { grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: 44px; padding-inline: 64px; }
+    .home-hero__stage { min-height: 520px; }
+    .feature-layers { gap: 64px; padding-inline: 72px; }
+    .feature-creative { gap: 54px; padding-inline: 72px; }
+  }
+
+  @media (max-width: 760px) {
+    .home-hero { display: grid; grid-template-columns: 1fr; align-items: start; gap: 22px; min-height: 860px; padding: 42px 20px 44px; }
+    .home-hero__copy { gap: 22px; }
+    .home-hero h1 { font-size: 46px; line-height: 1.3; }
+    .home-hero__lead { font-size: 16px; line-height: 1.75; }
+    .home-hero__stage { min-height: 386px; padding: 24px; }
+    .home-hero__mat { width: min(100%, 310px); padding: 18px; }
+
+    .feature-layers { grid-template-columns: 1fr; gap: 20px; min-height: 1120px; padding: 54px 20px 50px; }
+    .device-proof { grid-row: 3; width: 250px; }
+    .feature-layers__copy { display: contents; }
+    .feature-layers h2 { grid-row: 1; font-size: 43px; line-height: 1.35; }
+    .feature-layers__copy > p { grid-row: 2; margin: 0; font-size: 16px; line-height: 1.75; }
+    .water-result { grid-row: 4; min-height: 220px; padding: 12px 15px; }
+    .water-result__inner { padding: 12px 18px; }
+
+    .feature-repeat { gap: 18px; min-height: 780px; padding: 52px 20px 48px; }
+    .feature-repeat h2 { font-size: 36px; }
+    .feature-repeat > p { font-size: 15px; }
+    .batch-gallery { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px 14px; width: min(100%, 330px); min-height: 356px; }
+    .batch-frame--small, .batch-frame--large { width: 148px; padding: 9px; }
+    .batch-frame:nth-child(1) { grid-column: 1 / -1; justify-self: center; width: 164px; }
+    .batch-frame:nth-child(2) { justify-self: end; }
+    .batch-frame:nth-child(3) { justify-self: start; }
+
+    .feature-creative { grid-template-columns: 1fr; align-content: start; gap: 24px; min-height: 900px; padding: 52px 20px 48px; }
+    .feature-creative__copy { gap: 16px; }
+    .feature-creative h2 { font-size: 42px; line-height: 1.35; }
+    .feature-creative__copy > p:last-child { font-size: 16px; line-height: 1.75; }
+    .creative-gallery { height: 506px; }
+    .creative-frame--one { left: 2%; top: 5%; width: 36%; }
+    .creative-frame--two { left: 38%; top: 2%; width: 60%; }
+    .creative-frame--three { left: 8%; top: 48%; width: 30%; }
+    .creative-frame--four { left: 58%; top: 49%; width: 32%; }
+
+    .home-faq { min-height: 640px; padding: 40px 20px; }
+    .home-faq h2 { font-size: 27px; }
+    .closing-actions { flex-direction: column; gap: 30px; min-height: 300px; padding: 50px 20px; }
+    .closing-actions > img { width: 58px; height: 58px; }
+  }
+</style>

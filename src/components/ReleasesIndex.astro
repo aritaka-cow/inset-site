@@ -1,0 +1,38 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { releases } from "@/data/releases";
+import { pathFor, releasePath, type Locale } from "@/data/site";
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const base = import.meta.env.BASE_URL;
+const localPath = (path: string) => `${base}${path.replace(/^\//, "")}`;
+const title = locale === "ja" ? "Inset 更新情報" : "Inset Release Notes";
+const description = locale === "ja" ? "公開済みInsetの更新内容と機能追加を確認できます。" : "Read verified release notes for public versions of Inset.";
+const displayDate = (release: (typeof releases)[number]) => {
+  const value = release.storePublishedAt ?? `${release.announcementDate}T00:00:00Z`;
+  return new Intl.DateTimeFormat(locale === "ja" ? "ja-JP" : "en-US", { dateStyle: "long", timeZone: locale === "ja" ? "Asia/Tokyo" : "UTC" }).format(new Date(value));
+};
+---
+
+<BaseLayout locale={locale} title={title} description={description} currentPath={pathFor("releases", locale)} counterpartPath={pathFor("releases", locale === "ja" ? "en" : "ja")}>
+  <header class="editorial-hero">
+    <div class="editorial-hero__inner">
+      <p class="eyebrow">RELEASES</p>
+      <h1>{locale === "ja" ? "Insetの更新情報。" : "What changed in Inset."}</h1>
+      <p class="lede">{description}</p>
+    </div>
+  </header>
+  <div class="editorial-body release-list">
+    {releases.map((release) => (
+      <article>
+        <span class="release-version">v{release.version}</span>
+        <div>
+          <h2><a href={localPath(releasePath(release.version, locale))}>Inset {release.version}</a></h2>
+          <p>{release.summary[locale]}</p>
+        </div>
+        <time datetime={release.storePublishedAt ?? release.announcementDate}>{displayDate(release)}</time>
+      </article>
+    ))}
+  </div>
+</BaseLayout>

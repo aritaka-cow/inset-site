@@ -1,0 +1,44 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { type ReleaseEntry } from "@/data/releases";
+import { pathFor, releasePath, type Locale } from "@/data/site";
+
+interface Props { locale: Locale; release: ReleaseEntry }
+const { locale, release } = Astro.props;
+const base = import.meta.env.BASE_URL;
+const assetPath = (path: string) => `${base}${path.replace(/^\//, "")}`;
+const title = locale === "ja" ? `Inset ${release.version} 更新情報` : `Inset ${release.version} Release Notes`;
+const description = release.summary[locale];
+const mediaBase = `/releases/img/${release.version}/`;
+const dateValue = release.storePublishedAt ?? `${release.announcementDate}T00:00:00Z`;
+const dateLabel = new Intl.DateTimeFormat(locale === "ja" ? "ja-JP" : "en-US", { dateStyle: "long", timeZone: locale === "ja" ? "Asia/Tokyo" : "UTC" }).format(new Date(dateValue));
+const mediaSize = release.version === "1.2.1"
+  ? { width: 1536, height: 1024 }
+  : release.version === "1.1.0"
+    ? { width: 1080, height: 1350 }
+    : { width: 331, height: 720 };
+---
+
+<BaseLayout locale={locale} title={title} description={description} currentPath={releasePath(release.version, locale)} counterpartPath={releasePath(release.version, locale === "ja" ? "en" : "ja")} article>
+  <article class="release-detail">
+    <header>
+      <p class="eyebrow">RELEASE</p>
+      <h1>{release.version}</h1>
+      <time class="legal-updated" datetime={release.storePublishedAt ?? release.announcementDate}>{dateLabel}</time>
+      <p class="release-summary">{description}</p>
+    </header>
+    <section class="release-highlights">
+      <h2>{locale === "ja" ? "このバージョンの変更" : "What changed"}</h2>
+      <ul>{release.highlights[locale].map((item) => <li>{item}</li>)}</ul>
+    </section>
+    {release.media[locale].length > 0 && (
+      <section class="release-highlights">
+        <h2>{locale === "ja" ? "画像" : "Images"}</h2>
+        <div class="release-media">
+          {release.media[locale].map((filename, index) => <img src={assetPath(`${mediaBase}${filename}`)} width={mediaSize.width} height={mediaSize.height} alt={`Inset ${release.version} ${index + 1}`} loading="lazy" decoding="async" />)}
+        </div>
+      </section>
+    )}
+    <a class="text-link" href={assetPath(pathFor("releases", locale))}>{locale === "ja" ? "すべての更新情報へ" : "All release notes"}</a>
+  </article>
+</BaseLayout>

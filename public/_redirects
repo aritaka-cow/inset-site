@@ -1,0 +1,9 @@
+# Keep the published app and old GitHub Pages links working without changing
+# the requested URL. These 200 proxy rules run before HTML canonicalization.
+/privacy.html /privacy 200
+/terms.html /terms 200
+/roadmap.html /roadmap 200
+/releases/1.0.0.html /releases/1.0.0 200
+/releases/1.1.0.html /releases/1.1.0 200
+/releases/1.2.0.html /releases/1.2.0 200
+/releases/1.2.1.html /releases/1.2.1 200

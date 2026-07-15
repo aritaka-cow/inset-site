@@ -1,0 +1,26 @@
+---
+import { pathFor, type Locale } from "@/data/site";
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const base = import.meta.env.BASE_URL;
+const localPath = (path: string) => `${base}${path.replace(/^\//, "")}`;
+const links = [
+  ["support", locale === "ja" ? "サポート" : "Support"],
+  ["privacy", locale === "ja" ? "プライバシー" : "Privacy"],
+  ["terms", locale === "ja" ? "利用規約" : "Terms"],
+  ["releases", locale === "ja" ? "更新情報" : "Releases"]
+] as const;
+---
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <a class="footer-brand" href={localPath(pathFor("home", locale))}>
+      <img src={localPath("/images/app-icon.png")} width="30" height="30" alt="" />
+      <span>Inset</span>
+    </a>
+    <nav aria-label={locale === "ja" ? "フッターナビゲーション" : "Footer navigation"}>
+      {links.map(([key, label]) => <a href={localPath(pathFor(key, locale))}>{label}</a>)}
+    </nav>
+  </div>
+</footer>

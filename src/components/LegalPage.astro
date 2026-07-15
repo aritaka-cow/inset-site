@@ -1,0 +1,34 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { getLegalDocument } from "@/data/legal";
+import { pathFor, type Locale } from "@/data/site";
+
+interface Props { locale: Locale; kind: "privacy" | "terms" }
+const { locale, kind } = Astro.props;
+const document = getLegalDocument(kind, locale);
+---
+
+<BaseLayout
+  locale={locale}
+  title={document.title}
+  description={document.description}
+  currentPath={pathFor(kind, locale)}
+  counterpartPath={pathFor(kind, locale === "ja" ? "en" : "ja")}
+  article
+>
+  <article class="legal-page">
+    <header>
+      <p class="eyebrow">INSET</p>
+      <h1>{document.heading}</h1>
+      <time class="legal-updated" datetime={document.updated}>{locale === "ja" ? `最終更新 ${document.updated}` : `Last updated ${document.updated}`}</time>
+    </header>
+    <p class="legal-intro" set:html={document.intro} />
+    {document.sections.map((section) => (
+      <section class="legal-section">
+        <h2>{section.heading}</h2>
+        {section.paragraphs?.map((paragraph) => <p set:html={paragraph} />)}
+        {section.bullets && <ul>{section.bullets.map((item) => <li set:html={item} />)}</ul>}
+      </section>
+    ))}
+  </article>
+</BaseLayout>
