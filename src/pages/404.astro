@@ -1,7 +1,9 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import { pathFor } from "@/data/site";
+const base = import.meta.env.BASE_URL.endsWith("/") ? import.meta.env.BASE_URL : `${import.meta.env.BASE_URL}/`;
+const homePath = `${base}${pathFor("home", "en").replace(/^\//, "")}`;
 ---
 <BaseLayout locale="en" title="Page not found — Inset" description="The requested Inset page could not be found." currentPath="/404.html" counterpartPath="/ja/404/" noindex>
-  <section class="not-found"><div><h1>404</h1><p>The page could not be found. Return to Inset or read the release notes.</p><a class="text-link" href={pathFor("home", "en")}>Return home</a></div></section>
+  <section class="not-found"><div><h1>404</h1><p>The page could not be found. Return to Inset or read the release notes.</p><a class="text-link" href={homePath}>Return home</a></div></section>
 </BaseLayout>
