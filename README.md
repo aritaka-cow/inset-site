@@ -1,6 +1,6 @@
 # inset-site
 
-[Inset](https://inset.app/) の日英公式サイトです。Astroで静的HTMLを生成し、Cloudflare Workers Static Assetsから配信します。旧GitHub Pages URLと公開済みアプリの取得先は、同じビルド成果物で互換配信します。
+[Inset](https://inset.page/) の日英公式サイトです。Astroで静的HTMLを生成し、Cloudflare Workers Static Assetsから配信します。旧GitHub Pages URLと公開済みアプリの取得先は、同じビルド成果物で互換配信します。
 
 ## ローカル開発
 
@@ -26,12 +26,19 @@ npm run build
 
 Cloudflareのツール選定とWorkers Builds設定は [`docs/cloudflare-tooling.md`](docs/cloudflare-tooling.md) を参照してください。
 
+本番反映前のdry-runと、apexサイト＋`www`リダイレクトの本番反映:
+
+```sh
+npm run deploy:dry-run
+npm run deploy
+```
+
 ## 公開URL
 
 - English: `/`
 - 日本語: `/ja/`
 - Features, How it works, Frames, Pricing, FAQ, Support, Privacy, Terms, Releasesを両言語で生成
-- `inset.app` をcanonical、英語ルートを `x-default` とする
+- `inset.page` をcanonical、英語ルートを `x-default` とし、`www.inset.page` は同じパスとクエリを保って301する
 
 ## 既存の公開契約
 

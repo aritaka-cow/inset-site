@@ -4,7 +4,7 @@ export type PageKey = "home" | "features" | "how-it-works" | "frames" | "pricing
 export type ContentSection = { title: string; body: string; bullets?: string[] };
 export type PageContent = { title: string; description: string; eyebrow?: string; heading: string; intro: string; sections: ContentSection[] };
 
-export const siteOrigin = "https://inset.app";
+export const siteOrigin = "https://inset.page";
 export const supportEmail = "inset.support@gmail.com";
 export const appStoreId = "6776488290";
 export const appStoreUrls: Localized<string> = {

@@ -6,6 +6,7 @@ import { HtmlValidate } from "html-validate";
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const output = resolve(root, process.env.OUT_DIR || "dist");
 const base = (process.env.SITE_BASE || "/").replace(/\/$/, "");
+const siteOrigin = "https://inset.page";
 const errors = [];
 const pageKeys = ["features", "how-it-works", "frames", "pricing", "faq", "support", "privacy", "terms", "releases"];
 const versions = ["1.0.0", "1.1.0", "1.2.0", "1.2.1"];
@@ -52,11 +53,28 @@ for (const route of canonicalRoutes) {
   if (!/<title>[^<]+<\/title>/.test(html)) errors.push(`title missing: ${route}`);
   if (!/<meta name="description" content="[^"]+"/.test(html)) errors.push(`description missing: ${route}`);
   if (!/<h1[\s>]/.test(html)) errors.push(`H1 missing: ${route}`);
-  const canonical = `https://inset.app${route}`;
+  const canonical = `${siteOrigin}${route}`;
+  const englishRoute = route.startsWith("/ja/") ? route.replace(/^\/ja/, "") : route;
+  const japaneseRoute = route.startsWith("/ja/") ? route : route === "/" ? "/ja/" : `/ja${route}`;
+  const englishUrl = `${siteOrigin}${englishRoute}`;
+  const japaneseUrl = `${siteOrigin}${japaneseRoute}`;
   if (!html.includes(`rel="canonical" href="${canonical}"`)) errors.push(`canonical mismatch: ${route}`);
-  if (!html.includes('hreflang="x-default"')) errors.push(`x-default missing: ${route}`);
+  if (!html.includes(`hreflang="en" href="${englishUrl}"`)) errors.push(`English hreflang mismatch: ${route}`);
+  if (!html.includes(`hreflang="ja" href="${japaneseUrl}"`)) errors.push(`Japanese hreflang mismatch: ${route}`);
+  if (!html.includes(`hreflang="x-default" href="${englishUrl}"`)) errors.push(`x-default mismatch: ${route}`);
+  if (!html.includes(`property="og:url" content="${canonical}"`)) errors.push(`Open Graph URL mismatch: ${route}`);
+  if (!html.includes(`property="og:image" content="${siteOrigin}/`)) errors.push(`Open Graph image host mismatch: ${route}`);
+  if (!html.includes(`name="twitter:image" content="${siteOrigin}/`)) errors.push(`X Card image host mismatch: ${route}`);
   if (!html.includes(`lang="${locale}"`)) errors.push(`document language mismatch: ${route}`);
   if (html.includes("1.2.2")) errors.push(`unpublished version appears: ${route}`);
+  if (html.includes("https://inset.app")) errors.push(`old domain remains: ${route}`);
+
+  const schemas = [...html.matchAll(/<script type="application\/ld\+json">([^<]+)<\/script>/g)].map((match) => {
+    try { return JSON.parse(match[1]); } catch { errors.push(`invalid JSON-LD: ${route}`); return null; }
+  }).filter(Boolean);
+  const pageSchema = schemas.find((schema) => schema["@type"] === "WebPage" || schema["@type"] === "Article");
+  if (pageSchema?.url !== canonical) errors.push(`JSON-LD page URL mismatch: ${route}`);
+  if (pageSchema?.isPartOf?.url !== siteOrigin) errors.push(`JSON-LD website URL mismatch: ${route}`);
 }
 
 const announcementsSource = JSON.parse(await readFile(join(root, "announcements.json"), "utf8"));
@@ -67,7 +85,28 @@ const roadmapBuild = JSON.parse(await readFile(join(output, "roadmap.json"), "ut
 if (JSON.stringify(roadmapSource) !== JSON.stringify(roadmapBuild)) errors.push("roadmap.json build output changed wire values");
 
 const sitemap = await readFile(join(output, "sitemap.xml"), "utf8");
-for (const route of canonicalRoutes) if (!sitemap.includes(`https://inset.app${route}`)) errors.push(`sitemap route missing: ${route}`);
+const sitemapUrls = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
+for (const route of canonicalRoutes) if (!sitemapUrls.includes(`${siteOrigin}${route}`)) errors.push(`sitemap route missing: ${route}`);
+if (sitemapUrls.length !== canonicalRoutes.length) errors.push(`sitemap URL count mismatch: expected ${canonicalRoutes.length}, received ${sitemapUrls.length}`);
+if (new Set(sitemapUrls).size !== sitemapUrls.length) errors.push("sitemap contains duplicate URLs");
+if (sitemap.includes("https://inset.app")) errors.push("old domain remains in sitemap");
+
+const robots = await readFile(join(output, "robots.txt"), "utf8");
+if (!robots.includes(`Sitemap: ${siteOrigin}/sitemap.xml`)) errors.push("robots sitemap host mismatch");
+if (robots.includes("https://inset.app")) errors.push("old domain remains in robots.txt");
+
+const legacyCanonicals = new Map([
+  ["privacy.html", `${siteOrigin}/privacy/`],
+  ["terms.html", `${siteOrigin}/terms/`],
+  ["roadmap.html", `${siteOrigin}/releases/`],
+  ...versions.map((version) => [`releases/${version}.html`, `${siteOrigin}/releases/${version}/`])
+]);
+for (const [file, canonical] of legacyCanonicals) {
+  const html = await readFile(join(output, file), "utf8");
+  if (!html.includes('content="noindex, follow"')) errors.push(`legacy page is indexable: ${file}`);
+  if (!html.includes(`rel="canonical" href="${canonical}"`)) errors.push(`legacy canonical mismatch: ${file}`);
+  if (html.includes("https://inset.app")) errors.push(`old domain remains in legacy page: ${file}`);
+}
 
 function localTarget(href) {
   if (!href || /^(?:https?:|mailto:|tel:|#|data:)/.test(href)) return null;

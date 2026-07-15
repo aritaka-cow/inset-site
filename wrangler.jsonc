@@ -6,7 +6,7 @@
   "preview_urls": true,
   "routes": [
     {
-      "pattern": "inset.app",
+      "pattern": "inset.page",
       "custom_domain": true
     }
   ],

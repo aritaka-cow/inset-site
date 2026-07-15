@@ -1,0 +1,14 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "inset-site-www-redirect",
+  "main": "./workers/www-redirect.js",
+  "compatibility_date": "2026-07-15",
+  "workers_dev": false,
+  "preview_urls": false,
+  "routes": [
+    {
+      "pattern": "www.inset.page",
+      "custom_domain": true
+    }
+  ]
+}

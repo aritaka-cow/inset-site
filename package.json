@@ -10,15 +10,17 @@
     "dev": "ASTRO_TELEMETRY_DISABLED=1 astro dev",
     "check": "ASTRO_TELEMETRY_DISABLED=1 astro check && node scripts/validate-content.mjs",
     "prepare:legacy-assets": "node scripts/prepare-legacy-assets.mjs",
-    "build:site": "npm run prepare:legacy-assets && node scripts/validate-content.mjs && ASTRO_TELEMETRY_DISABLED=1 astro check && ASTRO_TELEMETRY_DISABLED=1 astro build && node scripts/validate-build.mjs",
+    "build:site": "npm run prepare:legacy-assets && node scripts/validate-content.mjs && node scripts/validate-www-redirect.mjs && ASTRO_TELEMETRY_DISABLED=1 astro check && ASTRO_TELEMETRY_DISABLED=1 astro build && node scripts/validate-build.mjs",
     "build": "PUBLIC_SITE_ENV=production npm run build:site",
     "build:preview": "PUBLIC_SITE_ENV=preview npm run build:site",
     "build:github": "PUBLIC_SITE_ENV=production SITE_BASE=/inset-site OUT_DIR=dist-github npm run build:site",
     "preview": "npm run build:preview && WRANGLER_SEND_METRICS=false wrangler dev",
-    "deploy": "npm run build && WRANGLER_SEND_METRICS=false wrangler deploy",
+    "deploy": "npm run deploy:site && npm run deploy:www",
+    "deploy:site": "npm run build && WRANGLER_SEND_METRICS=false wrangler deploy",
+    "deploy:www": "WRANGLER_SEND_METRICS=false wrangler deploy --config wrangler.www.jsonc",
     "deploy:preview": "npm run build:preview && WRANGLER_SEND_METRICS=false wrangler versions upload",
-    "deploy:dry-run": "npm run build && WRANGLER_SEND_METRICS=false wrangler deploy --dry-run",
-    "validate": "node scripts/validate-content.mjs && node scripts/validate-build.mjs"
+    "deploy:dry-run": "npm run build && WRANGLER_SEND_METRICS=false wrangler deploy --dry-run && WRANGLER_SEND_METRICS=false wrangler deploy --config wrangler.www.jsonc --dry-run",
+    "validate": "node scripts/validate-content.mjs && node scripts/validate-www-redirect.mjs && node scripts/validate-build.mjs"
   },
   "devDependencies": {
     "@astrojs/check": "0.9.9",
