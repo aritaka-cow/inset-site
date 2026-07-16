@@ -85,7 +85,7 @@ Dimensions:
 - placement: `hero`, `closing`, `pricing`, or `support`
 - App Store Connect campaign: `inset_web_202607`
 
-For a reporting window, query `httpRequestsAdaptiveGroups` for `requestSource: eyeball`, host `inset.page`, request paths beginning `/go/app-store/`, and 302 responses. Group by `clientRequestPath`; `count` is the number of redirect requests. Divide the total by Web Analytics page views or visits only after naming the denominator and time window explicitly.
+For a reporting window, query `httpRequestsAdaptiveGroups` for `requestSource: eyeball`, host `inset.page`, method `GET`, request paths beginning `/go/app-store/`, and response status 302. Group by `clientRequestPath`; `count` is the number of redirect requests. The GET filter excludes deployment QA performed with HEAD requests. Divide the total by Web Analytics page views or visits only after naming the denominator and time window explicitly.
 
 These are click requests, not unique people. Reloads, repeated clicks, privacy tools, and some automated requests can change the total. CTA anchors use `nofollow` and `robots.txt` excludes `/go/` to reduce crawler noise. Preview and GitHub Pages builds keep direct App Store URLs so review traffic does not enter the production click series.
 
