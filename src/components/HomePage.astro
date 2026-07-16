@@ -33,7 +33,7 @@ const homeFaqs: Faq[] = [
     <div class="home-hero__copy">
       <h1 class="display-heading">{copy.heading}</h1>
       <p class="home-hero__lead">{copy.lead}</p>
-      <StoreButtons locale={locale} />
+      <StoreButtons locale={locale} placement="hero" />
     </div>
     <div class="home-hero__stage" aria-hidden="true">
       <div class="home-hero__mat">
@@ -99,7 +99,7 @@ const homeFaqs: Faq[] = [
 
   <section class="closing-actions" aria-label={locale === "ja" ? "Insetを入手" : "Get Inset"}>
     <img src={assetPath("/images/app-icon.png")} width="64" height="64" alt="Inset" loading="lazy" decoding="async" />
-    <StoreButtons locale={locale} />
+    <StoreButtons locale={locale} placement="closing" />
   </section>
 </BaseLayout>
 

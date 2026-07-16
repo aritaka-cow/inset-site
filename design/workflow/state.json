@@ -171,10 +171,10 @@
     }
   ],
   "blockers": [],
-  "last_completed_checkpoint": "store-badges-and-six-frame-gallery-verified",
-  "last_event_id": "EVT-000019",
+  "last_completed_checkpoint": "app-store-click-tracking-verified",
+  "last_event_id": "EVT-000020",
   "mode": "redesign",
-  "next_action": "Enable Web Analytics, align AI Crawl Control with robots.txt, create the Search Console Domain property, and submit the sitemap.",
+  "next_action": "Review the first seven-day Web Analytics and App Store redirect baseline after 2026-07-23, then complete Search Console and AI Crawl Control follow-up.",
   "pencil": {
     "file_path": "/Users/aritakakanazawa/projects/App/Inset/inset-site/design/inset-web.pen",
     "frame_ids": [
@@ -230,5 +230,5 @@
   "surfaces": [
     "website/LP"
   ],
-  "updated_at": "2026-07-15T22:24:17+00:00"
+  "updated_at": "2026-07-16T08:46:00+00:00"
 }

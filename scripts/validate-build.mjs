@@ -7,12 +7,19 @@ const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const output = resolve(root, process.env.OUT_DIR || "dist");
 const base = (process.env.SITE_BASE || "/").replace(/\/$/, "");
 const siteOrigin = "https://inset.page";
+const isPreview = process.env.PUBLIC_SITE_ENV === "preview";
+const tracksAppStoreClicks = !isPreview && base === "";
+const appStoreUrls = {
+  en: "https://apps.apple.com/us/app/inset-photo-frames/id6776488290",
+  ja: "https://apps.apple.com/jp/app/inset/id6776488290"
+};
+const appStoreCampaignUrl = "https://apps.apple.com/app/apple-store/id6776488290?pt=128992117&ct=inset_web_202607&mt=8";
 const errors = [];
 const pageKeys = ["features", "how-it-works", "frames", "pricing", "faq", "support", "privacy", "terms", "releases"];
 const versions = ["1.0.0", "1.1.0", "1.2.0", "1.2.1"];
 const canonicalRoutes = ["/", "/ja/", ...pageKeys.flatMap((page) => [`/${page}/`, `/ja/${page}/`]), ...versions.flatMap((version) => [`/releases/${version}/`, `/ja/releases/${version}/`])];
 const expectedFiles = [
-  "index.html", "ja/index.html", "404.html", "ja/404.html", "ja/404/index.html", "announcements.json", "roadmap.json", "roadmap.html", "privacy.html", "terms.html", "robots.txt", "sitemap.xml",
+  "index.html", "ja/index.html", "404.html", "ja/404.html", "ja/404/index.html", "announcements.json", "roadmap.json", "roadmap.html", "privacy.html", "terms.html", "robots.txt", "sitemap.xml", "_redirects",
   ...pageKeys.flatMap((page) => [`${page}/index.html`, `ja/${page}/index.html`]),
   ...versions.flatMap((version) => [`releases/${version}/index.html`, `ja/releases/${version}/index.html`, `releases/${version}.html`]),
   "images/app-icon.png", "images/hero-finished.webp", "images/device-composite.webp", "images/water-glass.webp",
@@ -47,6 +54,22 @@ function fileForRoute(route) {
   const clean = route.replace(/^\//, "");
   return join(output, clean, "index.html");
 }
+const expectedCtaPlacements = new Map([
+  ["/", ["hero", "closing"]],
+  ["/ja/", ["hero", "closing"]],
+  ["/pricing/", ["pricing"]],
+  ["/ja/pricing/", ["pricing"]],
+  ["/support/", ["support"]],
+  ["/ja/support/", ["support"]]
+]);
+function attribute(markup, name) {
+  return markup.match(new RegExp(`\\b${name}="([^"]*)"`))?.[1] ?? null;
+}
+function appStoreCtas(html) {
+  return [...html.matchAll(/<a\b[^>]*>/g)]
+    .map((match) => match[0])
+    .filter((anchor) => /\bclass="[^"]*\bstore-badge--app-store\b[^"]*"/.test(anchor));
+}
 for (const route of canonicalRoutes) {
   const file = route === "/" ? join(output, "index.html") : fileForRoute(route);
   if (!await exists(file)) { errors.push(`canonical route is missing: ${route}`); continue; }
@@ -71,6 +94,17 @@ for (const route of canonicalRoutes) {
   if (html.includes("1.2.2")) errors.push(`unpublished version appears: ${route}`);
   if (html.includes("https://inset.app")) errors.push(`old domain remains: ${route}`);
 
+  const ctas = appStoreCtas(html);
+  const placements = expectedCtaPlacements.get(route) ?? [];
+  if (ctas.length !== placements.length) errors.push(`App Store CTA count mismatch: ${route}; expected ${placements.length}, received ${ctas.length}`);
+  for (const [index, placement] of placements.entries()) {
+    const cta = ctas[index] ?? "";
+    const expectedHref = tracksAppStoreClicks ? `/go/app-store/${locale}/${placement}` : appStoreUrls[locale];
+    if (attribute(cta, "href") !== expectedHref) errors.push(`App Store CTA href mismatch: ${route} ${placement}`);
+    if (attribute(cta, "data-app-store-placement") !== placement) errors.push(`App Store CTA placement mismatch: ${route} ${placement}`);
+    if (!(attribute(cta, "rel") ?? "").split(/\s+/).includes("nofollow")) errors.push(`App Store CTA must be nofollow: ${route} ${placement}`);
+  }
+
   const schemas = [...html.matchAll(/<script type="application\/ld\+json">([^<]+)<\/script>/g)].map((match) => {
     try { return JSON.parse(match[1]); } catch { errors.push(`invalid JSON-LD: ${route}`); return null; }
   }).filter(Boolean);
@@ -94,8 +128,19 @@ if (new Set(sitemapUrls).size !== sitemapUrls.length) errors.push("sitemap conta
 if (sitemap.includes("https://inset.app")) errors.push("old domain remains in sitemap");
 
 const robots = await readFile(join(output, "robots.txt"), "utf8");
-if (!robots.includes(`Sitemap: ${siteOrigin}/sitemap.xml`)) errors.push("robots sitemap host mismatch");
+if (isPreview) {
+  if (!robots.includes("User-agent: *\nDisallow: /")) errors.push("preview robots must block indexing");
+} else {
+  if (!robots.includes(`Sitemap: ${siteOrigin}/sitemap.xml`)) errors.push("robots sitemap host mismatch");
+  if (!robots.includes("Disallow: /go/")) errors.push("robots must exclude tracking redirects");
+}
 if (robots.includes("https://inset.app")) errors.push("old domain remains in robots.txt");
+
+const redirects = await readFile(join(output, "_redirects"), "utf8");
+const expectedTrackingRedirects = ["en", "ja"].flatMap((locale) => ["hero", "closing", "pricing", "support"].map((placement) => `/go/app-store/${locale}/${placement} ${appStoreCampaignUrl} 302`));
+const trackingRedirects = redirects.split(/\r?\n/).filter((line) => line.startsWith("/go/app-store/"));
+if (trackingRedirects.length !== expectedTrackingRedirects.length) errors.push(`App Store redirect count mismatch: expected ${expectedTrackingRedirects.length}, received ${trackingRedirects.length}`);
+for (const redirect of expectedTrackingRedirects) if (!trackingRedirects.includes(redirect)) errors.push(`App Store redirect missing: ${redirect.split(" ")[0]}`);
 
 const legacyCanonicals = new Map([
   ["privacy.html", `${siteOrigin}/privacy/`],
@@ -116,6 +161,7 @@ function localTarget(href) {
   let normalized = path;
   if (base && normalized.startsWith(`${base}/`)) normalized = normalized.slice(base.length);
   if (!normalized.startsWith("/")) return null;
+  if (normalized.startsWith("/go/app-store/")) return null;
   const rel = normalized.replace(/^\//, "");
   if (!rel) return join(output, "index.html");
   if (rel.endsWith("/")) return join(output, rel, "index.html");
