@@ -13,6 +13,7 @@ Updated: 2026-07-16
 | html-validate | Generated HTML and basic accessibility checks | Installed locally |
 | `cwebp` + ImageMagick | Deterministic product-image compositing, WebP conversion, and visual contact sheets | Already available locally; the frame renderer uses `cwebp` |
 | Cloudflare MCP | Documentation lookup and account-level investigation from Codex | Keep the existing integration; it complements Wrangler |
+| Cloudflare Web Analytics + HTTP Analytics | Visits, page views, Core Web Vitals, and first-party outbound CTA requests | Enabled for `inset.page`; no client analytics SDK is added |
 
 Use the project-local binaries through npm scripts. A global Wrangler install is not required.
 
@@ -32,7 +33,6 @@ npm run deploy:dry-run
 |---|---|---|
 | `cloudflared` | A phone or external reviewer needs temporary access to a local build | Wrangler already covers accurate local runtime testing; a tunnel adds no value to normal development |
 | Cloudflare Observatory | The production hostname is live | Measures Lighthouse and field-oriented performance without adding a package to the repository |
-| Cloudflare Web Analytics | Immediately after the production domain is connected | Gives privacy-oriented traffic and Core Web Vitals measurement; no PostHog web SDK is needed initially |
 | Lighthouse CI | Performance regressions need a hard CI budget | Browser availability and network variation make it better as a second-stage CI gate |
 | `@cloudflare/vitest-pool-workers` | Stateful Worker code, bindings, or APIs are added | The only runtime code is a pure redirect handler covered by a deterministic Node test |
 | `cloudflare:test` / Miniflare APIs | Low-level Worker behavior needs direct runtime tests | Wrangler dry-run plus the redirect contract test is sufficient for the current 0.45 KiB handler |
@@ -60,7 +60,7 @@ Production launch and follow-up:
 2. `inset-site-www-redirect` is deployed from `wrangler.www.jsonc`; `www.inset.page` returns a one-hop 301 to the same path and query on the apex domain.
 3. Keep the ordinary `workers.dev` alias disabled; retain version preview URLs for review.
 4. Configure AI Crawl Control to allow search and user-invoked agents, and block training-only crawlers according to the launch policy.
-5. Enable Web Analytics, then add the domain property and sitemap in Google Search Console.
+5. Web Analytics is enabled. Add the domain property and sitemap in Google Search Console.
 
 ## Compatibility contract
 
@@ -75,6 +75,22 @@ The following must remain regression-tested:
 - `/roadmap.html`
 - `/releases/1.0.0.html` through `/releases/1.2.1.html`
 
+## App Store CTA click tracking
+
+Production App Store badges link to eight exact first-party paths under `/go/app-store/{locale}/{placement}`. Workers Static Assets returns a 302 to Apple's campaign link, so the click is visible in Cloudflare HTTP Analytics before the browser leaves `inset.page`. No JavaScript, cookie, database, KV, or Analytics Engine dataset is involved.
+
+Dimensions:
+
+- locale: `en` or `ja`
+- placement: `hero`, `closing`, `pricing`, or `support`
+- App Store Connect campaign: `inset_web_202607`
+
+For a reporting window, query `httpRequestsAdaptiveGroups` for `requestSource: eyeball`, host `inset.page`, request paths beginning `/go/app-store/`, and 302 responses. Group by `clientRequestPath`; `count` is the number of redirect requests. Divide the total by Web Analytics page views or visits only after naming the denominator and time window explicitly.
+
+These are click requests, not unique people. Reloads, repeated clicks, privacy tools, and some automated requests can change the total. CTA anchors use `nofollow` and `robots.txt` excludes `/go/` to reduce crawler noise. Preview and GitHub Pages builds keep direct App Store URLs so review traffic does not enter the production click series.
+
+The redirect paths are static asset requests and do not invoke a Worker or paid storage product. Cloudflare states that static asset requests are free and unlimited. App Store Connect campaign reporting begins only after Apple's privacy thresholds and processing delay are met.
+
 ## Official references
 
 - [Workers Static Assets best practices](https://developers.cloudflare.com/workers/best-practices/workers-best-practices/)
@@ -85,6 +101,8 @@ The following must remain regression-tested:
 - [Preview URLs](https://developers.cloudflare.com/workers/versions-and-deployments/preview-urls/)
 - [Static HTML handling](https://developers.cloudflare.com/workers/static-assets/routing/advanced/html-handling/)
 - [Static redirects and proxying](https://developers.cloudflare.com/workers/static-assets/redirects/)
+- [HTTP Analytics with GraphQL](https://developers.cloudflare.com/analytics/graphql-api/tutorials/end-customer-analytics/)
+- [Apple App Store campaign links](https://developer.apple.com/help/app-store-connect-analytics/acquisition/campaign-links)
 - [Static response headers](https://developers.cloudflare.com/workers/static-assets/headers/)
 - [AI Crawl Control](https://developers.cloudflare.com/ai-crawl-control/)
 - [Web Analytics](https://developers.cloudflare.com/web-analytics/get-started/)

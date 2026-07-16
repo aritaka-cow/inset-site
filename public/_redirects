@@ -7,3 +7,14 @@
 /releases/1.1.0.html /releases/1.1.0 200
 /releases/1.2.0.html /releases/1.2.0 200
 /releases/1.2.1.html /releases/1.2.1 200
+
+# Count first-party App Store CTA requests by locale and placement in
+# Cloudflare HTTP Analytics, then preserve acquisition attribution in ASC.
+/go/app-store/en/hero https://apps.apple.com/app/apple-store/id6776488290?pt=128992117&ct=inset_web_202607&mt=8 302
+/go/app-store/en/closing https://apps.apple.com/app/apple-store/id6776488290?pt=128992117&ct=inset_web_202607&mt=8 302
+/go/app-store/en/pricing https://apps.apple.com/app/apple-store/id6776488290?pt=128992117&ct=inset_web_202607&mt=8 302
+/go/app-store/en/support https://apps.apple.com/app/apple-store/id6776488290?pt=128992117&ct=inset_web_202607&mt=8 302
+/go/app-store/ja/hero https://apps.apple.com/app/apple-store/id6776488290?pt=128992117&ct=inset_web_202607&mt=8 302
+/go/app-store/ja/closing https://apps.apple.com/app/apple-store/id6776488290?pt=128992117&ct=inset_web_202607&mt=8 302
+/go/app-store/ja/pricing https://apps.apple.com/app/apple-store/id6776488290?pt=128992117&ct=inset_web_202607&mt=8 302
+/go/app-store/ja/support https://apps.apple.com/app/apple-store/id6776488290?pt=128992117&ct=inset_web_202607&mt=8 302

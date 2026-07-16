@@ -3,6 +3,7 @@ export type Localized<T> = Record<Locale, T>;
 export type PageKey = "home" | "features" | "how-it-works" | "frames" | "pricing" | "faq" | "support" | "privacy" | "terms" | "releases";
 export type ContentSection = { title: string; body: string; bullets?: string[] };
 export type PageContent = { title: string; description: string; eyebrow?: string; heading: string; intro: string; sections: ContentSection[] };
+export type AppStorePlacement = "hero" | "closing" | "pricing" | "support";
 
 export const siteOrigin = "https://inset.page";
 export const supportEmail = "inset.support@gmail.com";
@@ -11,6 +12,9 @@ export const appStoreUrls: Localized<string> = {
   en: "https://apps.apple.com/us/app/inset-photo-frames/id6776488290",
   ja: "https://apps.apple.com/jp/app/inset/id6776488290"
 };
+export function appStoreClickPath(locale: Locale, placement: AppStorePlacement): string {
+  return `/go/app-store/${locale}/${placement}`;
+}
 export const appFacts = {
   name: "Inset",
   developer: "Aritaka Kanazawa",

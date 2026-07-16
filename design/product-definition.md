@@ -118,7 +118,7 @@ Insetはこの工程を短く正確にする製品だが、現在のWebサイト
 - REQ-019: モバイルLighthouseでLCP 2.5秒以内、INP 200ms未満、CLS 0.1未満を目標とする。
 - REQ-020: `robots.txt`、XML sitemap、真の404、App Store Smart Banner、faviconを提供する。
 - REQ-021: Search向けとユーザー操作型AI Agentのクローラを許可し、学習用途のクローラを拒否する。Cloudflare設定と`robots.txt`を一致させる。
-- REQ-022: 検索流入、Core Web Vitals、App Store CTAをCloudflare Web Analytics、Search Console、専用App Storeキャンペーンリンクで計測する。
+- REQ-022: 検索流入とCore Web VitalsをCloudflare Web AnalyticsとSearch Consoleで、App Store CTAをCloudflare HTTP Analyticsと専用App Storeキャンペーンリンクで計測する。
 - REQ-023: visible copyではem dashとen dashを使わず、誇張、汎用的なAIコピー、意味のないmicro labelを避ける。
 - REQ-024: アプリの公開バージョン、料金体系、対応OS、利用可能機能を本番公開直前にAppleの公開情報と再照合する。
 
@@ -126,7 +126,7 @@ Insetはこの工程を短く正確にする製品だが、現在のWebサイト
 
 | Signal | Baseline | Desired direction or threshold | Window | Availability |
 | --- | --- | --- | --- | --- |
-| App Store CTA click-through rate | 未計測 | ローンチ後の週次で上昇傾向 | 30日、継続観測 | Cloudflare Web Analytics |
+| App Store CTA click-through rate | 未計測 | ローンチ後の週次で上昇傾向 | 30日、継続観測 | Cloudflare HTTP Analytics (`/go/app-store/...` 302) |
 | 専用キャンペーン経由のApp Store獲得 | 新規リンクのため0 | 8週間で継続的な獲得を確認 | 8週間 | App Store Connect campaign reporting |
 | canonicalページのインデックス | 新サイトは0 | インデックス対象ページの100% | 公開後8週間 | Search Console |
 | 非ブランド検索のimpressions | 未計測 | 写真フレーム、余白、比率、書き出し関連で上昇 | 公開後8週間、探索的 | Search Console |
@@ -171,7 +171,7 @@ Insetはこの工程を短く正確にする製品だが、現在のWebサイト
 - Medium: ライトとダークで同じ写真素材の階調と可読性を維持するため、テーマ別の画像処理ルールが必要。
 - Medium: 料金ページは価格を固定表示せず、価値と購入方式を説明しながらApp Storeへ自然に委ねる必要がある。
 - Medium: Android版の公開時期、Google Play URL、課金と機能の最終状態は未確定。`Coming Soon`表示を一箇所の構造化コンテンツから更新できるようにする必要がある。
-- Open: 専用App Storeキャンペーンリンクの最終URL。
+- Resolved 2026-07-16: App Store CTAは`inset_web_202607`キャンペーンへ帰属させ、サイト内の言語・配置別クリックは`/go/app-store/{locale}/{placement}`で分ける。
 - Open: Android公開時に`Coming Soon`を置き換えるGoogle Play URLと公開確認手順。
 - Resolved 2026-07-16: `www.inset.page`は専用Workerでapexへ一段301し、旧GitHub Pages互換配信とWorkers previewのnoindexを維持する。
 

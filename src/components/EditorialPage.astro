@@ -26,7 +26,11 @@ const counterpartPath = pathFor(pageKey, locale === "ja" ? "en" : "ja");
       {copy.eyebrow && <p class="eyebrow">{copy.eyebrow}</p>}
       <h1>{copy.heading}</h1>
       <p class="lede">{copy.intro}</p>
-      {(pageKey === "pricing" || pageKey === "support") && <div class="editorial-actions"><StoreButtons locale={locale} compact /></div>}
+      {(pageKey === "pricing" || pageKey === "support") && (
+        <div class="editorial-actions">
+          <StoreButtons locale={locale} placement={pageKey === "pricing" ? "pricing" : "support"} compact />
+        </div>
+      )}
     </div>
   </header>
 

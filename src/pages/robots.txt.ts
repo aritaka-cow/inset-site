@@ -7,18 +7,23 @@ export function GET() {
     ? "User-agent: *\nDisallow: /\n"
     : `User-agent: *
 Allow: /
+Disallow: /go/
 
 User-agent: OAI-SearchBot
 Allow: /
+Disallow: /go/
 
 User-agent: ChatGPT-User
 Allow: /
+Disallow: /go/
 
 User-agent: Claude-SearchBot
 Allow: /
+Disallow: /go/
 
 User-agent: Claude-User
 Allow: /
+Disallow: /go/
 
 User-agent: GPTBot
 Disallow: /
