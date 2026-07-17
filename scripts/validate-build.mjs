@@ -33,18 +33,18 @@ const expectedFiles = [
 
 const homeSocialMeta = new Map([
   ["/", {
-    image: `${siteOrigin}/images/og-home-en.png?v=a73844c8`,
+    image: `${siteOrigin}/images/og-home-en.png?v=ea4ec019`,
     alt: "Inset's frame-layer editor shown in an iPhone beside the headline ‘Frames, layered your way.’"
   }],
   ["/ja/", {
-    image: `${siteOrigin}/images/og-home-ja.png?v=983a897f`,
+    image: `${siteOrigin}/images/og-home-ja.png?v=c2b7a494`,
     alt: "iPhoneに表示したInsetの余白レイヤー編集画面と「フレームを、思いのままに。」という見出し"
   }]
 ]);
 
 const approvedSocialAssetHashes = new Map([
-  ["images/og-home-en.png", "a73844c809866229559d60aa9e346c5fc3195a4f4d7b39c8dc9b25a767ad36e5"],
-  ["images/og-home-ja.png", "983a897f0878b2933469d36602a0e22a5c518d8486ea04ae583675823d547491"]
+  ["images/og-home-en.png", "ea4ec019eae46c168435b3d7f88e8305c6be64e7350637dc601fb771936d80a5"],
+  ["images/og-home-ja.png", "c2b7a494b63307fde05149b73ec710f086ef809ebcc7eedfc7e1bbb161aae067"]
 ]);
 
 async function exists(path) { try { await stat(path); return true; } catch { return false; } }
