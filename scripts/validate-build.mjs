@@ -33,11 +33,11 @@ const expectedFiles = [
 
 const homeSocialMeta = new Map([
   ["/", {
-    image: `${siteOrigin}/images/og-home-en.png`,
+    image: `${siteOrigin}/images/og-home-en.png?v=a73844c8`,
     alt: "Inset's frame-layer editor shown in an iPhone beside the headline ‘Frames, layered your way.’"
   }],
   ["/ja/", {
-    image: `${siteOrigin}/images/og-home-ja.png`,
+    image: `${siteOrigin}/images/og-home-ja.png?v=983a897f`,
     alt: "iPhoneに表示したInsetの余白レイヤー編集画面と「フレームを、思いのままに。」という見出し"
   }]
 ]);
