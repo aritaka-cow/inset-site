@@ -25,7 +25,7 @@ npm run preview
 npm run deploy:dry-run
 ```
 
-`npm run preview` builds a noindex preview and serves the same Workers Static Assets configuration used in production. `npm run deploy` deploys both the static site and the small `www` redirect Worker, changes Cloudflare state, and should be run only for an intentional release.
+`npm run preview` builds a noindex preview and serves the same Workers Static Assets configuration used in production. `npm run deploy` deploys both the static site and the small `www` redirect Worker, changes Cloudflare state, and should be run only for an intentional release. The production script fetches `origin/main` and refuses to run unless the checkout is a clean `main` whose HEAD exactly matches `origin/main`.
 
 ## Useful later, but not needed for the initial static site
 
@@ -46,13 +46,15 @@ Create or connect a Worker named `inset-site`; its name must match `wrangler.jso
 - Production branch: `main`
 - Root directory: repository root
 - Build command: `npm run build`
-- Production deploy command: `npx wrangler deploy`
+- Production deploy command: `npm run deploy:ci`
 - Non-production deploy command: `npx wrangler versions upload`
 - Preview URLs: enabled
 
 The `_headers` file applies `X-Robots-Tag: noindex, nofollow` to `workers.dev` version URLs. Preview builds also use a noindex meta tag when run through `npm run build:preview`.
 
-The production build command above updates `inset-site`. The independently deployed `inset-site-www-redirect` Worker is defined by `wrangler.www.jsonc` and only needs `npm run deploy:www` when its redirect code or route changes. It keeps `www.inset.page` from serving duplicate content while leaving apex static assets on the direct asset path.
+The production build command validates every contracted `/go/` redirect. The deploy command uses Wrangler strict mode and then checks the live 302 status and exact `Location` for every contracted redirect. The independently deployed `inset-site-www-redirect` Worker is defined by `wrangler.www.jsonc` and only needs `npm run deploy:www` when its redirect code or route changes. It keeps `www.inset.page` from serving duplicate content while leaving apex static assets on the direct asset path.
+
+Local production deploys must use `npm run deploy` or `npm run deploy:site`; never call `npx wrangler deploy` directly. Merge the change first, then run the command from a clean, up-to-date `main`. Pull requests run a production build in GitHub Actions, and a scheduled workflow checks the live redirects hourly.
 
 Production launch and follow-up:
 
@@ -90,6 +92,16 @@ For a reporting window, query `httpRequestsAdaptiveGroups` for `requestSource: e
 These are click requests, not unique people. Reloads, repeated clicks, privacy tools, and some automated requests can change the total. CTA anchors use `nofollow` and `robots.txt` excludes `/go/` to reduce crawler noise. Preview and GitHub Pages builds keep direct App Store URLs so review traffic does not enter the production click series.
 
 The redirect paths are static asset requests and do not invoke a Worker or paid storage product. Cloudflare states that static asset requests are free and unlimited. App Store Connect campaign reporting begins only after Apple's privacy thresholds and processing delay are met.
+
+## Paid campaign redirect contract
+
+Paid links must exist in three places before activating spend:
+
+1. The path, exact App Store campaign URL, and status are added to `scripts/redirect-contracts.mjs`.
+2. The same rule is present in `public/_redirects` and the pull request build passes.
+3. The change is merged into `origin/main`, deployed from that exact commit, and `npm run verify:live-redirects` passes.
+
+The production guard deliberately requires exact equality with `origin/main`, not merely that main is an ancestor. This prevents two feature branches created from the same old main from overwriting one another in production. The post-deploy verifier uses HEAD requests so smoke checks do not enter the GET-only App Store click series.
 
 ## Official references
 

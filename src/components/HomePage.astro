@@ -9,6 +9,15 @@ const { locale } = Astro.props;
 const copy = homeCopy[locale];
 const base = import.meta.env.BASE_URL;
 const assetPath = (path: string) => `${base}${path.replace(/^\//, "")}`;
+const socialImage = locale === "ja"
+  ? {
+      path: "/images/og-home-ja.png?v=c2b7a494",
+      alt: "iPhoneに表示したInsetの余白レイヤー編集画面と「フレームを、思いのままに。」という見出し"
+    }
+  : {
+      path: "/images/og-home-en.png?v=ea4ec019",
+      alt: "Inset's frame-layer editor shown in an iPhone beside the headline ‘Frames, layered your way.’"
+    };
 const homeFaqs: Faq[] = [
   faqs[locale][0],
   locale === "ja"
@@ -26,6 +35,11 @@ const homeFaqs: Faq[] = [
   description={copy.description}
   currentPath={pathFor("home", locale)}
   counterpartPath={pathFor("home", locale === "ja" ? "en" : "ja")}
+  imagePath={socialImage.path}
+  imageAlt={socialImage.alt}
+  imageWidth={1200}
+  imageHeight={630}
+  imageType="image/png"
   includeAppSchema
   faqItems={homeFaqs}
 >

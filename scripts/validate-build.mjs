@@ -1,7 +1,9 @@
 import { readFile, readdir, stat } from "node:fs/promises";
+import { createHash } from "node:crypto";
 import { dirname, extname, join, relative, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { HtmlValidate } from "html-validate";
+import { validateCriticalRedirects } from "./redirect-contracts.mjs";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const output = resolve(root, process.env.OUT_DIR || "dist");
@@ -13,7 +15,6 @@ const appStoreUrls = {
   en: "https://apps.apple.com/us/app/inset-photo-frames/id6776488290",
   ja: "https://apps.apple.com/jp/app/inset/id6776488290"
 };
-const appStoreCampaignUrl = "https://apps.apple.com/app/apple-store/id6776488290?pt=128992117&ct=inset_web_202607&mt=8";
 const errors = [];
 const pageKeys = ["features", "how-it-works", "frames", "pricing", "faq", "support", "privacy", "terms", "releases"];
 const versions = ["1.0.0", "1.1.0", "1.2.0", "1.2.1"];
@@ -23,11 +24,28 @@ const expectedFiles = [
   ...pageKeys.flatMap((page) => [`${page}/index.html`, `ja/${page}/index.html`]),
   ...versions.flatMap((version) => [`releases/${version}/index.html`, `ja/releases/${version}/index.html`, `releases/${version}.html`]),
   "images/app-icon.png", "images/hero-finished.webp", "images/device-composite.webp", "images/water-glass.webp",
+  "images/og-home-en.png", "images/og-home-ja.png",
   "images/batch-branch.webp", "images/batch-lamp.webp", "images/batch-chair.webp",
   "images/frame-35mm-black.webp", "images/frame-polaroid-black.webp", "images/frame-polaroid-white.webp", "images/frame-film-white.webp",
   "images/frame-letterbox-round-border.webp", "images/frame-letterbox-original.webp",
   "store-badges/app-store-en.svg", "store-badges/app-store-ja.svg"
 ];
+
+const homeSocialMeta = new Map([
+  ["/", {
+    image: `${siteOrigin}/images/og-home-en.png?v=ea4ec019`,
+    alt: "Inset's frame-layer editor shown in an iPhone beside the headline ‘Frames, layered your way.’"
+  }],
+  ["/ja/", {
+    image: `${siteOrigin}/images/og-home-ja.png?v=c2b7a494`,
+    alt: "iPhoneに表示したInsetの余白レイヤー編集画面と「フレームを、思いのままに。」という見出し"
+  }]
+]);
+
+const approvedSocialAssetHashes = new Map([
+  ["images/og-home-en.png", "ea4ec019eae46c168435b3d7f88e8305c6be64e7350637dc601fb771936d80a5"],
+  ["images/og-home-ja.png", "c2b7a494b63307fde05149b73ec710f086ef809ebcc7eedfc7e1bbb161aae067"]
+]);
 
 async function exists(path) { try { await stat(path); return true; } catch { return false; } }
 for (const file of expectedFiles) if (!await exists(join(output, file))) errors.push(`missing build artifact: ${file}`);
@@ -90,6 +108,17 @@ for (const route of canonicalRoutes) {
   if (!html.includes(`property="og:url" content="${canonical}"`)) errors.push(`Open Graph URL mismatch: ${route}`);
   if (!html.includes(`property="og:image" content="${siteOrigin}/`)) errors.push(`Open Graph image host mismatch: ${route}`);
   if (!html.includes(`name="twitter:image" content="${siteOrigin}/`)) errors.push(`X Card image host mismatch: ${route}`);
+  const socialMeta = homeSocialMeta.get(route);
+  if (socialMeta) {
+    if (!html.includes(`property="og:image" content="${socialMeta.image}"`)) errors.push(`localized Open Graph image mismatch: ${route}`);
+    if (!html.includes(`property="og:image:secure_url" content="${socialMeta.image}"`)) errors.push(`localized secure Open Graph image mismatch: ${route}`);
+    if (!html.includes('property="og:image:type" content="image/png"')) errors.push(`localized Open Graph image type mismatch: ${route}`);
+    if (!html.includes('property="og:image:width" content="1200"')) errors.push(`localized Open Graph image width mismatch: ${route}`);
+    if (!html.includes('property="og:image:height" content="630"')) errors.push(`localized Open Graph image height mismatch: ${route}`);
+    if (!html.includes(`property="og:image:alt" content="${socialMeta.alt}"`)) errors.push(`localized Open Graph image alt mismatch: ${route}`);
+    if (!html.includes(`name="twitter:image" content="${socialMeta.image}"`)) errors.push(`localized X Card image mismatch: ${route}`);
+    if (!html.includes(`name="twitter:image:alt" content="${socialMeta.alt}"`)) errors.push(`localized X Card image alt mismatch: ${route}`);
+  }
   if (!html.includes(`lang="${locale}"`)) errors.push(`document language mismatch: ${route}`);
   if (html.includes("1.2.2")) errors.push(`unpublished version appears: ${route}`);
   if (html.includes("https://inset.app")) errors.push(`old domain remains: ${route}`);
@@ -111,6 +140,20 @@ for (const route of canonicalRoutes) {
   const pageSchema = schemas.find((schema) => schema["@type"] === "WebPage" || schema["@type"] === "Article");
   if (pageSchema?.url !== canonical) errors.push(`JSON-LD page URL mismatch: ${route}`);
   if (pageSchema?.isPartOf?.url !== siteOrigin) errors.push(`JSON-LD website URL mismatch: ${route}`);
+}
+
+for (const [file, expectedHash] of approvedSocialAssetHashes) {
+  const png = await readFile(join(output, file));
+  const signature = png.subarray(0, 8).toString("hex");
+  if (signature !== "89504e470d0a1a0a") {
+    errors.push(`Open Graph asset is not a PNG: ${file}`);
+    continue;
+  }
+  const width = png.readUInt32BE(16);
+  const height = png.readUInt32BE(20);
+  if (width !== 1200 || height !== 630) errors.push(`Open Graph asset dimensions mismatch: ${file}; received ${width}x${height}`);
+  const hash = createHash("sha256").update(png).digest("hex");
+  if (hash !== expectedHash) errors.push(`Open Graph asset approval hash mismatch: ${file}`);
 }
 
 const announcementsSource = JSON.parse(await readFile(join(root, "announcements.json"), "utf8"));
@@ -137,10 +180,7 @@ if (isPreview) {
 if (robots.includes("https://inset.app")) errors.push("old domain remains in robots.txt");
 
 const redirects = await readFile(join(output, "_redirects"), "utf8");
-const expectedTrackingRedirects = ["en", "ja"].flatMap((locale) => ["hero", "closing", "pricing", "support"].map((placement) => `/go/app-store/${locale}/${placement} ${appStoreCampaignUrl} 302`));
-const trackingRedirects = redirects.split(/\r?\n/).filter((line) => line.startsWith("/go/app-store/"));
-if (trackingRedirects.length !== expectedTrackingRedirects.length) errors.push(`App Store redirect count mismatch: expected ${expectedTrackingRedirects.length}, received ${trackingRedirects.length}`);
-for (const redirect of expectedTrackingRedirects) if (!trackingRedirects.includes(redirect)) errors.push(`App Store redirect missing: ${redirect.split(" ")[0]}`);
+errors.push(...validateCriticalRedirects(redirects));
 
 const legacyCanonicals = new Map([
   ["privacy.html", `${siteOrigin}/privacy/`],
