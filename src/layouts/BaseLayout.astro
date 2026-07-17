@@ -11,6 +11,10 @@ interface Props {
   currentPath: string;
   counterpartPath: string;
   imagePath?: string;
+  imageAlt?: string;
+  imageWidth?: number;
+  imageHeight?: number;
+  imageType?: string;
   includeAppSchema?: boolean;
   faqItems?: Faq[];
   article?: boolean;
@@ -24,6 +28,10 @@ const {
   currentPath,
   counterpartPath,
   imagePath = "/images/hero-finished.webp",
+  imageAlt,
+  imageWidth = 1138,
+  imageHeight = 1420,
+  imageType = "image/webp",
   includeAppSchema = false,
   faqItems = [],
   article = false,
@@ -33,6 +41,8 @@ const base = import.meta.env.BASE_URL;
 const assetPath = (path: string) => `${base}${path.replace(/^\//, "")}`;
 const canonical = new URL(currentPath, siteOrigin).href;
 const counterpart = new URL(counterpartPath, siteOrigin).href;
+const imageUrl = new URL(imagePath, siteOrigin).href;
+const resolvedImageAlt = imageAlt ?? (locale === "ja" ? "Insetで仕上げた写真" : "A photograph finished with Inset");
 const isPreview = import.meta.env.PUBLIC_SITE_ENV === "preview";
 const language = locale === "ja" ? "ja-JP" : "en-US";
 const schemas: Record<string, unknown>[] = [
@@ -102,12 +112,17 @@ if (faqItems.length > 0) {
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
-    <meta property="og:image" content={new URL(imagePath, siteOrigin).href} />
-    <meta property="og:image:alt" content={locale === "ja" ? "Insetで仕上げた写真" : "A photograph finished with Inset"} />
+    <meta property="og:image" content={imageUrl} />
+    <meta property="og:image:secure_url" content={imageUrl} />
+    <meta property="og:image:type" content={imageType} />
+    <meta property="og:image:width" content={String(imageWidth)} />
+    <meta property="og:image:height" content={String(imageHeight)} />
+    <meta property="og:image:alt" content={resolvedImageAlt} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={new URL(imagePath, siteOrigin).href} />
+    <meta name="twitter:image" content={imageUrl} />
+    <meta name="twitter:image:alt" content={resolvedImageAlt} />
     {schemas.map((schema) => <script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />)}
   </head>
   <body>

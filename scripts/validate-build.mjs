@@ -1,4 +1,5 @@
 import { readFile, readdir, stat } from "node:fs/promises";
+import { createHash } from "node:crypto";
 import { dirname, extname, join, relative, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { HtmlValidate } from "html-validate";
@@ -23,11 +24,28 @@ const expectedFiles = [
   ...pageKeys.flatMap((page) => [`${page}/index.html`, `ja/${page}/index.html`]),
   ...versions.flatMap((version) => [`releases/${version}/index.html`, `ja/releases/${version}/index.html`, `releases/${version}.html`]),
   "images/app-icon.png", "images/hero-finished.webp", "images/device-composite.webp", "images/water-glass.webp",
+  "images/og-home-en.png", "images/og-home-ja.png",
   "images/batch-branch.webp", "images/batch-lamp.webp", "images/batch-chair.webp",
   "images/frame-35mm-black.webp", "images/frame-polaroid-black.webp", "images/frame-polaroid-white.webp", "images/frame-film-white.webp",
   "images/frame-letterbox-round-border.webp", "images/frame-letterbox-original.webp",
   "store-badges/app-store-en.svg", "store-badges/app-store-ja.svg"
 ];
+
+const homeSocialMeta = new Map([
+  ["/", {
+    image: `${siteOrigin}/images/og-home-en.png`,
+    alt: "Inset's frame-layer editor shown in an iPhone beside the headline ‘Frames, layered your way.’"
+  }],
+  ["/ja/", {
+    image: `${siteOrigin}/images/og-home-ja.png`,
+    alt: "iPhoneに表示したInsetの余白レイヤー編集画面と「フレームを、思いのままに。」という見出し"
+  }]
+]);
+
+const approvedSocialAssetHashes = new Map([
+  ["images/og-home-en.png", "a4e478d6ba9a6fecae146bbef6745a025efaaac22aa4f1ed51649f88c72c5aa2"],
+  ["images/og-home-ja.png", "1ab7751f200d201fd4f47cfb6e94b0735a8346af48402ea4e937b4686b84cf58"]
+]);
 
 async function exists(path) { try { await stat(path); return true; } catch { return false; } }
 for (const file of expectedFiles) if (!await exists(join(output, file))) errors.push(`missing build artifact: ${file}`);
@@ -90,6 +108,17 @@ for (const route of canonicalRoutes) {
   if (!html.includes(`property="og:url" content="${canonical}"`)) errors.push(`Open Graph URL mismatch: ${route}`);
   if (!html.includes(`property="og:image" content="${siteOrigin}/`)) errors.push(`Open Graph image host mismatch: ${route}`);
   if (!html.includes(`name="twitter:image" content="${siteOrigin}/`)) errors.push(`X Card image host mismatch: ${route}`);
+  const socialMeta = homeSocialMeta.get(route);
+  if (socialMeta) {
+    if (!html.includes(`property="og:image" content="${socialMeta.image}"`)) errors.push(`localized Open Graph image mismatch: ${route}`);
+    if (!html.includes(`property="og:image:secure_url" content="${socialMeta.image}"`)) errors.push(`localized secure Open Graph image mismatch: ${route}`);
+    if (!html.includes('property="og:image:type" content="image/png"')) errors.push(`localized Open Graph image type mismatch: ${route}`);
+    if (!html.includes('property="og:image:width" content="1200"')) errors.push(`localized Open Graph image width mismatch: ${route}`);
+    if (!html.includes('property="og:image:height" content="630"')) errors.push(`localized Open Graph image height mismatch: ${route}`);
+    if (!html.includes(`property="og:image:alt" content="${socialMeta.alt}"`)) errors.push(`localized Open Graph image alt mismatch: ${route}`);
+    if (!html.includes(`name="twitter:image" content="${socialMeta.image}"`)) errors.push(`localized X Card image mismatch: ${route}`);
+    if (!html.includes(`name="twitter:image:alt" content="${socialMeta.alt}"`)) errors.push(`localized X Card image alt mismatch: ${route}`);
+  }
   if (!html.includes(`lang="${locale}"`)) errors.push(`document language mismatch: ${route}`);
   if (html.includes("1.2.2")) errors.push(`unpublished version appears: ${route}`);
   if (html.includes("https://inset.app")) errors.push(`old domain remains: ${route}`);
@@ -111,6 +140,20 @@ for (const route of canonicalRoutes) {
   const pageSchema = schemas.find((schema) => schema["@type"] === "WebPage" || schema["@type"] === "Article");
   if (pageSchema?.url !== canonical) errors.push(`JSON-LD page URL mismatch: ${route}`);
   if (pageSchema?.isPartOf?.url !== siteOrigin) errors.push(`JSON-LD website URL mismatch: ${route}`);
+}
+
+for (const [file, expectedHash] of approvedSocialAssetHashes) {
+  const png = await readFile(join(output, file));
+  const signature = png.subarray(0, 8).toString("hex");
+  if (signature !== "89504e470d0a1a0a") {
+    errors.push(`Open Graph asset is not a PNG: ${file}`);
+    continue;
+  }
+  const width = png.readUInt32BE(16);
+  const height = png.readUInt32BE(20);
+  if (width !== 1200 || height !== 630) errors.push(`Open Graph asset dimensions mismatch: ${file}; received ${width}x${height}`);
+  const hash = createHash("sha256").update(png).digest("hex");
+  if (hash !== expectedHash) errors.push(`Open Graph asset approval hash mismatch: ${file}`);
 }
 
 const announcementsSource = JSON.parse(await readFile(join(root, "announcements.json"), "utf8"));
