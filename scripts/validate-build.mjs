@@ -3,6 +3,7 @@ import { createHash } from "node:crypto";
 import { dirname, extname, join, relative, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { HtmlValidate } from "html-validate";
+import { validateCriticalRedirects } from "./redirect-contracts.mjs";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const output = resolve(root, process.env.OUT_DIR || "dist");
@@ -14,7 +15,6 @@ const appStoreUrls = {
   en: "https://apps.apple.com/us/app/inset-photo-frames/id6776488290",
   ja: "https://apps.apple.com/jp/app/inset/id6776488290"
 };
-const appStoreCampaignUrl = "https://apps.apple.com/app/apple-store/id6776488290?pt=128992117&ct=inset_web_202607&mt=8";
 const errors = [];
 const pageKeys = ["features", "how-it-works", "frames", "pricing", "faq", "support", "privacy", "terms", "releases"];
 const versions = ["1.0.0", "1.1.0", "1.2.0", "1.2.1"];
@@ -180,10 +180,7 @@ if (isPreview) {
 if (robots.includes("https://inset.app")) errors.push("old domain remains in robots.txt");
 
 const redirects = await readFile(join(output, "_redirects"), "utf8");
-const expectedTrackingRedirects = ["en", "ja"].flatMap((locale) => ["hero", "closing", "pricing", "support"].map((placement) => `/go/app-store/${locale}/${placement} ${appStoreCampaignUrl} 302`));
-const trackingRedirects = redirects.split(/\r?\n/).filter((line) => line.startsWith("/go/app-store/"));
-if (trackingRedirects.length !== expectedTrackingRedirects.length) errors.push(`App Store redirect count mismatch: expected ${expectedTrackingRedirects.length}, received ${trackingRedirects.length}`);
-for (const redirect of expectedTrackingRedirects) if (!trackingRedirects.includes(redirect)) errors.push(`App Store redirect missing: ${redirect.split(" ")[0]}`);
+errors.push(...validateCriticalRedirects(redirects));
 
 const legacyCanonicals = new Map([
   ["privacy.html", `${siteOrigin}/privacy/`],

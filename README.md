@@ -29,9 +29,14 @@ Cloudflareのツール選定とWorkers Builds設定は [`docs/cloudflare-tooling
 本番反映前のdry-runと、apexサイト＋`www`リダイレクトの本番反映:
 
 ```sh
+# 先に変更をmainへmergeし、cleanかつorigin/mainと同一のmainから実行する
 npm run deploy:dry-run
 npm run deploy
 ```
+
+本番コマンドは毎回`origin/main`をfetchし、現在のbranchが`main`、HEADが`origin/main`と完全一致、worktreeがcleanであることを確認する。条件を満たさないブランチや未コミット変更からのデプロイは失敗する。`npx wrangler deploy`を直接実行せず、必ず上記npm scriptを使う。
+
+`/go/`配下の計測URLは[`scripts/redirect-contracts.mjs`](scripts/redirect-contracts.mjs)を契約正本とする。ソースとビルド成果物の不足・余計なルール・転送先・statusはbuildで検証し、デプロイ後にも実URLの302と`Location`完全一致を自動確認する。GitHub ActionsもPRごとのbuildと、本番URLの1時間ごとの監視を行う。
 
 ## 公開URL
 

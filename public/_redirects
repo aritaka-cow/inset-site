@@ -18,3 +18,6 @@
 /go/app-store/ja/closing https://apps.apple.com/app/apple-store/id6776488290?pt=128992117&ct=inset_web_202607&mt=8 302
 /go/app-store/ja/pricing https://apps.apple.com/app/apple-store/id6776488290?pt=128992117&ct=inset_web_202607&mt=8 302
 /go/app-store/ja/support https://apps.apple.com/app/apple-store/id6776488290?pt=128992117&ct=inset_web_202607&mt=8 302
+
+# Paid campaign redirects are also validated at build time and after deploy.
+/go/instagram-jp-202607 https://apps.apple.com/app/apple-store/id6776488290?pt=128992117&ct=instagram_jp_202607&mt=8 302
