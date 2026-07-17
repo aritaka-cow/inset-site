@@ -43,8 +43,8 @@ const homeSocialMeta = new Map([
 ]);
 
 const approvedSocialAssetHashes = new Map([
-  ["images/og-home-en.png", "a4e478d6ba9a6fecae146bbef6745a025efaaac22aa4f1ed51649f88c72c5aa2"],
-  ["images/og-home-ja.png", "1ab7751f200d201fd4f47cfb6e94b0735a8346af48402ea4e937b4686b84cf58"]
+  ["images/og-home-en.png", "a73844c809866229559d60aa9e346c5fc3195a4f4d7b39c8dc9b25a767ad36e5"],
+  ["images/og-home-ja.png", "983a897f0878b2933469d36602a0e22a5c518d8486ea04ae583675823d547491"]
 ]);
 
 async function exists(path) { try { await stat(path); return true; } catch { return false; } }
