@@ -2,6 +2,20 @@
   "version": 1,
   "announcements": [
     {
+      "id": "news-20260718-update-1.2.2",
+      "date": "2026-07-18",
+      "type": "news",
+      "title": {
+        "en": "Update to Inset 1.2.2",
+        "ja": "Inset 1.2.2へのアップデート"
+      },
+      "body": {
+        "en": "Version 1.2.2 includes minor bug fixes and stability improvements. Please update from the App Store for the most reliable experience.",
+        "ja": "軽微な不具合を修正し、アプリ内部の安定性を改善しました。より安定してお使いいただくため、App Storeから最新バージョンへのアップデートをお願いします。"
+      },
+      "url": "https://apps.apple.com/app/id6776488290"
+    },
+    {
       "id": "rel-1.2.1",
       "date": "2026-07-02",
       "type": "release",
