@@ -169,7 +169,7 @@ export const pageContent: Localized<Record<ContentPageKey, PageContent>> = {
       sections: [
         { title: "Core features are free", body: "Layered margins, crop, presets, and full-resolution export are available without Inset Lab." },
         { title: "Inset Lab", body: "Inset Lab unlocks Creative Frames, favorites, and batch framing for multiple photographs." },
-        { title: "Purchase options", body: "Current prices in Japan are ¥500 per month, ¥1,500 per year, and ¥4,000 for Lifetime, including tax. Eligible monthly and yearly subscriptions include a 7-day free trial and renew automatically unless cancelled. Prices outside Japan and any later changes are shown in the App Store purchase screen." }
+        { title: "Purchase options", body: "Choose a monthly or yearly auto-renewable subscription, or a Lifetime purchase. Eligible monthly and yearly subscriptions include a 7-day free trial and renew automatically unless cancelled. The applicable price is shown in the App Store purchase screen in the currency for your country or region before confirmation." }
       ]
     },
     faq: { title: "Inset FAQ — Price, full-resolution export, privacy, Android", description: "Direct answers about Inset's free features, Inset Lab, full-resolution export, photo privacy, supported iPhones, and Android status.", eyebrow: "FAQ", heading: "Questions about Inset, answered directly.", intro: "These answers describe the current public iPhone version, 1.2.1.", sections: [] },
@@ -221,7 +221,7 @@ export const pageContent: Localized<Record<ContentPageKey, PageContent>> = {
       sections: [
         { title: "基本機能は無料", body: "余白レイヤー、クロップ、プリセット、フル解像度書き出しはInset Labなしで利用できます。" },
         { title: "Inset Lab", body: "クリエイティブフレーム、お気に入り、複数写真への一括フレームを利用できます。" },
-        { title: "購入方式", body: "日本での現在価格（税込）は、月額500円、年額1,500円、買い切り4,000円です。対象となる月額・年額プランには7日間の無料トライアルが付き、解約しない限り自動更新されます。日本以外の価格と今後の変更はApp Storeの購入画面に表示されます。" }
+        { title: "購入方式", body: "Inset Labは、月額・年額の自動更新サブスクリプション、または買い切りから選べます。対象となる月額・年額プランには7日間の無料トライアルが付き、解約しない限り自動更新されます。実際に適用される価格は、購入確定前にApp Storeの購入画面へ各国・地域の通貨で表示されます。" }
       ]
     },
     faq: { title: "Inset FAQ — 料金、フル解像度、写真のプライバシー、Android", description: "Insetの無料機能、Inset Lab、フル解像度書き出し、写真の扱い、対応iPhone、Android版について回答します。", eyebrow: "FAQ", heading: "Insetについて、短く答えます。", intro: "現在公開中のiPhone版1.2.1に基づく回答です。", sections: [] },
