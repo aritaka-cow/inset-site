@@ -42,7 +42,7 @@ npm run deploy
 
 - English: `/`
 - 日本語: `/ja/`
-- Features, How it works, Frames, Pricing, FAQ, Support, Privacy, Terms, Releasesを両言語で生成
+- Features, How it works, Frames, Pricing, FAQ, Support, Privacy, Terms, Commercial Disclosure, Releasesを両言語で生成
 - `inset.page` をcanonical、英語ルートを `x-default` とし、`www.inset.page` は同じパスとクエリを保って301する
 
 ## 既存の公開契約
@@ -52,6 +52,7 @@ npm run deploy
 | `index.html` | 旧GitHub Pagesのサポート / FAQ |
 | `privacy.html` | 旧プライバシーポリシーURLの互換ページ |
 | `terms.html` | 旧利用規約URLの互換ページ |
+| `legal.html` | 特定商取引法に基づく表記の互換ページ |
 | `roadmap.html` / `roadmap.json` | 公開ロードマップ終了の案内（ロードマップ正本は Yohaku GitHub Issues） |
 | `announcements.json` | アプリ内お知らせの配信元（T-0201 / RM-033） |
 | `releases/*.html` | 旧リリースノートURLの互換ページ |

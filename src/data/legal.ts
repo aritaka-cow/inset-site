@@ -16,6 +16,8 @@ export type LegalDocument = {
   sections: LegalSection[];
 };
 
+export type LegalKind = "privacy" | "terms" | "legal";
+
 export const privacyDocuments: Localized<LegalDocument> = {
   ja: {
     title: "Inset プライバシーポリシー",
@@ -52,7 +54,7 @@ export const privacyDocuments: Localized<LegalDocument> = {
       ] },
       { heading: "お子様のプライバシー", paragraphs: ["本アプリは子どもを対象にしたサービスではありません。年齢、氏名、メールアドレスなど、個人を直接識別する情報の入力は求めません。"] },
       { heading: "本ポリシーの変更", paragraphs: ["本ポリシーは更新される場合があります。重要な変更はアプリの更新情報または本ページでお知らせします。"] },
-      { heading: "お問い合わせ", paragraphs: ["本アプリやプライバシーに関するお問い合わせは<a href=\"mailto:inset.support@gmail.com\">inset.support@gmail.com</a>までご連絡ください。"] }
+      { heading: "お問い合わせ", paragraphs: ["本アプリやプライバシーに関するお問い合わせは<a href=\"mailto:contact@atelier-yohaku.com\">contact@atelier-yohaku.com</a>までご連絡ください。"] }
     ]
   },
   en: {
@@ -90,7 +92,7 @@ export const privacyDocuments: Localized<LegalDocument> = {
       ] },
       { heading: "Children’s Privacy", paragraphs: ["The App is not directed to children. It does not ask for directly identifying information such as name, email address, or age."] },
       { heading: "Changes to This Policy", paragraphs: ["This policy may be updated. Material changes will be noted in the app’s release notes or on this page."] },
-      { heading: "Contact", paragraphs: ["For questions about the App or privacy, contact <a href=\"mailto:inset.support@gmail.com\">inset.support@gmail.com</a>."] }
+      { heading: "Contact", paragraphs: ["For questions about the App or privacy, contact <a href=\"mailto:contact@atelier-yohaku.com\">contact@atelier-yohaku.com</a>."] }
     ]
   }
 };
@@ -120,7 +122,7 @@ export const termsDocuments: Localized<LegalDocument> = {
       { heading: "4. 知的財産", paragraphs: ["本アプリおよび同梱されるフレーム素材・デザイン・ロゴ等の知的財産権は、提供者または正当な権利者に帰属します。お客様が本アプリで作成した画像（あなたの写真にフレームを適用した成果物）の権利はお客様に帰属します。"] },
       { heading: "5. 免責事項", paragraphs: ["本アプリは「現状有姿」で提供され、特定目的への適合性等について明示・黙示を問わず保証しません。法令で許容される範囲で、本アプリの利用に起因する損害について提供者は責任を負いません。"] },
       { heading: "6. 本規約の変更", paragraphs: ["本規約は変更される場合があります。重要な変更は本ページまたはアプリの更新情報でお知らせします。"] },
-      { heading: "7. お問い合わせ", paragraphs: ["本規約に関するお問い合わせは<a href=\"mailto:inset.support@gmail.com\">inset.support@gmail.com</a>までご連絡ください。"] }
+      { heading: "7. お問い合わせ", paragraphs: ["本規約に関するお問い合わせは<a href=\"mailto:contact@atelier-yohaku.com\">contact@atelier-yohaku.com</a>までご連絡ください。"] }
     ]
   },
   en: {
@@ -147,11 +149,61 @@ export const termsDocuments: Localized<LegalDocument> = {
       { heading: "4. Intellectual Property", paragraphs: ["The App and its bundled frame assets, designs, and logos are owned by the developer or its licensors. Images you create with the App (your own photos with frames applied) remain yours."] },
       { heading: "5. Disclaimer", paragraphs: ["The App is provided “as is” without warranties of any kind, express or implied, including fitness for a particular purpose. To the extent permitted by law, the developer is not liable for damages arising from use of the App."] },
       { heading: "6. Changes to These Terms", paragraphs: ["These Terms may be updated. Material changes will be noted on this page or in the app’s release notes."] },
-      { heading: "7. Contact", paragraphs: ["For questions about these Terms, contact <a href=\"mailto:inset.support@gmail.com\">inset.support@gmail.com</a>."] }
+      { heading: "7. Contact", paragraphs: ["For questions about these Terms, contact <a href=\"mailto:contact@atelier-yohaku.com\">contact@atelier-yohaku.com</a>."] }
     ]
   }
 };
 
-export function getLegalDocument(kind: "privacy" | "terms", locale: Locale): LegalDocument {
-  return (kind === "privacy" ? privacyDocuments : termsDocuments)[locale];
+export const commercialDisclosureDocuments: Localized<LegalDocument> = {
+  ja: {
+    title: "Inset 特定商取引法に基づく表記",
+    description: "Inset Labの販売事業者、所在地、連絡先、価格、支払方法、提供時期、解約・返金条件を表示します。",
+    heading: "特定商取引法に基づく表記",
+    updated: "2026-07-19",
+    intro: "Insetの有料機能「Inset Lab」に関する、特定商取引法第11条に基づく表示です。購入はAppleのApp Storeを通じて行われます。",
+    sections: [
+      { heading: "販売事業者", paragraphs: ["金澤 有剛（屋号：余白製作所）"] },
+      { heading: "運営責任者", paragraphs: ["金澤 有剛"] },
+      { heading: "所在地", paragraphs: ["〒060-0062<br>北海道札幌市中央区南2条西5丁目31-1 RMBld. 701"] },
+      { heading: "電話番号", paragraphs: ["<a href=\"tel:+818057430492\">080&#8209;5743&#8209;0492</a>"] },
+      { heading: "お問い合わせ", paragraphs: ["<a href=\"mailto:contact@atelier-yohaku.com\">contact@atelier-yohaku.com</a>"] },
+      { heading: "販売価格", paragraphs: ["日本での現在価格は、月額500円、年額1,500円、買い切り4,000円です（いずれも税込）。対象となる月額・年額プランには7日間の無料トライアルが付きます。購入確定前にApp Storeの購入画面に表示される価格が適用されます。日本以外では各国・地域のApp Storeに表示される価格が適用されます。"] },
+      { heading: "販売価格以外に必要な費用", paragraphs: ["ありません。ただし、アプリのダウンロードや利用に必要な通信料はお客様の負担となります。"] },
+      { heading: "支払方法・支払時期", paragraphs: ["Apple IDに設定された支払方法を通じて決済されます。買い切りは購入確定時に課金されます。サブスクリプションは、無料トライアルの対象者についてはトライアル終了時、その後は各更新期間の開始時に課金されます。"] },
+      { heading: "サービスの提供時期", paragraphs: ["購入手続きの完了後、直ちにInset Labの機能を利用できます。"] },
+      { heading: "サブスクリプションの更新・解約", paragraphs: ["月額・年額プランは、現在の期間終了の24時間前までに解約しない限り自動更新されます。解約はiPhoneの「設定」からApple Accountの「サブスクリプション」で行えます。解約後も、支払済み期間の終了までは利用できます。"] },
+      { heading: "返品・キャンセル・返金", paragraphs: ["デジタルサービスの性質上、提供開始後の返品・キャンセルには応じられません。サブスクリプションの解約は次回以降の更新を停止するもので、日割り返金は行われません。返金の可否はAppleの規約に従い、<a href=\"https://reportaproblem.apple.com/\">Appleの「問題を報告する」</a>から申請してください。法令上の権利を制限するものではありません。"] },
+      { heading: "動作環境", paragraphs: ["iOS 17.0以降を搭載したiPhone。対応環境はApp Storeの製品ページでもご確認いただけます。"] }
+    ]
+  },
+  en: {
+    title: "Inset — Commercial Transaction Disclosure",
+    description: "Seller identity, address, contact details, prices, payment, delivery, cancellation, and refund terms for Inset Lab under Japanese law.",
+    heading: "Commercial Transaction Disclosure",
+    updated: "2026-07-19",
+    intro: "This disclosure is provided for the paid Inset Lab features under Article 11 of Japan’s Act on Specified Commercial Transactions. Purchases are processed through Apple’s App Store.",
+    sections: [
+      { heading: "Seller", paragraphs: ["Aritaka Kanazawa (trading as Atelier Yohaku)"] },
+      { heading: "Person responsible for operations", paragraphs: ["Aritaka Kanazawa"] },
+      { heading: "Business address", paragraphs: ["RMBld. 701, 5-31-1 Minami 2-jo Nishi, Chuo-ku, Sapporo, Hokkaido 060-0062, Japan"] },
+      { heading: "Telephone", paragraphs: ["<a href=\"tel:+818057430492\">+81&nbsp;80&#8209;5743&#8209;0492</a>"] },
+      { heading: "Contact", paragraphs: ["<a href=\"mailto:contact@atelier-yohaku.com\">contact@atelier-yohaku.com</a>"] },
+      { heading: "Price", paragraphs: ["Current prices in Japan are ¥500 per month, ¥1,500 per year, and ¥4,000 for Lifetime, including tax. Eligible monthly and yearly subscriptions include a 7-day free trial. The price shown in the App Store purchase screen before confirmation applies. Outside Japan, the price shown by the App Store for the applicable country or region applies."] },
+      { heading: "Additional charges", paragraphs: ["No additional purchase charge is imposed by the seller. Internet access and data charges required to download or use the App are your responsibility."] },
+      { heading: "Payment method and timing", paragraphs: ["Payment is processed using the payment method associated with your Apple ID. Lifetime is charged when the purchase is confirmed. For eligible subscriptions, the first charge occurs when the free trial ends, and later charges occur at the start of each renewal period."] },
+      { heading: "Delivery", paragraphs: ["Inset Lab features become available immediately after the purchase is completed."] },
+      { heading: "Renewal and cancellation", paragraphs: ["Monthly and yearly subscriptions renew automatically unless cancelled at least 24 hours before the end of the current period. Cancel in iPhone Settings under Apple Account and Subscriptions. Access continues until the end of the paid period after cancellation."] },
+      { heading: "Returns, cancellations, and refunds", paragraphs: ["Because this is a digital service, returns or cancellations are not accepted after access begins. Cancelling a subscription stops future renewals and does not provide a prorated refund. Refund eligibility is determined by Apple; requests can be submitted through <a href=\"https://reportaproblem.apple.com/\">Apple’s Report a Problem</a>. This does not limit rights that cannot be waived under applicable law."] },
+      { heading: "System requirements", paragraphs: ["iPhone running iOS 17.0 or later. Current compatibility is also shown on the App Store product page."] }
+    ]
+  }
+};
+
+export function getLegalDocument(kind: LegalKind, locale: Locale): LegalDocument {
+  const documents: Record<LegalKind, Localized<LegalDocument>> = {
+    privacy: privacyDocuments,
+    terms: termsDocuments,
+    legal: commercialDisclosureDocuments
+  };
+  return documents[kind][locale];
 }

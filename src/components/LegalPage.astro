@@ -1,9 +1,9 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import { getLegalDocument } from "@/data/legal";
+import { getLegalDocument, type LegalKind } from "@/data/legal";
 import { pathFor, type Locale } from "@/data/site";
 
-interface Props { locale: Locale; kind: "privacy" | "terms" }
+interface Props { locale: Locale; kind: LegalKind }
 const { locale, kind } = Astro.props;
 const document = getLegalDocument(kind, locale);
 ---
