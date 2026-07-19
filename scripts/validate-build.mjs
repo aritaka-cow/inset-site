@@ -16,11 +16,11 @@ const appStoreUrls = {
   ja: "https://apps.apple.com/jp/app/inset/id6776488290"
 };
 const errors = [];
-const pageKeys = ["features", "how-it-works", "frames", "pricing", "faq", "support", "privacy", "terms", "releases"];
+const pageKeys = ["features", "how-it-works", "frames", "pricing", "faq", "support", "privacy", "terms", "legal", "releases"];
 const versions = ["1.0.0", "1.1.0", "1.2.0", "1.2.1"];
 const canonicalRoutes = ["/", "/ja/", ...pageKeys.flatMap((page) => [`/${page}/`, `/ja/${page}/`]), ...versions.flatMap((version) => [`/releases/${version}/`, `/ja/releases/${version}/`])];
 const expectedFiles = [
-  "index.html", "ja/index.html", "404.html", "ja/404.html", "ja/404/index.html", "announcements.json", "roadmap.json", "roadmap.html", "privacy.html", "terms.html", "robots.txt", "sitemap.xml", "_redirects",
+  "index.html", "ja/index.html", "404.html", "ja/404.html", "ja/404/index.html", "announcements.json", "roadmap.json", "roadmap.html", "privacy.html", "terms.html", "legal.html", "robots.txt", "sitemap.xml", "_redirects",
   ...pageKeys.flatMap((page) => [`${page}/index.html`, `ja/${page}/index.html`]),
   ...versions.flatMap((version) => [`releases/${version}/index.html`, `ja/releases/${version}/index.html`, `releases/${version}.html`]),
   "images/app-icon.png", "images/hero-finished.webp", "images/device-composite.webp", "images/water-glass.webp",
@@ -185,6 +185,7 @@ errors.push(...validateCriticalRedirects(redirects));
 const legacyCanonicals = new Map([
   ["privacy.html", `${siteOrigin}/privacy/`],
   ["terms.html", `${siteOrigin}/terms/`],
+  ["legal.html", `${siteOrigin}/legal/`],
   ["roadmap.html", `${siteOrigin}/releases/`],
   ...versions.map((version) => [`releases/${version}.html`, `${siteOrigin}/releases/${version}/`])
 ]);

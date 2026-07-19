@@ -1,12 +1,12 @@
 export type Locale = "en" | "ja";
 export type Localized<T> = Record<Locale, T>;
-export type PageKey = "home" | "features" | "how-it-works" | "frames" | "pricing" | "faq" | "support" | "privacy" | "terms" | "releases";
+export type PageKey = "home" | "features" | "how-it-works" | "frames" | "pricing" | "faq" | "support" | "privacy" | "terms" | "legal" | "releases";
 export type ContentSection = { title: string; body: string; bullets?: string[] };
 export type PageContent = { title: string; description: string; eyebrow?: string; heading: string; intro: string; sections: ContentSection[] };
 export type AppStorePlacement = "hero" | "closing" | "pricing" | "support";
 
 export const siteOrigin = "https://inset.page";
-export const supportEmail = "inset.support@gmail.com";
+export const supportEmail = "contact@atelier-yohaku.com";
 export const appStoreId = "6776488290";
 export const appStoreUrls: Localized<string> = {
   en: "https://apps.apple.com/us/app/inset-photo-frames/id6776488290",
@@ -25,7 +25,7 @@ export const appFacts = {
   androidStatus: "coming-soon" as const
 };
 
-export const routeKeys: PageKey[] = ["home", "features", "how-it-works", "frames", "pricing", "faq", "support", "privacy", "terms", "releases"];
+export const routeKeys: PageKey[] = ["home", "features", "how-it-works", "frames", "pricing", "faq", "support", "privacy", "terms", "legal", "releases"];
 export const contentPageKeys = ["features", "how-it-works", "frames", "pricing", "faq", "support"] as const;
 export type ContentPageKey = (typeof contentPageKeys)[number];
 
@@ -165,11 +165,11 @@ export const pageContent: Localized<Record<ContentPageKey, PageContent>> = {
     },
     pricing: {
       title: "Inset pricing — Free core features and Inset Lab", description: "Inset's core framing tools are free. Inset Lab is a paid upgrade for Creative Frames and batch processing.",
-      eyebrow: "PRICING", heading: "Start free. Add Inset Lab when you need more.", intro: "Prices are shown in your local currency on the App Store, so this page explains the product boundary rather than a regional fixed price.",
+      eyebrow: "PRICING", heading: "Start free. Add Inset Lab when you need more.", intro: "Inset Lab is available as monthly and yearly auto-renewable subscriptions or a one-time Lifetime purchase. The App Store shows the applicable price before you confirm a purchase.",
       sections: [
         { title: "Core features are free", body: "Layered margins, crop, presets, and full-resolution export are available without Inset Lab." },
         { title: "Inset Lab", body: "Inset Lab unlocks Creative Frames, favorites, and batch framing for multiple photographs." },
-        { title: "Purchase options", body: "The public iPhone version offers monthly and yearly auto-renewable subscriptions and a one-time Lifetime purchase. Availability and local price are confirmed in the App Store purchase screen." }
+        { title: "Purchase options", body: "Current prices in Japan are ¥500 per month, ¥1,500 per year, and ¥4,000 for Lifetime, including tax. Eligible monthly and yearly subscriptions include a 7-day free trial and renew automatically unless cancelled. Prices outside Japan and any later changes are shown in the App Store purchase screen." }
       ]
     },
     faq: { title: "Inset FAQ — Price, full-resolution export, privacy, Android", description: "Direct answers about Inset's free features, Inset Lab, full-resolution export, photo privacy, supported iPhones, and Android status.", eyebrow: "FAQ", heading: "Questions about Inset, answered directly.", intro: "These answers describe the current public iPhone version, 1.2.1.", sections: [] },
@@ -179,7 +179,7 @@ export const pageContent: Localized<Record<ContentPageKey, PageContent>> = {
       sections: [
         { title: "Before contacting support", body: "Check that Inset and iOS are up to date, then try the action again. For purchase restoration, use the same Apple ID and Restore inside Inset." },
         { title: "Contact", body: `Email ${supportEmail}. Please include a short description, your Inset version, iOS version, and whether the issue can be repeated.` },
-        { title: "Policies and updates", body: "Privacy, Terms, FAQ, and Releases are available from the footer of every page." }
+        { title: "Policies and updates", body: "Privacy, Terms, the commercial transaction disclosure, FAQ, and Releases are available from the footer of every page." }
       ]
     }
   },
@@ -217,11 +217,11 @@ export const pageContent: Localized<Record<ContentPageKey, PageContent>> = {
     },
     pricing: {
       title: "Insetの料金 — 基本機能は無料、Inset Labは有料", description: "Insetの基本機能は無料です。Inset Labではクリエイティブフレームと一括処理を利用できます。",
-      eyebrow: "料金", heading: "まずは無料で。必要になったらInset Labを。", intro: "価格はApp Storeで地域の通貨に合わせて表示されるため、このページでは固定価格ではなく機能の境界を説明します。",
+      eyebrow: "料金", heading: "まずは無料で。必要になったらInset Labを。", intro: "Inset Labは、月額・年額の自動更新サブスクリプションと、買い切りから選べます。購入確定前に、App Storeの画面で適用価格を確認できます。",
       sections: [
         { title: "基本機能は無料", body: "余白レイヤー、クロップ、プリセット、フル解像度書き出しはInset Labなしで利用できます。" },
         { title: "Inset Lab", body: "クリエイティブフレーム、お気に入り、複数写真への一括フレームを利用できます。" },
-        { title: "購入方式", body: "公開中のiPhone版では、月額・年額の自動更新サブスクリプションとLifetime買い切りを用意しています。提供状況と地域の価格はApp Storeの購入画面で確認してください。" }
+        { title: "購入方式", body: "日本での現在価格（税込）は、月額500円、年額1,500円、買い切り4,000円です。対象となる月額・年額プランには7日間の無料トライアルが付き、解約しない限り自動更新されます。日本以外の価格と今後の変更はApp Storeの購入画面に表示されます。" }
       ]
     },
     faq: { title: "Inset FAQ — 料金、フル解像度、写真のプライバシー、Android", description: "Insetの無料機能、Inset Lab、フル解像度書き出し、写真の扱い、対応iPhone、Android版について回答します。", eyebrow: "FAQ", heading: "Insetについて、短く答えます。", intro: "現在公開中のiPhone版1.2.1に基づく回答です。", sections: [] },
@@ -231,7 +231,7 @@ export const pageContent: Localized<Record<ContentPageKey, PageContent>> = {
       sections: [
         { title: "お問い合わせの前に", body: "InsetとiOSを最新の状態にし、もう一度同じ操作をお試しください。購入の復元は、同じApple IDでInset内のRestoreを使用します。" },
         { title: "お問い合わせ", body: `${supportEmail} へメールをお送りください。短い状況説明、Insetのバージョン、iOSのバージョン、再現できるかを添えてください。` },
-        { title: "ポリシーと更新情報", body: "プライバシー、利用規約、FAQ、リリースノートはすべてのページのフッターから確認できます。" }
+        { title: "ポリシーと更新情報", body: "プライバシー、利用規約、特定商取引法に基づく表記、FAQ、リリースノートはすべてのページのフッターから確認できます。" }
       ]
     }
   }

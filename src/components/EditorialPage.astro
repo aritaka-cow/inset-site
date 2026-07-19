@@ -71,9 +71,16 @@ const counterpartPath = pathFor(pageKey, locale === "ja" ? "en" : "ja");
 
     {pageKey === "support" && (
       <div class="support-links">
-        <a href={`mailto:inset.support@gmail.com`}>inset.support@gmail.com</a>
+        <a href={`mailto:contact@atelier-yohaku.com`}>contact@atelier-yohaku.com</a>
         <a href={assetPath(pathFor("faq", locale))}>{locale === "ja" ? "FAQを見る" : "Read the FAQ"}</a>
         <a href={assetPath(pathFor("releases", locale))}>{locale === "ja" ? "更新情報を見る" : "Read release notes"}</a>
+      </div>
+    )}
+
+    {pageKey === "pricing" && (
+      <div class="support-links">
+        <a href={assetPath(pathFor("legal", locale))}>{locale === "ja" ? "特定商取引法に基づく表記" : "Commercial transaction disclosure"}</a>
+        <a href={assetPath(pathFor("terms", locale))}>{locale === "ja" ? "利用規約" : "Terms of Use"}</a>
       </div>
     )}
   </div>
