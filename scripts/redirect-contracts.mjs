@@ -34,7 +34,7 @@ export const criticalRedirects = [
     purpose: "Instagram JP placement A/B — Advantage+ placements cell (July 2026)"
   },
   {
-    source: "/go/instagram-us-202607",
+    source: "/go/instagram-us-202607-r2",
     target: instagramUsCampaignUrl,
     status: 302,
     purpose: "Instagram US paid campaign (July 2026)"
