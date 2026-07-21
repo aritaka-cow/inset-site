@@ -19,6 +19,27 @@ test("rejects a missing paid campaign redirect", () => {
   );
 });
 
+for (const source of [
+  "/go/instagram-jp-ab-ig-202607",
+  "/go/instagram-jp-ab-adv-202607"
+]) {
+  test(`rejects a missing placement A/B redirect: ${source}`, () => {
+    const withoutCell = validText
+      .split("\n")
+      .filter((line) => !line.startsWith(`${source} `))
+      .join("\n");
+
+    assert.ok(
+      validateCriticalRedirects(withoutCell).includes(`critical redirect missing: ${source}`)
+    );
+  });
+}
+
+test("placement A/B redirects preserve distinct ASC campaign tokens", () => {
+  assert.match(validText, /\/go\/instagram-jp-ab-ig-202607 .*ct=instagram_jp_ab_ig_202607&mt=8 302/);
+  assert.match(validText, /\/go\/instagram-jp-ab-adv-202607 .*ct=instagram_jp_ab_adv_202607&mt=8 302/);
+});
+
 test("rejects an altered target", () => {
   const altered = validText.replace("ct=instagram_jp_202607", "ct=wrong_campaign");
   assert.ok(

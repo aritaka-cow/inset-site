@@ -2,6 +2,8 @@ export const siteOrigin = "https://inset.page";
 
 const appStoreCampaignUrl = "https://apps.apple.com/app/apple-store/id6776488290?pt=128992117&ct=inset_web_202607&mt=8";
 const instagramCampaignUrl = "https://apps.apple.com/app/apple-store/id6776488290?pt=128992117&ct=instagram_jp_202607&mt=8";
+const instagramAbInstagramUrl = "https://apps.apple.com/app/apple-store/id6776488290?pt=128992117&ct=instagram_jp_ab_ig_202607&mt=8";
+const instagramAbAdvantageUrl = "https://apps.apple.com/app/apple-store/id6776488290?pt=128992117&ct=instagram_jp_ab_adv_202607&mt=8";
 
 export const criticalRedirects = [
   ...["en", "ja"].flatMap((locale) =>
@@ -17,6 +19,18 @@ export const criticalRedirects = [
     target: instagramCampaignUrl,
     status: 302,
     purpose: "Instagram JP paid campaign (July 2026)"
+  },
+  {
+    source: "/go/instagram-jp-ab-ig-202607",
+    target: instagramAbInstagramUrl,
+    status: 302,
+    purpose: "Instagram JP placement A/B — Instagram-only cell (July 2026)"
+  },
+  {
+    source: "/go/instagram-jp-ab-adv-202607",
+    target: instagramAbAdvantageUrl,
+    status: 302,
+    purpose: "Instagram JP placement A/B — Advantage+ placements cell (July 2026)"
   }
 ];
 
