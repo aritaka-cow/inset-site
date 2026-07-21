@@ -40,6 +40,26 @@ test("placement A/B redirects preserve distinct ASC campaign tokens", () => {
   assert.match(validText, /\/go\/instagram-jp-ab-adv-202607 .*ct=instagram_jp_ab_adv_202607&mt=8 302/);
 });
 
+test("rejects a missing US paid campaign redirect", () => {
+  const withoutInstagramUs = validText
+    .split("\n")
+    .filter((line) => !line.startsWith("/go/instagram-us-202607 "))
+    .join("\n");
+
+  assert.ok(
+    validateCriticalRedirects(withoutInstagramUs).includes(
+      "critical redirect missing: /go/instagram-us-202607"
+    )
+  );
+});
+
+test("US paid campaign redirect preserves the US storefront and ASC campaign token", () => {
+  assert.match(
+    validText,
+    /\/go\/instagram-us-202607 https:\/\/apps\.apple\.com\/us\/app\/inset-photo-frames\/id6776488290\?pt=128992117&ct=instagram_us_202607&mt=8 302/
+  );
+});
+
 test("rejects an altered target", () => {
   const altered = validText.replace("ct=instagram_jp_202607", "ct=wrong_campaign");
   assert.ok(
