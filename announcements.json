@@ -2,6 +2,25 @@
   "version": 1,
   "announcements": [
     {
+      "id": "rel-1.3.0",
+      "date": "2026-07-26",
+      "type": "release",
+      "appVersion": "1.3.0",
+      "presentation": "modal",
+      "targetVersionBelow": "1.3.0",
+      "repeat": "daily",
+      "expiresAt": "2026-08-09T14:59:59Z",
+      "title": {
+        "en": "Inset 1.3.0",
+        "ja": "Inset 1.3.0"
+      },
+      "body": {
+        "en": "Frame videos as easily as photos. Add color or Creative Frames, crop to a different aspect ratio, rotate or straighten, and export with the original duration and audio at up to 1080p/30 fps. Video preview now includes playback, seeking, mute controls, and full-screen viewing. This update also improves Batch preview, save feedback, and overall reliability.",
+        "ja": "写真と同じように、動画にもフレームを付けられるようになりました。カラーフレーム／クリエイティブフレーム、比率変更とクロップ、回転と傾き調整に対応し、元の長さと音声を保って最大1080p・30fpsで書き出せます。再生・シーク・ミュート・全画面プレビューも追加しました。一括処理のプレビュー、保存完了表示、安定性も改善しています。"
+      },
+      "url": "https://apps.apple.com/app/id6776488290"
+    },
+    {
       "id": "news-20260718-update-1.2.2",
       "date": "2026-07-18",
       "type": "news",
