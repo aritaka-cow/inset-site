@@ -88,4 +88,16 @@ npm run deploy
 - フィールド追加（Optional）はアプリの Codable が未知キーを無視するため、トップレベル `version` を**上げずに**後方互換で行える。
 - 破壊的変更（必須フィールドの型変更等）は `version` を +1 し、**対応アプリを先にリリースしてから**配信側を切り替える（旧アプリは未来 version を拒否してキャッシュ表示を続ける）。
 
+### 更新案内のポップアップ
+
+iOS 1.2.3以降は、既存entryへ次のOptionalフィールドを加えると起動時の更新案内にも使える。
+
+- `presentation`: 通常は閉じられる `modal`。`blocking` は重大な互換性・セキュリティ・データ保全上の問題に限定する
+- `targetVersionBelow`: このバージョン未満だけを対象にする
+- `repeat`: `once` または `daily`
+- `startsAt` / `expiresAt`: 任意の配信期間。`blocking` では両方必須かつ最大7日
+- `url`: InsetのApp Store URL（App ID `6776488290`）
+
+iOS 1.2.2以前はこれらのフィールドを無視し、設定内のお知らせ一覧にだけ表示する。旧版へ起動時ポップアップを後付けすることはできない。App Storeで更新版が取得可能になる前に公開すると更新ボタンの遷移先に旧版しか出ないため、リリース状態を確認してから `announcements.json` を配信する。
+
 正本・実装は Yohaku repo（`Yohaku/IO/AnnouncementStore.swift` ほか）と vault T-0201 を参照。
