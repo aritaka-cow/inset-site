@@ -5,6 +5,7 @@ const instagramCampaignUrl = "https://apps.apple.com/app/apple-store/id677648829
 const instagramAbInstagramUrl = "https://apps.apple.com/app/apple-store/id6776488290?pt=128992117&ct=instagram_jp_ab_ig_202607&mt=8";
 const instagramAbAdvantageUrl = "https://apps.apple.com/app/apple-store/id6776488290?pt=128992117&ct=instagram_jp_ab_adv_202607&mt=8";
 const instagramUsCampaignUrl = "https://apps.apple.com/us/app/inset-photo-frames/id6776488290?pt=128992117&ct=instagram_us_202607&mt=8";
+const instagramFrCampaignUrl = "https://apps.apple.com/app/apple-store/id6776488290?pt=128992117&ct=instagram_fr_202608&mt=8";
 
 export const criticalRedirects = [
   ...["en", "ja"].flatMap((locale) =>
@@ -38,6 +39,12 @@ export const criticalRedirects = [
     target: instagramUsCampaignUrl,
     status: 302,
     purpose: "Instagram US paid campaign (July 2026)"
+  },
+  {
+    source: "/go/instagram-fr-202608-r2",
+    target: instagramFrCampaignUrl,
+    status: 302,
+    purpose: "Instagram France paid campaign (August 2026)"
   }
 ];
 

@@ -60,6 +60,39 @@ test("US paid campaign redirect preserves the US storefront and ASC campaign tok
   );
 });
 
+test("rejects a missing France paid campaign redirect", () => {
+  const withoutInstagramFrance = validText
+    .split("\n")
+    .filter((line) => !line.startsWith("/go/instagram-fr-202608-r2 "))
+    .join("\n");
+
+  assert.ok(
+    validateCriticalRedirects(withoutInstagramFrance).includes(
+      "critical redirect missing: /go/instagram-fr-202608-r2"
+    )
+  );
+});
+
+test("France paid campaign redirect preserves the exact ASC target and 302 status", () => {
+  assert.match(
+    validText,
+    /\/go\/instagram-fr-202608-r2 https:\/\/apps\.apple\.com\/app\/apple-store\/id6776488290\?pt=128992117&ct=instagram_fr_202608&mt=8 302/
+  );
+});
+
+test("rejects an altered France paid campaign redirect status", () => {
+  const altered = validText.replace(
+    /\/go\/instagram-fr-202608-r2 ([^\n]+) 302/,
+    "/go/instagram-fr-202608-r2 $1 301"
+  );
+
+  assert.ok(
+    validateCriticalRedirects(altered).includes(
+      "critical redirect status mismatch: /go/instagram-fr-202608-r2"
+    )
+  );
+});
+
 test("rejects an altered target", () => {
   const altered = validText.replace("ct=instagram_jp_202607", "ct=wrong_campaign");
   assert.ok(
