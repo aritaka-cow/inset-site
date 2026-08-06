@@ -1,0 +1,106 @@
+---
+const campaignUrl = "https://apps.apple.com/app/apple-store/id6776488290?pt=128992117&ct=instagram_fr_202608&mt=8";
+---
+
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="referrer" content="no-referrer" />
+    <title>Ouvrir Inset dans l’App Store</title>
+    <meta
+      name="description"
+      content="Ouvrez la fiche Inset dans l’App Store depuis Instagram."
+    />
+    <style is:inline>
+      :root {
+        color-scheme: light;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        background: #f4f1eb;
+        color: #1d1d1b;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        min-width: 0;
+        min-height: 100vh;
+        min-height: 100svh;
+        margin: 0;
+        padding: clamp(0.75rem, 5vw, 1.5rem);
+        padding:
+          max(clamp(0.75rem, 5vw, 1.5rem), env(safe-area-inset-top))
+          max(clamp(0.75rem, 5vw, 1.5rem), env(safe-area-inset-right))
+          max(clamp(0.75rem, 5vw, 1.5rem), env(safe-area-inset-bottom))
+          max(clamp(0.75rem, 5vw, 1.5rem), env(safe-area-inset-left));
+        display: grid;
+        place-items: center;
+        background: #f4f1eb;
+      }
+
+      main {
+        width: min(100%, 28rem);
+        padding: clamp(1.25rem, 6vw, 2rem);
+        border: 1px solid #d7d1c6;
+        border-radius: 1.25rem;
+        background: #fffdf9;
+        box-shadow: 0 1rem 2.5rem rgba(40, 35, 28, 0.08);
+      }
+
+      h1 {
+        margin: 0;
+        font-size: clamp(1.75rem, 9vw, 2.5rem);
+        line-height: 1.08;
+        letter-spacing: -0.035em;
+        overflow-wrap: anywhere;
+      }
+
+      p {
+        margin: 1rem 0 1.5rem;
+        color: #5b574f;
+        font-size: 1rem;
+        line-height: 1.6;
+        overflow-wrap: anywhere;
+      }
+
+      .cta {
+        width: 100%;
+        min-height: 56px;
+        padding: 0.85rem 1rem;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 0.875rem;
+        background: #171715;
+        color: #ffffff;
+        font-size: 1rem;
+        font-weight: 700;
+        line-height: 1.35;
+        text-align: center;
+        text-decoration: none;
+        overflow-wrap: anywhere;
+      }
+
+      .cta:focus-visible {
+        outline: 3px solid #2369d8;
+        outline-offset: 3px;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Ouvrez Inset dans l’App Store</h1>
+      <p>Depuis Instagram, touchez le bouton ci-dessous pour continuer vers l’App Store.</p>
+      <a
+        class="cta"
+        href={campaignUrl}
+        rel="external nofollow noreferrer"
+        referrerpolicy="no-referrer"
+      >Ouvrir dans l’App Store</a>
+    </main>
+  </body>
+</html>
