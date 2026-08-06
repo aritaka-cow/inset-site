@@ -15,6 +15,8 @@ const appStoreUrls = {
   en: "https://apps.apple.com/us/app/inset-photo-frames/id6776488290",
   ja: "https://apps.apple.com/jp/app/inset/id6776488290"
 };
+const franceLandingRoute = "/go/instagram-fr-202608-r3/";
+const franceCampaignUrl = "https://apps.apple.com/app/apple-store/id6776488290?pt=128992117&ct=instagram_fr_202608&mt=8";
 const errors = [];
 const pageKeys = ["features", "how-it-works", "frames", "pricing", "faq", "support", "privacy", "terms", "legal", "releases"];
 const versions = ["1.0.0", "1.1.0", "1.2.0", "1.2.1"];
@@ -28,7 +30,8 @@ const expectedFiles = [
   "images/batch-branch.webp", "images/batch-lamp.webp", "images/batch-chair.webp",
   "images/frame-35mm-black.webp", "images/frame-polaroid-black.webp", "images/frame-polaroid-white.webp", "images/frame-film-white.webp",
   "images/frame-letterbox-round-border.webp", "images/frame-letterbox-original.webp",
-  "store-badges/app-store-en.svg", "store-badges/app-store-ja.svg"
+  "store-badges/app-store-en.svg", "store-badges/app-store-ja.svg",
+  "go/instagram-fr-202608-r3/index.html", "_headers"
 ];
 
 const homeSocialMeta = new Map([
@@ -82,6 +85,9 @@ const expectedCtaPlacements = new Map([
 ]);
 function attribute(markup, name) {
   return markup.match(new RegExp(`\\b${name}="([^"]*)"`))?.[1] ?? null;
+}
+function decodeAttribute(value) {
+  return value?.replaceAll("&amp;", "&") ?? null;
 }
 function appStoreCtas(html) {
   return [...html.matchAll(/<a\b[^>]*>/g)]
@@ -140,6 +146,71 @@ for (const route of canonicalRoutes) {
   const pageSchema = schemas.find((schema) => schema["@type"] === "WebPage" || schema["@type"] === "Article");
   if (pageSchema?.url !== canonical) errors.push(`JSON-LD page URL mismatch: ${route}`);
   if (pageSchema?.isPartOf?.url !== siteOrigin) errors.push(`JSON-LD website URL mismatch: ${route}`);
+}
+
+const franceLandingFile = fileForRoute(franceLandingRoute);
+if (await exists(franceLandingFile)) {
+  const html = await readFile(franceLandingFile, "utf8");
+  const anchors = [...html.matchAll(/<a\b[^>]*>/g)].map((match) => match[0]);
+  const forbiddenPatterns = new Map([
+    ["script", /<script\b/i],
+    ["meta refresh", /<meta\b[^>]*http-equiv=["']?refresh/i],
+    ["iframe", /<iframe\b/i],
+    ["form", /<form\b/i],
+    ["image", /<img\b/i],
+    ["external resource link", /<link\b/i],
+    ["base element", /<base\b/i],
+    ["automatic navigation", /\b(?:window\.open|location\s*=|location\.(?:assign|replace)\s*\()/i],
+    ["network API", /\b(?:fetch\s*\(|XMLHttpRequest|WebSocket)\b/i],
+    ["cookie or storage", /\b(?:document\.cookie|localStorage|sessionStorage|indexedDB)\b/i],
+    ["CSS external request", /@import\b|url\s*\(/i]
+  ]);
+
+  if (!/<html\b[^>]*\blang="fr"/.test(html)) errors.push(`${franceLandingRoute} document language must be fr`);
+  if (anchors.length !== 1) errors.push(`${franceLandingRoute} must contain exactly one anchor; received ${anchors.length}`);
+  const cta = anchors[0] ?? "";
+  if (decodeAttribute(attribute(cta, "href")) !== franceCampaignUrl) errors.push(`${franceLandingRoute} CTA href mismatch`);
+  if (attribute(cta, "target") !== null) errors.push(`${franceLandingRoute} CTA must remain in the same browsing context`);
+  const ctaRel = new Set((attribute(cta, "rel") ?? "").split(/\s+/).filter(Boolean));
+  for (const token of ["external", "nofollow", "noreferrer"]) {
+    if (!ctaRel.has(token)) errors.push(`${franceLandingRoute} CTA rel must include ${token}`);
+  }
+  if (attribute(cta, "referrerpolicy") !== "no-referrer") errors.push(`${franceLandingRoute} CTA referrer policy mismatch`);
+  if (!/\.cta\s*\{[^}]*\bmin-height:\s*(?:5[2-9]|[6-9]\d|\d{3,})px\b/s.test(html)) errors.push(`${franceLandingRoute} CTA minimum height must be at least 52px`);
+  for (const [label, pattern] of forbiddenPatterns) {
+    if (pattern.test(html)) errors.push(`${franceLandingRoute} contains forbidden ${label}`);
+  }
+}
+
+const builtHeaders = await readFile(join(output, "_headers"), "utf8");
+function headersForRoute(text, route) {
+  const lines = text.split(/\r?\n/);
+  const start = lines.findIndex((line) => line.trim() === route);
+  if (start === -1) return null;
+  const headers = new Map();
+  for (const line of lines.slice(start + 1)) {
+    if (!/^\s+/.test(line)) break;
+    const separator = line.indexOf(":");
+    if (separator === -1) continue;
+    headers.set(line.slice(0, separator).trim(), line.slice(separator + 1).trim());
+  }
+  return headers;
+}
+const franceLandingHeaders = headersForRoute(builtHeaders, franceLandingRoute);
+const requiredFranceLandingHeaders = new Map([
+  ["Cache-Control", "no-store"],
+  ["Content-Language", "fr"],
+  ["Content-Security-Policy", "default-src 'none'; style-src 'unsafe-inline'; script-src 'none'; connect-src 'none'; img-src 'none'; font-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'"],
+  ["Referrer-Policy", "no-referrer"],
+  ["X-Robots-Tag", "noindex, nofollow"]
+]);
+if (!franceLandingHeaders) {
+  errors.push(`${franceLandingRoute} route-specific headers missing`);
+} else {
+  for (const [name, value] of requiredFranceLandingHeaders) {
+    if (franceLandingHeaders.get(name) !== value) errors.push(`${franceLandingRoute} ${name} header mismatch`);
+  }
+  if (franceLandingHeaders.has("Location")) errors.push(`${franceLandingRoute} must not set a Location header`);
 }
 
 for (const [file, expectedHash] of approvedSocialAssetHashes) {
