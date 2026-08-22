@@ -19,7 +19,7 @@ const franceLandingRoute = "/go/instagram-fr-202608-r3/";
 const franceCampaignUrl = "https://apps.apple.com/app/apple-store/id6776488290?pt=128992117&ct=instagram_fr_202608&mt=8";
 const errors = [];
 const pageKeys = ["features", "how-it-works", "frames", "pricing", "faq", "support", "privacy", "terms", "legal", "releases"];
-const versions = ["1.0.0", "1.1.0", "1.2.0", "1.2.1"];
+const versions = ["1.0.0", "1.1.0", "1.2.0", "1.2.1", "1.3.1"];
 const canonicalRoutes = ["/", "/ja/", ...pageKeys.flatMap((page) => [`/${page}/`, `/ja/${page}/`]), ...versions.flatMap((version) => [`/releases/${version}/`, `/ja/releases/${version}/`])];
 const expectedFiles = [
   "index.html", "ja/index.html", "404.html", "ja/404.html", "ja/404/index.html", "announcements.json", "roadmap.json", "roadmap.html", "privacy.html", "terms.html", "legal.html", "robots.txt", "sitemap.xml", "_redirects",

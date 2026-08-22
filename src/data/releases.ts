@@ -11,6 +11,31 @@ export type ReleaseEntry = {
 
 export const releases: ReleaseEntry[] = [
   {
+    version: "1.3.1",
+    announcementDate: "2026-08-23",
+    summary: {
+      en: "Finish a single video with Inset's layered frame workflow, with more reliable saving and clearer, more accessible Inset Lab guidance.",
+      ja: "写真と同じ余白レイヤーで1本の動画を仕上げられるようになり、保存の安定性とInset Labの案内・アクセシビリティも改善しました。"
+    },
+    highlights: {
+      en: [
+        "Edit one video with frame layers, aspect ratio, crop, 90° rotation, straightening, and Creative Frames",
+        "Play, seek, and control audio directly in the preview",
+        "With Inset Lab, save videos up to 5 minutes while preserving the original duration and audio, at up to 1080p/30 fps",
+        "More reliable saving for longer videos, with improved playback controls, frame sizing, and save status",
+        "A clearer one-time Inset Lab introduction and better access to Lab actions with larger accessibility text"
+      ],
+      ja: [
+        "1本の動画に、余白レイヤー、比率フィット、トリミング、90°回転、傾き補正、クリエイティブフレームを適用",
+        "プレビューで再生、シーク、音声を操作",
+        "Inset Labなら最大5分の動画を、元の尺と音声を保ったまま最大1080p／30fpsで保存",
+        "長めの動画でも保存をより安定化し、再生操作、フレームのリサイズ、保存状況の表示を改善",
+        "Inset Labを初めてご案内する流れを明確化し、大きな文字でも操作へアクセスしやすく改善"
+      ]
+    },
+    media: { en: [], ja: [] }
+  },
+  {
     version: "1.2.1",
     announcementDate: "2026-07-02",
     storePublishedAt: "2026-07-11T20:54:04Z",

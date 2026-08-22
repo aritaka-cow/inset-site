@@ -22,7 +22,7 @@ for (const item of announcements.announcements ?? []) {
 
 if (roadmap.status !== "retired" || !roadmap.message?.en || !roadmap.message?.ja) errors.push("roadmap.json retired wire contract changed");
 
-const expectedVersions = ["1.0.0", "1.1.0", "1.2.0", "1.2.1"];
+const expectedVersions = ["1.0.0", "1.1.0", "1.2.0", "1.2.1", "1.3.1"];
 const announcementVersions = new Set((announcements.announcements ?? []).filter((item) => item.type === "release").map((item) => item.appVersion));
 for (const version of expectedVersions) {
   if (!announcementVersions.has(version)) errors.push(`missing release announcement: ${version}`);
