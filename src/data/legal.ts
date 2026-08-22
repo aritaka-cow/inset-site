@@ -29,7 +29,7 @@ export const privacyDocuments: Localized<LegalDocument> = {
       { heading: "データの収集", bullets: [
         "アカウント登録・ログインはありません。",
         "本アプリは、仮名の利用分析のためにPostHogを使用します。",
-        "本アプリに組み込まれたPostHogおよびMeta SDKのコンポーネントは、アプリの機能提供と利用分析のため、クラッシュレポートおよび限定的な技術・運用上の診断データを収集する場合があります。これらの診断データをトラッキングには使用しません。",
+        "本アプリに組み込まれたPostHogおよびMeta SDKのコンポーネントは、アプリの機能提供のためにクラッシュレポートを、アプリの機能提供と利用分析のために限定的な技術・運用上の診断データを収集する場合があります。いずれもトラッキングには使用しません。",
         "Inset Labの購入確認、解錠、復元、購入分析のためにRevenueCatを使用します。",
         "収集する可能性がある情報: 仮名のアプリ・端末インスタンス識別子、アプリの起動・画面表示・フレーム追加・プリセット保存・書き出し成功・失敗などの利用イベント、アプリバージョン、OS・端末種別などの技術情報。これらの識別子はアカウントや氏名などの直接識別情報ではありませんが、AppleのApp Privacyでは利用者または端末に関連付けられる識別子として扱われる場合があります。",
         "Apple Ads経由でインストールされた場合、広告効果を測定するため、Appleが返すattribution結果とcampaign・ad group・keyword・ad ID、claim・conversion type、国・地域、掲載面を、仮名の利用イベントとともにPostHogへ送信する場合があります。",
@@ -74,7 +74,7 @@ export const privacyDocuments: Localized<LegalDocument> = {
       { heading: "Data Collection", bullets: [
         "No account and no sign-in.",
         "The App uses PostHog for pseudonymous product analytics.",
-        "Bundled PostHog and Meta SDK components may collect crash reports and limited technical or operational diagnostic data for app functionality and analytics. These diagnostics are not used for tracking.",
+        "Bundled PostHog and Meta SDK components may collect crash reports for app functionality and limited technical or operational diagnostic data for app functionality and analytics. Neither is used for tracking.",
         "The App uses RevenueCat to validate, unlock, restore, and analyze Inset Lab purchases.",
         "Data that may be collected: pseudonymous app or device instance identifiers, usage events such as app opens, screen views, frame additions, preset saves, export success or failure, app version, OS or device type, and similar technical information. These are not account names or direct identifiers, but Apple App Privacy may treat them as identifiers linked to a user or device.",
         "When the App is installed through Apple Ads, it may send Apple's attribution result and campaign, ad group, keyword, and ad IDs, claim or conversion type, country or region, and placement to PostHog with pseudonymous usage events to measure campaign performance.",
