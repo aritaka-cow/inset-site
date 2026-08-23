@@ -7,6 +7,7 @@
 /releases/1.1.0.html /releases/1.1.0 200
 /releases/1.2.0.html /releases/1.2.0 200
 /releases/1.2.1.html /releases/1.2.1 200
+/releases/1.3.1.html /releases/1.3.1 200
 
 # Count first-party App Store CTA requests by locale and placement in
 # Cloudflare HTTP Analytics, then preserve acquisition attribution in ASC.
