@@ -23,7 +23,7 @@ export const privacyDocuments: Localized<LegalDocument> = {
     title: "Inset プライバシーポリシー",
     description: "Insetが扱う写真、仮名利用分析、Apple Ads attribution、RevenueCatによる購入情報、Meta広告効果測定について説明します。",
     heading: "プライバシーポリシー",
-    updated: "2026-08-22",
+    updated: "2026-09-18",
     intro: "Inset（以下「本アプリ」）は、ユーザーのプライバシーに配慮して設計されています。本アプリは、アプリ改善のための<strong>仮名の利用状況データ</strong>と、課金機能に必要な購入履歴を扱います。氏名、メールアドレス、電話番号、写真、編集後画像、ファイル名、写真の位置情報、プリセット名をMeta、PostHog、RevenueCatへ送信しません。",
     sections: [
       { heading: "データの収集", bullets: [
@@ -44,6 +44,7 @@ export const privacyDocuments: Localized<LegalDocument> = {
         "写真ファイル名、写真メタデータ、位置情報、プリセット名、任意カラーの実際の色値も分析イベントには含めません。"
       ] },
       { heading: "端末内に保存される情報", bullets: [
+        "前回の編集を再開するため、選択した写真の一時コピー1枚と編集設定を端末内に保存します。別の写真を選択したとき、またはアプリやiOSがキャッシュを削除したとき、写真のコピーは利用できなくなる場合があります。写真のコピーを外部へ送信することはありません。",
         "保存したプリセット（余白の色・幅・比率などの<strong>数値設定のみ</strong>）は端末内にのみ保存されます。画像・位置情報は含まれません。",
         "プリセット名やプリセット内容そのものは分析サービスへ送信しません。アプリを削除すると端末内のプリセットは消去されます。"
       ] },
@@ -68,7 +69,7 @@ export const privacyDocuments: Localized<LegalDocument> = {
     title: "Inset Privacy Policy",
     description: "Learn how Inset handles photos, pseudonymous product analytics, Apple Ads attribution, RevenueCat purchases, and Meta ad measurement.",
     heading: "Privacy Policy",
-    updated: "2026-08-22",
+    updated: "2026-09-18",
     intro: "Inset (“the App”) is designed with privacy in mind. The App handles <strong>pseudonymous usage analytics</strong> to improve the product and purchase history required to provide paid features. It does not send your name, email address, phone number, photos, edited images, filenames, photo location data, or preset names to Meta, PostHog, or RevenueCat.",
     sections: [
       { heading: "Data Collection", bullets: [
@@ -89,6 +90,7 @@ export const privacyDocuments: Localized<LegalDocument> = {
         "Photo filenames, photo metadata, location data, preset names, and exact custom color values are not included in analytics events."
       ] },
       { heading: "Information Stored on Your Device", bullets: [
+        "To resume your previous edit, the App stores one temporary copy of your selected photo and your editing settings on your device. The copy may no longer be available after you select another photo or if the App or iOS clears the cache. It is not transmitted outside your device.",
         "Saved presets (numeric settings only, such as frame color, width, and ratio) are stored locally on your device. They contain no images or location data.",
         "Preset names and preset contents are not sent to analytics services. Deleting the App removes local presets."
       ] },
