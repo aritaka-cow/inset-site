@@ -1,7 +1,7 @@
 export type Locale = "en" | "ja";
 export type Localized<T> = Record<Locale, T>;
 export type PageKey = "home" | "features" | "how-it-works" | "frames" | "pricing" | "faq" | "support" | "privacy" | "terms" | "legal" | "releases";
-export type ContentSection = { title: string; body: string; bullets?: string[] };
+export type ContentSection = { title: string; body: string; bullets?: string[]; links?: { label: string; href: string }[] };
 export type PageContent = { title: string; description: string; eyebrow?: string; heading: string; intro: string; sections: ContentSection[] };
 export type AppStorePlacement = "hero" | "closing" | "pricing" | "support";
 
@@ -19,7 +19,7 @@ export const appFacts = {
   name: "Inset",
   developer: "Aritaka Kanazawa",
   developerUrl: "https://apps.apple.com/jp/developer/aritaka-kanazawa/id6776488293",
-  publicVersion: "1.2.1",
+  publicVersion: "1.3.2",
   minimumOs: "iOS 17.0",
   device: "iPhone",
   androidStatus: "coming-soon" as const
@@ -107,24 +107,24 @@ export const faqs: Localized<Faq[]> = {
     { question: "Can I stack more than one margin?", answer: "Yes. Each layer can have its own color, width, and aspect ratio, so you can build the frame one layer at a time." },
     { question: "Does Inset export at full resolution?", answer: "Yes. Inset renders the layout you see in the preview at the full resolution supported by the source photograph." },
     { question: "Can I reuse the same setup?", answer: "Yes. Save a setup as a preset and apply it to another photograph. Presets are stored on your device." },
-    { question: "Are my photos uploaded?", answer: "No. Photos and edited images are processed on your device. Inset does send anonymous usage analytics and purchase data as described in the Privacy Policy." },
-    { question: "Why does Inset request photo access?", answer: "Inset uses add-only access to save exported images. You choose source images through the system photo picker." },
-    { question: "What devices are supported?", answer: "The current public version supports iPhone with iOS 17.0 or later." },
-    { question: "Which languages are supported?", answer: "Inset 1.2.1 is localized for 17 locales, including English and Japanese." },
+    { question: "Are my photos uploaded?", answer: "No. Photos and edited images are processed on your device. Inset does send pseudonymous usage analytics and purchase data as described in the Privacy Policy." },
+    { question: "Why does Inset request photo access?", answer: "Choose source photos and videos through the system picker. iOS uses add-only access to save them. Android 8–9 asks for storage write permission when saving photos; Android 10 and later uses MediaStore for saving." },
+    { question: "What devices are supported?", answer: "The public iOS version supports iPhone with iOS 17.0 or later. Android is in preparation: photos require Android 8 or later; video saving requires Android 10 or later, for videos up to five minutes. Some formats or device limitations may prevent export." },
+    { question: "Which languages are supported?", answer: "The iOS version supports 17 locales, including English and Japanese. The initial Android release is being prepared with Japanese and English support." },
     { question: "Is an Android version available?", answer: "Not yet. Android is in preparation. A release date and Google Play URL have not been announced." },
-    { question: "How do I manage or restore Inset Lab?", answer: "Manage a subscription in your Apple Account settings. Use Restore in Inset with the same Apple ID to restore an eligible purchase." }
+    { question: "How do I manage or restore Inset Lab?", answer: "Use Apple subscription management on iOS or Google Play subscription management on Android. Restore Purchases in Inset with the same account for the store where you purchased. Uninstalling does not cancel a subscription; purchases are not guaranteed to transfer between stores." }
   ],
   ja: [
     { question: "Insetは無料で使えますか？", answer: "はい。余白、プリセット、クロップ、フル解像度書き出しなどの基本機能は無料です。クリエイティブフレームと一括処理を含むInset Labは有料の追加機能です。" },
     { question: "複数の余白を重ねられますか？", answer: "はい。各レイヤーの色、幅、比率を個別に調整し、余白を一層ずつ重ねられます。" },
     { question: "フル解像度で書き出せますか？", answer: "はい。プレビューと同じレイアウトを、元写真に応じたフル解像度で書き出します。" },
     { question: "設定を保存して繰り返し使えますか？", answer: "はい。仕上がりをプリセットとして保存し、別の写真へ再適用できます。プリセットは端末内に保存されます。" },
-    { question: "写真はアップロードされますか？", answer: "いいえ。写真と編集後画像は端末内で処理されます。匿名の利用分析と購入に関するデータについてはプライバシーポリシーをご確認ください。" },
-    { question: "写真ライブラリ権限は何に使いますか？", answer: "書き出した画像を追加するためのadd-only権限です。元写真はシステムの写真ピッカーから選びます。" },
-    { question: "対応環境は？", answer: "現在の公開版はiOS 17.0以降のiPhoneに対応しています。" },
-    { question: "何言語に対応していますか？", answer: "Inset 1.2.1は、日本語と英語を含む17ロケールに対応しています。" },
+    { question: "写真はアップロードされますか？", answer: "いいえ。写真と編集後画像は端末内で処理されます。仮名の利用分析と購入に関するデータについてはプライバシーポリシーをご確認ください。" },
+    { question: "写真ライブラリ権限は何に使いますか？", answer: "元の写真・動画はシステムのピッカーで選びます。iOSでは保存用の「追加のみ」権限を使います。Android 8–9では写真保存時にストレージ書き込み権限を求め、Android 10以降ではMediaStoreで保存します。" },
+    { question: "対応環境は？", answer: "公開中のiOS版はiOS 17.0以降のiPhoneに対応しています。準備中のAndroid版は、写真がAndroid 8以降、動画保存がAndroid 10以降で、動画の上限は5分です。素材形式・端末性能により保存できない場合があります。" },
+    { question: "何言語に対応していますか？", answer: "iOS版は日本語と英語を含む17ロケールに対応しています。Android初回公開は日本語・英語を基本として準備しています。" },
     { question: "Android版はありますか？", answer: "現在準備中です。公開日とGoogle Play URLはまだ発表していません。" },
-    { question: "Inset Labの管理や復元は？", answer: "Apple Accountのサブスクリプション設定から管理できます。同じApple IDでInsetのRestoreを使うと、対象の購入を復元できます。" }
+    { question: "Inset Labの管理や復元は？", answer: "iOSはApple、AndroidはGoogle Playのサブスクリプション管理で解約できます。購入したストアの同じアカウントで、Insetの「購入を復元」を使います。アプリを削除しても解約されません。ストアをまたぐ購入の移行は保証しません。" }
   ]
 };
 
@@ -165,21 +165,71 @@ export const pageContent: Localized<Record<ContentPageKey, PageContent>> = {
     },
     pricing: {
       title: "Inset pricing — Free core features and Inset Lab", description: "Inset's core framing tools are free. Inset Lab is a paid upgrade for Creative Frames and batch processing.",
-      eyebrow: "PRICING", heading: "Start free. Add Inset Lab when you need more.", intro: "Inset Lab is available as monthly and yearly auto-renewable subscriptions or a one-time Lifetime purchase. The App Store shows the applicable price before you confirm a purchase.",
+      eyebrow: "PRICING", heading: "Start free. Add Inset Lab when you need more.", intro: "Inset Lab is available as monthly and yearly auto-renewable subscriptions or a one-time Lifetime purchase. The store purchase screen shows the applicable price and terms before confirmation. Android public sales have not started.",
       sections: [
         { title: "Core features are free", body: "Layered margins, crop, presets, and full-resolution export are available without Inset Lab." },
         { title: "Inset Lab", body: "Inset Lab unlocks Creative Frames, favorites, and batch framing for multiple photographs." },
-        { title: "Purchase options", body: "Current prices in Japan are ¥500 per month, ¥1,500 per year, and ¥4,000 for Lifetime, including tax. Eligible monthly and yearly subscriptions include a 7-day free trial and renew automatically unless cancelled. For prices outside Japan, contact contact@atelier-yohaku.com and we will provide the current price by email without delay. The applicable price is also shown in the App Store purchase screen before confirmation." }
+        { title: "Purchase options", body: "Published App Store prices in Japan are ¥500 per month, ¥1,500 per year, and ¥4,000 for Lifetime, including tax. Eligible monthly and yearly subscriptions include a 7-day free trial and renew automatically unless cancelled. For prices outside Japan, contact contact@atelier-yohaku.com and we will provide the current price by email without delay. The applicable price is also shown in the App Store purchase screen before confirmation. Android public prices and trial conditions will be listed before public sales begin; they are not guaranteed to match iOS." }
       ]
     },
-    faq: { title: "Inset FAQ — Price, full-resolution export, privacy, Android", description: "Direct answers about Inset's free features, Inset Lab, full-resolution export, photo privacy, supported iPhones, and Android status.", eyebrow: "FAQ", heading: "Questions about Inset, answered directly.", intro: "These answers describe the current public iPhone version, 1.2.1.", sections: [] },
+    faq: { title: "Inset FAQ — Price, full-resolution export, privacy, Android", description: "Direct answers about Inset's free features, Inset Lab, full-resolution export, photo privacy, supported iPhones, and Android status.", eyebrow: "FAQ", heading: "Questions about Inset, answered directly.", intro: "These answers cover the public iOS app and the Android version being prepared for release.", sections: [] },
     support: {
-      title: "Inset support — Help, privacy, terms, and release notes", description: "Get help with Inset, read common answers, review release notes, or contact the developer.",
-      eyebrow: "SUPPORT", heading: "Help with Inset.", intro: "Start with the FAQ and release notes. If the problem remains, send the app version, iOS version, and the steps that led to it. Do not attach a private photo unless it is necessary and you choose to do so.",
-      sections: [
-        { title: "Before contacting support", body: "Check that Inset and iOS are up to date, then try the action again. For purchase restoration, use the same Apple ID and Restore inside Inset." },
-        { title: "Contact", body: `Email ${supportEmail}. Please include a short description, your Inset version, iOS version, and whether the issue can be repeated.` },
-        { title: "Policies and updates", body: "Privacy, Terms, the commercial transaction disclosure, FAQ, and Releases are available from the footer of every page." }
+      "title": "Inset support — iOS and Android",
+      "description": "Help with photos, videos, Inset Lab, restoration, cancellation, refunds, and privacy on iOS and Android.",
+      "eyebrow": "SUPPORT",
+      "heading": "Help with Inset.",
+      "intro": "Support for the public iOS app and the Android version being prepared for release. Start with the FAQ and release notes. If a problem remains, tell us your device model, OS, Inset version, and the steps that led to it. Do not send private media unless needed and you choose to share it.",
+      "sections": [
+        {
+          "title": "Photos and videos",
+          "body": "Update Inset and try again. For Google Photos or other cloud media, first confirm the selected file has downloaded and plays in its source app. Android photo support starts at Android 8; video saving requires Android 10 or later, for videos up to five minutes. If export fails, report the duration, file format if known, and the error shown; do not send the media initially."
+        },
+        {
+          "title": "Restore Inset Lab",
+          "body": "In Inset settings, select Restore Purchases while using the same Apple Account or Google account used for the purchase. Confirm any pending payment with the store. Restoring does not create a new purchase. A purchase is not guaranteed to transfer between iOS and Android. If restoration fails, tell us the platform and plan without sending card details or verification codes."
+        },
+        {
+          "title": "Cancel a subscription",
+          "body": "On iOS, use Apple subscription management and cancel at least 24 hours before renewal. On Android, use Google Play subscription management before the next renewal. Inset’s Android settings also provides a management link when an active subscription is recognized. Uninstalling does not cancel a subscription. Check the store for the access end date. Lifetime is a one-time purchase with no renewal.",
+          "links": [
+            {
+              "label": "Manage Apple subscriptions",
+              "href": "https://support.apple.com/118428"
+            },
+            {
+              "label": "Manage Google Play subscriptions",
+              "href": "https://play.google.com/store/account/subscriptions"
+            }
+          ]
+        },
+        {
+          "title": "Request a refund",
+          "body": "Refund eligibility follows the conditions of the store where you purchased and applicable law. Use Apple’s Report a Problem or Google Play’s refund guidance. If Google Play asks you to contact the developer, email us for assistance.",
+          "links": [
+            {
+              "label": "Apple: Report a Problem",
+              "href": "https://reportaproblem.apple.com/"
+            },
+            {
+              "label": "Google Play refund guidance",
+              "href": "https://support.google.com/googleplay/answer/15574908"
+            }
+          ]
+        },
+        {
+          "title": "Privacy and deletion requests",
+          "body": "Inset has no app account or sign-in. Email us with a privacy inquiry or data deletion request. We do not currently provide a dedicated method that reliably matches and deletes anonymous records. Pseudonymous records may not be locatable from an email address alone; we will explain the identifiable records and any limits. Deleting the app removes local data but does not cancel purchases or remove service-side records.",
+          "links": [
+            {
+              "label": "Read the Privacy Policy",
+              "href": "/privacy/"
+            }
+          ]
+        },
+        {
+          "title": "Contact",
+          "body": "Email contact@atelier-yohaku.com. Include a short description, device model, OS and Inset versions, and whether the issue repeats. For an internal Android test, include the build number if available. Do not send verification codes, payment details, or unnecessary private media."
+        }
       ]
     }
   },
@@ -217,21 +267,71 @@ export const pageContent: Localized<Record<ContentPageKey, PageContent>> = {
     },
     pricing: {
       title: "Insetの料金 — 基本機能は無料、Inset Labは有料", description: "Insetの基本機能は無料です。Inset Labではクリエイティブフレームと一括処理を利用できます。",
-      eyebrow: "料金", heading: "まずは無料で。必要になったらInset Labを。", intro: "Inset Labは、月額・年額の自動更新サブスクリプションと、買い切りから選べます。購入確定前に、App Storeの画面で適用価格を確認できます。",
+      eyebrow: "料金", heading: "まずは無料で。必要になったらInset Labを。", intro: "Inset Labは、月額・年額の自動更新サブスクリプションと、買い切りから選べます。購入前に各ストアの購入画面で価格と条件を確認できます。Android版の一般販売はまだ開始していません。",
       sections: [
         { title: "基本機能は無料", body: "余白レイヤー、クロップ、プリセット、フル解像度書き出しはInset Labなしで利用できます。" },
         { title: "Inset Lab", body: "クリエイティブフレーム、お気に入り、複数写真への一括フレームを利用できます。" },
-        { title: "購入方式", body: "日本での現在価格（税込）は、月額500円、年額1,500円、買い切り4,000円です。対象となる月額・年額プランには7日間の無料トライアルが付き、解約しない限り自動更新されます。日本以外の各国・地域の販売価格は、contact@atelier-yohaku.comへご請求いただければ、電子メールにて遅滞なく提供します。適用価格は購入確定前にApp Storeの購入画面にも表示されます。" }
+        { title: "購入方式", body: "日本のApp Store掲載価格（税込）は、月額500円、年額1,500円、買い切り4,000円です。対象となる月額・年額プランには7日間の無料トライアルが付き、解約しない限り自動更新されます。日本以外の各国・地域の販売価格は、contact@atelier-yohaku.comへご請求いただければ、電子メールにて遅滞なく提供します。適用価格は購入前にApp Storeの購入画面でも表示されます。Android版の一般販売価格・トライアル条件は一般販売開始までに表示します。iOSと同一条件であることは保証しません。" }
       ]
     },
-    faq: { title: "Inset FAQ — 料金、フル解像度、写真のプライバシー、Android", description: "Insetの無料機能、Inset Lab、フル解像度書き出し、写真の扱い、対応iPhone、Android版について回答します。", eyebrow: "FAQ", heading: "Insetについて、短く答えます。", intro: "現在公開中のiPhone版1.2.1に基づく回答です。", sections: [] },
+    faq: { title: "Inset FAQ — 料金、フル解像度、写真のプライバシー、Android", description: "Insetの無料機能、Inset Lab、フル解像度書き出し、写真の扱い、対応iPhone、Android版について回答します。", eyebrow: "FAQ", heading: "Insetについて、短く答えます。", intro: "公開中のiOS版と、公開準備中のAndroid版についてご案内します。", sections: [] },
     support: {
-      title: "Insetサポート — FAQ、プライバシー、利用規約、更新情報", description: "Insetのよくある質問、リリースノート、ポリシーを確認し、開発者へ問い合わせできます。",
-      eyebrow: "サポート", heading: "Insetのサポート。", intro: "まずFAQとリリースノートをご確認ください。解決しない場合は、アプリのバージョン、iOSのバージョン、問題が起きるまでの手順をお知らせください。必要がない限り、私的な写真は添付しないでください。",
-      sections: [
-        { title: "お問い合わせの前に", body: "InsetとiOSを最新の状態にし、もう一度同じ操作をお試しください。購入の復元は、同じApple IDでInset内のRestoreを使用します。" },
-        { title: "お問い合わせ", body: `${supportEmail} へメールをお送りください。短い状況説明、Insetのバージョン、iOSのバージョン、再現できるかを添えてください。` },
-        { title: "ポリシーと更新情報", body: "プライバシー、利用規約、特定商取引法に基づく表記、FAQ、リリースノートはすべてのページのフッターから確認できます。" }
+      "title": "Insetサポート — iOS・Android",
+      "description": "iOS・Androidの写真・動画、Inset Lab、復元、解約、返金、プライバシーの問い合わせ先です。",
+      "eyebrow": "サポート",
+      "heading": "Insetのサポート。",
+      "intro": "公開中のiOS版と公開準備中のAndroid版についてご案内します。まずFAQと更新情報をご確認ください。解決しない場合は、端末の機種、OS、Insetのバージョン、問題が起きるまでの手順をお知らせください。私的な写真・動画は、必要があり、ご自身が共有を選ぶ場合だけお送りください。",
+      "sections": [
+        {
+          "title": "写真・動画が読み込めない／保存できない",
+          "body": "Insetを更新してもう一度お試しください。Google フォトなどクラウド上の素材は、元アプリでダウンロードが完了し、再生できるか確認してください。Androidの写真はAndroid 8以降、動画保存はAndroid 10以降・5分までが対象です。保存できない場合は、動画の長さ、分かれば形式、表示されたエラーをお知らせください。最初から素材そのものを送る必要はありません。"
+        },
+        {
+          "title": "Inset Labの購入を復元",
+          "body": "購入したものと同じApple AccountまたはGoogleアカウントで、Insetの設定から「購入を復元」を選んでください。支払いが保留中ならストアの状態をご確認ください。復元で新たな購入は発生しません。iOSとAndroidをまたぐ購入の移行は保証しません。復元できない場合は、OSと購入プランをお知らせください。カード情報や認証コードは送らないでください。"
+        },
+        {
+          "title": "サブスクリプションの解約",
+          "body": "iOSは更新の少なくとも24時間前までにAppleの管理画面から、Androidは次回更新前にGoogle Playの管理画面から解約します。Android版Insetの設定にも、認識された有効なサブスクリプションがある場合は管理リンクが表示されます。アプリを削除しても解約されません。利用終了日はストアでご確認ください。買い切りは一度きりの購入で、自動更新はありません。",
+          "links": [
+            {
+              "label": "Appleのサブスクリプション管理",
+              "href": "https://support.apple.com/118428"
+            },
+            {
+              "label": "Google Playのサブスクリプション管理",
+              "href": "https://play.google.com/store/account/subscriptions"
+            }
+          ]
+        },
+        {
+          "title": "返金について",
+          "body": "返金の可否は購入したストアの条件と適用法令に従います。Appleの「問題を報告する」またはGoogle Playの返金案内をご確認ください。Google Playから開発者への連絡を求められた場合は、メールでお問い合わせください。",
+          "links": [
+            {
+              "label": "Apple：問題を報告する",
+              "href": "https://reportaproblem.apple.com/"
+            },
+            {
+              "label": "Google Playの返金案内",
+              "href": "https://support.google.com/googleplay/answer/15574908"
+            }
+          ]
+        },
+        {
+          "title": "プライバシー・データ削除の依頼",
+          "body": "Insetにはアプリのアカウント登録・ログインはありません。プライバシーの照会・データ削除の依頼はメールで受け付けます。現在、匿名の記録を確実に照合して削除する専用手段は提供していません。仮名の記録はメールアドレスだけで特定できない場合があり、特定できる情報や対応範囲をご案内します。アプリの削除で端末内データは消去されますが、解約やサービス側の記録の削除は行われません。",
+          "links": [
+            {
+              "label": "プライバシーポリシーを読む",
+              "href": "/ja/privacy/"
+            }
+          ]
+        },
+        {
+          "title": "お問い合わせ",
+          "body": "contact@atelier-yohaku.com へメールをお送りください。状況の説明、端末の機種、OSとInsetのバージョン、再現できるかを添えてください。Android内部テストの場合は、分かればビルド番号もお知らせください。認証コード、決済情報、必要のない私的な写真・動画は送らないでください。"
+        }
       ]
     }
   }
