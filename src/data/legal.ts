@@ -98,7 +98,8 @@ export const privacyDocuments: Localized<LegalDocument> = {
       {
         "heading": "お子様のプライバシー",
         "paragraphs": [
-          "本アプリは子どもを対象にしたサービスではありません。年齢、氏名、メールアドレスなど、個人を直接識別する情報の入力は求めません。"
+          "本アプリは13歳以上の利用者を対象にしています。氏名やメールアドレスなど、個人を直接識別する情報の入力は求めません。",
+          "Android版は、対応する地域やGoogle Playの設定に応じて、Google Playから提供される年齢範囲と年齢確認の状態を、アプリの利用可否を判断するため、実行中のメモリでのみ処理します。この情報や、それに基づく利用可否の状態を、当社サーバー、PostHog、RevenueCat、広告サービスへ送信せず、アプリのログや永続ストレージにも保存しません。この処理のために本アプリが生年月日、身分証明書や顔写真の入力を求めることはありません。Google Playで年齢確認が必要な場合は、その確認手順へ案内します。Google Play自身が行う処理にはGoogleのポリシーが適用されます。"
         ]
       },
       {
@@ -188,7 +189,8 @@ export const privacyDocuments: Localized<LegalDocument> = {
       {
         "heading": "Children’s Privacy",
         "paragraphs": [
-          "The App is not directed to children. It does not ask for directly identifying information such as age, name, or email address."
+          "The App is intended for users aged 13 and older. It does not ask you to enter directly identifying information such as your name or email address.",
+          "On Android, depending on the region and Google Play settings, the App processes age ranges and age-verification status supplied by Google Play only in memory while running, to determine access to the App. The App does not send these signals or the resulting access status to our servers, PostHog, RevenueCat or advertising services, or save them in application logs or persistent storage. The App does not ask you to enter a date of birth, identity document or facial photo for this process. If Google Play requires age verification, the App directs you to Google Play. Google’s policies govern processing performed by Google Play itself."
         ]
       },
       {
