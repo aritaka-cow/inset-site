@@ -47,7 +47,7 @@ export const privacyDocuments: Localized<LegalDocument> = {
         "bullets": [
           "本アプリはPostHog（PostHog, Inc.）を利用し、仮名のアプリ・端末インスタンス識別子、起動・画面表示・編集・保存成功／失敗などのイベント、アプリバージョン、OS、端末の種類、画面サイズ、言語、タイムゾーン、ネットワーク状態などの技術情報を送信します。目的は、機能改善と不具合の把握です。仮名識別子は、氏名そのものではありませんが、利用者・端末に関連付けられる情報として扱います。",
           "保存や読み込みの失敗について、エラーの種類・段階・限定した診断情報を扱う場合があります。iOSに組み込まれたPostHog・Meta SDKのコンポーネントも、限定的な技術・運用上の診断情報やクラッシュレポートを扱う場合があります。",
-          "通信先のサービスやホスティング事業者は、通信に伴うIPアドレスやアクセスログを扱います。利用分析サービスの設定によって、IPアドレスから国・地域、市区町村、郵便番号、おおまかな緯度・経度などの位置が推定される場合があります。これは写真のGPS情報や端末の位置情報権限を使った取得とは別です。",
+          "通信先のサービスやホスティング事業者は、通信に伴うIPアドレスやアクセスログを扱います。PostHogでは、生のIPアドレスを分析イベントに保存せず、標準のGeoIP処理によりIPアドレスから推定した国・地域、市区町村、郵便番号、おおまかな緯度・経度を利用分析で扱います。これは写真のGPS情報や端末の位置情報権限を使った取得とは別です。",
           "更新情報を表示するため、公開された更新情報ファイルをインターネットから取得します。配信元のホスティング事業者にも通信に伴う技術情報が渡ります。"
         ]
       },
@@ -57,6 +57,13 @@ export const privacyDocuments: Localized<LegalDocument> = {
           "iOSではApple（App Store・StoreKit）、AndroidではGoogle（Google Play）を通じて購入を処理します。本アプリがカード番号や銀行口座情報を収集・保存することはありません。",
           "RevenueCat（RevenueCat, Inc.）は、レシート・トランザクション情報、製品ID、購入・更新・有効期限・復元状態などの購入履歴と、仮名のApp User IDを受け取り、購入確認、Inset Labの解放、復元、購入分析に使います。",
           "RevenueCatへPostHogの仮名識別子を渡します。RevenueCatからPostHogへ購入ライフサイクルイベントが送られ、利用分析と対応付けられます。この連携により、サービス側に仮名の利用者レコードが作られる場合がありますが、本アプリのログイン用アカウントではありません。本アプリ側でRevenueCatの端末識別子自動収集は無効にしています。氏名、メールアドレス、電話番号、Apple AccountやGoogleアカウントの情報を、これらの識別子に設定しません。"
+        ]
+      },
+      {
+        "heading": "サービスコード（Android）",
+        "paragraphs": [
+          "Androidでサービスコードを利用する場合、入力したコードとRevenueCatの仮名のApp User IDを、HTTPSでCloudflare上の検証サービスへ送信します。Cloudflareは通信に伴うIPアドレスなども受け取ります。検証サービスはコードを確認し、RevenueCatへApp User IDとInset Labの無償アクセス付与の依頼を送ります。",
+          "検証サービスのアプリケーションは、コード、App User ID、IPアドレスの元の値をログやデータベースに記録しません。不正利用を抑えるため、IPアドレスからHMAC（秘密鍵を使ったハッシュ）識別子を生成し、短期間の利用制限カウンターに使います。このカウンターは自動消去されます。一方、App User IDから生成したHMAC識別子と付与状態の記録は、二重付与を防ぐため継続して保持し、自動消去の期限は設けていません。HMAC識別子も仮名情報として扱います。CloudflareやRevenueCatが扱う通信・サービス側の記録には、各提供者の保持方針が適用されます。"
         ]
       },
       {
@@ -71,7 +78,7 @@ export const privacyDocuments: Localized<LegalDocument> = {
         "heading": "第三者サービスと保護",
         "paragraphs": [
           "利用分析、課金・購入確認、広告効果測定に必要な範囲で上記サービスへデータを送信します。本アプリ内に第三者広告は表示しません。データを販売せず、データブローカーへ提供しません。各サービスは日本国外でデータを処理する場合があります。RevenueCatのMeta連携が有効な構成では、購入・サブスクリプション等のライフサイクル情報がMetaへ送信される場合があります。AndroidにMeta SDKがないことと、サービス間の送信は別です。iOSでの広告効果測定の条件は上記のとおりです。PostHogへの通信にはHTTPSを使用し、素材の一時コピーはアプリ専用の領域で管理します。",
-          "各提供者の説明は、<a href=\"https://posthog.com/privacy\">PostHog</a>、<a href=\"https://www.revenuecat.com/privacy/\">RevenueCat</a>、<a href=\"https://www.apple.com/legal/privacy/\">Apple</a>、<a href=\"https://policies.google.com/privacy\">Google</a>、<a href=\"https://www.facebook.com/privacy/policy/\">Meta</a>のプライバシーポリシーをご確認ください。"
+          "各提供者の説明は、<a href=\"https://posthog.com/privacy\">PostHog</a>、<a href=\"https://www.revenuecat.com/privacy/\">RevenueCat</a>、<a href=\"https://www.cloudflare.com/privacypolicy/\">Cloudflare</a>、<a href=\"https://www.apple.com/legal/privacy/\">Apple</a>、<a href=\"https://policies.google.com/privacy\">Google</a>、<a href=\"https://www.facebook.com/privacy/policy/\">Meta</a>のプライバシーポリシーをご確認ください。"
         ]
       },
       {
@@ -130,7 +137,7 @@ export const privacyDocuments: Localized<LegalDocument> = {
         "bullets": [
           "The App uses PostHog (PostHog, Inc.) for product improvement and troubleshooting. It sends pseudonymous app or device instance identifiers, events such as app opens, screen views, editing, and export success or failure, and technical details such as app version, OS, device type, screen size, language, time zone, and network state. Pseudonymous identifiers are not names, but are treated as information associated with a user or device.",
           "For loading or export failures, the App may handle the error type, processing stage, and limited diagnostic information. PostHog and Meta SDK components bundled with iOS may also handle limited technical or operational diagnostics and crash reports.",
-          "Services receiving network requests and hosting providers handle IP addresses and access logs. Depending on the analytics service configuration, an IP address may be used to infer approximate location, including country or region, city, postal code, and approximate latitude and longitude. This is separate from photo GPS metadata or access through a device location permission.",
+          "Services receiving network requests and hosting providers handle IP addresses and access logs. PostHog does not store raw IP addresses in analytics events. Its standard GeoIP processing derives country or region, city, postal code, and approximate latitude and longitude from an IP address for usage analytics. This is separate from photo GPS metadata or access through a device location permission.",
           "The App retrieves a publicly hosted update information file to display release announcements. The hosting provider also receives technical information associated with that request."
         ]
       },
@@ -140,6 +147,13 @@ export const privacyDocuments: Localized<LegalDocument> = {
           "Purchases are processed through Apple (App Store and StoreKit) on iOS and Google (Google Play) on Android. The App does not collect or store card numbers or bank account details.",
           "RevenueCat (RevenueCat, Inc.) receives receipt or transaction information, product IDs, purchase, renewal, expiration and restore status, and a pseudonymous App User ID. These are used to validate purchases, unlock Inset Lab, restore purchases, and analyze purchases.",
           "The App passes a pseudonymous PostHog identifier to RevenueCat. RevenueCat sends purchase lifecycle events to PostHog, where they are associated with usage analytics. This integration may create a pseudonymous person record in the service; it is not an account for signing in to the App. RevenueCat automatic device-identifier collection is disabled in the App. The App does not set names, email addresses, telephone numbers, or Apple or Google account information on these identifiers."
+        ]
+      },
+      {
+        "heading": "Service Codes (Android)",
+        "paragraphs": [
+          "When you use a service code on Android, the entered code and your pseudonymous RevenueCat App User ID are sent over HTTPS to a validation service hosted on Cloudflare. Cloudflare also receives network metadata such as your IP address. The service validates the code and sends the App User ID and a request for complimentary Inset Lab access to RevenueCat.",
+          "The validation service application does not record raw codes, App User IDs, or IP addresses in its logs or database. To limit abuse, it derives an HMAC identifier (a hash made with a secret key) from the IP address and uses it for a short-lived rate-limit counter that is automatically cleared. Separately, a customer-derived HMAC identifier and grant-status record are retained to prevent duplicate grants, with no automatic expiry. HMAC identifiers are also treated as pseudonymous information. Network and service records handled by Cloudflare and RevenueCat remain subject to their own retention practices."
         ]
       },
       {
@@ -154,7 +168,7 @@ export const privacyDocuments: Localized<LegalDocument> = {
         "heading": "Third-party Services and Protection",
         "paragraphs": [
           "The App sends data to the services above as needed for usage analytics, purchases, and advertising measurement. It does not display third-party ads, sell data, or provide data to data brokers. These services may process information outside Japan. When RevenueCat’s Meta integration is enabled for a configuration, purchase and subscription lifecycle information may be sent to Meta. The absence of a Meta SDK on Android is separate from service-to-service delivery. Conditions for iOS advertising measurement are described above. Communication with PostHog uses HTTPS, and temporary media copies are managed in App-private storage.",
-          "See the privacy policies of <a href=\"https://posthog.com/privacy\">PostHog</a>, <a href=\"https://www.revenuecat.com/privacy/\">RevenueCat</a>, <a href=\"https://www.apple.com/legal/privacy/\">Apple</a>, <a href=\"https://policies.google.com/privacy\">Google</a>, and <a href=\"https://www.facebook.com/privacy/policy/\">Meta</a> for their practices."
+          "See the privacy policies of <a href=\"https://posthog.com/privacy\">PostHog</a>, <a href=\"https://www.revenuecat.com/privacy/\">RevenueCat</a>, <a href=\"https://www.cloudflare.com/privacypolicy/\">Cloudflare</a>, <a href=\"https://www.apple.com/legal/privacy/\">Apple</a>, <a href=\"https://policies.google.com/privacy\">Google</a>, and <a href=\"https://www.facebook.com/privacy/policy/\">Meta</a> for their practices."
         ]
       },
       {

@@ -189,6 +189,10 @@ export const pageContent: Localized<Record<ContentPageKey, PageContent>> = {
           "body": "In Inset settings, select Restore Purchases while using the same Apple Account or Google account used for the purchase. Confirm any pending payment with the store. Restoring does not create a new purchase. A purchase is not guaranteed to transfer between iOS and Android. If restoration fails, tell us the platform and plan without sending card details or verification codes."
         },
         {
+          "title": "Service codes on Android",
+          "body": "Complimentary Inset Lab access from a service code is separate from a Google Play purchase. Restore Purchases is for store purchases and is not guaranteed to restore code access to a different anonymous App User ID. If reinstalling creates a new ID, you may need to enter the code again. Redeeming a code does not cancel or refund an existing paid subscription; manage that subscription through Google Play."
+        },
+        {
           "title": "Cancel a subscription",
           "body": "On iOS, use Apple subscription management and cancel at least 24 hours before renewal. On Android, use Google Play subscription management before the next renewal. Inset’s Android settings also provides a management link when an active subscription is recognized. Uninstalling does not cancel a subscription. Check the store for the access end date. Lifetime is a one-time purchase with no renewal.",
           "links": [
@@ -289,6 +293,10 @@ export const pageContent: Localized<Record<ContentPageKey, PageContent>> = {
         {
           "title": "Inset Labの購入を復元",
           "body": "購入したものと同じApple AccountまたはGoogleアカウントで、Insetの設定から「購入を復元」を選んでください。支払いが保留中ならストアの状態をご確認ください。復元で新たな購入は発生しません。iOSとAndroidをまたぐ購入の移行は保証しません。復元できない場合は、OSと購入プランをお知らせください。カード情報や認証コードは送らないでください。"
+        },
+        {
+          "title": "Androidのサービスコード",
+          "body": "サービスコードによるInset Labの無償アクセスは、Google Playでの購入とは別です。「購入を復元」はストア購入のための機能で、別の匿名App User IDへのコード利用権の復元は保証しません。再インストールで新しいIDになった場合は、コードの再入力が必要になることがあります。コードを利用しても既存の有料サブスクリプションは解約・返金されません。Google Playで管理してください。"
         },
         {
           "title": "サブスクリプションの解約",
