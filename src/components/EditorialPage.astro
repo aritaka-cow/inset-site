@@ -64,6 +64,13 @@ const counterpartPath = pathFor(pageKey, locale === "ja" ? "en" : "ja");
           <div>
             <p>{section.body}</p>
             {section.bullets && <ul>{section.bullets.map((item) => <li>{item}</li>)}</ul>}
+            {section.links && (
+              <div class="section-links">
+                {section.links.map(({ label, href }) => (
+                  <a href={href.startsWith("/") ? assetPath(href) : href}>{label}</a>
+                ))}
+              </div>
+            )}
           </div>
         </section>
       ))
@@ -102,6 +109,8 @@ const counterpartPath = pathFor(pageKey, locale === "ja" ? "en" : "ja");
   .frame-proof img:nth-child(6) { transform: rotate(-1deg); }
   .support-links { display: flex; flex-wrap: wrap; gap: 12px 28px; padding: 44px 0; border-top: 1px solid var(--line); }
   .support-links a { display: inline-flex; align-items: center; min-height: 44px; font-weight: 600; }
+  .section-links { display: flex; flex-wrap: wrap; gap: 8px 24px; margin-top: 16px; }
+  .section-links a { display: inline-flex; align-items: center; min-height: 44px; text-decoration: underline; text-underline-offset: 4px; overflow-wrap: anywhere; }
   @media (max-width: 760px) {
     .editorial-proof { width: calc(100% - 40px); margin-top: 52px; }
     .editorial-proof--features { grid-template-columns: 1fr; gap: 38px; }
