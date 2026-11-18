@@ -21,16 +21,17 @@ export type LegalKind = "privacy" | "terms" | "legal";
 export const privacyDocuments: Localized<LegalDocument> = {
   "ja": {
     "title": "Inset プライバシーポリシー",
-    "description": "iOS・Android版Insetの写真・動画、利用分析、購入情報、保存と削除の扱いを説明します。",
+    "description": "iOS・macOS・Android版Insetの写真・動画、利用分析、購入情報、保存と削除の扱いを説明します。",
     "heading": "プライバシーポリシー",
-    "updated": "2026-10-05",
-    "intro": "Atelier Yohakuが提供するInset（以下「本アプリ」）のiOS版とAndroid版に共通するポリシーです。Android版は現在一般公開の準備中です。本アプリにはアカウント登録・ログインはありません。編集対象の写真・動画は端末内で処理し、機能改善のための仮名の利用状況データと、Inset Labの提供に必要な購入履歴を扱います。",
+    "updated": "2026-11-18",
+    "intro": "Atelier Yohakuが提供するInset（以下「本アプリ」）のiOS版、macOS版、Android版に共通するポリシーです。Android版は現在一般公開の準備中です。本アプリにはアカウント登録・ログインはありません。編集対象の写真・動画は端末内で処理し、機能改善のための仮名の利用状況データと、Inset Labの提供に必要な購入履歴を扱います。",
     "sections": [
       {
         "heading": "写真・動画とアクセス権限",
         "bullets": [
           "システムの写真ピッカーなどから、あなたが選択した写真・動画を読み込みます。端末の写真ライブラリ全体へのアクセスを求めるものではありません。Google フォトなどのクラウド上の素材は、OSや選択元サービスがダウンロードしてから本アプリへ渡す場合があります。そのサービスには各提供者のポリシーが適用されます。",
           "iOSでは、書き出した写真・動画をライブラリへ保存するために「追加のみ」の写真アクセス権限を求めます。Android 10以降では共有メディアへの保存にMediaStoreを使い、Android 8–9で写真を保存するときはストレージへの書き込み権限を求めます。Android 8–9では動画保存に対応していません。",
+          "macOSでは、選択した写真・動画の読み込みと、指定した保存先への書き出しに、選択した項目に限ってmacOSから付与されるファイルアクセス権限を使います。元ファイルは変更せず、写真は別のJPEGファイルとして保存します。",
           "写真・動画・書き出し結果を、開発者、PostHog、RevenueCat、Metaへアップロードしません。写真・動画のファイル名、画像や音声の内容、メディアに含まれる位置情報、プリセット名・設定データ全体、任意カラーの実際の色値を分析イベントに含めません。ただし、フレーム種類やレイヤー数など、限定した編集設定の分類情報を利用分析に含める場合があります。",
           "書き出した写真に、撮影日時やGPSなど元写真のメタデータが残る場合があります。これは端末内の処理です。書き出したファイルを他者へ共有する際は、必要に応じてメタデータを確認してください。"
         ]
@@ -39,7 +40,8 @@ export const privacyDocuments: Localized<LegalDocument> = {
         "heading": "端末内に保存される情報",
         "bullets": [
           "前回の写真編集を再開するための一時コピーと編集設定、プリセット、お気に入り、ガイドの進行状況などを端末内に保存します。Androidでは、選択した動画を安定して読み込み・書き出しするための一時コピーも使用します。",
-          "キャッシュは、別の素材を選ぶ、処理を終える、アプリやOSがキャッシュを整理するなどの際に削除され、編集再開に使えなくなる場合があります。プリセットには写真・動画や位置情報を含めません。アプリの削除により端末内のアプリデータは削除されます。"
+          "キャッシュは、別の素材を選ぶ、処理を終える、アプリやOSがキャッシュを整理するなどの際に削除され、編集再開に使えなくなる場合があります。プリセットには写真・動画や位置情報を含めません。iOS・Androidでは、アプリの削除により端末内のアプリデータは削除されます。",
+          "macOSでは、読み込んだ写真・動画の作業用コピーと、編集セッションやプリセットをMacのアプリ専用領域に保存します。アプリ本体を削除した後も、これらのデータや書き出したファイルはMacに残る場合があります。"
         ]
       },
       {
@@ -48,13 +50,13 @@ export const privacyDocuments: Localized<LegalDocument> = {
           "本アプリはPostHog（PostHog, Inc.）を利用し、仮名のアプリ・端末インスタンス識別子、起動・画面表示・編集・保存成功／失敗などのイベント、アプリバージョン、OS、端末の種類、画面サイズ、言語、タイムゾーン、ネットワーク状態などの技術情報を送信します。目的は、機能改善と不具合の把握です。仮名識別子は、氏名そのものではありませんが、利用者・端末に関連付けられる情報として扱います。",
           "保存や読み込みの失敗について、エラーの種類・段階・限定した診断情報を扱う場合があります。iOSに組み込まれたPostHog・Meta SDKのコンポーネントも、限定的な技術・運用上の診断情報やクラッシュレポートを扱う場合があります。",
           "通信先のサービスやホスティング事業者は、通信に伴うIPアドレスやアクセスログを扱います。PostHogでは、生のIPアドレスを分析イベントに保存せず、標準のGeoIP処理によりIPアドレスから推定した国・地域、市区町村、郵便番号、おおまかな緯度・経度を利用分析で扱います。これは写真のGPS情報や端末の位置情報権限を使った取得とは別です。",
-          "更新情報を表示するため、公開された更新情報ファイルをインターネットから取得します。配信元のホスティング事業者にも通信に伴う技術情報が渡ります。"
+          "iOS・Androidでは、更新情報を表示するため、公開された更新情報ファイルをインターネットから取得します。配信元のホスティング事業者にも通信に伴う技術情報が渡ります。"
         ]
       },
       {
         "heading": "購入・Inset Lab",
         "bullets": [
-          "iOSではApple（App Store・StoreKit）、AndroidではGoogle（Google Play）を通じて購入を処理します。本アプリがカード番号や銀行口座情報を収集・保存することはありません。",
+          "iOS・macOSではApple（App Store・StoreKit）、AndroidではGoogle（Google Play）を通じて購入を処理します。本アプリがカード番号や銀行口座情報を収集・保存することはありません。",
           "RevenueCat（RevenueCat, Inc.）は、レシート・トランザクション情報、製品ID、購入・更新・有効期限・復元状態などの購入履歴と、仮名のApp User IDを受け取り、購入確認、Inset Labの解放、復元、購入分析に使います。",
           "RevenueCatへPostHogの仮名識別子を渡します。RevenueCatからPostHogへ購入ライフサイクルイベントが送られ、利用分析と対応付けられます。この連携により、サービス側に仮名の利用者レコードが作られる場合がありますが、本アプリのログイン用アカウントではありません。本アプリ側でRevenueCatの端末識別子自動収集は無効にしています。氏名、メールアドレス、電話番号、Apple AccountやGoogleアカウントの情報を、これらの識別子に設定しません。"
         ]
@@ -71,7 +73,7 @@ export const privacyDocuments: Localized<LegalDocument> = {
         "bullets": [
           "iOSでApple Ads経由のインストールを測定する場合、Appleが返すattribution結果、campaign・ad group・keyword・ad ID、claim・conversion type、国・地域、掲載面をPostHogへ送信する場合があります。attribution token、未加工のApple APIレスポンス、広告のクリック・表示日時は保存・送信しません。",
           "対応するiOS production版では、App Tracking Transparency（ATT）を許可した場合だけMeta SDKを有効にし、アプリ起動と初回写真書き出し完了のイベントを送信します。iOSのRevenueCatによるMeta送信も、ATTを許可し、連携が明示的に有効な場合に限り、trial開始・購入・サブスクリプション・更新などをserver-to-serverで送信する場合があります。ATT未許可時のiOSのserver-to-server送信は有効にしません。購入・売上イベントを本アプリとRevenueCatの両方からMetaへ二重送信しません。これはAppleの定義上のトラッキングです。",
-          "ATTが未許可・拒否・制限中、または必要なproduction設定がない場合、本アプリはMeta SDKを初期化せず、Metaの匿名識別子やアプリ内イベントを送信しません。許可しなくても利用・購入・復元には影響しません。iOSの設定で許可を変更できます。許可を取り消した後は、新しいiOSのトラッキングデータをMetaへ送信しません。既に送信したデータには提供先の保持・削除方針が適用されます。Android版にはこのiOS向けMeta SDK・Apple Ads・ATTの処理はありません。"
+          "ATTが未許可・拒否・制限中、または必要なproduction設定がない場合、本アプリはMeta SDKを初期化せず、Metaの匿名識別子やアプリ内イベントを送信しません。許可しなくても利用・購入・復元には影響しません。iOSの設定で許可を変更できます。許可を取り消した後は、新しいiOSのトラッキングデータをMetaへ送信しません。既に送信したデータには提供先の保持・削除方針が適用されます。Android版とmacOS版には、このiOS向けMeta SDK・Apple Ads・ATTの処理はありません。"
         ]
       },
       {
@@ -112,16 +114,17 @@ export const privacyDocuments: Localized<LegalDocument> = {
   },
   "en": {
     "title": "Inset Privacy Policy",
-    "description": "How Inset for iOS and Android handles photos, videos, analytics, purchases, retention, and deletion.",
+    "description": "How Inset for iOS, macOS, and Android handles photos, videos, analytics, purchases, retention, and deletion.",
     "heading": "Privacy Policy",
-    "updated": "2026-10-05",
-    "intro": "This policy covers Inset (“the App”) for iOS and Android, provided by Atelier Yohaku. The Android version is currently being prepared for public release. The App has no account registration or sign-in. Selected photos and videos are processed on your device. The App handles pseudonymous usage data to improve the product and purchase history needed to provide Inset Lab.",
+    "updated": "2026-11-18",
+    "intro": "This policy covers Inset (“the App”) for iOS, macOS, and Android, provided by Atelier Yohaku. The Android version is currently being prepared for public release. The App has no account registration or sign-in. Selected photos and videos are processed on your device. The App handles pseudonymous usage data to improve the product and purchase history needed to provide Inset Lab.",
     "sections": [
       {
         "heading": "Photos, Videos, and Permissions",
         "bullets": [
           "The App reads photos and videos you select through the system media picker or a similar selection flow. It does not request access to your entire photo library. For cloud assets, services such as Google Photos or the OS may download the selected file before providing it to the App. Their own policies apply to that transfer.",
           "On iOS, the App requests add-only photo access to save exported photos and videos. On Android 10 and later, it saves shared media through MediaStore. On Android 8–9, saving photos requires storage write permission; video saving is not supported on these versions.",
+          "On macOS, the App uses security-scoped access to read the photo or video files you select and to write exports to your chosen folder. Source files are preserved, and photos are exported as separate JPEG files.",
           "Photos, videos, and exported files are not uploaded to the developer, PostHog, RevenueCat, or Meta. Media filenames, image or audio content, embedded media location, preset names or complete preset configuration, and exact custom color values are not included in analytics events. Limited classifications of editing settings, such as frame type or layer count, may be included in usage analytics.",
           "Exported photos may retain metadata from the source, including capture time or GPS coordinates. This happens on-device. Check metadata when sharing an exported file if necessary."
         ]
@@ -130,7 +133,8 @@ export const privacyDocuments: Localized<LegalDocument> = {
         "heading": "Information Stored on Your Device",
         "bullets": [
           "The App stores a temporary copy and settings to resume a photo edit, along with presets, favorites, and guide progress. Android also uses temporary video copies for reliable reading and export.",
-          "Cached media can be removed when another asset is selected, processing finishes, or the App or OS clears its cache. The previous edit may then be unavailable. Presets contain no photos, videos, or location data. Deleting the App removes its local data."
+          "Cached media can be removed when another asset is selected, processing finishes, or the App or OS clears its cache. The previous edit may then be unavailable. Presets contain no photos, videos, or location data. On iOS and Android, deleting the App removes its local data.",
+          "On macOS, the App stores working copies of imported photos and videos, the editing session, and presets in its private storage on your Mac. This data and exported files may remain on your Mac after you remove the App."
         ]
       },
       {
@@ -139,13 +143,13 @@ export const privacyDocuments: Localized<LegalDocument> = {
           "The App uses PostHog (PostHog, Inc.) for product improvement and troubleshooting. It sends pseudonymous app or device instance identifiers, events such as app opens, screen views, editing, and export success or failure, and technical details such as app version, OS, device type, screen size, language, time zone, and network state. Pseudonymous identifiers are not names, but are treated as information associated with a user or device.",
           "For loading or export failures, the App may handle the error type, processing stage, and limited diagnostic information. PostHog and Meta SDK components bundled with iOS may also handle limited technical or operational diagnostics and crash reports.",
           "Services receiving network requests and hosting providers handle IP addresses and access logs. PostHog does not store raw IP addresses in analytics events. Its standard GeoIP processing derives country or region, city, postal code, and approximate latitude and longitude from an IP address for usage analytics. This is separate from photo GPS metadata or access through a device location permission.",
-          "The App retrieves a publicly hosted update information file to display release announcements. The hosting provider also receives technical information associated with that request."
+          "On iOS and Android, the App retrieves a publicly hosted update information file to display release announcements. The hosting provider also receives technical information associated with that request."
         ]
       },
       {
         "heading": "Purchases and Inset Lab",
         "bullets": [
-          "Purchases are processed through Apple (App Store and StoreKit) on iOS and Google (Google Play) on Android. The App does not collect or store card numbers or bank account details.",
+          "Purchases are processed through Apple (App Store and StoreKit) on iOS and macOS and through Google (Google Play) on Android. The App does not collect or store card numbers or bank account details.",
           "RevenueCat (RevenueCat, Inc.) receives receipt or transaction information, product IDs, purchase, renewal, expiration and restore status, and a pseudonymous App User ID. These are used to validate purchases, unlock Inset Lab, restore purchases, and analyze purchases.",
           "The App passes a pseudonymous PostHog identifier to RevenueCat. RevenueCat sends purchase lifecycle events to PostHog, where they are associated with usage analytics. This integration may create a pseudonymous person record in the service; it is not an account for signing in to the App. RevenueCat automatic device-identifier collection is disabled in the App. The App does not set names, email addresses, telephone numbers, or Apple or Google account information on these identifiers."
         ]
@@ -162,7 +166,7 @@ export const privacyDocuments: Localized<LegalDocument> = {
         "bullets": [
           "For Apple Ads attribution on iOS, the App may send Apple’s attribution result, campaign, ad group, keyword and ad IDs, claim or conversion type, country or region, and placement to PostHog. The attribution token, raw Apple API response, and ad click or impression timestamps are not stored or sent.",
           "In a supported iOS production release, the Meta SDK is enabled only after permission through App Tracking Transparency (ATT), sending app activation and first photo export completion events. On iOS, RevenueCat’s Meta delivery also requires ATT authorization and an explicitly enabled integration, and may send trial start, purchase, subscription, renewal and similar events server-to-server. iOS server-to-server delivery without ATT authorization is not enabled. Purchase and revenue events are not sent to Meta from both the App and RevenueCat. Apple defines this purpose as tracking.",
-          "When ATT is not authorized, is denied or restricted, or required production configuration is unavailable, the App does not initialize the Meta SDK or send Meta’s anonymous identifier or in-app events. Your choice does not affect using the App, purchasing, or restoring purchases. You can change permission in iOS Settings. After permission is withdrawn, new iOS tracking data is no longer sent to Meta; previously sent data remains subject to the recipient’s retention and deletion practices. The Android version does not include these iOS Meta SDK, Apple Ads, or ATT flows."
+          "When ATT is not authorized, is denied or restricted, or required production configuration is unavailable, the App does not initialize the Meta SDK or send Meta’s anonymous identifier or in-app events. Your choice does not affect using the App, purchasing, or restoring purchases. You can change permission in iOS Settings. After permission is withdrawn, new iOS tracking data is no longer sent to Meta; previously sent data remains subject to the recipient’s retention and deletion practices. The Android and macOS versions do not include these iOS Meta SDK, Apple Ads, or ATT flows."
         ]
       },
       {
@@ -206,15 +210,15 @@ export const privacyDocuments: Localized<LegalDocument> = {
 export const termsDocuments: Localized<LegalDocument> = {
   "ja": {
     "title": "Inset 利用規約",
-    "description": "iOS・Android版InsetとInset Labの利用、購入、解約、復元、返金について定めます。",
+    "description": "iOS・macOS・Android版InsetとInset Labの利用、購入、解約、復元、返金について定めます。",
     "heading": "利用規約",
-    "updated": "2026-10-05",
-    "intro": "本規約はInset（以下「本アプリ」）のiOS版とAndroid版の利用条件を定めます。本アプリをダウンロード・利用した時点で、本規約に同意したものとみなされます。Android版は現在一般公開の準備中です。",
+    "updated": "2026-11-18",
+    "intro": "本規約はInset（以下「本アプリ」）のiOS版、macOS版、Android版の利用条件を定めます。本アプリをダウンロード・利用した時点で、本規約に同意したものとみなされます。Android版は現在一般公開の準備中です。",
     "sections": [
       {
         "heading": "1. ライセンス",
         "paragraphs": [
-          "お客様の所有・管理する対応端末で本アプリを利用する非独占的なライセンスを付与します。iOS版にはApp Storeの規約とAppleの<a href=\"https://www.apple.com/legal/internet-services/itunes/dev/stdeula/\">標準使用許諾契約</a>が適用されます。Android版の入手・購入にはGoogle Playの該当規約が適用されます。"
+          "お客様の所有・管理する対応端末で本アプリを利用する非独占的なライセンスを付与します。iOS版とmacOS版にはApp Storeの規約とAppleの<a href=\"https://www.apple.com/legal/internet-services/itunes/dev/stdeula/\">標準使用許諾契約</a>が適用されます。Android版の入手・購入にはGoogle Playの該当規約が適用されます。"
         ]
       },
       {
@@ -228,19 +232,19 @@ export const termsDocuments: Localized<LegalDocument> = {
         "heading": "3. 支払い・更新・解約",
         "paragraphs": [
           "支払いは購入したストアのアカウントと支払方法で行われます。サブスクリプションは解約しない限り表示された周期で自動更新されます。無料トライアルが適用される場合は、期間終了後に表示価格で課金されます。",
-          "iOSでは期間終了の少なくとも24時間前までに解約してください。<a href=\"https://support.apple.com/118428\">Apple</a>のサブスクリプション管理をご利用ください。Androidでは次回更新前に<a href=\"https://support.google.com/googleplay/answer/7018481\">Google Play</a>のサブスクリプション管理から解約してください。アプリの削除だけでは解約されません。解約後の利用期限やトライアル終了の扱いは各ストアの条件をご確認ください。"
+          "iOS・macOSのApp Store購入は、<a href=\"https://support.apple.com/118428\">Apple</a>のサブスクリプション管理から次回の請求前に解約してください。次の契約期間が始まる前の24時間以内に請求される場合があります。無料トライアルを更新しない場合は、終了の少なくとも24時間前までに解約してください。Androidでは次回更新前に<a href=\"https://support.google.com/googleplay/answer/7018481\">Google Play</a>のサブスクリプション管理から解約してください。アプリの削除だけでは解約されません。解約後の利用期限やトライアル終了の扱いは各ストアの条件をご確認ください。"
         ]
       },
       {
         "heading": "4. 購入の復元",
         "paragraphs": [
-          "購入したものと同じApple AccountまたはGoogleアカウントを使い、アプリの設定または購入画面の「購入を復元」を選んでください。購入の確認・復元にはRevenueCatを利用します。ストアやOSをまたいだ購入の移行・共有は保証しません。"
+          "購入したものと同じApple AccountまたはGoogleアカウントを使い、アプリの設定または購入画面の「購入を復元」を選んでください。購入の確認・復元にはRevenueCatを利用します。同じApple Accountを使うと、App Storeで購入した有効な月額・年額プランと買い切り（Lifetime）をiOS版とmacOS版の両方で利用できます。Google Playでの購入は別扱いで、App Storeと自動的には共有されません。"
         ]
       },
       {
         "heading": "5. 返金",
         "paragraphs": [
-          "iOSの返金はAppleの条件に従い、<a href=\"https://reportaproblem.apple.com/\">Appleの「問題を報告する」</a>から申請できます。Androidの返金はGoogle Playの条件に従います。<a href=\"https://support.google.com/googleplay/answer/15574908\">Google Playの返金案内</a>を確認し、ストアへの返金申請はリンク先の手順で行ってください。開発者の支援が必要な場合は<a href=\"mailto:contact@atelier-yohaku.com\">contact@atelier-yohaku.com</a>へご連絡ください。適用法令上の権利を制限するものではありません。"
+          "iOS・macOSのApp Store購入の返金はAppleの条件に従い、<a href=\"https://reportaproblem.apple.com/\">Appleの「問題を報告する」</a>から申請できます。Androidの返金はGoogle Playの条件に従います。<a href=\"https://support.google.com/googleplay/answer/15574908\">Google Playの返金案内</a>を確認し、ストアへの返金申請はリンク先の手順で行ってください。開発者の支援が必要な場合は<a href=\"mailto:contact@atelier-yohaku.com\">contact@atelier-yohaku.com</a>へご連絡ください。適用法令上の権利を制限するものではありません。"
         ]
       },
       {
@@ -265,15 +269,15 @@ export const termsDocuments: Localized<LegalDocument> = {
   },
   "en": {
     "title": "Inset Terms of Use",
-    "description": "Terms for Inset on iOS and Android, including Inset Lab purchases, cancellation, restoration, and refunds.",
+    "description": "Terms for Inset on iOS, macOS, and Android, including Inset Lab purchases, cancellation, restoration, and refunds.",
     "heading": "Terms of Use",
-    "updated": "2026-10-05",
-    "intro": "These Terms govern Inset (“the App”) for iOS and Android. By downloading or using the App, you agree to these Terms. The Android version is currently being prepared for public release.",
+    "updated": "2026-11-18",
+    "intro": "These Terms govern Inset (“the App”) for iOS, macOS, and Android. By downloading or using the App, you agree to these Terms. The Android version is currently being prepared for public release.",
     "sections": [
       {
         "heading": "1. License",
         "paragraphs": [
-          "You are granted a non-exclusive license to use the App on supported devices that you own or control. The iOS version is subject to App Store terms and Apple’s <a href=\"https://www.apple.com/legal/internet-services/itunes/dev/stdeula/\">Standard Licensed Application End User License Agreement</a>. Applicable Google Play terms govern obtaining and purchasing the Android version."
+          "You are granted a non-exclusive license to use the App on supported devices that you own or control. The iOS and macOS versions are subject to App Store terms and Apple’s <a href=\"https://www.apple.com/legal/internet-services/itunes/dev/stdeula/\">Standard Licensed Application End User License Agreement</a>. Applicable Google Play terms govern obtaining and purchasing the Android version."
         ]
       },
       {
@@ -287,19 +291,19 @@ export const termsDocuments: Localized<LegalDocument> = {
         "heading": "3. Billing, Renewal, and Cancellation",
         "paragraphs": [
           "Payment uses the account and payment method for the store where you purchase. Subscriptions renew at the displayed interval unless cancelled. If an eligible free trial applies, billing starts at the displayed price after it ends.",
-          "On iOS, cancel at least 24 hours before the current period ends using <a href=\"https://support.apple.com/118428\">Apple</a> subscription management. On Android, cancel before the next renewal using <a href=\"https://support.google.com/googleplay/answer/7018481\">Google Play</a> subscription management. Uninstalling the App does not cancel a subscription. Check your store’s terms for the remaining access period and how trial cancellation is handled."
+          "For App Store purchases on iOS and macOS, use <a href=\"https://support.apple.com/118428\">Apple</a> subscription management to cancel before the next charge. Apple may charge within 24 hours before the next subscription period begins. To avoid renewing a free trial, cancel at least 24 hours before it ends. On Android, cancel before the next renewal using <a href=\"https://support.google.com/googleplay/answer/7018481\">Google Play</a> subscription management. Uninstalling the App does not cancel a subscription. Check your store’s terms for the remaining access period and how trial cancellation is handled."
         ]
       },
       {
         "heading": "4. Restoring Purchases",
         "paragraphs": [
-          "Use the same Apple Account or Google account used for the purchase, then choose Restore Purchases in the App settings or purchase screen. RevenueCat is used to validate and restore purchases. Transfer or sharing of a purchase between stores or operating systems is not guaranteed."
+          "Use the same Apple Account or Google account used for the purchase, then choose Restore Purchases in the App settings or purchase screen. RevenueCat is used to validate and restore purchases. Active monthly and yearly plans and Lifetime purchases from the App Store can be used on both iOS and macOS with the same Apple Account. Google Play purchases are separate and do not automatically transfer between Google Play and the App Store."
         ]
       },
       {
         "heading": "5. Refunds",
         "paragraphs": [
-          "iOS refunds follow Apple’s conditions; apply through <a href=\"https://reportaproblem.apple.com/\">Apple’s Report a Problem</a>. Android refunds follow Google Play’s conditions; see <a href=\"https://support.google.com/googleplay/answer/15574908\">Google Play refund guidance</a>. Apply to the store using the linked instructions. If you need developer assistance, contact <a href=\"mailto:contact@atelier-yohaku.com\">contact@atelier-yohaku.com</a>. This does not limit rights under applicable law."
+          "Refunds for App Store purchases on iOS and macOS follow Apple’s conditions. Apply through <a href=\"https://reportaproblem.apple.com/\">Apple’s Report a Problem</a>. Android refunds follow Google Play’s conditions; see <a href=\"https://support.google.com/googleplay/answer/15574908\">Google Play refund guidance</a>. Apply to the store using the linked instructions. If you need developer assistance, contact <a href=\"mailto:contact@atelier-yohaku.com\">contact@atelier-yohaku.com</a>. This does not limit rights under applicable law."
         ]
       },
       {
@@ -329,8 +333,8 @@ ja: {
   "title": "Inset 特定商取引法に基づく表記",
   "description": "Inset Labの事業者、価格、支払い、提供、解約・返金、対応環境を表示します。",
   "heading": "特定商取引法に基づく表記",
-  "updated": "2026-10-05",
-  "intro": "Inset Labに関する、特定商取引法第11条に基づく表示です。iOSはApp Store、AndroidはGoogle Playを通じて購入します。Android版は現在一般公開前で、一般向けの販売は開始していません。",
+  "updated": "2026-11-18",
+  "intro": "Inset Labに関する、特定商取引法第11条に基づく表示です。iOS・macOSはApp Store、AndroidはGoogle Playを通じて購入します。Android版は現在一般公開前で、一般向けの販売は開始していません。",
   "sections": [
 { heading: "販売事業者", paragraphs: ["金澤 有剛（屋号：余白製作所）"] },
 { heading: "運営責任者", paragraphs: ["金澤 有剛"] },
@@ -365,19 +369,20 @@ ja: {
     {
       "heading": "更新・解約・購入の復元",
       "paragraphs": [
-        "月額・年額は解約しない限り自動更新されます。iOSでは期間終了の少なくとも24時間前までに<a href=\"https://support.apple.com/118428\">Apple</a>から、Androidでは次回更新前に<a href=\"https://support.google.com/googleplay/answer/7018481\">Google Play</a>から解約してください。アプリを削除しても解約されません。利用終了日は各ストアの管理画面でご確認ください。購入の復元は、購入したストアの同じアカウントで本アプリの「購入を復元」から行えます。"
+        "月額・年額は解約しない限り自動更新されます。iOS・macOSのApp Store購入は、<a href=\"https://support.apple.com/118428\">Apple</a>のサブスクリプション管理から次回の請求前に解約してください。次の契約期間が始まる前の24時間以内に請求される場合があります。無料トライアルを更新しない場合は、終了の少なくとも24時間前までに解約してください。Androidでは次回更新前に<a href=\"https://support.google.com/googleplay/answer/7018481\">Google Play</a>から解約してください。アプリを削除しても解約されません。利用終了日は各ストアの管理画面でご確認ください。購入の復元は、購入したストアの同じアカウントで本アプリの「購入を復元」から行えます。",
+        "同じApple Accountを使うと、App Storeで購入した有効な月額・年額プランと買い切り（Lifetime）をiOS版とmacOS版の両方で利用できます。Google Playでの購入は別扱いで、App Storeと自動的には共有されません。"
       ]
     },
     {
       "heading": "返品・キャンセル・返金",
       "paragraphs": [
-        "デジタルサービスの性質上、提供開始後の返品・キャンセルには原則応じられません。サブスクリプションの解約は次回以降の更新を止める操作です。返金の可否・日割り返金などは、適用法令および購入したストアの条件に従います。iOSは<a href=\"https://reportaproblem.apple.com/\">Appleの「問題を報告する」</a>、Androidは<a href=\"https://support.google.com/googleplay/answer/15574908\">Google Playの返金案内</a>をご確認ください。開発者への問い合わせが必要な場合は<a href=\"mailto:contact@atelier-yohaku.com\">contact@atelier-yohaku.com</a>へご連絡ください。法令上の権利を制限するものではありません。"
+        "デジタルサービスの性質上、提供開始後の返品・キャンセルには原則応じられません。サブスクリプションの解約は次回以降の更新を止める操作です。返金の可否・日割り返金などは、適用法令および購入したストアの条件に従います。iOS・macOSのApp Store購入は<a href=\"https://reportaproblem.apple.com/\">Appleの「問題を報告する」</a>、Androidは<a href=\"https://support.google.com/googleplay/answer/15574908\">Google Playの返金案内</a>をご確認ください。開発者への問い合わせが必要な場合は<a href=\"mailto:contact@atelier-yohaku.com\">contact@atelier-yohaku.com</a>へご連絡ください。法令上の権利を制限するものではありません。"
       ]
     },
     {
       "heading": "動作環境",
       "paragraphs": [
-        "iOS版：iOS 17.0以降のiPhone。Android版：写真はAndroid 8以降、動画保存はAndroid 10以降、動画の上限は5分です。素材形式や端末性能により保存できない場合があります。各ストアの対応環境と購入前のアプリ表示もご確認ください。"
+        "iOS版：iOS 17.0以降のiPhone。macOS版：macOS 14.0以降のMac向けネイティブアプリ。Android版：写真はAndroid 8以降、動画保存はAndroid 10以降、動画の上限は5分です。素材形式や端末性能により保存できない場合があります。各ストアの対応環境と購入前のアプリ表示もご確認ください。"
       ]
     }
   ]
@@ -386,8 +391,8 @@ en: {
   "title": "Inset — Commercial Transaction Disclosure",
   "description": "Seller information, prices, payments, delivery, cancellation, refunds, and compatibility for Inset Lab.",
   "heading": "Commercial Transaction Disclosure",
-  "updated": "2026-10-05",
-  "intro": "This disclosure covers Inset Lab under Article 11 of Japan’s Act on Specified Commercial Transactions. Purchases use the App Store on iOS and Google Play on Android. The Android version is not publicly released and public sales have not started.",
+  "updated": "2026-11-18",
+  "intro": "This disclosure covers Inset Lab under Article 11 of Japan’s Act on Specified Commercial Transactions. Purchases use the App Store on iOS and macOS and Google Play on Android. The Android version is not publicly released and public sales have not started.",
   "sections": [
 { heading: "Seller", paragraphs: ["Aritaka Kanazawa (trading as Atelier Yohaku)"] },
 { heading: "Person responsible for operations", paragraphs: ["Aritaka Kanazawa"] },
@@ -422,19 +427,20 @@ en: {
     {
       "heading": "Renewal, Cancellation, and Restoration",
       "paragraphs": [
-        "Monthly and yearly plans renew unless cancelled. On iOS, cancel at least 24 hours before the period ends through <a href=\"https://support.apple.com/118428\">Apple</a>. On Android, cancel before the next renewal through <a href=\"https://support.google.com/googleplay/answer/7018481\">Google Play</a>. Uninstalling the App does not cancel a subscription. Check the store management screen for the access end date. Restore an eligible purchase through Restore Purchases in the App using the same account for the store where you purchased."
+        "Monthly and yearly plans renew unless cancelled. For App Store purchases on iOS and macOS, use <a href=\"https://support.apple.com/118428\">Apple</a> subscription management to cancel before the next charge. Apple may charge within 24 hours before the next subscription period begins. To avoid renewing a free trial, cancel at least 24 hours before it ends. On Android, cancel before the next renewal through <a href=\"https://support.google.com/googleplay/answer/7018481\">Google Play</a>. Uninstalling the App does not cancel a subscription. Check the store management screen for the access end date. Restore an eligible purchase through Restore Purchases in the App using the same account for the store where you purchased.",
+        "Active monthly and yearly plans and Lifetime purchases from the App Store can be used on both iOS and macOS with the same Apple Account. Google Play purchases are separate and do not automatically transfer between Google Play and the App Store."
       ]
     },
     {
       "heading": "Returns, Cancellations, and Refunds",
       "paragraphs": [
-        "Because this is a digital service, returns or cancellations are generally not accepted after access begins. Cancelling a subscription stops future renewals. Refund eligibility, including any prorated refund, follows applicable law and the conditions of the store where you purchased. See <a href=\"https://reportaproblem.apple.com/\">Apple’s Report a Problem</a> for iOS or <a href=\"https://support.google.com/googleplay/answer/15574908\">Google Play refund guidance</a> for Android. Contact <a href=\"mailto:contact@atelier-yohaku.com\">contact@atelier-yohaku.com</a> when developer assistance is needed. This does not limit rights under applicable law."
+        "Because this is a digital service, returns or cancellations are generally not accepted after access begins. Cancelling a subscription stops future renewals. Refund eligibility, including any prorated refund, follows applicable law and the conditions of the store where you purchased. See <a href=\"https://reportaproblem.apple.com/\">Apple’s Report a Problem</a> for App Store purchases on iOS and macOS or <a href=\"https://support.google.com/googleplay/answer/15574908\">Google Play refund guidance</a> for Android. Contact <a href=\"mailto:contact@atelier-yohaku.com\">contact@atelier-yohaku.com</a> when developer assistance is needed. This does not limit rights under applicable law."
       ]
     },
     {
       "heading": "System Requirements",
       "paragraphs": [
-        "iOS: iPhone with iOS 17.0 or later. Android: photos on Android 8 and later, video saving on Android 10 and later, for videos up to five minutes. Some media formats or device limitations may prevent export. Check the store compatibility information and the App before purchasing."
+        "iOS requires an iPhone with iOS 17.0 or later. The native Mac app requires macOS 14.0 or later. Android: photos on Android 8 and later, video saving on Android 10 and later, for videos up to five minutes. Some media formats or device limitations may prevent export. Check the store compatibility information and the App before purchasing."
       ]
     }
   ]
