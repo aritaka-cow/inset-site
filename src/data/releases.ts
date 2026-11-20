@@ -11,6 +11,29 @@ export type ReleaseEntry = {
 
 export const releases: ReleaseEntry[] = [
   {
+    version: "1.4.0",
+    announcementDate: "2026-11-21",
+    summary: {
+      en: "Choose where your photo sits inside the frame and reorder color frame layers. Placement editing and previews are free; saving off-center placement requires Inset Lab.",
+      ja: "写真の配置とカラーフレームの重ね順を調整できるようになりました。配置の編集・プレビューは無料、中央以外の配置での写真保存はInset Labで利用できます。"
+    },
+    highlights: {
+      en: [
+        "Place photos at the top, center, or bottom—or left, center, or right—where extra space is available",
+        "Move color frames inward or outward to change their order",
+        "Reorganized editor controls, more reliable session restore, and improved first-photo and save-completion guidance",
+        "Frame reordering is free, and saving basic frames with centered placement remains free"
+      ],
+      ja: [
+        "写真を上・中央・下、または左・中央・右へ配置。余白のある方向で選べます",
+        "カラーフレームを内側・外側へ並べ替え",
+        "編集画面を整理し、編集内容の復元、初回ガイドと保存完了の案内を改善",
+        "フレームの並べ替えは無料。基本フレームを使った中央配置の写真保存も、これまでどおり無料"
+      ]
+    },
+    media: { en: [], ja: [] }
+  },
+  {
     version: "1.3.1",
     announcementDate: "2026-08-23",
     summary: {

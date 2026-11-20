@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Inset 1.4.0 — リリースノート / Release Notes</title>
+<style>
+  :root{--bg:#fff;--fg:#1a1a18;--mut:#6b6b70;--line:#e6e6ea;--ink:#1a1a18}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.75 -apple-system,"Hiragino Sans","Hiragino Kaku Gothic ProN",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  header{border-bottom:1px solid var(--line)}
+  header .wrap,main,footer .wrap{max-width:760px;margin:0 auto;padding-left:24px;padding-right:24px}
+  header .wrap{padding-top:24px;padding-bottom:18px;display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap}
+  h1{margin:0;font-size:22px}.meta{margin:6px 0 0;color:var(--mut);font-size:13px}
+  .lang{display:flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+  .lang button{background:#fff;color:var(--mut);border:0;padding:8px 14px;font:inherit;cursor:pointer}
+  .lang button[aria-pressed="true"]{background:var(--ink);color:#fff;font-weight:600}
+  main{padding-top:30px;padding-bottom:18px}.lead{font-size:16px;line-height:1.9;margin:0 0 32px}
+  section{margin:0 0 36px}section h2{font-size:17px;margin:0 0 10px}section ul{padding-left:1.3em}section li{margin:5px 0}
+  footer{border-top:1px solid var(--line);margin-top:32px}footer .wrap{padding-top:18px;padding-bottom:40px;color:var(--mut);font-size:13px}
+  footer a{color:var(--fg)}body[data-lang="ja"] .i-en{display:none}body[data-lang="en"] .i-ja{display:none}
+</style>
+</head>
+<body data-lang="ja">
+<header><div class="wrap">
+  <div><h1>Inset 1.4.0</h1><p class="meta">2026-11-21</p></div>
+  <div class="lang" role="group" aria-label="Language">
+    <button type="button" data-lang="ja" aria-pressed="true">日本語</button>
+    <button type="button" data-lang="en" aria-pressed="false">English</button>
+  </div>
+</div></header>
+<main>
+  <p class="lead i-ja">写真の配置とカラーフレームの重ね順を調整できるようになりました。配置の編集・プレビューは無料、中央以外の配置での写真保存はInset Labで利用できます。</p>
+  <p class="lead i-en">Choose where your photo sits inside the frame and reorder color frame layers. Placement editing and previews are free; saving off-center placement requires Inset Lab.</p>
+  <section>
+    <h2><span class="i-ja">写真の配置とフレームの重ね順</span><span class="i-en">Photo placement and frame order</span></h2>
+    <ul class="i-ja"><li>写真を上・中央・下、または左・中央・右へ配置。余白のある方向で選べます</li><li>カラーフレームを内側・外側へ並べ替え</li></ul>
+    <ul class="i-en"><li>Place photos at the top, center, or bottom—or left, center, or right—where extra space is available</li><li>Move color frames inward or outward to change their order</li></ul>
+  </section>
+  <section>
+    <h2><span class="i-ja">編集画面と案内を改善</span><span class="i-en">Improved editor and guidance</span></h2>
+    <ul class="i-ja"><li>編集画面を整理し、編集内容の復元を安定化</li><li>初回ガイドと保存完了の案内を改善</li></ul>
+    <ul class="i-en"><li>Reorganized editor controls and more reliable session restore</li><li>Improved first-photo and save-completion guidance</li></ul>
+  </section>
+  <section>
+    <h2><span class="i-ja">無料で使える範囲</span><span class="i-en">What stays free</span></h2>
+    <ul class="i-ja"><li>配置の編集・プレビュー、フレームの並べ替えは無料</li><li>基本フレームを使った中央配置の写真保存も、これまでどおり無料</li></ul>
+    <ul class="i-en"><li>Placement editing, previews, and frame reordering are free</li><li>Saving basic frames with centered placement remains free</li></ul>
+  </section>
+</main>
+<footer><div class="wrap"><a href="https://inset.page/releases/1.4.0/"><span class="i-ja">正規のリリースページを開く</span><span class="i-en">Open the canonical release page</span></a></div></footer>
+<script>
+  const requested = new URLSearchParams(location.search).get("lang");
+  let lang = requested || (navigator.language?.startsWith("ja") ? "ja" : "en");
+  if (lang !== "ja" && lang !== "en") lang = "ja";
+  setLang(lang);
+  document.querySelectorAll(".lang button").forEach((button) => { button.onclick = () => setLang(button.dataset.lang); });
+  function setLang(value) {
+    document.body.dataset.lang = value;
+    document.documentElement.lang = value;
+    document.querySelectorAll(".lang button").forEach((button) => button.setAttribute("aria-pressed", String(button.dataset.lang === value)));
+  }
+</script>
+</body>
+</html>
