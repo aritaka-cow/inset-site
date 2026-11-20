@@ -81,7 +81,55 @@ npm run deploy
    - `title` / `body`: `{ "en": ..., "ja": ... }`。en 必須、ja 推奨（欠落時は en にフォールバック）
    - `url`（任意）: 詳細ページへのリンク。**https のみ有効**（http は無視される）。画像付きのリッチな解説はサイト側のページに置き、ここからリンクする。アプリでは「詳しく見る ↗」として表示される
 3. push 前に構文チェック: `python3 -m json.tool announcements.json > /dev/null`
-4. push 後の反映は**最大 11 分程度**（GitHub Pages の CDN cache-control: max-age=600 + デプロイ時間）。即時反映は保証されない。
+4. iOS の新しい版のお知らせは、下の「App Store 公開での自動公開」で出す。手でマージした場合は、GitHub Pages は自動で出るが inset.page は `npm run deploy` が要る
+5. push 後の反映は**最大 11 分程度**（GitHub Pages の CDN cache-control: max-age=600 + デプロイ時間）。即時反映は保証されない。
+
+### App Store 公開での自動公開
+
+iOS の新しい版のお知らせとリリースノートは、PR を用意してラベルを付けておけば、App Store Connect でリリースのボタンを押すだけで公開される。ワークフロー [`auto-publish-on-store-release.yml`](.github/workflows/auto-publish-on-store-release.yml) が15分ごとに [iTunes Lookup](https://itunes.apple.com/lookup?id=6776488290&country=jp) で日本の App Store の公開版を確かめ、対象の版以上になったら PR をマージし、GitHub Pages と inset.page に公開する。
+
+1. お知らせ（`announcements.json` の `release`）とリリースノートの PR を作る。日付 `date` は公開予定日にしておく
+2. PR に `publish-on-store-release` ラベルを付ける。対象の版は、PR で新しく足した `release` の `appVersion` から読む。お知らせを足さない PR や、`release` を2件以上足す PR は、本文に `Store-Release-Version: 1.4.0` の行を書く
+3. チェック（Verify site changes）が通っていること、Draft でないこと、main とコンフリクトしていないことを確かめておく
+4. App Store Connect でリリースする。公開版が対象の版以上になってから最大15分ほどで（GitHub の定期実行は混雑時に遅れることがある）、次が順に行われる
+   - PR を squash でマージし、PR にコメントする
+   - [`deploy-pages.yml`](.github/workflows/deploy-pages.yml) で GitHub Pages（アプリの取得先）に公開する
+   - [`deploy-inset-page.yml`](.github/workflows/deploy-inset-page.yml) で inset.page（Cloudflare Workers）に公開する
+   - 公開結果を PR にコメントする
+
+1回の実行でマージするのは1件だけ。公開前はチェックが落ちていても待つだけで、公開後に PR をマージできないとき（チェック失敗・コンフリクト・Draft・対象の版が読めない）は PR にコメントし、実行を失敗にして GitHub の通知を出す。直せば次の回で再確認する。急ぐときは Actions の「Publish on App Store release」を Run workflow で手動実行できる。`dry_run` にすると判定だけを行う。
+
+手元での判定の確認（マージやコメントはしない）:
+
+```sh
+GITHUB_TOKEN=$(gh auth token) GITHUB_REPOSITORY=aritaka-cow/inset-site npm run auto-publish:dry-run
+# ラベルのない PR を、公開済みと仮定して判定する
+GITHUB_TOKEN=$(gh auth token) GITHUB_REPOSITORY=aritaka-cow/inset-site DRY_RUN_PR=52 STORE_VERSION_OVERRIDE=1.4.0 npm run auto-publish:dry-run
+```
+
+判定ロジックは [`scripts/store-release.mjs`](scripts/store-release.mjs)、テストは `npm run test:store-release`。
+
+注意:
+
+- 見ているのは iOS の App Store だけ。Android（Google Play）の公開は検知しない
+- `GITHUB_TOKEN` によるマージは、ほかのワークフローの `push` を起動しない。そのため公開はこのワークフローから直接呼んでいる
+- `.github/workflows/` を変える PR は `GITHUB_TOKEN` でマージできないので、ラベルを付けない
+- 公開リポジトリの定期実行は、リポジトリに60日間動きがないと GitHub が止める。止まったら Actions の画面で有効にし直す
+- inset.page への公開には、次の秘密の値が要る。未登録の間は inset.page への公開だけが失敗し、PR にその旨がコメントされるので、main から `npm run deploy` を手で実行する
+
+#### inset.page 公開用の秘密の値（オーナーが登録）
+
+| 名前 | 中身 |
+|---|---|
+| `CLOUDFLARE_API_TOKEN` | Cloudflare の Account API tokens で「Edit Cloudflare Workers」テンプレートから作るトークン。アカウントは Inset のアカウント、ゾーンは `inset.page` だけに絞る |
+| `CLOUDFLARE_ACCOUNT_ID` | Cloudflare のアカウント ID |
+
+```sh
+gh secret set CLOUDFLARE_API_TOKEN --repo aritaka-cow/inset-site
+gh secret set CLOUDFLARE_ACCOUNT_ID --repo aritaka-cow/inset-site
+```
+
+登録後、Actions の「Deploy inset.page」を main で Run workflow すると、公開の経路を単独で確かめられる。このワークフローは checkout したコミットが `origin/main` と一致しないと公開しない（手元の `npm run deploy` の安全確認と同じ考え方）。
 
 ### スキーマの拡張
 
