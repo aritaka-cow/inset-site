@@ -54,6 +54,8 @@ The `_headers` file applies `X-Robots-Tag: noindex, nofollow` to `workers.dev` v
 
 The production build command validates every contracted `/go/` redirect. The deploy command uses Wrangler strict mode and then checks the live 302 status and exact `Location` for every contracted redirect. The independently deployed `inset-site-www-redirect` Worker is defined by `wrangler.www.jsonc` and only needs `npm run deploy:www` when its redirect code or route changes. It keeps `www.inset.page` from serving duplicate content while leaving apex static assets on the direct asset path.
 
+GitHub Actions can also deploy the apex Worker through `.github/workflows/deploy-inset-page.yml` (manual `workflow_dispatch`, or called by the App Store release workflow after it merges a prepared PR). It needs the repository secrets `CLOUDFLARE_API_TOKEN` (from the **Edit Cloudflare Workers** template, scoped to this account and the `inset.page` zone) and `CLOUDFLARE_ACCOUNT_ID`, refuses to run unless the checked-out commit equals `origin/main`, and runs `npm run build` then `npm run deploy:ci`. Workers Builds is not connected to this repository as of 2026-11-20.
+
 Local production deploys must use `npm run deploy` or `npm run deploy:site`; never call `npx wrangler deploy` directly. Merge the change first, then run the command from a clean, up-to-date `main`. Pull requests run a production build in GitHub Actions, and a scheduled workflow checks the live redirects hourly.
 
 Production launch and follow-up:
@@ -108,6 +110,7 @@ The production guard deliberately requires exact equality with `origin/main`, no
 - [Workers Static Assets best practices](https://developers.cloudflare.com/workers/best-practices/workers-best-practices/)
 - [Astro on Workers](https://developers.cloudflare.com/workers/framework-guides/web-apps/astro/)
 - [Install and update Wrangler](https://developers.cloudflare.com/workers/wrangler/install-and-update/)
+- [Wrangler in GitHub Actions](https://developers.cloudflare.com/workers/ci-cd/external-cicd/github-actions/)
 - [Workers Builds configuration](https://developers.cloudflare.com/workers/ci-cd/builds/configuration/)
 - [GitHub integration](https://developers.cloudflare.com/workers/ci-cd/builds/git-integration/github-integration/)
 - [Preview URLs](https://developers.cloudflare.com/workers/versions-and-deployments/preview-urls/)

@@ -1,0 +1,109 @@
+name: Publish on App Store release
+
+# Merges an open PR labelled `publish-on-store-release` once the App Store
+# serves its target version, then publishes GitHub Pages and inset.page.
+# A merge made with GITHUB_TOKEN does not trigger other `push` workflows, so the
+# deploy workflows are called here directly. See README "App Store 公開での自動公開".
+
+on:
+  schedule:
+    - cron: "4,19,34,49 * * * *"
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "判定だけを行い、マージやコメントをしない"
+        type: boolean
+        default: false
+
+permissions: {}
+
+concurrency:
+  group: auto-publish-on-store-release
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      checks: read
+      statuses: read
+    outputs:
+      merged: ${{ steps.publish.outputs.merged }}
+      pr_number: ${{ steps.publish.outputs.pr_number }}
+      version: ${{ steps.publish.outputs.version }}
+      merge_sha: ${{ steps.publish.outputs.merge_sha }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .node-version
+      - id: publish
+        run: node scripts/auto-publish-on-store-release.mjs
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          DRY_RUN: ${{ inputs.dry_run == true }}
+
+  deploy-pages:
+    needs: check
+    if: needs.check.outputs.merged == 'true'
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    uses: ./.github/workflows/deploy-pages.yml
+    with:
+      ref: ${{ needs.check.outputs.merge_sha }}
+
+  deploy-inset-page:
+    needs: check
+    if: needs.check.outputs.merged == 'true'
+    permissions:
+      contents: read
+    uses: ./.github/workflows/deploy-inset-page.yml
+    with:
+      ref: ${{ needs.check.outputs.merge_sha }}
+    secrets: inherit
+
+  report:
+    needs: [check, deploy-pages, deploy-inset-page]
+    if: always() && needs.check.outputs.merged == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    steps:
+      - name: Comment publish result on the PR
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ needs.check.outputs.pr_number }}
+          VERSION: ${{ needs.check.outputs.version }}
+          PAGES_RESULT: ${{ needs.deploy-pages.result }}
+          INSET_PAGE_RESULT: ${{ needs.deploy-inset-page.result }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          mark() { [ "$1" = "success" ] && echo "成功" || echo "失敗（$1）"; }
+          body="$(cat <<EOF
+          Inset ${VERSION} のお知らせの公開結果:
+
+          - GitHub Pages（アプリの取得先）: $(mark "$PAGES_RESULT")
+          - inset.page（Cloudflare Workers）: $(mark "$INSET_PAGE_RESULT")
+
+          実行ログ: ${RUN_URL}
+          EOF
+          )"
+          if [ "$PAGES_RESULT" != "success" ] || [ "$INSET_PAGE_RESULT" != "success" ]; then
+            body="${body}
+
+          失敗した公開先は、Actions の該当ワークフローを Run workflow で再実行するか、main から \`npm run deploy\` を実行してください。"
+          fi
+          gh pr comment "$PR_NUMBER" --repo "$GITHUB_REPOSITORY" --body "$body"
+          {
+            echo "## 公開結果"
+            echo "$body"
+          } >> "$GITHUB_STEP_SUMMARY"
+          if [ "$PAGES_RESULT" != "success" ] || [ "$INSET_PAGE_RESULT" != "success" ]; then
+            exit 1
+          fi
