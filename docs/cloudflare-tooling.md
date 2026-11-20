@@ -56,6 +56,8 @@ The production build command validates every contracted `/go/` redirect. The dep
 
 GitHub Actions can also deploy the apex Worker through `.github/workflows/deploy-inset-page.yml` (manual `workflow_dispatch`, or called by the App Store release workflow after it merges a prepared PR). It needs the repository secrets `CLOUDFLARE_API_TOKEN` (from the **Edit Cloudflare Workers** template, scoped to this account and the `inset.page` zone) and `CLOUDFLARE_ACCOUNT_ID`, refuses to run unless the checked-out commit equals `origin/main`, and runs `npm run build` then `npm run deploy:ci`. Workers Builds is not connected to this repository as of 2026-11-20.
 
+A third Worker, `inset-site-store-release-dispatcher` (`wrangler.dispatcher.jsonc`), has no route and only a Cron Trigger. Every 15 minutes it dispatches the App Store release workflow on GitHub while a pull request is labelled `publish-on-store-release`, because GitHub's `schedule` event proved unreliable for this repository. It uses one of the five Cron Triggers allowed on the Workers Free plan and the `GITHUB_DISPATCH_TOKEN` Worker secret. Deploy it with `npm run deploy:dispatcher` only when its code or schedule changes.
+
 Local production deploys must use `npm run deploy` or `npm run deploy:site`; never call `npx wrangler deploy` directly. Merge the change first, then run the command from a clean, up-to-date `main`. Pull requests run a production build in GitHub Actions, and a scheduled workflow checks the live redirects hourly.
 
 Production launch and follow-up:
