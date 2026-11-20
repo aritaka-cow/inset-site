@@ -86,16 +86,20 @@ npm run deploy
 
 ### App Store 公開での自動公開
 
-iOS の新しい版のお知らせとリリースノートは、PR を用意してラベルを付けておけば、App Store Connect でリリースのボタンを押すだけで公開される。ワークフロー [`auto-publish-on-store-release.yml`](.github/workflows/auto-publish-on-store-release.yml) が15分ごとに [iTunes Lookup](https://itunes.apple.com/lookup?id=6776488290&country=jp) で日本の App Store の公開版を確かめ、対象の版以上になったら PR をマージし、GitHub Pages と inset.page に公開する。
+iOS の新しい版のお知らせとリリースノートは、PR を用意してラベルを付けておけば、App Store Connect でリリースのボタンを押すだけで公開される。ワークフロー [`auto-publish-on-store-release.yml`](.github/workflows/auto-publish-on-store-release.yml) が15分ごとに（下の「定期実行の起動元」を参照） [iTunes Lookup](https://itunes.apple.com/lookup?id=6776488290&country=jp) で日本の App Store の公開版を確かめ、対象の版以上になったら PR をマージし、GitHub Pages と inset.page に公開する。
 
 1. お知らせ（`announcements.json` の `release`）とリリースノートの PR を作る。日付 `date` は公開予定日にしておく
 2. PR に `publish-on-store-release` ラベルを付ける。対象の版は、PR で新しく足した `release` の `appVersion` から読む。お知らせを足さない PR や、`release` を2件以上足す PR は、本文に `Store-Release-Version: 1.4.0` の行を書く
 3. チェック（Verify site changes）が通っていること、Draft でないこと、main とコンフリクトしていないことを確かめておく
-4. App Store Connect でリリースする。公開版が対象の版以上になってから最大15分ほどで（GitHub の定期実行は混雑時に遅れることがある）、次が順に行われる
+4. App Store Connect でリリースする。公開版が対象の版以上になってから最大15分ほどで、次が順に行われる
    - PR を squash でマージし、PR にコメントする
    - [`deploy-pages.yml`](.github/workflows/deploy-pages.yml) で GitHub Pages（アプリの取得先）に公開する
    - [`deploy-inset-page.yml`](.github/workflows/deploy-inset-page.yml) で inset.page（Cloudflare Workers）に公開する
    - 公開結果を PR にコメントする
+5. 念のため、リリースのボタンを押したら Actions の「Publish on App Store release」を Run workflow で1回実行する（`dry_run` は付けない）。App Store にまだ出ていなければ「公開待ち」で終わるだけなので、何度実行してもよい。PR にマージのコメントが付けば完了
+   - PC：<https://github.com/aritaka-cow/inset-site/actions/workflows/auto-publish-on-store-release.yml> →「Run workflow」→ Branch は `main` のまま →「Run workflow」
+   - スマホ（GitHub アプリ）：`aritaka-cow/inset-site` → Actions → Workflows →「Publish on App Store release」→ Run workflow（[GitHub Changelog](https://github.blog/changelog/2024-07-30-run-workflows-set-as-workflow_dispatch-manually/)）
+   - ターミナル：`gh workflow run auto-publish-on-store-release.yml -R aritaka-cow/inset-site --ref main`
 
 1回の実行でマージするのは1件だけ。公開前はチェックが落ちていても待つだけで、公開後に PR をマージできないとき（チェック失敗・コンフリクト・Draft・対象の版が読めない）は PR にコメントし、実行を失敗にして GitHub の通知を出す。直せば次の回で再確認する。急ぐときは Actions の「Publish on App Store release」を Run workflow で手動実行できる。`dry_run` にすると判定だけを行う。
 
@@ -114,8 +118,32 @@ GITHUB_TOKEN=$(gh auth token) GITHUB_REPOSITORY=aritaka-cow/inset-site DRY_RUN_P
 - 見ているのは iOS の App Store だけ。Android（Google Play）の公開は検知しない
 - `GITHUB_TOKEN` によるマージは、ほかのワークフローの `push` を起動しない。そのため公開はこのワークフローから直接呼んでいる
 - `.github/workflows/` を変える PR は `GITHUB_TOKEN` でマージできないので、ラベルを付けない
-- 公開リポジトリの定期実行は、リポジトリに60日間動きがないと GitHub が止める。止まったら Actions の画面で有効にし直す
+- 公開リポジトリの定期実行（`schedule`）は、リポジトリに60日間動きがないと GitHub が止める。止まったら Actions の画面で有効にし直す
 - inset.page への公開には、次の秘密の値が要る。未登録の間は inset.page への公開だけが失敗し、PR にその旨がコメントされるので、main から `npm run deploy` を手で実行する
+
+#### 定期実行の起動元
+
+GitHub の `schedule` は混雑時に遅れたり落とされたりする（[公式ドキュメント](https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#schedule)）。このリポジトリでも毎時の監視が1日3〜4回しか動かず、このワークフローの `schedule` は登録後5時間以上1回も動かなかった（2026-11-20）。そのため、Cloudflare Workers の Cron Trigger から `workflow_dispatch` で起動する。`schedule` は予備として残している。
+
+- Worker：[`workers/store-release-dispatcher.js`](workers/store-release-dispatcher.js)（設定 [`wrangler.dispatcher.jsonc`](wrangler.dispatcher.jsonc)、Worker 名 `inset-site-store-release-dispatcher`）。inset.page の Worker とは別で、公開 URL を持たない
+- 15分ごとに、ラベル `publish-on-store-release` の付いた未マージの PR があるときだけ `main` のワークフローを起動する。なければ何もしない
+- Cron Trigger は無料プランのアカウント上限（5個）のうち1個を使う
+- 公開後に PR をマージできない状態が続くと、15分ごとに失敗の実行と GitHub の通知が出る。直すかラベルを外すと止まる
+- デプロイは main から `npm run deploy:dispatcher`（`npm run deploy` と同じ main 一致の安全確認つき）。Worker のコードを変えたときだけ要る
+- ログは Cloudflare の Workers & Pages → `inset-site-store-release-dispatcher` → Logs で見られる
+
+Worker が使う GitHub のトークン（オーナーが作成・登録）:
+
+1. GitHub の Settings → Developer settings → Fine-grained personal access tokens → Generate new token
+2. Resource owner は `aritaka-cow`、Repository access は Only select repositories で `aritaka-cow/inset-site` だけ
+3. Permissions は Repository permissions の Actions を Read and write（Metadata: Read-only は自動で付く）。ほかは付けない
+4. 有効期限を決めて生成し、Worker の秘密の値に登録する（値は画面に貼り付けるだけで、ファイルやチャットに残さない）
+
+```sh
+npx wrangler secret put GITHUB_DISPATCH_TOKEN --config wrangler.dispatcher.jsonc
+```
+
+トークンの有効期限が切れると起動が止まる。期限の前に作り直して同じコマンドで登録し直す。
 
 #### inset.page 公開用の秘密の値（オーナーが登録）
 

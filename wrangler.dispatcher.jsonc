@@ -1,0 +1,15 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "inset-site-store-release-dispatcher",
+  "main": "./workers/store-release-dispatcher.js",
+  "compatibility_date": "2026-07-15",
+  "workers_dev": false,
+  "preview_urls": false,
+  // One of the five Cron Triggers on the Workers Free plan.
+  "triggers": {
+    "crons": ["2,17,32,47 * * * *"]
+  },
+  "observability": {
+    "enabled": true
+  }
+}
