@@ -79,6 +79,7 @@ npm run deploy
    - `type`: `release`（アプリ更新のお知らせ）または `news`（一般告知）。アプリ側は未知の type も一般告知として表示する
    - `appVersion`: `release` のみ必須。この値が端末のアプリバージョンと一致すると、更新後の初回起動で What's New シートに使われる
    - `title` / `body`: `{ "en": ..., "ja": ... }`。en 必須、ja 推奨（欠落時は en にフォールバック）
+   - `platforms`（任意）: 対象 OS の配列。`"ios"` / `"android"` / `"macos"`。省略・空配列は全 OS 向け。指定した OS のアプリだけが一覧・What's New・更新案内に使う（iOS 1.4.1・Android の対応版以降。古いアプリはこの項目を無視して全件を表示するので、移行期間は文面にも OS 名を入れる）。同じ `appVersion` の `release` を OS ごとに分けるときは、OS が重ならないようにする（検証スクリプトが重複を拒否する）。macOS 版にはお知らせの表示がまだない
    - `url`（任意）: 詳細ページへのリンク。**https のみ有効**（http は無視される）。画像付きのリッチな解説はサイト側のページに置き、ここからリンクする。アプリでは「詳しく見る ↗」として表示される
 3. push 前に構文チェック: `python3 -m json.tool announcements.json > /dev/null`
 4. iOS の新しい版のお知らせは、下の「App Store 公開での自動公開」で出す。手でマージした場合は、GitHub Pages は自動で出るが inset.page は `npm run deploy` が要る
