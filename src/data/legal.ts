@@ -23,7 +23,7 @@ export const privacyDocuments: Localized<LegalDocument> = {
     "title": "Inset プライバシーポリシー",
     "description": "iOS・macOS・Android版Insetの写真・動画、利用分析、購入情報、保存と削除の扱いを説明します。",
     "heading": "プライバシーポリシー",
-    "updated": "2026-11-18",
+    "updated": "2026-11-26",
     "intro": "Atelier Yohakuが提供するInset（以下「本アプリ」）のiOS版、macOS版、Android版に共通するポリシーです。Android版は現在一般公開の準備中です。本アプリにはアカウント登録・ログインはありません。編集対象の写真・動画は端末内で処理し、機能改善のための仮名の利用状況データと、Inset Labの提供に必要な購入履歴を扱います。",
     "sections": [
       {
@@ -48,7 +48,7 @@ export const privacyDocuments: Localized<LegalDocument> = {
         "heading": "利用状況・技術情報",
         "bullets": [
           "本アプリはPostHog（PostHog, Inc.）を利用し、仮名のアプリ・端末インスタンス識別子、起動・画面表示・編集・保存成功／失敗などのイベント、アプリバージョン、OS、端末の種類、画面サイズ、言語、タイムゾーン、ネットワーク状態などの技術情報を送信します。目的は、機能改善と不具合の把握です。仮名識別子は、氏名そのものではありませんが、利用者・端末に関連付けられる情報として扱います。",
-          "保存や読み込みの失敗について、エラーの種類・段階・限定した診断情報を扱う場合があります。iOSに組み込まれたPostHog・Meta SDKのコンポーネントも、限定的な技術・運用上の診断情報やクラッシュレポートを扱う場合があります。",
+          "保存や読み込みの失敗について、エラーの種類・段階・限定した診断情報を扱う場合があります。iOSに組み込まれたPostHogのコンポーネント（iOS版1.4.0以前はMeta SDKを含む）も、限定的な技術・運用上の診断情報やクラッシュレポートを扱う場合があります。",
           "通信先のサービスやホスティング事業者は、通信に伴うIPアドレスやアクセスログを扱います。PostHogでは、生のIPアドレスを分析イベントに保存せず、標準のGeoIP処理によりIPアドレスから推定した国・地域、市区町村、郵便番号、おおまかな緯度・経度を利用分析で扱います。これは写真のGPS情報や端末の位置情報権限を使った取得とは別です。",
           "iOS・Androidでは、更新情報を表示するため、公開された更新情報ファイルをインターネットから取得します。配信元のホスティング事業者にも通信に伴う技術情報が渡ります。"
         ]
@@ -72,8 +72,8 @@ export const privacyDocuments: Localized<LegalDocument> = {
         "heading": "iOSの広告効果測定",
         "bullets": [
           "iOSでApple Ads経由のインストールを測定する場合、Appleが返すattribution結果、campaign・ad group・keyword・ad ID、claim・conversion type、国・地域、掲載面をPostHogへ送信する場合があります。attribution token、未加工のApple APIレスポンス、広告のクリック・表示日時は保存・送信しません。",
-          "対応するiOS production版では、App Tracking Transparency（ATT）を許可した場合だけMeta SDKを有効にし、アプリ起動と初回写真書き出し完了のイベントを送信します。iOSのRevenueCatによるMeta送信も、ATTを許可し、連携が明示的に有効な場合に限り、trial開始・購入・サブスクリプション・更新などをserver-to-serverで送信する場合があります。ATT未許可時のiOSのserver-to-server送信は有効にしません。購入・売上イベントを本アプリとRevenueCatの両方からMetaへ二重送信しません。これはAppleの定義上のトラッキングです。",
-          "ATTが未許可・拒否・制限中、または必要なproduction設定がない場合、本アプリはMeta SDKを初期化せず、Metaの匿名識別子やアプリ内イベントを送信しません。許可しなくても利用・購入・復元には影響しません。iOSの設定で許可を変更できます。許可を取り消した後は、新しいiOSのトラッキングデータをMetaへ送信しません。既に送信したデータには提供先の保持・削除方針が適用されます。Android版とmacOS版には、このiOS向けMeta SDK・Apple Ads・ATTの処理はありません。"
+          "iOS版1.4.1以降は、App Tracking Transparency（ATT）の確認を表示せず、Meta SDKを初期化しないため、Metaの匿名識別子やアプリ内イベントを送信しません。iOS版1.4.1以降の利用について、本アプリからMetaへの購入・サブスクリプション情報のserver-to-server送信も行いません。広告効果の測定を再開する場合は、事前に本ポリシーを改訂します。",
+          "iOS版1.4.0以前では、ATTを許可した場合だけMeta SDKを有効にし、アプリ起動と初回写真書き出し完了のイベントを送信していました。ATTを許可していない場合はMeta SDKを初期化していません。iOSの設定でいつでも許可を取り消せます。既に送信したデータには提供先の保持・削除方針が適用されます。Android版とmacOS版には、このiOS向けMeta SDK・ATTの処理はありません。"
         ]
       },
       {
@@ -116,7 +116,7 @@ export const privacyDocuments: Localized<LegalDocument> = {
     "title": "Inset Privacy Policy",
     "description": "How Inset for iOS, macOS, and Android handles photos, videos, analytics, purchases, retention, and deletion.",
     "heading": "Privacy Policy",
-    "updated": "2026-11-18",
+    "updated": "2026-11-26",
     "intro": "This policy covers Inset (“the App”) for iOS, macOS, and Android, provided by Atelier Yohaku. The Android version is currently being prepared for public release. The App has no account registration or sign-in. Selected photos and videos are processed on your device. The App handles pseudonymous usage data to improve the product and purchase history needed to provide Inset Lab.",
     "sections": [
       {
@@ -141,7 +141,7 @@ export const privacyDocuments: Localized<LegalDocument> = {
         "heading": "Usage and Technical Data",
         "bullets": [
           "The App uses PostHog (PostHog, Inc.) for product improvement and troubleshooting. It sends pseudonymous app or device instance identifiers, events such as app opens, screen views, editing, and export success or failure, and technical details such as app version, OS, device type, screen size, language, time zone, and network state. Pseudonymous identifiers are not names, but are treated as information associated with a user or device.",
-          "For loading or export failures, the App may handle the error type, processing stage, and limited diagnostic information. PostHog and Meta SDK components bundled with iOS may also handle limited technical or operational diagnostics and crash reports.",
+          "For loading or export failures, the App may handle the error type, processing stage, and limited diagnostic information. PostHog components bundled with iOS (and, in iOS version 1.4.0 and earlier, the Meta SDK) may also handle limited technical or operational diagnostics and crash reports.",
           "Services receiving network requests and hosting providers handle IP addresses and access logs. PostHog does not store raw IP addresses in analytics events. Its standard GeoIP processing derives country or region, city, postal code, and approximate latitude and longitude from an IP address for usage analytics. This is separate from photo GPS metadata or access through a device location permission.",
           "On iOS and Android, the App retrieves a publicly hosted update information file to display release announcements. The hosting provider also receives technical information associated with that request."
         ]
@@ -165,8 +165,8 @@ export const privacyDocuments: Localized<LegalDocument> = {
         "heading": "iOS Advertising Measurement",
         "bullets": [
           "For Apple Ads attribution on iOS, the App may send Apple’s attribution result, campaign, ad group, keyword and ad IDs, claim or conversion type, country or region, and placement to PostHog. The attribution token, raw Apple API response, and ad click or impression timestamps are not stored or sent.",
-          "In a supported iOS production release, the Meta SDK is enabled only after permission through App Tracking Transparency (ATT), sending app activation and first photo export completion events. On iOS, RevenueCat’s Meta delivery also requires ATT authorization and an explicitly enabled integration, and may send trial start, purchase, subscription, renewal and similar events server-to-server. iOS server-to-server delivery without ATT authorization is not enabled. Purchase and revenue events are not sent to Meta from both the App and RevenueCat. Apple defines this purpose as tracking.",
-          "When ATT is not authorized, is denied or restricted, or required production configuration is unavailable, the App does not initialize the Meta SDK or send Meta’s anonymous identifier or in-app events. Your choice does not affect using the App, purchasing, or restoring purchases. You can change permission in iOS Settings. After permission is withdrawn, new iOS tracking data is no longer sent to Meta; previously sent data remains subject to the recipient’s retention and deletion practices. The Android and macOS versions do not include these iOS Meta SDK, Apple Ads, or ATT flows."
+          "From iOS version 1.4.1, the App does not ask for App Tracking Transparency (ATT) permission and does not initialize the Meta SDK, so it sends no Meta anonymous identifier or in-app events. For use of iOS version 1.4.1 or later, the App also does not send purchase or subscription events to Meta server-to-server. The policy will be updated before advertising measurement resumes.",
+          "In iOS version 1.4.0 and earlier, the Meta SDK was enabled only after ATT permission, sending app activation and first photo export completion events; without permission it was not initialized. You can withdraw permission at any time in iOS Settings. Previously sent data remains subject to the recipient’s retention and deletion practices. The Android and macOS versions do not include these iOS Meta SDK or ATT flows."
         ]
       },
       {
