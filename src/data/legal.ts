@@ -49,7 +49,7 @@ export const privacyDocuments: Localized<LegalDocument> = {
         "bullets": [
           "本アプリはPostHog（PostHog, Inc.）を利用し、仮名のアプリ・端末インスタンス識別子、起動・画面表示・編集・保存成功／失敗などのイベント、アプリバージョン、OS、端末の種類、画面サイズ、言語、タイムゾーン、ネットワーク状態などの技術情報を送信します。目的は、機能改善と不具合の把握です。仮名識別子は、氏名そのものではありませんが、利用者・端末に関連付けられる情報として扱います。",
           "保存や読み込みの失敗について、エラーの種類・段階・限定した診断情報を扱う場合があります。iOSに組み込まれたPostHogのコンポーネント（iOS版1.4.0以前はMeta SDKを含む）も、限定的な技術・運用上の診断情報やクラッシュレポートを扱う場合があります。",
-          "通信先のサービスやホスティング事業者は、通信に伴うIPアドレスやアクセスログを扱います。PostHogでは、生のIPアドレスを分析イベントに保存せず、標準のGeoIP処理によりIPアドレスから推定した国・地域、市区町村、郵便番号、おおまかな緯度・経度を利用分析で扱います。これは写真のGPS情報や端末の位置情報権限を使った取得とは別です。",
+          "通信先のサービスやホスティング事業者は、通信に伴うIPアドレスやアクセスログを扱います。PostHogでは、生のIPアドレスを分析イベントに保存せず、標準のGeoIP処理によりIPアドレスから推定した国・大陸だけを利用分析で扱います（2026年11月26日以降。それより前は、市区町村・郵便番号・おおまかな緯度経度なども扱っていました）。これは写真のGPS情報や端末の位置情報権限を使った取得とは別です。",
           "iOS・Androidでは、更新情報を表示するため、公開された更新情報ファイルをインターネットから取得します。配信元のホスティング事業者にも通信に伴う技術情報が渡ります。"
         ]
       },
@@ -72,7 +72,7 @@ export const privacyDocuments: Localized<LegalDocument> = {
         "heading": "iOSの広告効果測定",
         "bullets": [
           "iOSでApple Ads経由のインストールを測定する場合、Appleが返すattribution結果、campaign・ad group・keyword・ad ID、claim・conversion type、国・地域、掲載面をPostHogへ送信する場合があります。attribution token、未加工のApple APIレスポンス、広告のクリック・表示日時は保存・送信しません。",
-          "iOS版1.4.1以降は、App Tracking Transparency（ATT）の確認を表示せず、Meta SDKを初期化しないため、Metaの匿名識別子やアプリ内イベントを送信しません。iOS版1.4.1以降の利用について、本アプリからMetaへの購入・サブスクリプション情報のserver-to-server送信も行いません。広告効果の測定を再開する場合は、事前に本ポリシーを改訂します。",
+          "iOS版1.4.2以降はMeta SDKを含みません。iOS版1.4.1以降は、App Tracking Transparency（ATT）の確認を表示せず、Meta SDKを初期化しないため、Metaの匿名識別子やアプリ内イベントを送信しません。iOS版1.4.1以降の利用について、本アプリからMetaへの購入・サブスクリプション情報のserver-to-server送信も行いません。広告効果の測定を再開する場合は、事前に本ポリシーを改訂します。",
           "iOS版1.4.0以前では、ATTを許可した場合だけMeta SDKを有効にし、アプリ起動と初回写真書き出し完了のイベントを送信していました。ATTを許可していない場合はMeta SDKを初期化していません。iOSの設定でいつでも許可を取り消せます。既に送信したデータには提供先の保持・削除方針が適用されます。Android版とmacOS版には、このiOS向けMeta SDK・ATTの処理はありません。"
         ]
       },
@@ -142,7 +142,7 @@ export const privacyDocuments: Localized<LegalDocument> = {
         "bullets": [
           "The App uses PostHog (PostHog, Inc.) for product improvement and troubleshooting. It sends pseudonymous app or device instance identifiers, events such as app opens, screen views, editing, and export success or failure, and technical details such as app version, OS, device type, screen size, language, time zone, and network state. Pseudonymous identifiers are not names, but are treated as information associated with a user or device.",
           "For loading or export failures, the App may handle the error type, processing stage, and limited diagnostic information. PostHog components bundled with iOS (and, in iOS version 1.4.0 and earlier, the Meta SDK) may also handle limited technical or operational diagnostics and crash reports.",
-          "Services receiving network requests and hosting providers handle IP addresses and access logs. PostHog does not store raw IP addresses in analytics events. Its standard GeoIP processing derives country or region, city, postal code, and approximate latitude and longitude from an IP address for usage analytics. This is separate from photo GPS metadata or access through a device location permission.",
+          "Services receiving network requests and hosting providers handle IP addresses and access logs. PostHog does not store raw IP addresses in analytics events. Its standard GeoIP processing derives only the country and continent from an IP address for usage analytics (from November 26, 2026; before that date, city, postal code, approximate latitude and longitude and similar details were also derived). This is separate from photo GPS metadata or access through a device location permission.",
           "On iOS and Android, the App retrieves a publicly hosted update information file to display release announcements. The hosting provider also receives technical information associated with that request."
         ]
       },
@@ -165,7 +165,7 @@ export const privacyDocuments: Localized<LegalDocument> = {
         "heading": "iOS Advertising Measurement",
         "bullets": [
           "For Apple Ads attribution on iOS, the App may send Apple’s attribution result, campaign, ad group, keyword and ad IDs, claim or conversion type, country or region, and placement to PostHog. The attribution token, raw Apple API response, and ad click or impression timestamps are not stored or sent.",
-          "From iOS version 1.4.1, the App does not ask for App Tracking Transparency (ATT) permission and does not initialize the Meta SDK, so it sends no Meta anonymous identifier or in-app events. For use of iOS version 1.4.1 or later, the App also does not send purchase or subscription events to Meta server-to-server. The policy will be updated before advertising measurement resumes.",
+          "From iOS version 1.4.2, the App no longer includes the Meta SDK. From iOS version 1.4.1, the App does not ask for App Tracking Transparency (ATT) permission and does not initialize the Meta SDK, so it sends no Meta anonymous identifier or in-app events. For use of iOS version 1.4.1 or later, the App also does not send purchase or subscription events to Meta server-to-server. The policy will be updated before advertising measurement resumes.",
           "In iOS version 1.4.0 and earlier, the Meta SDK was enabled only after ATT permission, sending app activation and first photo export completion events; without permission it was not initialized. You can withdraw permission at any time in iOS Settings. Previously sent data remains subject to the recipient’s retention and deletion practices. The Android and macOS versions do not include these iOS Meta SDK or ATT flows."
         ]
       },
