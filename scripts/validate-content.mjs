@@ -6,6 +6,7 @@ const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const announcements = JSON.parse(await readFile(join(root, "announcements.json"), "utf8"));
 const roadmap = JSON.parse(await readFile(join(root, "roadmap.json"), "utf8"));
 const errors = [];
+const KNOWN_PLATFORMS = new Set(["ios", "android", "macos"]);
 
 if (announcements.version !== 1) errors.push("announcements.version must remain 1");
 if (!Array.isArray(announcements.announcements) || announcements.announcements.length === 0) errors.push("announcements must be a non-empty array");
@@ -18,6 +19,24 @@ for (const item of announcements.announcements ?? []) {
   if (!item.title?.en || !item.body?.en) errors.push(`English title/body required: ${item.id}`);
   if (item.type === "release" && !item.appVersion) errors.push(`appVersion required for release: ${item.id}`);
   if (item.url && !item.url.startsWith("https://")) errors.push(`announcement URL must use HTTPS: ${item.id}`);
+  if (item.platforms !== undefined) {
+    const platforms = item.platforms;
+    if (!Array.isArray(platforms) || platforms.some((platform) => !KNOWN_PLATFORMS.has(platform)) || new Set(platforms).size !== platforms.length) {
+      errors.push(`platforms must be a unique list of ${[...KNOWN_PLATFORMS].join("/")}: ${item.id}`);
+    }
+  }
+}
+
+// Each OS must see at most one release note per appVersion, or What's New becomes ambiguous.
+const releaseOwners = new Map();
+for (const item of announcements.announcements ?? []) {
+  if (item.type !== "release" || !item.appVersion) continue;
+  const targets = Array.isArray(item.platforms) && item.platforms.length > 0 ? item.platforms : [...KNOWN_PLATFORMS];
+  for (const platform of targets) {
+    const key = `${platform}@${item.appVersion}`;
+    if (releaseOwners.has(key)) errors.push(`two release announcements for ${key}: ${releaseOwners.get(key)} and ${item.id}`);
+    else releaseOwners.set(key, item.id);
+  }
 }
 
 if (roadmap.status !== "retired" || !roadmap.message?.en || !roadmap.message?.ja) errors.push("roadmap.json retired wire contract changed");
