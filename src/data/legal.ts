@@ -23,7 +23,7 @@ export const privacyDocuments: Localized<LegalDocument> = {
     "title": "Inset プライバシーポリシー",
     "description": "iOS・macOS・Android版Insetの写真・動画、利用分析、購入情報、保存と削除の扱いを説明します。",
     "heading": "プライバシーポリシー",
-    "updated": "2026-11-26",
+    "updated": "2026-11-27",
     "intro": "Atelier Yohakuが提供するInset（以下「本アプリ」）のiOS版、macOS版、Android版に共通するポリシーです。本アプリにはアカウント登録・ログインはありません。編集対象の写真・動画は端末内で処理し、機能改善のための仮名の利用状況データと、Inset Labの提供に必要な購入履歴を扱います。",
     "sections": [
       {
@@ -116,7 +116,7 @@ export const privacyDocuments: Localized<LegalDocument> = {
     "title": "Inset Privacy Policy",
     "description": "How Inset for iOS, macOS, and Android handles photos, videos, analytics, purchases, retention, and deletion.",
     "heading": "Privacy Policy",
-    "updated": "2026-11-26",
+    "updated": "2026-11-27",
     "intro": "This policy covers Inset (“the App”) for iOS, macOS, and Android, provided by Atelier Yohaku. The App has no account registration or sign-in. Selected photos and videos are processed on your device. The App handles pseudonymous usage data to improve the product and purchase history needed to provide Inset Lab.",
     "sections": [
       {
@@ -212,7 +212,7 @@ export const termsDocuments: Localized<LegalDocument> = {
     "title": "Inset 利用規約",
     "description": "iOS・macOS・Android版InsetとInset Labの利用、購入、解約、復元、返金について定めます。",
     "heading": "利用規約",
-    "updated": "2026-11-26",
+    "updated": "2026-11-27",
     "intro": "本規約はInset（以下「本アプリ」）のiOS版、macOS版、Android版の利用条件を定めます。本アプリをダウンロード・利用した時点で、本規約に同意したものとみなされます。",
     "sections": [
       {
@@ -271,7 +271,7 @@ export const termsDocuments: Localized<LegalDocument> = {
     "title": "Inset Terms of Use",
     "description": "Terms for Inset on iOS, macOS, and Android, including Inset Lab purchases, cancellation, restoration, and refunds.",
     "heading": "Terms of Use",
-    "updated": "2026-11-26",
+    "updated": "2026-11-27",
     "intro": "These Terms govern Inset (“the App”) for iOS, macOS, and Android. By downloading or using the App, you agree to these Terms.",
     "sections": [
       {
