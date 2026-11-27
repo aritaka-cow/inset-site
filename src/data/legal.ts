@@ -24,7 +24,7 @@ export const privacyDocuments: Localized<LegalDocument> = {
     "description": "iOS・macOS・Android版Insetの写真・動画、利用分析、購入情報、保存と削除の扱いを説明します。",
     "heading": "プライバシーポリシー",
     "updated": "2026-11-26",
-    "intro": "Atelier Yohakuが提供するInset（以下「本アプリ」）のiOS版、macOS版、Android版に共通するポリシーです。Android版は現在一般公開の準備中です。本アプリにはアカウント登録・ログインはありません。編集対象の写真・動画は端末内で処理し、機能改善のための仮名の利用状況データと、Inset Labの提供に必要な購入履歴を扱います。",
+    "intro": "Atelier Yohakuが提供するInset（以下「本アプリ」）のiOS版、macOS版、Android版に共通するポリシーです。本アプリにはアカウント登録・ログインはありません。編集対象の写真・動画は端末内で処理し、機能改善のための仮名の利用状況データと、Inset Labの提供に必要な購入履歴を扱います。",
     "sections": [
       {
         "heading": "写真・動画とアクセス権限",
@@ -72,8 +72,8 @@ export const privacyDocuments: Localized<LegalDocument> = {
         "heading": "iOSの広告効果測定",
         "bullets": [
           "iOSでApple Ads経由のインストールを測定する場合、Appleが返すattribution結果、campaign・ad group・keyword・ad ID、claim・conversion type、国・地域、掲載面をPostHogへ送信する場合があります。attribution token、未加工のApple APIレスポンス、広告のクリック・表示日時は保存・送信しません。",
-          "iOS版1.4.2以降はMeta SDKを含みません。iOS版1.4.1以降は、App Tracking Transparency（ATT）の確認を表示せず、Meta SDKを初期化しないため、Metaの匿名識別子やアプリ内イベントを送信しません。iOS版1.4.1以降の利用について、本アプリからMetaへの購入・サブスクリプション情報のserver-to-server送信も行いません。広告効果の測定を再開する場合は、事前に本ポリシーを改訂します。",
-          "iOS版1.4.0以前では、ATTを許可した場合だけMeta SDKを有効にし、アプリ起動と初回写真書き出し完了のイベントを送信していました。ATTを許可していない場合はMeta SDKを初期化していません。iOSの設定でいつでも許可を取り消せます。既に送信したデータには提供先の保持・削除方針が適用されます。Android版とmacOS版には、このiOS向けMeta SDK・ATTの処理はありません。"
+          "iOS版1.4.2以降はMeta SDKを含まず、App Tracking Transparency（ATT）の確認も表示しません。Metaの匿名識別子やアプリ内イベントは送信しません。また、2026年11月26日以降、どのバージョンについても、RevenueCatからMetaへの購入・サブスクリプション情報のserver-to-server送信を停止しています。広告効果の測定を再開する場合は、事前に本ポリシーを改訂します。",
+          "iOS版1.4.0以前では、ATTを許可した場合だけMeta SDKを有効にし、アプリ起動と初回写真書き出し完了のイベントを送信します（1.4.2以降へ更新すると送信しなくなります）。ATTを許可していない場合はMeta SDKを初期化しません。iOSの設定でいつでも許可を取り消せます。既に送信したデータには提供先の保持・削除方針が適用されます。Android版とmacOS版には、このiOS向けMeta SDK・ATTの処理はありません。"
         ]
       },
       {
@@ -117,7 +117,7 @@ export const privacyDocuments: Localized<LegalDocument> = {
     "description": "How Inset for iOS, macOS, and Android handles photos, videos, analytics, purchases, retention, and deletion.",
     "heading": "Privacy Policy",
     "updated": "2026-11-26",
-    "intro": "This policy covers Inset (“the App”) for iOS, macOS, and Android, provided by Atelier Yohaku. The Android version is currently being prepared for public release. The App has no account registration or sign-in. Selected photos and videos are processed on your device. The App handles pseudonymous usage data to improve the product and purchase history needed to provide Inset Lab.",
+    "intro": "This policy covers Inset (“the App”) for iOS, macOS, and Android, provided by Atelier Yohaku. The App has no account registration or sign-in. Selected photos and videos are processed on your device. The App handles pseudonymous usage data to improve the product and purchase history needed to provide Inset Lab.",
     "sections": [
       {
         "heading": "Photos, Videos, and Permissions",
@@ -165,8 +165,8 @@ export const privacyDocuments: Localized<LegalDocument> = {
         "heading": "iOS Advertising Measurement",
         "bullets": [
           "For Apple Ads attribution on iOS, the App may send Apple’s attribution result, campaign, ad group, keyword and ad IDs, claim or conversion type, country or region, and placement to PostHog. The attribution token, raw Apple API response, and ad click or impression timestamps are not stored or sent.",
-          "From iOS version 1.4.2, the App no longer includes the Meta SDK. From iOS version 1.4.1, the App does not ask for App Tracking Transparency (ATT) permission and does not initialize the Meta SDK, so it sends no Meta anonymous identifier or in-app events. For use of iOS version 1.4.1 or later, the App also does not send purchase or subscription events to Meta server-to-server. The policy will be updated before advertising measurement resumes.",
-          "In iOS version 1.4.0 and earlier, the Meta SDK was enabled only after ATT permission, sending app activation and first photo export completion events; without permission it was not initialized. You can withdraw permission at any time in iOS Settings. Previously sent data remains subject to the recipient’s retention and deletion practices. The Android and macOS versions do not include these iOS Meta SDK or ATT flows."
+          "From iOS version 1.4.2, the App no longer includes the Meta SDK and does not ask for App Tracking Transparency (ATT) permission. It sends no Meta anonymous identifier or in-app events. In addition, since November 26, 2026, RevenueCat no longer sends purchase or subscription events to Meta server-to-server for any version. The policy will be updated before advertising measurement resumes.",
+          "In iOS version 1.4.0 and earlier, the Meta SDK is enabled only after ATT permission and sends app activation and first photo export completion events (this stops after updating to 1.4.2 or later); without permission it is not initialized. You can withdraw permission at any time in iOS Settings. Previously sent data remains subject to the recipient’s retention and deletion practices. The Android and macOS versions do not include these iOS Meta SDK or ATT flows."
         ]
       },
       {
@@ -212,8 +212,8 @@ export const termsDocuments: Localized<LegalDocument> = {
     "title": "Inset 利用規約",
     "description": "iOS・macOS・Android版InsetとInset Labの利用、購入、解約、復元、返金について定めます。",
     "heading": "利用規約",
-    "updated": "2026-11-18",
-    "intro": "本規約はInset（以下「本アプリ」）のiOS版、macOS版、Android版の利用条件を定めます。本アプリをダウンロード・利用した時点で、本規約に同意したものとみなされます。Android版は現在一般公開の準備中です。",
+    "updated": "2026-11-26",
+    "intro": "本規約はInset（以下「本アプリ」）のiOS版、macOS版、Android版の利用条件を定めます。本アプリをダウンロード・利用した時点で、本規約に同意したものとみなされます。",
     "sections": [
       {
         "heading": "1. ライセンス",
@@ -271,8 +271,8 @@ export const termsDocuments: Localized<LegalDocument> = {
     "title": "Inset Terms of Use",
     "description": "Terms for Inset on iOS, macOS, and Android, including Inset Lab purchases, cancellation, restoration, and refunds.",
     "heading": "Terms of Use",
-    "updated": "2026-11-18",
-    "intro": "These Terms govern Inset (“the App”) for iOS, macOS, and Android. By downloading or using the App, you agree to these Terms. The Android version is currently being prepared for public release.",
+    "updated": "2026-11-26",
+    "intro": "These Terms govern Inset (“the App”) for iOS, macOS, and Android. By downloading or using the App, you agree to these Terms.",
     "sections": [
       {
         "heading": "1. License",
